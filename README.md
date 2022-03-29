@@ -7,7 +7,7 @@
   <a href ="#dart-prosposta">  Proposta </a>  • 
   <a href ="#pushpin-requisitos"> Requisitos </a>  • 
   <a href ="#calendar-plano-de-ação"> Plano de Ação </a>  • 
-  <a href ="#computer-protótipo"> Protótipo</a>  • 
+  <a href ="#computer-protótipo"> Wireframe</a>  • 
   <a href ="#rocket-tecnologias-utilizadas">  Tecnologias Utilizadas </a>  • 
   <a href ="#mortar_board-dev-team"> Dev Team </a> • 
 
@@ -58,17 +58,16 @@ do contrato).<br>
 ## :computer: Protótipo
 
 Acesse o link para visualizar:
-> * [Protótipo interativo no Figma.]()
+> * [Protótipo interativo no Figma.](https://www.figma.com/file/AeyU0W19dA8KmriaZEmQVZ/Wireframe?node-id=1%3A2)
   
   <br>
      
 ## :rocket: Tecnologias Utilizadas
 
 * **Reuniões e Apresentações:** Discord, WhatsApp e Microsoft Teams;
-* **Banco de Dados:** MySQL e Wampserver;
-* **Back-end:** Java;
-* **Front-end:** HTML5, CSS e JavaScript;
-* **Ferramentas:** GitHub, VS Code, Canva, Excel e Figma.
+* **Back-end:** Java, Spring e MySQL;
+* **Front-end:** HTML5, CSS, JavaScript e Bootstrap;
+* **Ferramentas:** GitHub, VS Code, Canva, Excel, Figma e Jira.
 <br>
   
 ## :gear: Execução 
