@@ -1,17 +1,25 @@
 package com.api.inodevs.entidades;
 
-public class Endereco{
-	public String cep;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class Endereco {
+	
+	@Id
+	public int cep;
+	
 	public String estado;
-	public String município;
+	public String municipio;
 	public String bairro;
+	public String rua;
 	public int numero;
 	public String complemento;
 	
-	public String getCep() {
+	public int getCep() {
 		return cep;
 	}
-	public void setCep(String cep) {
+	public void setCep(int cep) {
 		this.cep = cep;
 	}
 	public String getEstado() {
@@ -20,17 +28,23 @@ public class Endereco{
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	public String getMunicípio() {
-		return município;
+	public String getMunicipio() {
+		return municipio;
 	}
-	public void setMunicípio(String município) {
-		this.município = município;
+	public void setMunicipio(String município) {
+		this.municipio = município;
 	}
 	public String getBairro() {
 		return bairro;
 	}
 	public void setBairro(String bairro) {
 		this.bairro = bairro;
+	}
+	public String getRua() {
+		return rua;
+	}
+	public void setRua(String rua) {
+		this.rua = rua;
 	}
 	public int getNumero() {
 		return numero;
