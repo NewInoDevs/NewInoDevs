@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Concessionaria</title>
+</head>
+<body>
+    <h1>Cadastro de Concessionaria</h1>
+    <form th:action="@{/salvarConcessionaria}" th:object="${concessionaria}" method="POST">
+    	Nome da Concessionária: <input type="text" name="nome" id="nome" th:field="*{nome}"><br><br>
+		Código da Concessionária: <input type="text" name="codigo" id="codigo" th:field="*{codigo}"><br><br>
+        <input type="submit" value="Cadastrar">
+    </form>
+</body>
+</html>

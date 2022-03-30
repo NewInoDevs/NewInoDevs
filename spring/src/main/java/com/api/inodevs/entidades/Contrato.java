@@ -1,9 +1,9 @@
 package com.api.inodevs.entidades;
 
 public class Contrato extends Concessionaria{
-    private int codigo;
+    private long codigo;
 
-	public int getCodigo() {
+	public long getCodigo() {
 		return codigo;
 	}
 	public void setCodigo(int codigo) {

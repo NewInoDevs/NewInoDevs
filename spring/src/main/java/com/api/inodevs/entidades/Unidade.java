@@ -1,8 +1,15 @@
 package com.api.inodevs.entidades;
 
-public class Unidade extends Endereco{
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class Unidade {
+	
+	@Id
+	private int cnpj;
+	
 	private String nome;
-	private String cnpj;
 	public String telefone;
 	public int endereco;
 	  
@@ -12,10 +19,10 @@ public class Unidade extends Endereco{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getCnpj() {
+	public int getCnpj() {
 		return cnpj;
 	}
-	public void setCnpj(String cnpj) {
+	public void setCnpj(int cnpj) {
 		this.cnpj = cnpj;
 	}
 	public String getTelefone() {

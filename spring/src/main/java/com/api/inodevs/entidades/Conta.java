@@ -15,7 +15,7 @@ public class Conta extends Contrato{
 	private int baseDeCalculo;
 	private String tipoDeConta;
 	
-	public int getCodigo() {
+	public long getCodigo() {
 		return codigo;
 	}
 	public void setCodigo(int codigo) {
