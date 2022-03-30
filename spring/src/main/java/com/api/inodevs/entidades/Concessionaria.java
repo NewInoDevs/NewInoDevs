@@ -1,13 +1,20 @@
 package com.api.inodevs.entidades;
 
-public class Concessionaria extends Unidade{
-    private int codigo;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class Concessionaria {
+	
+    @Id
+    private long codigo;
+    
     public String nome;
     
-	public int getCodigo() {
+	public long getCodigo() {
 		return codigo;
 	}
-	public void setCodigo(int codigo) {
+	public void setCodigo(long codigo) {
 		this.codigo = codigo;
 	}
 	public String getNome() {
