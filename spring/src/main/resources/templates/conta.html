@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Conta</title>
+</head>
+<body>
+    <h1>Cadastro de Conta</h1>
+    <form th:action="@{/salvarConta}" th:object="${conta}" method="POST">
+    	Nome da Conta: <input type="text" name="nome" id="nome" th:field="*{nome}"><br><br>
+		Código da Conta: <input type="text" name="codigo" id="codigo" th:field="*{codigo}"><br><br>
+		Consumo da Conta: <input type="text" name="consumo" id="consumo" th:field="*{consumo}"><br><br>
+		Desconto da Conta: <input type="text" name="desconto" id="desconto" th:field="*{desconto}"><br><br>
+		Data de Criação da Conta: <input type="date" name="dataDeCriacao" id="dataDeCriacao" th:field="*{dataDeCriacao}"><br><br>
+		Data de Lançamento da Conta: <input type="date" name="dataDeLancamento" id="dataDeLancamento" th:field="*{dataDeLancamento}"><br><br>
+		Data de Vencimento da Conta: <input type="date" name="dataDeVencimento" id="dataDeVencimento" th:field="*{dataDeVencimento}"><br><br>
+		Dias da Conta: <input type="text" name="dias" id="dias" th:field="*{dias}"><br><br>
+		Dados Adicionais da Conta: <input type="text" name="dadosAdicionais" id="dadosAdicionais" th:field="*{dadosAdicionais}"><br><br>
+		Valor da Conta: <input type="text" name="valor" id="valor" th:field="*{valor}"><br><br>
+		Valor Total da Conta: <input type="text" name="valorTotal" id="valorTotal" th:field="*{valorTotal}"><br><br>
+		Base de Cálculo da Conta: <input type="number" name="baseDeCalculo" id="baseDeCalculo" th:field="*{baseDeCalculo}"><br><br>
+		Tipo de Conta:<br>
+		<select name="tipoDeConta" id="tipoDeConta" th:field="*{tipoDeConta}">
+		  <option value="agua">Água</option>
+		  <option value="energia" selected>Energia</option>
+		  <option value="gas">Gás</option>
+		</select>
+        <input type="submit" value="Cadastrar">
+    </form>
+</body>
+</html>

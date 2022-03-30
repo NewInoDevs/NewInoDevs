@@ -1,18 +1,36 @@
 package com.api.inodevs.entidades;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Conta extends Contrato{
-	private int codigo;
+	
+	@Id
+	private long codigo;
+	
 	public String nome;
+	
 	private String consumo;
+	
 	private String desconto;
-	private String dataDeCriação;
-	private String dataDeLançamento;
+	
+	private String dataDeCriacao;
+	
+	private String dataDeLancamento;
+	
 	private String dataDeVencimento;
+	
 	private String dias;
+	
 	private String dadosAdicionais;
+	
 	private float valor;
+	
 	private float valorTotal;
+	
 	private int baseDeCalculo;
+	
 	private String tipoDeConta;
 	
 	public long getCodigo() {
@@ -39,17 +57,17 @@ public class Conta extends Contrato{
 	public void setDesconto(String desconto) {
 		this.desconto = desconto;
 	}
-	public String getDataDeCriação() {
-		return dataDeCriação;
+	public String getDataDeCriacao() {
+		return dataDeCriacao;
 	}
-	public void setDataDeCriação(String dataDeCriação) {
-		this.dataDeCriação = dataDeCriação;
+	public void setDataDeCriacao(String dataDeCriacao) {
+		this.dataDeCriacao = dataDeCriacao;
 	}
-	public String getDataDeLançamento() {
-		return dataDeLançamento;
+	public String getDataDeLancamento() {
+		return dataDeLancamento;
 	}
-	public void setDataDeLançamento(String dataDeLançamento) {
-		this.dataDeLançamento = dataDeLançamento;
+	public void setDataDeLancamento(String dataDeLancamento) {
+		this.dataDeLancamento = dataDeLancamento;
 	}
 	public String getDataDeVencimento() {
 		return dataDeVencimento;
