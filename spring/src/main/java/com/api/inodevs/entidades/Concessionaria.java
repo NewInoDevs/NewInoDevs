@@ -1,5 +1,6 @@
 package com.api.inodevs.entidades;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -9,6 +10,7 @@ public class Concessionaria {
     @Id
     private long codigo;
     
+    @Column
     public String nome;
     
 	public long getCodigo() {
