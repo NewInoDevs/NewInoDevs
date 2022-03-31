@@ -58,7 +58,7 @@ do contrato).<br>
 ## :computer: Wireframe
 
 Acesse o link para visualizar:
-> * [Protótipo interativo no Figma.]()
+> * [Wireframe Figma.]()
   
   <br>
      
