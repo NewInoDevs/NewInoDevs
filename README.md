@@ -55,7 +55,7 @@ do contrato).<br>
 
 <br>
 
-## :computer: Protótipo
+## :computer: Wireframe
 
 Acesse o link para visualizar:
 > * [Protótipo interativo no Figma.]()
@@ -64,11 +64,10 @@ Acesse o link para visualizar:
      
 ## :rocket: Tecnologias Utilizadas
 
-* **Reuniões e Apresentações:** Discord, WhatsApp e Microsoft Teams;
-* **Banco de Dados:** MySQL e Wampserver;
-* **Back-end:** Java;
-* **Front-end:** HTML5, CSS e JavaScript;
-* **Ferramentas:** GitHub, VS Code, Canva, Excel e Figma.
+* **Reuniões e Apresentações:** Discord, WhatsApp e Microsoft Teams;;
+* **Back-end:** Java, MySQL e Spring;
+* **Front-end:** HTML5, CSS, JavaScript e bootstrap;
+* **Ferramentas:** GitHub, VS Code, Canva, Excel,Figma e Jira.
 <br>
   
 ## :gear: Execução 
