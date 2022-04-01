@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.api.inodevs.entidades.Concessionaria;
+import com.api.inodevs.entidades.Conta;
 import com.api.inodevs.entidades.Endereco;
 import com.api.inodevs.entidades.Unidade;
 import com.api.inodevs.repositorio.ConcessionariaRepositorio;
+import com.api.inodevs.repositorio.ContaRepositorio;
 import com.api.inodevs.repositorio.EnderecoRepositorio;
 import com.api.inodevs.repositorio.UnidadeRepositorio;
 
@@ -47,5 +49,19 @@ public class Controle {
 		unidadeRepo.save(unidade);
 		enderecoRepo.save(endereco);
 		return "redirect:cadastroUnidade";
+	}
+	
+	@Autowired
+	private ContaRepositorio contaRepo;
+
+	@GetMapping("/cadastroConta")
+	public String cadastroConta(@ModelAttribute("conta") Conta conta){
+		return "conta";
+	}
+	
+	@PostMapping("/salvarConta")
+	public String salvarConta(@ModelAttribute("conta") Conta conta) {
+		contaRepo.save(conta);	
+		return "redirect:cadastroConta";
 	}
 }
