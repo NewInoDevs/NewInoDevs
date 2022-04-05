@@ -7,7 +7,7 @@ import javax.persistence.Id;
 public class Endereco {
 	
 	@Id
-	public int cep;
+	public long cep;
 	
 	public String estado;
 	public String municipio;
@@ -16,10 +16,10 @@ public class Endereco {
 	public int numero;
 	public String complemento;
 	
-	public int getCep() {
+	public long getCep() {
 		return cep;
 	}
-	public void setCep(int cep) {
+	public void setCep(long cep) {
 		this.cep = cep;
 	}
 	public String getEstado() {

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Concessionaria</title>
+</head>
+<body>
+    <h1>Tabelas</h1>
+	<h2>Concessionarias</h2>
+	    <table border="1px">
+        <thead>
+            <tr>
+                <td>Nome</td>
+                <td>Código</td>
+                <td>Ações</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="concessionaria : ${listaConcessionaria}">
+                <td th:text="${concessionaria.codigo}"></td>
+                <td th:text="${concessionaria.nome}"></td>
+                <td><a href="#">Editar</a>
+                <a href="#">Excluir</a></td>
+            </tr>
+       	</tbody>
+    </table>
+    	<h2>Unidades</h2>
+	    <table border="1px">
+        <thead>
+            <tr>
+            	<td>CNPJ</td>
+                <td>Nome</td>
+                <td>Telefone</td>
+				<td>CEP do Endereço</td>
+				<td>Ações</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="unidade : ${listaUnidade}">
+                <td th:text="${unidade.cnpj}"></td>
+                <td th:text="${unidade.nome}"></td>
+                <td th:text="${unidade.telefone}"></td>
+                <td th:text="${unidade.endereco}"></td>
+	            <td><a href="#">Editar</a>
+                <a href="#">Excluir</a></td>
+	         </tr>
+       	</tbody>
+       	</table>
+       	<h2>Endereços</h2>
+	    <table border="1px">
+        <thead>
+            <tr>
+       			<td>CEP</td>
+                <td>Estado</td>
+                <td>Município</td>
+                <td>Bairro</td>
+                <td>Rua</td>
+                <td>Número</td>
+                <td>Complemento</td>
+                <td>Ações</td>
+       		</tr>
+       	</thead>
+       	<tbody>
+       		<tr th:each="endereco: ${listaEndereco}">
+       	        <td th:text="${endereco.cep}"></td>
+                <td th:text="${endereco.estado}"></td>
+                <td th:text="${endereco.municipio}"></td>
+                <td th:text="${endereco.bairro}"></td>
+                <td th:text="${endereco.rua}"></td>
+                <td th:text="${endereco.numero}"></td>
+                <td th:text="${endereco.complemento}"></td>
+				<td><a href="#">Editar</a>
+                <a href="#">Excluir</a></td>
+            </tr>
+         </tbody>
+    </table>
+</body>
+</html>
