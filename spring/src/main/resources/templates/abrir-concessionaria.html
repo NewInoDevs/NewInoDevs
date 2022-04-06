@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Funcionários</title>
+<body>
+    <h1>Concessionária</h1>
+    <div th:object="${concessionaria}">
+    	Código: <span th:text="*{codigo}"></span><br><br>
+        Nome: <span th:text="*{nome}"></span>
+    </div>
+    </form>
+</body>
+</html>

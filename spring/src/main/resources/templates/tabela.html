@@ -21,8 +21,9 @@
             <tr th:each="concessionaria : ${listaConcessionaria}">
                 <td th:text="${concessionaria.codigo}"></td>
                 <td th:text="${concessionaria.nome}"></td>
-                <td><a href="#">Editar</a>
-                <a href="#">Excluir</a></td>
+                <td><a th:href="@{/concessionaria/{codigo}(codigo=${concessionaria.codigo})}">Abrir
+				<a href="#">Editar</a>
+                <a href="#">Excluir</a></td>  
             </tr>
        	</tbody>
     </table>
@@ -43,7 +44,8 @@
                 <td th:text="${unidade.nome}"></td>
                 <td th:text="${unidade.telefone}"></td>
                 <td th:text="${unidade.endereco}"></td>
-	            <td><a href="#">Editar</a>
+                <td><a th:href="@{/unidade/{cnpj}/{endereco}(cnpj = ${unidade.cnpj}, endereco = ${unidade.endereco})}">Abrir</a>
+	            <a href="#">Editar</a>
                 <a href="#">Excluir</a></td>
 	         </tr>
        	</tbody>
