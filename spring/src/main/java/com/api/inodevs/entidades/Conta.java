@@ -21,6 +21,7 @@ public class Conta{
 	private float valor_total;
 	private int base_calculo;
 	private String tipo_conta;
+	private long contrato;
 	
 	public long getCodi() {
 		return codi;
@@ -99,6 +100,12 @@ public class Conta{
 	}
 	public void setTipo_conta(String tipo_conta) {
 		this.tipo_conta = tipo_conta;
+	}
+	public long getContrato() {
+		return contrato;
+	}
+	public void setContrato(long contrato) {
+		this.contrato = contrato;
 	}
 	
 	

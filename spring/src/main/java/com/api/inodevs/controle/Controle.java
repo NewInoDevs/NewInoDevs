@@ -71,6 +71,8 @@ public class Controle {
 		modelo.addAttribute("listaConcessionaria", concessionariaRepo.findAll());
 		modelo.addAttribute("listaUnidade", unidadeRepo.findAll());
 		modelo.addAttribute("listaEndereco", enderecoRepo.findAll());
+		modelo.addAttribute("listaConta", contaRepo.findAll());
 		return "tabela";
 	}
+
 }

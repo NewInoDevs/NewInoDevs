@@ -75,6 +75,48 @@
                 <a href="#">Excluir</a></td>
             </tr>
          </tbody>
-    </table>
+         </table>
+		<h2>Conta</h2>
+		<table border="1px">
+        <thead>
+    		<tr>
+		       	<td>Código</td>
+	            <td>Nome</td>
+	            <td>Consumo</td>
+	            <td>Desconto</td>
+	            <td>Data de Criação</td>
+	            <td>Data de Lançamento</td>
+	            <td>Data de Vencimento</td>
+	            <td>Dias</td>
+				<td>Dados Adicionais</td>
+				<td>Valor</td>
+				<td>Valor Total</td>
+				<td>Base de Cálculo</td>
+				<td>Tipo de Conta</td>
+				<td>Contrato</td>
+				<td>Ações</td>
+       	    </tr>
+       	</thead>
+		<tbody>
+   			<tr th:each="conta: ${listaConta}">
+	 			<td th:text="${conta.codi}"></td>
+     			<td th:text="${conta.nome}"></td>
+             	<td th:text="${conta.consumo}"></td>
+             	<td th:text="${conta.desconto}"></td>
+             	<td th:text="${conta.data_de_criacao}"></td>
+             	<td th:text="${conta.data_de_lancamento}"></td>
+             	<td th:text="${conta.data_de_vencimento}"></td>
+             	<td th:text="${conta.dias}"></td>
+             	<td th:text="${conta.dados_adicionais}"></td>
+             	<td th:text="${conta.valor}"></td>
+        	 	<td th:text="${conta.valor_total}"></td>
+             	<td th:text="${conta.base_calculo}"></td>
+             	<td th:text="${conta.tipo_conta}"></td>
+             	<td th:text="${conta.contrato}"></td>
+			 	<td><a href="#">Editar</a>
+             	<a href="#">Excluir</a></td>
+     		</tr>
+		</tbody>
+	</table>
 </body>
 </html>
