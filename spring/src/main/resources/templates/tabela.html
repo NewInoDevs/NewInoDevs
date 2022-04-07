@@ -115,7 +115,8 @@
              	<td th:text="${conta.base_calculo}"></td>
              	<td th:text="${conta.tipo_conta}"></td>
              	<td th:text="${conta.contrato}"></td>
-			 	<td><a href="#">Editar</a>
+             	<td><a th:href="@{/conta/{codi}(codi=${conta.codi})}">Abrir
+			 	<a href="#">Editar</a>
              	<a href="#">Excluir</a></td>
      		</tr>
 		</tbody>

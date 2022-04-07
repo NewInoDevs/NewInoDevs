@@ -100,5 +100,14 @@ public class Controle {
         modelo.addAttribute("endereco", enderecoOpt.get());
         return "abrir-unidade";
     }
+	@GetMapping("/conta/{codi}")
+    public String abrirConta(@PathVariable("codi") long codi, Model modelo) {
+        Optional<Conta> contaOpt = contaRepo.findById(codi);
+        if (contaOpt.isEmpty()) {
+            throw new IllegalArgumentException("Conta inválida");
+        }
+        modelo.addAttribute("conta", contaOpt.get());
+        return "abrir-conta";
+    }
 
 }
