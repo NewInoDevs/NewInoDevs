@@ -67,7 +67,7 @@ Acesse o link para visualizar:
 * **Reuniões e Apresentações:** Discord, WhatsApp e Microsoft Teams;;
 * **Back-end:** Java, MySQL e Spring;
 * **Front-end:** HTML5, CSS, JavaScript e bootstrap;
-* **Ferramentas:** GitHub, VS Code, Canva, Excel,Figma e Jira.
+* **Ferramentas:** GitHub, VS Code, Eclipse IDE, Canva, Excel,Figma e Jira.
 <br>
   
 ## :gear: Execução 
