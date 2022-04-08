@@ -8,14 +8,14 @@
 </head>
 <body>
     <h1>Cadastro de Conta</h1>
-    <form th:action="@{/salvarConta}" th:object="${conta}" method="POST">
-    	Nome da Conta: <input type="text" name="nome" id="nome" th:field="*{nome}"><br><br>
+    <form th:action="@{/salvarConta}" th:object="${conta}" method="POST" enctype="multipart/form-data">
+    	Nome: <input type="text" name="nome" id="nome" th:field="*{nome}"><br><br>
 		Código da Conta: <input type="text" name="codi" id="codi" th:field="*{codi}"><br><br>
 		Consumo da Conta: <input type="text" name="consumo" id="consumo" th:field="*{consumo}"><br><br>
 		Desconto da Conta: <input type="text" name="desconto" id="desconto" th:field="*{desconto}"><br><br>
-		Data de Criação da Conta: <input type="date" name="data_de_criacao" id="data_de_criacao" th:field="*{data_de_criacao}"><br><br>
-		Data de Lançamento da Conta: <input type="date" name="data_de_lancamento" id="data_de_lancamento" th:field="*{data_de_lancamento}"><br><br>
-		Data de Vencimento da Conta: <input type="date" name="data_de_vencimento" id="data_de_vencimento" th:field="*{data_de_vencimento}"><br><br>
+		Data de Criação: <input type="date" name="data_de_criacao" id="data_de_criacao" th:field="*{data_de_criacao}"><br><br>
+		Data de Lançamento: <input type="date" name="data_de_lancamento" id="data_de_lancamento" th:field="*{data_de_lancamento}"><br><br>
+		Data de Vencimento: <input type="date" name="data_de_vencimento" id="data_de_vencimento" th:field="*{data_de_vencimento}"><br><br>
 		Dias da Conta: <input type="text" name="dias" id="dias" th:field="*{dias}"><br><br>
 		Dados Adicionais da Conta: <input type="text" name="dados_adicionais" id="dados_adicionais" th:field="*{dados_adicionais}"><br><br>
 		Valor da Conta: <input type="text" name="valor" id="valor" th:field="*{valor}"><br><br>
@@ -26,7 +26,9 @@
 		  <option value="agua">Água</option>
 		  <option value="energia" selected>Energia</option>
 		  <option value="gas">Gás</option>
-		</select>
+		</select><br><br>
+		Contrato: <input type="text" name="contrato" id="contrato" th:field="*{contrato}"><br><br>
+		Arquivo pdf da conta: <br><input type="file" name="faturaPdf" id="faturaPdf"><br><br>
         <input type="submit" value="Cadastrar">
     </form>
 </body>
