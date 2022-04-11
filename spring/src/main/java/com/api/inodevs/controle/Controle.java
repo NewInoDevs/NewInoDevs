@@ -48,17 +48,18 @@ public class Controle {
 
 	@GetMapping("/cadastroConcessionaria")
 	public String cadastroConcessionaria(@ModelAttribute("concessionaria") Concessionaria concessionaria){
-		return "concessionaria";
+		return "pages/forms/concessionaria";
 	}
 	
 	@GetMapping("/cadastroUnidade")
 	public String cadastroUnidade(@ModelAttribute("endereco") Endereco endereco, @ModelAttribute("unidade") Unidade unidade){
-		return "unidade";
+		return "pages/forms/unidade";
 	}
 	
 	@GetMapping("/cadastroConta")
 	public String cadastroConta(@ModelAttribute("conta") Conta conta){
-		return "conta";
+		conta.setTipo_conta("energia");
+		return "pages/forms/contas";
 	}
 	
 	// CADASTRANDO NO BANCO DE DADOS = Concessionaria, Unidade (+ Endereco) e Conta (+ Upload do Arquivo)
@@ -99,7 +100,7 @@ public class Controle {
 		modelo.addAttribute("listaUnidade", unidadeRepo.findAll());
 		modelo.addAttribute("listaEndereco", enderecoRepo.findAll());
 		modelo.addAttribute("listaConta", contaRepo.findAll());
-		return "tabela";
+		return "pages/tables";
 	}
 	
 	// ABRINDO TODAS INFORMAÇOES DA TABELA = Concessionaria, Unidade (+ Endereco) e Conta
@@ -111,7 +112,7 @@ public class Controle {
             throw new IllegalArgumentException("Concessionária inválida");
         }
         modelo.addAttribute("concessionaria", concessionariaOpt.get());
-        return "abrir-concessionaria";
+        return "pages/forms/edit/concessionariaEdit";
     }
 	
 	@GetMapping("/unidade/{cnpj}/{endereco}")
@@ -126,7 +127,7 @@ public class Controle {
             throw new IllegalArgumentException("Endereco inválido");
         }
         modelo.addAttribute("endereco", enderecoOpt.get());
-        return "abrir-unidade";
+        return "pages/forms/edit/unidadeEdit";
     }
 	
 	@GetMapping("/conta/{codi}")
@@ -136,7 +137,7 @@ public class Controle {
             throw new IllegalArgumentException("Conta inválida");
         }
         modelo.addAttribute("conta", contaOpt.get());
-        return "abrir-conta";
+        return "pages/forms/edit/faturas";
     }
 	
 	// DOWNLOAD DO ARQUIVO DE FATURA
