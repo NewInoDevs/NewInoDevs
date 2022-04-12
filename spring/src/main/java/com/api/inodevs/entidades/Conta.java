@@ -2,6 +2,7 @@ package com.api.inodevs.entidades;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 @Entity
 public class Conta{
@@ -22,6 +23,15 @@ public class Conta{
 	private int base_calculo;
 	private String tipo_conta;
 	private long contrato;
+
+	private String concessionaria;
+	private String unidade; 
+	
+	private String nome_fatura;
+	private String tipo_fatura;
+	
+	@Lob
+	private byte[] fatura;
 	
 	public long getCodi() {
 		return codi;
@@ -107,6 +117,34 @@ public class Conta{
 	public void setContrato(long contrato) {
 		this.contrato = contrato;
 	}
-	
-	
+	public String getConcessionaria() {
+		return concessionaria;
+	}
+	public void setConcessionaria(String concessionaria) {
+		this.concessionaria = concessionaria;
+	}
+	public String getUnidade() {
+		return unidade;
+	}
+	public void setUnidade(String unidade) {
+		this.unidade = unidade;
+	}
+	public String getNome_fatura() {
+		return nome_fatura;
+	}
+	public void setNome_fatura(String nomeFatura) {
+		this.nome_fatura = nomeFatura;
+	}
+	public String getTipo_fatura() {
+		return tipo_fatura;
+	}
+	public void setTipo_fatura(String tipo_fatura) {
+		this.tipo_fatura = tipo_fatura;
+	}
+	public byte[] getFatura() {
+		return fatura;
+	}
+	public void setFatura(byte[] fatura) {
+		this.fatura = fatura;
+	}
 }

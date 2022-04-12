@@ -1,0 +1,42 @@
+.title {
+    text-align : center;
+    padding: 0.2rem;
+}
+.block-main2 {
+    background-color: #f0f2f5; 
+    width: 90%;
+    height: 50%;
+    margin: 0;
+    padding: 0;
+    left: 9%;
+    position: relative;
+    border: solid;
+    border-radius: 2rem;
+}
+
+.subtitle {
+    text-align : center;
+    padding-bottom: 1rem;
+    color: #868ba2;
+}
+
+.bt2 {
+    display: inline-block; 
+    content: flex-end; 
+    margin-left: 43%;
+    padding-bottom: 4%;
+}
+
+.sub-main-right {
+    display: inline-block; 
+    margin-left: 20%;
+}
+.sub-main-left {
+    display: inline-block; 
+    margin-left: 20%;
+}
+
+.space {
+    margin-top: 2rem;
+    margin-left: 23rem;
+}
