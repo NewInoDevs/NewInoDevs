@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>
-    Página de Cadastros
+    PÃ¡gina de Cadastros
   </title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
@@ -23,18 +23,18 @@
 
 <body class="g-sidenav-show  bg-gray-200">
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
-    <div class="sidenav-header">
+        <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
-        <img src="../../assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
-        <span class="ms-1 font-weight-bold text-white">Material Dashboard 2</span>
+        <img src="../assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
+        <span class="ms-1 font-weight-bold text-white">Menu</span>
       </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white " href="../../pages/dashboard.html">
+          <a class="nav-link text-white " href="../pages/dashboard.html">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
@@ -42,11 +42,11 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="../../pages/tables.html">
+          <a class="nav-link text-white active bg-gradient-primary" href="/tabela">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
-            <span class="nav-link-text ms-1">Tables</span>
+            <span class="nav-link-text ms-1">Tabelas</span>
           </a>
         </li>
         <li class="nav-item">
@@ -57,20 +57,18 @@
               </div>          
                 <span>Cadastros</span>
                   <div class="dropdown-content">
-                    <a href="./concessionaria.html">Concessionaria</a>
-                    <a href="./unidade.html">Unidade</a>
-                    <a href="./contas.html">Conta</a>
+                    <a href="/cadastroConcessionaria">Concessionaria</a>
+                    <a href="/cadastroUnidade">Unidade</a>
+                    <a href="/cadastroConta">Conta</a>
                   </div>
               </div> 
            </a>
          </li>
-      
-        <!--
-        <li class="nav-item mt-3">
+       <!-- <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
         </li>
-         <li class="nav-item">
-          <a class="nav-link text-white " href="../../pages/profile.html">
+        <li class="nav-item">
+          <a class="nav-link text-white " href="../pages/profile.html">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">person</i>
             </div>
@@ -78,7 +76,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="../../pages/sign-in.html">
+          <a class="nav-link text-white " href="../pages/sign-in.html">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">login</i>
             </div>
@@ -86,21 +84,16 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="../../pages/sign-up.html">
+          <a class="nav-link text-white " href="../pages/sign-up.html">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">assignment</i>
             </div>
             <span class="nav-link-text ms-1">Sign Up</span>
           </a>
         </li>
+        -->
       </ul>
     </div>
-    <div class="sidenav-footer position-absolute w-100 bottom-0 ">
-      <div class="mx-3">
-        <a class="btn bg-gradient-primary mt-4 w-100" href="https://www.creative-tim.com/product/material-dashboard-pro?ref=sidebarfree" type="button">Upgrade to pro</a>
-      </div>
-    </div>
-      -->
   </aside>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
     <!-- Navbar -->
@@ -222,13 +215,13 @@
 
     <!-- FORMS -->
     <div class="container-fluid py-4">
-      <h1 class="title">CADASTRO DE CONCESSIONARIA </h1> <br> <h4 style="font-size: 1rem;" class="subtitle" >(campos precisam de pontuação)</h4>
+      <h1 class="title">CADASTRO DE CONCESSIONARIA </h1> <br> <h4 style="font-size: 1rem;" class="subtitle" >(campos precisam de pontuaÃ§Ã£o)</h4>
       <form th:action="@{/salvarConcessionaria}"  th:object="${concessionaria}" method="POST" role="form" class="text-start">
         <div class="block-main">
           <div class="card-body space" >
             <label for="nomeConce">Nome:</label><br>
             <input maxlength="60" type="text" name="nomeConce" id="nomeConce" placeholder="Sabesp" th:field="*{nome}"> <br><br>
-            <label for="cnpj">Código:</label><br>
+            <label for="cnpj">CÃ³digo:</label><br>
             <input size="25" maxlength="25" type="text" name="cnpj" id="cnpj" placeholder="110457 43.776.517/0001-80" th:field="*{codigo}"> <br><br>
           </div>
           
@@ -246,7 +239,7 @@
           <div class="row align-items-center justify-content-lg-between">
             <div class="col-lg-6 mb-lg-0 mb-4">
               <div class="copyright text-center text-sm text-muted text-lg-start">
-                © <script>
+                Â© <script>
                   document.write(new Date().getFullYear())
                 </script>,
                 made with <i class="fa fa-heart"></i> by
@@ -371,3 +364,5 @@
 </body>
 
 </html>
+concessionaria.html
+20 KB

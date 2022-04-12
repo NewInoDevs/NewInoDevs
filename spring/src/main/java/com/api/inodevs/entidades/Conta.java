@@ -23,6 +23,9 @@ public class Conta{
 	private int base_calculo;
 	private String tipo_conta;
 	private long contrato;
+
+	private String concessionaria;
+	private String unidade; 
 	
 	private String nome_fatura;
 	private String tipo_fatura;
@@ -113,6 +116,18 @@ public class Conta{
 	}
 	public void setContrato(long contrato) {
 		this.contrato = contrato;
+	}
+	public String getConcessionaria() {
+		return concessionaria;
+	}
+	public void setConcessionaria(String concessionaria) {
+		this.concessionaria = concessionaria;
+	}
+	public String getUnidade() {
+		return unidade;
+	}
+	public void setUnidade(String unidade) {
+		this.unidade = unidade;
 	}
 	public String getNome_fatura() {
 		return nome_fatura;
