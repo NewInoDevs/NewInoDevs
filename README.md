@@ -86,6 +86,11 @@ Acesse o link para visualizar:
 * **Ferramentas:** GitHub, VS Code, Eclipse IDE, Canva, Excel,Figma e Jira.
 <br>
   
+## :chart_with_upwards_trend: Burndown
+*O gráfico abaixo mostra o desempenho da equipe na realização das tarefas referentes a Sprint:*
+<h1 align="center"><img src = "https://cdn.discordapp.com/attachments/956295961775337484/964262980818731060/Burndown.png" width="80%"></h1>
+<br> 
+  
 ## :gear: Execução 
 <h1 align="center"><img src = "./Artefatos/Execução Geral.gif" width="100%" height="580px"></h1>
 <br>
