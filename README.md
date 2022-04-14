@@ -7,7 +7,8 @@
   <a href ="#dart-prosposta">  Proposta </a>  • 
   <a href ="#pushpin-requisitos"> Requisitos </a>  • 
   <a href ="#calendar-plano-de-ação"> Plano de Ação </a>  • 
-  <a href ="#computer-Wireframe"> Wireframe</a>  • 
+  <a href ="#Backlog"> Backlog </a> • 
+  <a href ="#computer-Wireframe"> Wireframe </a>  • 
   <a href ="#rocket-tecnologias-utilizadas">  Tecnologias Utilizadas </a>  • 
   <a href ="#mortar_board-dev-team"> Dev Team </a> 
 
@@ -53,6 +54,15 @@ do contrato).<br>
 - [x] Feira de Soluções - 15/06 
 
 
+<br>
+
+
+
+## Backlog
+
+<h1 align="center"><img src = "https://github.com/NewInoDevs/NewInoDevs/blob/1º-Sprint/Artefatos/Backlog.jpg" width="80%"></h1>
+<br>
+<h1 align="center"><img src = "https://github.com/NewInoDevs/NewInoDevs/blob/1º-Sprint/Artefatos/Sprint%201%20Backlog.jpg" width="35%"></h1>
 <br>
 
 ## :computer: Wireframe
