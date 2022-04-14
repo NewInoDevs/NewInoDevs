@@ -30,3 +30,9 @@
     margin-left: 40%;
     padding-bottom: 4%;
 }
+.bt2 {
+    display: inline-block; 
+    content: flex-end; 
+    margin-left: 40%;
+    padding-bottom: 4%;
+}

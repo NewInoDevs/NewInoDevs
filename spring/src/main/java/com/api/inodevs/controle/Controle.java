@@ -1,7 +1,6 @@
 package com.api.inodevs.controle;
 
 import java.io.IOException;
-
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.api.inodevs.entidades.Concessionaria;
 import com.api.inodevs.entidades.Conta;
@@ -65,22 +65,25 @@ public class Controle {
 	// CADASTRANDO NO BANCO DE DADOS = Concessionaria, Unidade (+ Endereco) e Conta (+ Upload do Arquivo)
 	
 	@PostMapping("/salvarConcessionaria")
-	public String salvarConcessionaria(@ModelAttribute("concessionaria") Concessionaria concessionaria) {
-		concessionariaRepo.save(concessionaria);	
-		return "redirect:cadastroConcessionaria";
-	}
+    public String salvarConcessionaria(@ModelAttribute("concessionaria") Concessionaria concessionaria, RedirectAttributes redirect) {
+        concessionariaRepo.save(concessionaria);
+        redirect.addFlashAttribute("successo", "Cadastrado com sucesso!");
+        return "redirect:cadastroConcessionaria";
+    }
 	
 	@PostMapping("/salvarUnidade")
-	public String salvarUnidade(@ModelAttribute("endereco") Endereco endereco, @ModelAttribute("unidade") Unidade unidade) {
+	public String salvarUnidade(@ModelAttribute("endereco") Endereco endereco, @ModelAttribute("unidade") Unidade unidade, RedirectAttributes redirect) {
 		unidade.setEndereco(endereco.getCep());
+        redirect.addFlashAttribute("successo", "Cadastrado com sucesso!");
 		unidadeRepo.save(unidade);
 		enderecoRepo.save(endereco);
 		return "redirect:cadastroUnidade";
 	}
 
 	@PostMapping("/salvarConta")
-	public String salvarConta(@ModelAttribute("conta") Conta conta, @RequestParam("faturaPdf") MultipartFile file) {
+	public String salvarConta(@ModelAttribute("conta") Conta conta, @RequestParam("faturaPdf") MultipartFile file, RedirectAttributes redirect) {
 		String nome = file.getOriginalFilename();
+        redirect.addFlashAttribute("successo", "Cadastrado com sucesso!");
 		try {
 			conta.setNome_fatura(nome);
 			conta.setTipo_fatura(file.getContentType());
