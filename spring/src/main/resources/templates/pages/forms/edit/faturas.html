@@ -25,8 +25,8 @@
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
         <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard/pages/dashboard " target="_blank">
-        <img src="../assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
+      <a class="navbar-brand m-0" target="_blank">
+        <img src="../assets/img/icons/menuIcon.png" class="navbar-brand-img h-100" alt="main_logo">
         <span class="ms-1 font-weight-bold text-white">Menu</span>
       </a>
     </div>
@@ -51,18 +51,18 @@
         </li>
         <li class="nav-item">
           <div class="dropdown float-start text-white text-center me-2 d-flex align-items-center justify-content-center">
-            <a class="nav-link text-white ">
+            <a class="nav-link text-white long">
               <div class="text-white text-center me-4 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">person</i>
               </div>          
                 <span>Cadastros</span>
+			</a>
                   <div class="dropdown-content">
                     <a href="/cadastroConcessionaria">Concessionaria</a>
                     <a href="/cadastroUnidade">Unidade</a>
                     <a href="/cadastroConta">Conta</a>
                   </div>
               </div> 
-           </a>
          </li>
        <!-- <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
@@ -227,73 +227,86 @@
               <div class="card-body">
                   <form role="form" th:object="${conta}">
                   	<div class="input-group input-group-outline mb-3">
-                      <label style="color: red">Tipo de Conta: </label>
+                      <label>Tipo de Conta: </label>
 						<div class="btn-group btn-group-toggle" data-toggle="buttons">
-						  <label class="btn btn-secondary active">
+						  <label class="btn active">
 						    <input type="radio" name="tipoConta" id="tipoAgua" autocomplete="off" value="agua" th:checked="${conta.tipo_conta == 'agua'}"> Água
 						  </label>
-						  <label class="btn btn-secondary">
+						  <label class="btn active">
 						    <input type="radio" name="tipoConta" id="tipoEnergia" autocomplete="off" value="energia" th:checked="${conta.tipo_conta == 'energia'}"> Energia
 						  </label>
-						  <label class="btn btn-secondary">
+						  <label class="btn active">
 						    <input type="radio" name="tipoConta" id="tipoGas" autocomplete="off" value="gas" th:checked="${conta.tipo_conta == 'gas'}"> Gás
 						  </label>
 						</div>
                     </div>
+	                 <label >Complemento</label>
                     <div class="input-group input-group-outline mb-3">
-                      <label class="form-label">Nome</label>
                       <input type="text" class="form-control" th:field=*{nome}>
                     </div>
+                    
+                    <label >Código</label>
                     <div class="input-group input-group-outline mb-3">
-                      <label class="form-label">Código</label>
                       <input type="text" class="form-control" th:field=*{codi}>
                     </div>
+                    
+                    <label >Concessionária</label>
                     <div class="input-group input-group-outline mb-3">
-                      <label class="form-label">Concessionária</label>
                       <input type="text" class="form-control" th:field=*{concessionaria}>
                     </div>
+                    
+                    <label >Unidade</label>
                     <div class="input-group input-group-outline mb-3">
-                      <label class="form-label">Unidade</label>
                       <input type="text" class="form-control" th:field=*{unidade}>
                     </div>
+                    
+                    <label >Data de Criação</label>
                     <div class="input-group input-group-outline mb-3">
-                      <label class="form-label">Data de Criação</label>
                       <input type="text" class="form-control" th:field=*{data_de_criacao}>
                     </div>
+                    
+                    <label >Data de Lançamento</label>
                     <div class="input-group input-group-outline mb-3">
-                      <label class="form-label">Data de Lançamento</label>
                       <input type="text" class="form-control" th:field=*{data_de_lancamento}>
                     </div>
+                    
+                    <label >Data de Vencimento</label>
                     <div class="input-group input-group-outline mb-3">
-                      <label class="form-label">Data de Vencimento</label>
                       <input type="text" class="form-control" th:field=*{data_de_vencimento}>
                     </div>
+                    
+                    <label >Consumo</label>
                     <div class="input-group input-group-outline mb-3">
-                      <label class="form-label">Consumo</label>
                       <input type="text" class="form-control" th:field=*{consumo}>
                     </div>
+                    
+                    <label >Valor</label>
                     <div class="input-group input-group-outline mb-3">
-                      <label class="form-label">Valor</label>
                       <input type="text" class="form-control" th:field=*{valor}>
                     </div>
+                    
+                    <label >Desconto</label>
                     <div class="input-group input-group-outline mb-3">
-                      <label class="form-label">Desconto</label>
                       <input type="text" class="form-control" th:field=*{desconto}>
                     </div>
+                    
+                    <label >Valor Total</label>
                     <div class="input-group input-group-outline mb-3">
-                      <label class="form-label">Valor Total</label>
                       <input type="text" class="form-control" th:field=*{valor_total}>
                     </div>
-	                   <div class="input-group input-group-outline mb-3">
-	                      <label class="form-label">Dias</label>
-	                      <input type="text" class="form-control" th:field=*{dias}>
-	                   </div>
-	                 <div class="input-group input-group-outline mb-3">
-                      <label class="form-label">Dados Adicionais</label>
+                    
+                    <label >Dias</label>
+	                <div class="input-group input-group-outline mb-3">
+	                	<input type="text" class="form-control" th:field=*{dias}>
+	                </div>
+	                
+	                <label >Dados Adicionais</label>
+	                <div class="input-group input-group-outline mb-3">
                       <input type="text" class="form-control" th:field=*{dados_adicionais}>
                     </div>
+                    
+                    <label >Base de Cálculo</label>
                     <div class="input-group input-group-outline mb-3">
-                      <label class="form-label">Base de Cálculo</label>
                       <input type="text" class="form-control" th:field=*{base_calculo}>
                     </div>
          			Arquivo pdf da conta:<br><a type="button" class="btn btn-primary" th:href="@{'/download/'+${conta.codi}}" download>Download</a>
