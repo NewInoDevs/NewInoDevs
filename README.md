@@ -1,6 +1,6 @@
 ### Aprendizado por projeto integrador-FATEC-SJC
 
-# <p align="center"> InoDevs </center> 
+# <p align="center"> NewInoDevs </center> 
 <hr>
 
 <p align="center">
@@ -23,7 +23,7 @@ salvamento em banco de dados para eventuais consultas e análises técnicas/fina
 trazer ao cliente oportunidades de redução de custos e alteração de contratos. 
 
 
-> [Documentação](https://github.com/Inodevs/Inodevs/blob/sprint-4/Documenta%C3%A7%C3%A3o/InodevsSprint4.pdf)
+> [Documentação](https://github.com/NewInoDevs/NewInoDevs/blob/1%C2%BA-Sprint/Documenta%C3%A7%C3%A3o/Inodevs3sem.pdf)
 <br>
 
 ## :pushpin: Requisitos
