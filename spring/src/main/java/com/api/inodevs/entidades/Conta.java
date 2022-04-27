@@ -8,7 +8,7 @@ import javax.persistence.Lob;
 public class Conta{
 	
 	@Id
-	private long codi;
+	private Long codi;
 	
 	public String nome;
 	private String consumo;
@@ -18,11 +18,11 @@ public class Conta{
 	private String data_de_vencimento;
 	private String dias;
 	private String dados_adicionais;
-	private float valor;
-	private float valor_total;
-	private int base_calculo;
+	private Float valor;
+	private Float valor_total;
+	private Integer base_calculo;
 	private String tipo_conta;
-	private long contrato;
+	private Long contrato;
 
 	private String concessionaria;
 	private String unidade; 
@@ -33,10 +33,10 @@ public class Conta{
 	@Lob
 	private byte[] fatura;
 	
-	public long getCodi() {
+	public Long getCodi() {
 		return codi;
 	}
-	public void setCodi(long codi) {
+	public void setCodi(Long codi) {
 		this.codi = codi;
 	}
 	public String getNome() {
@@ -87,22 +87,22 @@ public class Conta{
 	public void setDados_adicionais(String dados_adicionais) {
 		this.dados_adicionais = dados_adicionais;
 	}
-	public float getValor() {
+	public Float getValor() {
 		return valor;
 	}
-	public void setValor(float valor) {
+	public void setValor(Float valor) {
 		this.valor = valor;
 	}
-	public float getValor_total() {
+	public Float getValor_total() {
 		return valor_total;
 	}
-	public void setValor_total(float valor_total) {
+	public void setValor_total(Float valor_total) {
 		this.valor_total = valor_total;
 	}
-	public int getBase_calculo() {
+	public Integer getBase_calculo() {
 		return base_calculo;
 	}
-	public void setBase_calculo(int base_calculo) {
+	public void setBase_calculo(Integer base_calculo) {
 		this.base_calculo = base_calculo;
 	}
 	public String getTipo_conta() {
@@ -111,10 +111,10 @@ public class Conta{
 	public void setTipo_conta(String tipo_conta) {
 		this.tipo_conta = tipo_conta;
 	}
-	public long getContrato() {
+	public Long getContrato() {
 		return contrato;
 	}
-	public void setContrato(long contrato) {
+	public void setContrato(Long contrato) {
 		this.contrato = contrato;
 	}
 	public String getConcessionaria() {
