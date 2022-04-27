@@ -7,19 +7,19 @@ import javax.persistence.Id;
 public class Endereco {
 	
 	@Id
-	public long cep;
+	public Long cep;
 	
 	public String estado;
 	public String municipio;
 	public String bairro;
 	public String rua;
-	public int numero;
+	public Integer numero;
 	public String complemento;
 	
-	public long getCep() {
+	public Long getCep() {
 		return cep;
 	}
-	public void setCep(long cep) {
+	public void setCep(Long cep) {
 		this.cep = cep;
 	}
 	public String getEstado() {
@@ -46,10 +46,10 @@ public class Endereco {
 	public void setRua(String rua) {
 		this.rua = rua;
 	}
-	public int getNumero() {
+	public Integer getNumero() {
 		return numero;
 	}
-	public void setNumero(int numero) {
+	public void setNumero(Integer numero) {
 		this.numero = numero;
 	}
 	public String getComplemento() {

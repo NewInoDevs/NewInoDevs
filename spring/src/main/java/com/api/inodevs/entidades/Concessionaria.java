@@ -8,15 +8,15 @@ import javax.persistence.Id;
 public class Concessionaria {
 	
     @Id
-    private long codigo;
+    private Long codigo;
     
     @Column
     public String nome;
     
-	public long getCodigo() {
+	public Long getCodigo() {
 		return codigo;
 	}
-	public void setCodigo(long codigo) {
+	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
 	}
 	public String getNome() {
