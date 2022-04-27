@@ -27302,7 +27302,6 @@ pre[class*="language-"] {
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
   margin-top: 14rem;
-  margin-left: ;
   display: none;
   position: absolute;
   background-color: #f1f1f1;
@@ -27357,7 +27356,7 @@ pre[class*="language-"] {
 /* Links inside the dropdown */
 .dropdown-content a {
   color: black;
-  padding: 12px 16px;
+  padding: 17px 16px;
   text-decoration: none;
   display: block;
 }
@@ -27375,4 +27374,13 @@ pre[class*="language-"] {
 navbar-vertical .nav-item:hover .navigation {
   background-color: rgba(199, 199, 199, 0.2);
   border-radius: 0.375rem;
+}
+
+.long {
+	width: 13.55rem;
+}
+
+
+.corzinha {
+	color: green;
 }

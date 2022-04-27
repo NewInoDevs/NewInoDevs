@@ -7,11 +7,11 @@ import javax.persistence.Id;
 public class Unidade {
 	
 	@Id
-	private long cnpj;
+	private Long cnpj;
 	
 	private String nome;
 	public String telefone;
-	public long endereco;
+	public Long endereco;
 	  
 	public String getNome() {
 		return nome;
@@ -19,10 +19,10 @@ public class Unidade {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public long getCnpj() {
+	public Long getCnpj() {
 		return cnpj;
 	}
-	public void setCnpj(long cnpj) {
+	public void setCnpj(Long cnpj) {
 		this.cnpj = cnpj;
 	}
 	public String getTelefone() {
@@ -31,10 +31,10 @@ public class Unidade {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	public long getEndereco() {
+	public Long getEndereco() {
 		return endereco;
 	}
-	public void setEndereco(long endereco) {
+	public void setEndereco(Long endereco) {
 		this.endereco = endereco;
 	}
 }
