@@ -7,10 +7,9 @@
   <a href ="#dart-prosposta">  Proposta </a>  • 
   <a href ="#pushpin-requisitos"> Requisitos </a>  • 
   <a href ="#calendar-plano-de-ação"> Plano de Ação </a>  • 
-  <a href ="#Backlog"> Backlog </a> • 
-  <a href ="#computer-Wireframe"> Wireframe </a>  • 
+  <a href ="#computer-Wireframe"> Wireframe</a>  • 
   <a href ="#rocket-tecnologias-utilizadas">  Tecnologias Utilizadas </a>  • 
-  <a href ="#mortar_board-dev-team"> Dev Team </a> 
+  <a href ="#mortar_board-dev-team"> Dev Team </a> • 
 
 </p>
 <hr>
@@ -24,7 +23,7 @@ salvamento em banco de dados para eventuais consultas e análises técnicas/fina
 trazer ao cliente oportunidades de redução de custos e alteração de contratos. 
 
 
-> [Documentação](https://github.com/NewInoDevs/NewInoDevs/blob/1º-Sprint/Documentação/Inodevs3sem.pdf)
+> [Documentação](https://github.com/Inodevs/Inodevs/blob/sprint-4/Documenta%C3%A7%C3%A3o/InodevsSprint4.pdf)
 <br>
 
 ## :pushpin: Requisitos
@@ -56,25 +55,10 @@ do contrato).<br>
 
 <br>
 
-
-
-## Backlog
-
-<h1 align="center"><img src = "https://github.com/NewInoDevs/NewInoDevs/blob/1º-Sprint/Artefatos/Backlog.jpg" width="80%"></h1>
-
-<h5 align="center">Prioridade:<br>
-🔴- Alta,
-🟡- Média,
-🟢- Baixa,
-🔵- Seria bom ter.<br></h5>
-
-<h1 align="center"><img src = "https://github.com/NewInoDevs/NewInoDevs/blob/1º-Sprint/Artefatos/Sprint%201%20Backlog.jpg" width="35%"></h1>
-<br>
-
 ## :computer: Wireframe
 
 Acesse o link para visualizar:
-> * [Wireframe Figma.](https://www.figma.com/file/AeyU0W19dA8KmriaZEmQVZ/Wireframe?node-id=29%3A2)
+> * [Wireframe Figma.]()
   
   <br>
      
@@ -86,13 +70,8 @@ Acesse o link para visualizar:
 * **Ferramentas:** GitHub, VS Code, Eclipse IDE, Canva, Excel,Figma e Jira.
 <br>
   
-## :chart_with_upwards_trend: Burndown
-*O gráfico abaixo mostra o desempenho da equipe na realização das tarefas referentes a Sprint:*
-<h1 align="center"><img src = "https://cdn.discordapp.com/attachments/956295961775337484/964262980818731060/Burndown.png" width="80%"></h1>
-<br> 
-  
 ## :gear: Execução 
-<h1 align="center"><img src = "./Artefatos/Execução Geral.gif" width="100%" height="580px"></h1>
+<h1 align="center"><img src = " " width="100%" height="580px"></h1>
 <br>
 
 ## :mortar_board: Dev Team
@@ -105,3 +84,10 @@ Acesse o link para visualizar:
 | Kauã Gustavo Rodrigues Reno | Desenvolvedor 2 | [@GitHub](https://github.com/Kaua-Reno) | [@LinkedIn](https://www.linkedin.com/in/kau%C3%A3-gustavo-r-reno-6a3142205/) 
 | Luís Henrique Ferreira Souza | Desenvolvedor 3 | [@GitHub]( https://github.com/Luisttine) | [@LinkedIn](https://www.linkedin.com/in/lu%C3%ADs-souza/) |
 | Raul Santos Iglesias | Desenvolvedor 4 | [@GitHub]( https://github.com/RaulIglesias) | [@LinkedIn](https://www.linkedin.com/in/raul-iglesias-8010201a1/) |
+
+
+
+
+<h1 align="center"></h1>
+
+##### <p align="center"><img src="https://cdn.discordapp.com/attachments/826526043917647912/883363052425195560/faTec.png" width="20" height="20" /> Projeto Integrador 2021 - Fatec São José dos Campos </center>
