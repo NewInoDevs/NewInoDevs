@@ -63,9 +63,18 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                     <a href="/cadastroConcessionaria">Concessionaria</a>
                     <a href="/cadastroUnidade">Unidade</a>
                     <a href="/cadastroConta">Conta</a>
+                    <a href="/cadastroContrato">Contrato</a>
                   </div>
               </div> 
          </li>
+         <li class="nav-item">
+          <a class="nav-link text-white" href="/controleUsuario">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
+            <span class="nav-link-text ms-1">Perfis</span>
+          </a>
+        </li>
        <!-- <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
         </li>
@@ -416,6 +425,69 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
           </div>
         </div>
       </div>
+      
+                 <!-- TABELA Contrato -->
+
+        <div class="row">
+        <div class="col-12">
+          <div class="card my-4">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+              <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                <h6 class="text-white text-capitalize ps-3">Tabela de Contrato</h6>
+              </div>
+            </div>
+            <div class="card-body px-0 pb-2">
+              <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary font-weight-bolder opacity-7">Código</th>
+                      <th class="text-uppercase text-secondary font-weight-bolder opacity-7 ps-2">Concessionaria</th>
+                      <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Unidade</th>
+                      <th class="text-center text-uppercase text-secondary  font-weight-bolder opacity-7">Status</th>
+                      <th class="text-secondary opacity-7">AÇÕES</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <!-- PRIMEIRA LINHA -->
+                    <tr th:each="contrato: ${listaContrato}">
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div>
+                            <!-- LINK PARA VISUALIZAR A UNIDADE-->
+                            <a th:href="@{/contrato/{codigo}(codigo = ${contrato.codigo})}"> 
+                            <!-- ALTERAR ICONE AQUI -->
+                            <img src="../assets/img/Icons/accountIcon.png"  class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+                          </div>
+                          <div class="d-flex flex-column justify-content-center">
+                			<h6 class="mb-0 text-sm" th:text="${contrato.codigo}"></h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p class="text-xs font-weight-bold mb-0" th:each="concessionaria : ${listaConcessionaria}" th:if="${concessionaria.codigo == contrato.concessionaria}" th:text="${concessionaria.nome}"></p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <p class="text-secondary text-xs font-weight-bold" th:each="unidade : ${listaUnidade}" th:if="${unidade.cnpj == contrato.unidade}" th:text="${unidade.nome}"></p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold">pendente</span>
+                      </td>
+                      <td class="align-middle">
+                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                          Editar
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
       <footer class="footer py-4  ">
         <div class="container-fluid">
           <div class="row align-items-center justify-content-lg-between">
@@ -431,6 +503,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
         </div>
       </footer>
     </div>
+    
   </main>
     <div class="fixed-plugin">
     <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
