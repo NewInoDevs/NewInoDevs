@@ -27,19 +27,22 @@ public class SegurancaConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.
-			authorizeRequests()
-			.antMatchers("/controleUsuario", "/cadastroUsuario", "/editarUsuario/{id}","/excluirUsuario/{id}").hasAnyRole("ADMINISTRADOR", "GESTOR")
+		http
+			.requestCache()
+				.disable()
+			.authorizeRequests()
+			.antMatchers("/controleUsuario", "/cadastroUsuario", "/editarUsuario/{id}","/excluirUsuario/{id}")
+				.hasAnyRole("ADMINISTRADOR", "GESTOR")
 			.anyRequest()
 			.authenticated()
 			.and()
-			.formLogin()
-			.loginPage("/login")
-			.permitAll()
+				.formLogin()
+				.loginPage("/login")
+				.permitAll()
 			.and()
-			.logout()
-			.logoutSuccessUrl("/login?logout")
-			.permitAll()
+				.logout()
+				.logoutSuccessUrl("/login?logout")
+				.permitAll()
 			;
 	}
 }

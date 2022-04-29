@@ -215,7 +215,7 @@
     </nav>
     <!-- End Navbar -->
 
-
+	<form th:action="@{/salvarContaEdit}" th:object="${conta}" method="POST">
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
@@ -225,22 +225,17 @@
             </div>
             <div class="card-body p-3 pb-0">
               <div class="card-body">
-                  <form role="form" th:object="${conta}">
                   	<div class="input-group input-group-outline mb-3">
                       <label>Tipo de Conta: </label>
 						<div class="btn-group btn-group-toggle" data-toggle="buttons">
 						  <label class="btn active">
-						    <input type="radio" name="tipoConta" id="tipoAgua" autocomplete="off" value="agua" th:checked="${conta.tipo_conta == 'agua'}"> Água
+						    <input type="radio" name="tipoConta" id="tipoAgua" autocomplete="off" value="agua" th:checked="${conta.tipo_conta == 'agua'}" th:field="*{tipo_conta}"> Água
 						  </label>
 						  <label class="btn active">
-						    <input type="radio" name="tipoConta" id="tipoEnergia" autocomplete="off" value="energia" th:checked="${conta.tipo_conta == 'energia'}"> Energia
+						    <input type="radio" name="tipoConta" id="tipoEnergia" autocomplete="off" value="energia" th:checked="${conta.tipo_conta == 'energia'}" th:field="*{tipo_conta}"> Energia
 						  </label>
 						  <label class="btn active">
-						  <label class="btn btn-secondary active">
-						    <input type="radio" name="tipoConta" id="tipoEnergia" autocomplete="off" value="energia" th:checked="${conta.tipo_conta == 'energia'}"> Energia
-						  </label>
-						  <label class="btn btn-secondary active">
-						    <input type="radio" name="tipoConta" id="tipoGas" autocomplete="off" value="gas" th:checked="${conta.tipo_conta == 'gas'}"> Gás
+						    <input type="radio" name="tipoConta" id="tipoGas" autocomplete="off" value="gas" th:checked="${conta.tipo_conta == 'gas'}" th:field="*{tipo_conta}"> Gás
 						  </label>
 						</div>
                     </div>
@@ -251,7 +246,13 @@
                     
                     <label >Código</label>
                     <div class="input-group input-group-outline mb-3">
-                      <input type="text" class="form-control" th:field=*{codi}>
+                      <input type="text" class="form-control" th:field=*{codi} disabled>
+                      <input type="hidden" th:field=*{codi}>
+                    </div>
+                    
+                    <label >Contrato</label>
+                    	<div class="input-group input-group-outline mb-3">
+                    	<input type="text" class="form-control" th:field=*{contrato}>
                     </div>
                     
                     <label >Concessionária</label>
@@ -266,17 +267,17 @@
                     
                     <label >Data de Criação</label>
                     <div class="input-group input-group-outline mb-3">
-                      <input type="text" class="form-control" th:field=*{data_de_criacao}>
+                      <input type="date" class="form-control" th:field=*{data_de_criacao}>
                     </div>
                     
                     <label >Data de Lançamento</label>
                     <div class="input-group input-group-outline mb-3">
-                      <input type="text" class="form-control" th:field=*{data_de_lancamento}>
+                      <input type="date" class="form-control" th:field=*{data_de_lancamento}>
                     </div>
                     
                     <label >Data de Vencimento</label>
                     <div class="input-group input-group-outline mb-3">
-                      <input type="text" class="form-control" th:field=*{data_de_vencimento}>
+                      <input type="date" class="form-control" th:field=*{data_de_vencimento}>
                     </div>
                     
                     <label >Consumo</label>
@@ -313,7 +314,9 @@
                     <div class="input-group input-group-outline mb-3">
                       <input type="text" class="form-control" th:field=*{base_calculo}>
                     </div>
-         			Arquivo pdf da conta:<br><a type="button" class="btn btn-primary" th:href="@{'/download/'+${conta.codi}}" download>Download</a>
+         			Arquivo pdf da conta:<br><a type="button" class="btn btn-primary" th:href="@{'/download/'+${conta.fatura}}" download>Download</a>
+         			<a type="button" class="btn btn-primary" th:href="@{'/inserirFatura/'+${conta.fatura}}">Inserir Novo</a>
+         			<input type="hidden" th:field="*{fatura}">
             </div>
           </div>
           <div class="card mt-4">
@@ -329,7 +332,7 @@
                   <button class="btn bg-gradient-success w-100 mb-0 toast-btn" type="button" data-target="successToast">Aprovar</button>
                 </div>
                 <div class="col-lg-4 col-sm-8 col-12 mt-lg-0 mt-2">
-                  <button class="btn bg-gradient-warning w-100 mb-0 toast-btn" type="button" data-target="warningToast">Editar</button> <a href=""> </a>
+                  <input class="btn bg-gradient-warning w-100 mb-0 toast-btn" type="submit" data-target="warningToast" value="Editar"> <a href=""> </a>
                 </div>
                 <div class="col-lg-4 col-sm-8 col-12 mt-lg-0 mt-2">
                   <button class="btn bg-gradient-danger w-100 mb-0 toast-btn" type="button" data-target="dangerToast">Reprovar</button>
@@ -338,6 +341,7 @@
             </div>
           </div>  
         </div>
+      </form>
       
       <div class="position-fixed top-1 end-1 z-index-2">
         <div class="toast fade hide p-2 bg-white" role="alert" aria-live="assertive" id="successToast" aria-atomic="true">
