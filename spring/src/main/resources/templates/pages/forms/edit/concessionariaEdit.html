@@ -216,7 +216,7 @@
     </nav>
     <!-- End Navbar -->
 
-
+	<form th:action="@{/salvarConcessionariaEdit}" th:object="${concessionaria}" method="POST">
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
@@ -226,14 +226,14 @@
             </div>
             <div class="card-body p-3 pb-0">
               <div class="card-body">
-                  <form role="form" th:object="${concessionaria}">
                   	<label >Nome</label>
                     <div class="input-group input-group-outline mb-3">
                       <input type="text" class="form-control" th:field="*{nome}">
                     </div>
                     <label >Código</label>
                     <div class="input-group input-group-outline mb-3">
-                      <input type="text" class="form-control" th:field="*{codigo}">
+                      <input type="text" class="form-control" th:field="*{codigo}" disabled>
+                      <input type="hidden" th:field="*{codigo}">
                     </div>                    
             	</div>
           </div>
@@ -250,7 +250,7 @@
                   <button class="btn bg-gradient-success w-100 mb-0 toast-btn" type="button" data-target="successToast">Aprovar</button>
                 </div>
                 <div class="col-lg-4 col-sm-8 col-12 mt-lg-0 mt-2">
-                  <button class="btn bg-gradient-warning w-100 mb-0 toast-btn" type="button" data-target="warningToast">Editar</button> <a href=""> </a>
+                  <input class="btn bg-gradient-warning w-100 mb-0 toast-btn" type="submit" data-target="warningToast" value="Editar"> <a href=""> </a>
                 </div>
                 <div class="col-lg-4 col-sm-8 col-12 mt-lg-0 mt-2">
                   <button class="btn bg-gradient-danger w-100 mb-0 toast-btn" type="button" data-target="dangerToast">Reprovar</button>
@@ -259,7 +259,7 @@
             </div>
           </div>  
         </div>
-      
+      </form>
       <div class="position-fixed top-1 end-1 z-index-2">
         <div class="toast fade hide p-2 bg-white" role="alert" aria-live="assertive" id="successToast" aria-atomic="true">
           <div class="toast-header border-0">

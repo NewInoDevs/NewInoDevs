@@ -53,5 +53,28 @@ public class ControleUnidade {
         modelo.addAttribute("endereco", enderecoOpt.get());
         return "pages/forms/edit/unidadeEdit";
     }
-
+	
+	@PostMapping("/salvarUnidadeEdit")
+	public String salvarUnidadeEdit(@ModelAttribute("unidade") Unidade unidade, RedirectAttributes redirect, @ModelAttribute("endereco") Endereco endereco) {
+		unidade.setEndereco(endereco.getCep());
+		unidadeRepo.save(unidade);
+		enderecoRepo.save(endereco);
+		redirect.addFlashAttribute("sucesso", "Unidade salvo com sucesso!");
+		return "redirect:/tabela";
+	}
+	
+	@GetMapping("/excluirUnidade/{cnpj}/{endereco}")
+	public String excluirUnidade(@PathVariable("cnpj") long cnpj, @PathVariable("endereco") long endereco) {
+		Optional<Unidade> unidadeOpt = unidadeRepo.findById(cnpj);
+		if (unidadeOpt.isEmpty()) {
+			throw new IllegalArgumentException("Unidade inválido");
+		}
+		unidadeRepo.deleteById(cnpj);
+        Optional<Endereco> enderecoOpt = enderecoRepo.findById(endereco);
+        if (enderecoOpt.isEmpty()) {
+            throw new IllegalArgumentException("Endereco inválido");
+        }
+		enderecoRepo.deleteById(endereco);
+		return "redirect:/tabela";
+	}
 }

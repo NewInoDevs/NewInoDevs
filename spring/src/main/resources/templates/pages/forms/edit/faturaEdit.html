@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Editar Fatura</title>
+</head>
+<body>
+	<h1>Reinsira a fatura correta:</h1>
+	<form th:action="@{/salvarFatura}" th:object="${fatura}" method="POST">
+		<input type="hidden" th:field="*{id}"><br>
+		<label for="faturaPdf">Arquivo pdf da conta: </label><br>
+        <input type="file" name="faturaPdf" id="faturaPdf"> <br><br>
+		<input type="submit">
+	</form>
+</body>
+</html>

@@ -1,4 +1,4 @@
-package com.api.inodevs;
+package com.api.inodevs.seguranca;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 

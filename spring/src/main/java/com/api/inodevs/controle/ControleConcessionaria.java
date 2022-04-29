@@ -32,6 +32,13 @@ public class ControleConcessionaria {
         return "redirect:cadastroConcessionaria";
     }
 	
+	@PostMapping("/salvarConcessionariaEdit")
+    public String salvarConcessionariaEdit(@ModelAttribute("concessionaria") Concessionaria concessionaria, RedirectAttributes redirect) {
+        concessionariaRepo.save(concessionaria);
+        redirect.addFlashAttribute("successo", "Editado com sucesso!");
+        return "redirect:tabela";
+    }
+	
 	@GetMapping("/concessionaria/{codigo}")
     public String abrirConcessionaria(@PathVariable("codigo") long codigo, Model modelo) {
         Optional<Concessionaria> concessionariaOpt = concessionariaRepo.findById(codigo);
@@ -41,5 +48,15 @@ public class ControleConcessionaria {
         modelo.addAttribute("concessionaria", concessionariaOpt.get());
         return "pages/forms/edit/concessionariaEdit";
     }
+	
+	@GetMapping("/excluirConcessionaria/{codigo}")
+	public String excluirConcessionaria(@PathVariable("codigo") long codigo) {
+		Optional<Concessionaria> usuarioOpt = concessionariaRepo.findById(codigo);
+		if (usuarioOpt.isEmpty()) {
+			throw new IllegalArgumentException("Concessionaria inválido");
+		}
+		concessionariaRepo.deleteById(codigo);
+		return "redirect:/tabela";
+	}
 	
 }
