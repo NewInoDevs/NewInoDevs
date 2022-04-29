@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.api.inodevs.entidades.Contrato;
+import com.api.inodevs.entidades.Usuario;
 import com.api.inodevs.repositorio.ConcessionariaRepositorio;
 import com.api.inodevs.repositorio.ContratoRepositorio;
 import com.api.inodevs.repositorio.UnidadeRepositorio;
@@ -44,13 +45,31 @@ public class ControleContrato {
 	
 	@GetMapping("/contrato/{codigo}")
     public String abrirContrato(@PathVariable("codigo") long codigo, Model modelo) {
+		modelo.addAttribute("listaConcessionaria", concessionariaRepo.findAll());
+		modelo.addAttribute("listaUnidade", unidadeRepo.findAll());
         Optional<Contrato> contratoOpt = contratoRepo.findById(codigo);
         if (contratoOpt.isEmpty()) {
             throw new IllegalArgumentException("Contrato inválida");
         }
         modelo.addAttribute("contrato", contratoOpt.get());
-        return "pages/forms/edit/contrato";
+        return "pages/forms/edit/contratoEdit";
     }
 	
+	@PostMapping("/salvarContratoEdit")
+	public String salvarContratoEdit(@ModelAttribute("contrato") Contrato contrato, RedirectAttributes redirect) {
+		contratoRepo.save(contrato);
+		redirect.addFlashAttribute("sucesso", "Contrato salvo com sucesso!");
+		return "redirect:/tabela";
+	}
+	
+	@GetMapping("/excluirContrato/{codigo}")
+	public String excluirContrato(@PathVariable("codigo") long codigo) {
+		Optional<Contrato> contratoOpt = contratoRepo.findById(codigo);
+		if (contratoOpt.isEmpty()) {
+			throw new IllegalArgumentException("Contrato inválido");
+		}
+		contratoRepo.deleteById(codigo);
+		return "redirect:/tabela";
+	}
 }
 

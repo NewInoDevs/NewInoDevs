@@ -290,6 +290,9 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                         <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Editar
                         </a>
+                        <a onclick="javascript:return confirm('Você tem certeza que quer excluir esta conta?')" 
+                		th:href="@{/excluirConta/{codi}(codi=${conta.codi})}" 
+                		href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">Excluir</a>
                       </td>
                     </tr>
                   </tbody>
@@ -327,7 +330,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                       <td>
                         <div class="d-flex px-2">
                           <div>
-                            <!-- LINK PARA VISUALIZAR A CONTA -->
+                            <!-- LINK PARA VISUALIZAR A CONCESSIONARIA -->
                             <a th:href="@{/concessionaria/{codigo}(codigo=${concessionaria.codigo})}"> 
                             <!-- ALTERE O ICONE AQUI -->
                             <img src="../assets/img/icons/accountIcon.png" class="avatar avatar-sm rounded-circle me-2" alt="spotify">
@@ -348,6 +351,9 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                         <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Editar
                         </a>
+                        <a onclick="javascript:return confirm('Você tem certeza que quer excluir este concessionaria?')" 
+                		th:href="@{/excluirConcessionaria/{codigo}(codigo=${concessionaria.codigo})}" 
+                		href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">Excluir</a>
                       </td>
                     </tr>
                   </tbody>
@@ -416,7 +422,10 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                         <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Editar
                         </a>
-                      </td>
+                        <a onclick="javascript:return confirm('Você tem certeza que quer excluir este contrato?')" 
+                		th:href="@{/excluirUnidade/{cnpj}/{cep}(cnpj=${unidade.cnpj}, cep=${unidade.endereco})}"
+                		href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">Excluir</a>
+					  </td>
                     </tr>
                   </tbody>
                 </table>
@@ -478,6 +487,9 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                         <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Editar
                         </a>
+                        <a onclick="javascript:return confirm('Você tem certeza que quer excluir este contrato?')" 
+                		th:href="@{/excluirContrato/{codigo}(codigo=${contrato.codigo})}"
+                		href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">Excluir</a>
                       </td>
                     </tr>
                   </tbody>

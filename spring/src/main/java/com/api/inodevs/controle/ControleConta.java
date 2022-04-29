@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.api.inodevs.entidades.Conta;
+import com.api.inodevs.entidades.Contrato;
 import com.api.inodevs.repositorio.ContaRepositorio;
 
 @Controller
@@ -67,4 +68,19 @@ public class ControleConta {
 				.body(new ByteArrayResource(conta.getFatura()));
 	}
 	
+	@PostMapping("/salvarContaEdit")
+    public String salvarContaEdit(@ModelAttribute("conta") Conta conta, RedirectAttributes redirect) {
+        contaRepo.save(conta);
+        return "redirect:tabela";
+    }
+	
+	@GetMapping("/excluirConta/{codi}")
+	public String excluirConta(@PathVariable("codi") long codi) {
+		Optional<Conta> contaOpt = contaRepo.findById(codi);
+		if (contaOpt.isEmpty()) {
+			throw new IllegalArgumentException("Conta inválido");
+		}
+		contaRepo.deleteById(codi);
+		return "redirect:/tabela";
+	}
 }
