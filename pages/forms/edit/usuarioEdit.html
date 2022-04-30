@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Usuário</title>
+</head>
+<body>
+    <h1>Editar Usuário</h1>
+    <form th:action="@{/salvarUsuarioEdit}" th:object="${usuario}" method="POST">
+    	Nome: <input type="text" name="nome" id="nome" th:field="*{nome}"><br><br>
+		Sobrenome: <input type="text" name="sobrenome" id="sobrenome" th:field="*{sobrenome}"><br><br>
+		Username: <input type="text" name="username" id="username" th:field="*{username}" disabled><br><br>
+		<input type="hidden" name="username_hidden" id="username_hidden" th:field="*{username}">
+		<div id="secao">Seção:
+	        <br>
+	        <input type="radio" id="administrador" name="usuario" value="ROLE_ADMINISTRADOR" th:field="*{secao}">
+	        <label for="administrador">Adiministrador</label>
+	
+	        <input type="radio" id="gestor" name="usuario" value="ROLE_GESTOR" th:field="*{secao}">
+	        <label for="gestor">Gestor</label>
+	
+	        <input type="radio" id="digitador" name="usuario" value="ROLE_DIGITADOR" th:field="*{secao}">
+	        <label for="digitador">Digitador</label>
+        </div>
+			<div id="ativo">Ativo:
+	        <br>
+	        <input type="radio" id="sim" name="usuario" value="1" th:field="*{ativo}">
+	        <label for="sim">Sim</label>
+	
+	        <input type="radio" id="nao" name="usuario" value="0" th:field="*{ativo}">
+	        <label for="nao">Não</label>
+
+        </div>
+        <input type="hidden" id="senha" name="senha" th:field="*{senha}">
+        
+        <input type="submit" value="Editar">
+    </form>
+</body>
+</html>
