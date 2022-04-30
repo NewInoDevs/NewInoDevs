@@ -293,7 +293,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                         <span class="text-secondary text-xs font-weight-bold">pendente</span>
                       </td>
                       <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                        <a th:href="@{/conta/{codi}(codi=${conta.codi})}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Editar
                         </a>
                         <a onclick="javascript:return confirm('Você tem certeza que quer excluir esta conta?')" 
@@ -354,7 +354,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                       </td>
                       
                       <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                        <a th:href="@{/concessionaria/{codigo}(codigo=${concessionaria.codigo})}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Editar
                         </a>
                         <a onclick="javascript:return confirm('Você tem certeza que quer excluir este concessionaria?')" 
@@ -425,7 +425,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                         <span class="text-secondary text-xs font-weight-bold">pendente</span>
                       </td>
                       <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                        <a th:href="@{/unidade/{cnpj}/{endereco}(cnpj = ${unidade.cnpj}, endereco = ${unidade.endereco})}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Editar
                         </a>
                         <a onclick="javascript:return confirm('Você tem certeza que quer excluir este contrato?')" 
@@ -490,7 +490,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                         <span class="text-secondary text-xs font-weight-bold">pendente</span>
                       </td>
                       <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                        <a th:href="@{/contrato/{codigo}(codigo = ${contrato.codigo})}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Editar
                         </a>
                         <a onclick="javascript:return confirm('Você tem certeza que quer excluir este contrato?')" 
