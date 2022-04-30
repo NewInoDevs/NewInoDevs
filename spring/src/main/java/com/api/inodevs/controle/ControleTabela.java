@@ -14,21 +14,19 @@ import com.api.inodevs.repositorio.UnidadeRepositorio;
 @Controller
 public class ControleTabela {
 	
+	// Adicionando repositório da concessionária, conta, contrato e unidade para ler dados no banco:
 	@Autowired
 	private ConcessionariaRepositorio concessionariaRepo;
-	
-	@Autowired
-	private UnidadeRepositorio unidadeRepo;
-	
-	@Autowired
-	private EnderecoRepositorio enderecoRepo;
-	
 	@Autowired
 	private ContaRepositorio contaRepo;
-	
 	@Autowired
 	private ContratoRepositorio contratoRepo;
+	@Autowired
+	private UnidadeRepositorio unidadeRepo;
+	@Autowired
+	private EnderecoRepositorio enderecoRepo;
 
+	// Entrar na página das tabelas com dados do banco de dados:
 	@GetMapping("/tabela")
 	public String tabela(Model modelo) {
 		modelo.addAttribute("listaConcessionaria", concessionariaRepo.findAll());

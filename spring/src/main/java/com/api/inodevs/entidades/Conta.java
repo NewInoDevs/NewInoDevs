@@ -3,10 +3,11 @@ package com.api.inodevs.entidades;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+//Criando entidade da conta:
 @Entity
 public class Conta{
-	
-	@Id
+	// Colunas da contrato:
+    @Id // Referenciando o Id
 	private Long codi;
 	
 	public String nome;
@@ -22,11 +23,11 @@ public class Conta{
 	private Integer base_calculo;
 	private String tipo_conta;
 	private Long contrato;
-
 	private String concessionaria;
 	private String unidade;
 	private Long fatura;
 	
+    // Getters e Setters:
 	public Long getCodi() {
 		return codi;
 	}

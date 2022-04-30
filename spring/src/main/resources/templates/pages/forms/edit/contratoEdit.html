@@ -9,9 +9,9 @@
 <body>
     <h1>Editar Contrato</h1>
     <form th:action="@{/salvarContratoEdit}" th:object="${contrato}" method="POST">
-    	CÃ³digo: <input type="text" name="codigo" id="codigo" th:field="*{codigo}" disabled><br><br>
+    	Código: <input type="text" name="codigo" id="codigo" th:field="*{codigo}" disabled><br><br>
         <input type="hidden" name="codigo_hidden" id="codigo_hidden" th:field="*{codigo}">
-        <label for="concessionaria">Concessionaria:</label><br>
+        <label for="concessionaria">Concessionária:</label><br>
         <select th:field="*{concessionaria}">
      		<option th:each="concessionaria : ${listaConcessionaria}" th:value="${concessionaria.codigo}" th:text="${concessionaria.nome}"></option>
 		</select><br>

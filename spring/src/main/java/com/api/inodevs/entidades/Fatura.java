@@ -6,19 +6,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
+//Criando entidade da fatura:
 @Entity
 public class Fatura {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	// Colunas da fatura:
+    @Id // Referenciando o Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // Gerando id automaticamente (Auto Increment)
 	private Long id;
 	
-	@Lob
+	@Lob // Referenciando como Lob (Tipo para arquivos - Imagens, pdfs etc.)
 	private byte[] fatura;
 	
 	private String nome_fatura;
 	private String tipo_fatura;
 	
+	// Getters e Setters:
 	public Long getId() {
 		return id;
 	}

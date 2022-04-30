@@ -3,16 +3,18 @@ package com.api.inodevs.entidades;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+//Criando entidade da unidade:
 @Entity
 public class Unidade {
-	
-	@Id
+	// Colunas da unidade:
+    @Id // Referenciando o Id
 	private Long cnpj;
 	
 	private String nome;
 	public String telefone;
 	public Long endereco;
-	  
+	 
+	// Getters e Setters:
 	public String getNome() {
 		return nome;
 	}

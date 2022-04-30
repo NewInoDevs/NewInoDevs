@@ -3,20 +3,20 @@ package com.api.inodevs.entidades;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+//Criando entidade da usuário:
 @Entity
 public class Usuario{
-
-	@Id
+	// Colunas da unidade:
+    @Id // Referenciando o Id
 	private Long username;
-
-
 
 	private String nome;
 	private String sobrenome;
 	private String senha;
 	private String secao;
 	private Integer ativo;
-
+	
+	// Getters e Setters:
 	public Long getUsername() {
 		return username;
 	}
