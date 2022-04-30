@@ -16,29 +16,33 @@ import com.api.inodevs.entidades.Unidade;
 import com.api.inodevs.repositorio.EnderecoRepositorio;
 import com.api.inodevs.repositorio.UnidadeRepositorio;
 
+//Classe de controle que permite a navegação e funcionalidades no sistema:
 @Controller
 public class ControleUnidade {
 	
+	// Adicionando repositório da unidade e endereço para salvar e ler dados no banco:
 	@Autowired
 	private UnidadeRepositorio unidadeRepo;
-	
 	@Autowired
 	private EnderecoRepositorio enderecoRepo;
 	
+	// Entrar na página de cadastro de unidade com o modelo da entidade com o modelo da entidade:
 	@GetMapping("/cadastroUnidade")
 	public String cadastroUnidade(@ModelAttribute("endereco") Endereco endereco, @ModelAttribute("unidade") Unidade unidade){
 		return "pages/forms/unidade";
 	}
 	
+	// Salvar uma unidade e endereço no banco ao clicar em cadastrar:
 	@PostMapping("/salvarUnidade")
 	public String salvarUnidade(@ModelAttribute("endereco") Endereco endereco, @ModelAttribute("unidade") Unidade unidade, RedirectAttributes redirect) {
-		unidade.setEndereco(endereco.getCep());
+		unidade.setEndereco(endereco.getCep()); // Adicionando no endereço da unidade o cep (ligando as duas entidades)
         redirect.addFlashAttribute("successo", "Cadastrado com sucesso!");
 		unidadeRepo.save(unidade);
 		enderecoRepo.save(endereco);
 		return "redirect:cadastroUnidade";
 	}
 	
+	// Abrir mais inforações da unidade com o seu endereço clicando na tabela para permitir a edição de um cadastro:
 	@GetMapping("/unidade/{cnpj}/{endereco}")
     public String abrirUnidade(@PathVariable("cnpj") long cnpj, @PathVariable("endereco") long endereco, Model modelo) {
         Optional<Unidade> unidadeOpt = unidadeRepo.findById(cnpj);
@@ -54,6 +58,7 @@ public class ControleUnidade {
         return "pages/forms/edit/unidadeEdit";
     }
 	
+	// Salvar a unidade e endereço editados no banco de dados ao clicar em editar:
 	@PostMapping("/salvarUnidadeEdit")
 	public String salvarUnidadeEdit(@ModelAttribute("unidade") Unidade unidade, RedirectAttributes redirect, @ModelAttribute("endereco") Endereco endereco) {
 		unidade.setEndereco(endereco.getCep());
@@ -63,6 +68,7 @@ public class ControleUnidade {
 		return "redirect:/tabela";
 	}
 	
+	// Excluir uma unidade (junto com o seu endereço) ao clicar em excluir na tabela:
 	@GetMapping("/excluirUnidade/{cnpj}/{endereco}")
 	public String excluirUnidade(@PathVariable("cnpj") long cnpj, @PathVariable("endereco") long endereco) {
 		Optional<Unidade> unidadeOpt = unidadeRepo.findById(cnpj);

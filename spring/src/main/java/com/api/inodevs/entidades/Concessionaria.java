@@ -1,18 +1,18 @@
 package com.api.inodevs.entidades;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+// Criando entidade da concessionária:
 @Entity
 public class Concessionaria {
-	
-    @Id
+	// Colunas da  concessionária:
+    @Id // Referenciando o Id
     private Long codigo;
-    
-    @Column
+
     public String nome;
     
+    // Getters e Setters:
 	public Long getCodigo() {
 		return codigo;
 	}

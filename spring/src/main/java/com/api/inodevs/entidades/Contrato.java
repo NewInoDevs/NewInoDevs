@@ -3,15 +3,17 @@ package com.api.inodevs.entidades;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+//Criando entidade da cotrato:
 @Entity
 public class Contrato {
-	
-	@Id
+	// Colunas do contrato:
+    @Id // Referenciando o Id
 	private Long codigo;
 	
 	private Long concessionaria;
 	private Long unidade;
 	
+	 // Getters e Setters:
 	public Long getCodigo() {
 		return codigo;
 	}

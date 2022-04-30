@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.api.inodevs.entidades.Usuario;
 
+//Repositório do Usuário para acessar dados do banco:
 @Repository
 public interface UsuarioRepositorio extends JpaRepository<Usuario, Long>{
-
 }

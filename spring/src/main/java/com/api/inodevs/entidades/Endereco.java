@@ -3,10 +3,11 @@ package com.api.inodevs.entidades;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+//Criando entidade do endereço:
 @Entity
 public class Endereco {
-	
-	@Id
+	// Colunas da  concessionária:
+    @Id // Referenciando o Id
 	public Long cep;
 	
 	public String estado;
@@ -16,6 +17,7 @@ public class Endereco {
 	public Integer numero;
 	public String complemento;
 	
+	// Getters e Setters:
 	public Long getCep() {
 		return cep;
 	}

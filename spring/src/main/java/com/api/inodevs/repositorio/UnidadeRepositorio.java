@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.api.inodevs.entidades.Unidade;
 
+//Repositório da Unidade para acessar dados do banco:
 @Repository
 public interface UnidadeRepositorio extends JpaRepository<Unidade, Long>{
-
 }
