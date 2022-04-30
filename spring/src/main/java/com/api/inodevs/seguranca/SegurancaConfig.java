@@ -30,10 +30,21 @@ public class SegurancaConfig extends WebSecurityConfigurerAdapter {
 	// Configurações do Http para Login:
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http
+		
+		// Lista com os caminhos para o css, imagens, fontes e scripts
+		String[] staticResources = {
+			        "/assets/css/**",
+			        "/assets/img/**",
+			        "/assets/fonts/**",
+			        "/assets/scripts/**",};
+		
+		 http
+		 	// Corrigindo um bug ao logar pela primeira vez:
 			.requestCache().disable()
-			// Adicionando permissões das páginas:
+			// Adicionando permissões:
 			.authorizeRequests() // 
+				// Permitindo que todos (mesmo sem logar) tenham acesso aos arquivos dentro do static
+				.antMatchers(staticResources).permitAll()
 			 	// Páginas somente disponível para Administradores e gestores:
 				.antMatchers("/controleUsuario", "/cadastroUsuario", "/editarUsuario/{id}","/excluirUsuario/{id}")
 					.hasAnyRole("ADMINISTRADOR", "GESTOR")
