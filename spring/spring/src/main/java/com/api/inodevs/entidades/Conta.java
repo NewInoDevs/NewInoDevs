@@ -16,7 +16,7 @@ public class Conta{
 	
 	public String nome;
 	private String consumo;
-	private String desconto;
+	private Float desconto;
 	private String data_de_criacao;
 	private String data_de_lancamento;
 	private String data_de_vencimento;
@@ -30,9 +30,7 @@ public class Conta{
 	@JoinColumn(name = "codigo_contrato")
 	private Contrato contrato;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_fatura", referencedColumnName = "id")
-	private Fatura fatura;
+	private Long fatura;
 	
     // Getters e Setters:
 	public Long getCodi() {
@@ -53,10 +51,10 @@ public class Conta{
 	public void setConsumo(String consumo) {
 		this.consumo = consumo;
 	}
-	public String getDesconto() {
+	public Float getDesconto() {
 		return desconto;
 	}
-	public void setDesconto(String desconto) {
+	public void setDesconto(Float desconto) {
 		this.desconto = desconto;
 	}
 	public String getData_de_criacao() {
@@ -113,10 +111,10 @@ public class Conta{
 	public void setContrato(Contrato contrato) {
 		this.contrato = contrato;
 	}
-	public Fatura getFatura() {
+	public Long getFatura() {
 		return fatura;
 	}
-	public void setFatura(Fatura fatura) {
+	public void setFatura(Long fatura) {
 		this.fatura = fatura;
 	}
 }

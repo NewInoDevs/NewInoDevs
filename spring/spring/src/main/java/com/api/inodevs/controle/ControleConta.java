@@ -53,6 +53,7 @@ public class ControleConta {
 			e.printStackTrace();
 		}
 		faturaRepo.save(fatura);
+		conta.setFatura(fatura.getId());
 		contaRepo.save(conta);
 		return "redirect:cadastroConta";
 	}
@@ -60,6 +61,7 @@ public class ControleConta {
 	// Abrir mais inforações da conta clicando na tabela para permitir a edição de um cadastro:
 	@GetMapping("/conta/{codi}")
     public String abrirConta(@PathVariable("codi") long codi, Model modelo) {
+		modelo.addAttribute("listaContrato", contratoRepo.findAll());
         Optional<Conta> contaOpt = contaRepo.findById(codi);
         if (contaOpt.isEmpty()) {
             throw new IllegalArgumentException("Conta inválida");

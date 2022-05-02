@@ -243,7 +243,18 @@
                     <div class="input-group input-group-outline mb-3">
                       <input type="text" class="form-control" th:field="*{codigo}" disabled>
                       <input type="hidden" th:field="*{codigo}">
-                    </div>                    
+                    </div>          
+                    <div id="tipo_conta">Tipo da Conta:
+		              <br>
+		              <input type="radio" id="energia" name="conta" value="energia" th:field="*{tipo_conta}">
+		              <label for="energia">Energia</label>
+		      
+		              <input type="radio" id="agua" name="conta" value="agua" th:field="*{tipo_conta}">
+		              <label for="agua">Água</label>
+		
+		              <input type="radio" id="gas" name="conta" value="gas" th:field="*{tipo_conta}">
+		              <label for="gas">Gás</label>
+		            </div>          
             	</div>
           </div>
           <div class="card mt-4">

@@ -59,12 +59,12 @@
               </div>          
                 <span>Cadastros</span>
 			</a>
-                
-			<div class="dropdown-content">
-				<a href="/cadastroConcessionaria">Concessionaria</a>
-                <a href="/cadastroUnidade">Unidade</a>
-                <a href="/cadastroConta">Conta</a>
-            </div>
+             <div class="dropdown-content">
+               <a href="/cadastroConcessionaria">Concessionaria</a>
+               <a href="/cadastroUnidade">Unidade</a>
+               <a href="/cadastroConta">Conta</a>
+               <a href="/cadastroContrato">Contrato</a>
+             </div>
           </div> 
          </li>
          <li class="nav-item">
@@ -239,7 +239,7 @@
 	            	<option value="0" hidden=hidden disabled selected>Selecione um contrato...</option>
 	        		<option th:each="contrato : ${listaContrato}" th:value="${contrato.codigo}" 
 	        		th:text="${contrato.codigo} + ' // Unidade: ' + ${contrato.unidade.nome} + ' // Concessionária: ' + ${contrato.concessionaria.nome} + ' // Tipo: ' + ${contrato.concessionaria.tipo_conta}"></option>
-			</select><br>
+				</select><br>
 		</div>
           <div class="sub-main-right">
             <br>         
@@ -256,7 +256,7 @@
             <input maxlength="16" type="date" name="data_de_vencimento" id="data_de_vencimento" th:field="*{data_de_vencimento}"> <br><br>
             
             <label for="valoeContrato">Valor:</label><br>
-            <input maxlength="60" type="text" name="valor" id="valor" th:field="*{valor}" placeholder="R$100,00"> <br><br>
+            <input maxlength="60" type="number" name="valor" id="valor" th:field="*{valor}" placeholder="R$100,00" step="0.01"> <br><br>
             
             <label for="consumoConta">Consumo:</label><br>
             <input maxlength="500" type="text" name="consumo" id="consumo" th:field="*{consumo}" placeholder="111m³"> <br><br>
@@ -268,7 +268,7 @@
             <input maxlength="60" type="number" name="base_calculo" id="base_calculo" th:field="*{base_calculo}" placeholder="4+3=7"> <br><br>
             
             <label for="desconto">Desconto:</label><br>
-            <input maxlength="60" type="text" name="desconto" id="desconto" th:field="*{desconto}" placeholder="Devolução de Subsídio-4,36"> <br><br>
+            <input maxlength="60" type="number" name="desconto" id="desconto" th:field="*{desconto}" placeholder="Devolução de Subsídio-4,36" step="0.01"> <br><br>
             
             <label for="diasConta">Dias:</label><br>
             <input maxlength="3" type="text" name="dias" id="dias" th:field="*{dias}" placeholder="32"> <br><br>
@@ -277,7 +277,7 @@
             <input maxlength="500" type="text" name="dados_adicionais" id="dados_adicionais" th:field="*{dados_adicionais}" placeholder="Algo importante a ser ressaltado"> <br><br>
             
             <label for="valorTotConta">Valor Total:</label><br>
-            <input maxlength="20" type="text" name="valor_total" id="valor_total" th:field="*{valor_total}" placeholder="R$100,00"> <br><br>   
+            <input maxlength="20" type="number" name="valor_total" id="valor_total" th:field="*{valor_total}" placeholder="R$100,00" step="0.01"> <br><br>   
             
             <label for="faturaPdf">Arquivo pdf da conta: </label><br>
             <input type="file" name="faturaPdf" id="faturaPdf"> <br><br>
