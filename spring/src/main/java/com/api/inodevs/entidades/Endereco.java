@@ -2,6 +2,7 @@ package com.api.inodevs.entidades;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 //Criando entidade do endereço:
 @Entity
@@ -16,6 +17,9 @@ public class Endereco {
 	public String rua;
 	public Integer numero;
 	public String complemento;
+	
+	@OneToOne(mappedBy = "endereco")
+	private Unidade unidade;
 	
 	// Getters e Setters:
 	public Long getCep() {

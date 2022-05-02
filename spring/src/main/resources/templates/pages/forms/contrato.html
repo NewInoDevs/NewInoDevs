@@ -242,7 +242,7 @@
             <select th:field="*{concessionaria}">
             	<option value="0" hidden=hidden disabled selected>Selecione uma unidade...</option>
         		<option th:each="concessionaria : ${listaConcessionaria}" th:value="${concessionaria.codigo}" th:text="${concessionaria.nome}"></option>
-			</select><br>
+			</select><br><br>
             <label for="unidade">Unidade:</label><br>
             <select th:field="*{unidade}">
             	<option value="0" hidden=hidden disabled selected>Selecione uma unidade...</option>

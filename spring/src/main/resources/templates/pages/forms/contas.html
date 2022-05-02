@@ -7,7 +7,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
   <title>
-    Página de Contas
+    PÃ¡gina de Contas
   </title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
@@ -59,12 +59,12 @@
               </div>          
                 <span>Cadastros</span>
 			</a>
-                
-			<div class="dropdown-content">
-				<a href="/cadastroConcessionaria">Concessionaria</a>
-                <a href="/cadastroUnidade">Unidade</a>
-                <a href="/cadastroConta">Conta</a>
-            </div>
+             <div class="dropdown-content">
+               <a href="/cadastroConcessionaria">Concessionaria</a>
+               <a href="/cadastroUnidade">Unidade</a>
+               <a href="/cadastroConta">Conta</a>
+               <a href="/cadastroContrato">Contrato</a>
+             </div>
           </div> 
          </li>
          <li class="nav-item">
@@ -229,60 +229,46 @@
 
     <!-- FORMS -->
     <div class="container-fluid py-4">
-      <h1 class="title">CADASTRO DE CONTA </h1> <br> <h4 style="font-size: 1rem;" class="subtitle" >(campos precisam de pontuação)</h4>
+      <h1 class="title">CADASTRO DE CONTA </h1> <br> <h4 style="font-size: 1rem;" class="subtitle" >(campos precisam de pontuaÃ§Ã£o)</h4>
       <form th:action="@{/salvarConta}" th:object="${conta}" method="POST" enctype="multipart/form-data">
         <section class="block-main2">
+        <br>
+        <div class="sub-main-right">
+        	 <label>Contrato:</label><br>
+            	<select th:field="*{contrato}">
+	            	<option value="0" hidden=hidden disabled selected>Selecione um contrato...</option>
+	        		<option th:each="contrato : ${listaContrato}" th:value="${contrato.codigo}" 
+	        		th:text="${contrato.codigo} + ' // Unidade: ' + ${contrato.unidade.nome} + ' // ConcessionÃ¡ria: ' + ${contrato.concessionaria.nome} + ' // Tipo: ' + ${contrato.concessionaria.tipo_conta}"></option>
+				</select><br>
+		</div>
           <div class="sub-main-right">
             <br>         
-            <div name="tipo_conta" id="tipo_conta">Tipo da Conta:
-              <br>
-              <input type="radio" id="energia" name="conta" value="energia" th:field="*{tipo_conta}">
-              <label for="energia">Energia</label>
-      
-              <input type="radio" id="agua" name="conta" value="agua" th:field="*{tipo_conta}">
-              <label for="agua">Água</label>
-
-              <input type="radio" id="gas" name="conta" value="gas" th:field="*{tipo_conta}">
-              <label for="gas">Gás</label>
-            </div>
-            <br>
-            <label for="nomeConta">Nome:</label><br>
-            <input maxlength="60" type="text" name="nome" id="nome" th:field="*{nome}" placeholder="Kaua Gustavo Luis"> <br><br>
-            
-            <label for="codigoConta">Código:</label><br>
+            <label for="codigoConta">CÃ³digo:</label><br>
             <input maxlength="8" type="text" name="codi" id="codi" th:field="*{codi}" placeholder="1234567890"> <br><br>
             
-            <label for="codigoConta">Concessionária:</label><br>
-            <input maxlength="12" type="text" name="concessionaria" id="concessionaria" th:field="*{concessionaria}" placeholder="Sabesp"> <br><br>
-            
-            <label for="codigoConta">Unidade:</label><br>
-            <input maxlength="100" type="text" name="unidade" id="unidade" th:field="*{unidade}" placeholder="Kauã Gustavo Rodrigues Renó"> <br><br>
-            
-            <label for="createDataConta">Data de Criação:</label><br>
+            <label for="createDataConta">Data de CriaÃ§Ã£o:</label><br>
             <input maxlength="16" type="date" name="data_de_criacao" id="data_de_criacao" th:field="*{data_de_criacao}"> <br><br>
         
-            <label for="launchDataConta">Data de Lançamento:</label><br>
+            <label for="launchDataConta">Data de LanÃ§amento:</label><br>
             <input maxlength="16" type="date" name="data_de_lancamento" id="data_de_lancamento" th:field="*{data_de_lancamento}" > <br><br>
 
             <label for="launchDataConta">Data de Vencimento:</label><br>
             <input maxlength="16" type="date" name="data_de_vencimento" id="data_de_vencimento" th:field="*{data_de_vencimento}"> <br><br>
             
             <label for="valoeContrato">Valor:</label><br>
-            <input maxlength="60" type="text" name="valor" id="valor" th:field="*{valor}" placeholder="R$100,00"> <br><br>
+            <input maxlength="60" type="number" name="valor" id="valor" th:field="*{valor}" placeholder="R$100,00" step="0.01"> <br><br>
+            
+            <label for="consumoConta">Consumo:</label><br>
+            <input maxlength="500" type="text" name="consumo" id="consumo" th:field="*{consumo}" placeholder="111mÂ³"> <br><br>
           </div>
           
           <div class="sub-main-left">
-            <label for="contrato">Contrato:</label><br>
-            <input maxlength="20" type="text" name="contrato" id="contrato" th:field="*{contrato}" placeholder="3483548743"> <br><br>
 
-            <label for="consumoConta">Consumo:</label><br>
-            <input maxlength="500" type="text" name="consumo" id="consumo" th:field="*{consumo}" placeholder="111m³"> <br><br>
-
-            <label for="desconto">Base de Cálculo:</label><br>
+            <label for="desconto">Base de CÃ¡lculo:</label><br>
             <input maxlength="60" type="number" name="base_calculo" id="base_calculo" th:field="*{base_calculo}" placeholder="4+3=7"> <br><br>
             
             <label for="desconto">Desconto:</label><br>
-            <input maxlength="60" type="text" name="desconto" id="desconto" th:field="*{desconto}" placeholder="Devolução de Subsídio-4,36"> <br><br>
+            <input maxlength="60" type="number" name="desconto" id="desconto" th:field="*{desconto}" placeholder="DevoluÃ§Ã£o de SubsÃ­dio-4,36" step="0.01"> <br><br>
             
             <label for="diasConta">Dias:</label><br>
             <input maxlength="3" type="text" name="dias" id="dias" th:field="*{dias}" placeholder="32"> <br><br>
@@ -291,7 +277,7 @@
             <input maxlength="500" type="text" name="dados_adicionais" id="dados_adicionais" th:field="*{dados_adicionais}" placeholder="Algo importante a ser ressaltado"> <br><br>
             
             <label for="valorTotConta">Valor Total:</label><br>
-            <input maxlength="20" type="text" name="valor_total" id="valor_total" th:field="*{valor_total}" placeholder="R$100,00"> <br><br>   
+            <input maxlength="20" type="number" name="valor_total" id="valor_total" th:field="*{valor_total}" placeholder="R$100,00" step="0.01"> <br><br>   
             
             <label for="faturaPdf">Arquivo pdf da conta: </label><br>
             <input type="file" name="faturaPdf" id="faturaPdf"> <br><br>
@@ -330,7 +316,7 @@
           <div class="row align-items-center justify-content-lg-between">
             <div class="col-lg-6 mb-lg-0 mb-4">
               <div class="copyright text-center text-sm text-muted text-lg-start">
-                © <script>
+                Â© <script>
                   document.write(new Date().getFullYear())
                 </script>,
                 made with <i class="fa fa-heart"></i> by

@@ -2,6 +2,8 @@ package com.api.inodevs.entidades;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 //Criando entidade da cotrato:
 @Entity
@@ -10,8 +12,15 @@ public class Contrato {
     @Id // Referenciando o Id
 	private Long codigo;
 	
-	private Long concessionaria;
-	private Long unidade;
+	@ManyToOne
+	@JoinColumn(name = "codigo_concessionaria")
+	private Concessionaria concessionaria;
+	
+	@ManyToOne
+	@JoinColumn(name = "cnpj_unidade")
+	private Unidade unidade;
+	
+	private String status;
 	
 	 // Getters e Setters:
 	public Long getCodigo() {
@@ -20,17 +29,22 @@ public class Contrato {
 	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
 	}
-	public Long getConcessionaria() {
+	public Concessionaria getConcessionaria() {
 		return concessionaria;
 	}
-	public void setConcessionaria(Long concessionaria) {
+	public void setConcessionaria(Concessionaria concessionaria) {
 		this.concessionaria = concessionaria;
 	}
-	public Long getUnidade() {
+	public Unidade getUnidade() {
 		return unidade;
 	}
-	public void setUnidade(Long unidade) {
+	public void setUnidade(Unidade unidade) {
 		this.unidade = unidade;
 	}
-	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 }

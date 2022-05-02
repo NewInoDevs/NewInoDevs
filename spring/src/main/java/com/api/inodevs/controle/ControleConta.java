@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.api.inodevs.entidades.Conta;
 import com.api.inodevs.entidades.Fatura;
 import com.api.inodevs.repositorio.ContaRepositorio;
+import com.api.inodevs.repositorio.ContratoRepositorio;
 import com.api.inodevs.repositorio.FaturaRepositorio;
 
 //Classe de controle que permite a navegação e funcionalidades no sistema:
@@ -28,17 +29,20 @@ public class ControleConta {
 	private ContaRepositorio contaRepo;
 	@Autowired
 	private FaturaRepositorio faturaRepo;
+	@Autowired
+	private ContratoRepositorio contratoRepo;
 	
 	// Entrar na página de cadastro de conta com o modelo da entidade:
 	@GetMapping("/cadastroConta")
-	public String cadastroConta(@ModelAttribute("conta") Conta conta){
-		conta.setTipo_conta("energia"); // Deixando pré-selecionado energia no HTML
+	public String cadastroConta(@ModelAttribute("conta") Conta conta, Model modelo){
+		modelo.addAttribute("listaContrato", contratoRepo.findAll());
 		return "pages/forms/contas";
 	}
 	
 	// Salvar uma conta e uma fatura no banco ao clicar em cadastrar:
 	@PostMapping("/salvarConta")
 	public String salvarConta(@ModelAttribute("conta") Conta conta, @ModelAttribute("fatura") Fatura fatura, @RequestParam("faturaPdf") MultipartFile file, RedirectAttributes redirect) {
+        conta.setStatus("Pendente");
 		// Salvando o arquivo da fatura:
 		String nome = file.getOriginalFilename();
         redirect.addFlashAttribute("successo", "Cadastrado com sucesso!");
@@ -58,6 +62,7 @@ public class ControleConta {
 	// Abrir mais inforações da conta clicando na tabela para permitir a edição de um cadastro:
 	@GetMapping("/conta/{codi}")
     public String abrirConta(@PathVariable("codi") long codi, Model modelo) {
+		modelo.addAttribute("listaContrato", contratoRepo.findAll());
         Optional<Conta> contaOpt = contaRepo.findById(codi);
         if (contaOpt.isEmpty()) {
             throw new IllegalArgumentException("Conta inválida");
@@ -69,6 +74,7 @@ public class ControleConta {
 	// Salvar a conta editada no banco de dados ao clicar em editar:
 	@PostMapping("/salvarContaEdit")
 	public String salvarContaEdit(@ModelAttribute("conta") Conta conta, RedirectAttributes redirect) {
+		conta.setStatus("Pendente");
 		contaRepo.save(conta);
 		return "redirect:tabela";
 	}
@@ -83,4 +89,18 @@ public class ControleConta {
         contaRepo.deleteById(codi);
         return "redirect:/tabela";
     }
+	@PostMapping("/aprovarConta")
+	public String aprovarConta(@ModelAttribute("conta") Conta conta) {
+		conta.setStatus("Aprovado");
+		contaRepo.save(conta);
+		return "redirect:/tabela";
+	}
+	
+	@PostMapping("/reprovarConta")
+	public String reprovarConta(@ModelAttribute("conta") Conta conta) {
+		conta.setStatus("Reprovado");
+		contaRepo.save(conta);
+		return "redirect:/tabela";
+	}
+	
 }

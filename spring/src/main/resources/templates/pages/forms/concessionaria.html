@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>
-    Página de Cadastros
+    PÃ¡gina de Cadastros
   </title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
@@ -61,6 +61,7 @@
                     <a href="/cadastroConcessionaria">Concessionaria</a>
                     <a href="/cadastroUnidade">Unidade</a>
                     <a href="/cadastroConta">Conta</a>
+                    <a href="/cadastroContrato">Contrato</a>
                   </div>
               </div> 
          </li>
@@ -224,14 +225,25 @@
 
     <!-- FORMS -->
     <div class="container-fluid py-4">
-      <h1 class="title">CADASTRO DE CONCESSIONARIA </h1> <br> <h4 style="font-size: 1rem;" class="subtitle" >(campos precisam de pontuação)</h4>
+      <h1 class="title">CADASTRO DE CONCESSIONARIA </h1> <br> <h4 style="font-size: 1rem;" class="subtitle" >(campos precisam de pontuaÃ§Ã£o)</h4>
       <form th:action="@{/salvarConcessionaria}"  th:object="${concessionaria}" method="POST" role="form" class="text-start">
         <div class="block-main">
           <div class="card-body space" >
             <label for="nomeConce">Nome:</label><br>
             <input maxlength="60" type="text" name="nomeConce" id="nomeConce" placeholder="Sabesp" th:field="*{nome}" required> <br><br>
-            <label for="cnpj">Código:</label><br>
+            <label for="cnpj">CÃ³digo:</label><br>
             <input size="25" maxlength="25" type="text" name="cnpj" id="cnpj" placeholder="110457 43.776.517/0001-80" th:field="*{codigo}" required> <br><br>
+          	<div id="tipo_conta">Tipo da Conta:
+              <br>
+              <input type="radio" id="energia" name="conta" value="Energia" th:field="*{tipo_conta}">
+              <label for="energia">Energia</label>
+      
+              <input type="radio" id="agua" name="conta" value="Água" th:field="*{tipo_conta}">
+              <label for="agua">Ãgua</label>
+
+              <input type="radio" id="gas" name="conta" value="Gás" th:field="*{tipo_conta}">
+              <label for="gas">GÃ¡s</label>
+            </div>
           </div>
 
 
@@ -249,7 +261,7 @@
           </div>
           <hr class="horizontal dark m-0">
           <div class="toast-body">
-            Concessionária cadastrada com sucesso.
+            ConcessionÃ¡ria cadastrada com sucesso.
           </div>
         </div>
         <div class="toast fade hide p-2 mt-2 bg-white" role="alert" aria-live="assertive" id="warningToast" aria-atomic="true">
@@ -266,7 +278,7 @@
           <div class="row align-items-center justify-content-lg-between">
             <div class="col-lg-6 mb-lg-0 mb-4">
               <div class="copyright text-center text-sm text-muted text-lg-start">
-                Â© <script>
+                Ã‚Â© <script>
                   document.write(new Date().getFullYear())
                 </script>,
                 made with <i class="fa fa-heart"></i> by
@@ -341,5 +353,3 @@
 </body>
 
 </html>
-concessionaria.html
-20 KB
