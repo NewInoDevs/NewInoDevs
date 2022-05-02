@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.api.inodevs.entidades.Conta;
 import com.api.inodevs.entidades.Fatura;
+import com.api.inodevs.entidades.Unidade;
 import com.api.inodevs.repositorio.ContaRepositorio;
 import com.api.inodevs.repositorio.ContratoRepositorio;
 import com.api.inodevs.repositorio.FaturaRepositorio;
@@ -87,4 +88,18 @@ public class ControleConta {
         contaRepo.deleteById(codi);
         return "redirect:/tabela";
     }
+	@PostMapping("/aprovarConta")
+	public String aprovarConta(@ModelAttribute("conta") Conta conta) {
+		conta.setStatus("Aprovado");
+		contaRepo.save(conta);
+		return "redirect:/tabela";
+	}
+	
+	@PostMapping("/reprovarConta")
+	public String reprovarConta(@ModelAttribute("conta") Conta conta) {
+		conta.setStatus("Reprovado");
+		contaRepo.save(conta);
+		return "redirect:/tabela";
+	}
+	
 }

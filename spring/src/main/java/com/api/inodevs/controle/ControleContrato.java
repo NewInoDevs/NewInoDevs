@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.api.inodevs.entidades.Contrato;
+import com.api.inodevs.entidades.Unidade;
 import com.api.inodevs.repositorio.ConcessionariaRepositorio;
 import com.api.inodevs.repositorio.ContratoRepositorio;
 import com.api.inodevs.repositorio.UnidadeRepositorio;
@@ -60,6 +61,7 @@ public class ControleContrato {
 	// Salvar o contrato editado no banco de dados ao clicar em editar:
 	@PostMapping("/salvarContratoEdit")
 	public String salvarContratoEdit(@ModelAttribute("contrato") Contrato contrato, RedirectAttributes redirect) {
+		contrato.setStatus("Pendente");
 		contratoRepo.save(contrato);
 		redirect.addFlashAttribute("sucesso", "Contrato editado com sucesso!");
 		return "redirect:/tabela";
@@ -73,6 +75,20 @@ public class ControleContrato {
 			throw new IllegalArgumentException("Contrato inválido");
 		}
 		contratoRepo.deleteById(codigo);
+		return "redirect:/tabela";
+	}
+	
+	@PostMapping("/aprovarContrato")
+	public String aprovarContrato(@ModelAttribute("contrato") Contrato contrato) {
+		contrato.setStatus("Aprovado");
+		contratoRepo.save(contrato);
+		return "redirect:/tabela";
+	}
+	
+	@PostMapping("/reprovarContrato")
+	public String reprovarContrato(@ModelAttribute("contrato") Contrato contrato) {
+		contrato.setStatus("Reprovado");
+		contratoRepo.save(contrato);
 		return "redirect:/tabela";
 	}
 	

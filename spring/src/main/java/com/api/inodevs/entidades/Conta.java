@@ -23,6 +23,7 @@ public class Conta{
 	private Float valor;
 	private Float valor_total;
 	private Integer base_calculo;
+	private String status;
 
 	@ManyToOne
 	@JoinColumn(name = "codigo_contrato")
@@ -102,6 +103,13 @@ public class Conta{
 	}
 	public void setBase_calculo(Integer base_calculo) {
 		this.base_calculo = base_calculo;
+	}
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	public Contrato getContrato() {
 		return contrato;
