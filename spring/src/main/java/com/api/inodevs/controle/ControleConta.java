@@ -43,6 +43,7 @@ public class ControleConta {
 	// Salvar uma conta e uma fatura no banco ao clicar em cadastrar:
 	@PostMapping("/salvarConta")
 	public String salvarConta(@ModelAttribute("conta") Conta conta, @ModelAttribute("fatura") Fatura fatura, @RequestParam("faturaPdf") MultipartFile file, RedirectAttributes redirect) {
+        conta.setStatus("Pendente");
 		// Salvando o arquivo da fatura:
 		String nome = file.getOriginalFilename();
         redirect.addFlashAttribute("successo", "Cadastrado com sucesso!");
@@ -74,6 +75,7 @@ public class ControleConta {
 	// Salvar a conta editada no banco de dados ao clicar em editar:
 	@PostMapping("/salvarContaEdit")
 	public String salvarContaEdit(@ModelAttribute("conta") Conta conta, RedirectAttributes redirect) {
+		conta.setStatus("Pendente");
 		contaRepo.save(conta);
 		return "redirect:tabela";
 	}
