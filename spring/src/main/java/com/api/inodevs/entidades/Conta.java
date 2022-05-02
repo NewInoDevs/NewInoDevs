@@ -1,11 +1,9 @@
 package com.api.inodevs.entidades;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 //Criando entidade da conta:
 @Entity

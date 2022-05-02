@@ -274,14 +274,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                       <td>
                         <p class="text-xs font-weight-bold mb-0" th:text="${conta.codi}"></p>
                       </td>
-                      <td class="align-middle text-center text-sm" th:if="${conta.contrato.concessionaria.tipo_conta == 'agua'}">
-                        <p class="text-xs font-weight-bold mb-0">Água</p>
-                      </td>
-                      <td class="align-middle text-center text-sm" th:if="${conta.contrato.concessionaria.tipo_conta == 'energia'}">
-                        <p class="text-xs font-weight-bold mb-0">Energia</p>
-                      </td>
-                      <td class="align-middle text-center text-sm" th:if="${conta.contrato.concessionaria.tipo_conta == 'gas'}">
-                        <p class="text-xs font-weight-bold mb-0">Gás</p>
+                      <td class="align-middle text-center text-sm">
+                        <p class="text-xs font-weight-bold mb-0" th:text="${conta.contrato.concessionaria.tipo_conta}"></p>
                       </td>
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold" th:text="${conta.contrato.codigo}"></span>
@@ -426,7 +420,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                         <span class="text-secondary text-xs font-weight-bold" th:text="${unidade.endereco}"></span>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">pendente</span>
+                        <span class="text-secondary text-xs font-weight-bold" th:text="${unidade.status}"></span>
                       </td>
                       <td class="align-middle">
                         <a th:href="@{/unidade/{cnpj}/{endereco}(cnpj = ${unidade.cnpj}, endereco = ${unidade.endereco})}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">

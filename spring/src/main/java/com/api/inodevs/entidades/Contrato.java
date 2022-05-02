@@ -20,6 +20,8 @@ public class Contrato {
 	@JoinColumn(name = "cnpj_unidade")
 	private Unidade unidade;
 	
+	private String status;
+	
 	 // Getters e Setters:
 	public Long getCodigo() {
 		return codigo;
@@ -38,5 +40,11 @@ public class Contrato {
 	}
 	public void setUnidade(Unidade unidade) {
 		this.unidade = unidade;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 }

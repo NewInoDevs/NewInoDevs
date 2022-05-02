@@ -4,10 +4,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
   <title>
-    Página de Contratos
+    PÃ¡gina de Cadastros
   </title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
@@ -20,7 +18,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="pagestyle" href="../../assets/css/material-dashboard.css?v=3.0.2" rel="stylesheet" />
-  <link id="formstyle" href="../../assets/css/unidade.css" rel="stylesheet" />
+  <link id="formstyle" href="../../assets/css/concessionaria.css" rel="stylesheet" />
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -44,7 +42,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="/tabela">
+          <a class="nav-link text-white " href="/tabela">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
@@ -57,15 +55,15 @@
               <div class="text-white text-center me-4 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">person</i>
               </div>          
-                <span>Cadastros</span>
-			</a>
-             <div class="dropdown-content">
-               <a href="/cadastroConcessionaria">Concessionaria</a>
-               <a href="/cadastroUnidade">Unidade</a>
-               <a href="/cadastroConta">Conta</a>
-               <a href="/cadastroContrato">Contrato</a>
-             </div>
-           </div> 
+				<span>Cadastros</span>
+             </a>
+                  <div class="dropdown-content">
+                    <a href="/cadastroConcessionaria">Concessionaria</a>
+                    <a href="/cadastroUnidade">Unidade</a>
+                    <a href="/cadastroConta">Conta</a>
+                    <a href="/cadastroContrato">Contrato</a>
+                  </div>
+              </div> 
          </li>
          <li class="nav-item">
           <a class="nav-link text-white" href="/controleUsuario">
@@ -106,10 +104,8 @@
         -->
       </ul>
     </div>
-
   </aside>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
       <div class="container-fluid py-1 px-3">
@@ -229,31 +225,33 @@
 
     <!-- FORMS -->
     <div class="container-fluid py-4">
-      <h1 class="title">CADASTRO DE CONTRATO </h1> <br> <h4 style="font-size: 1rem;" class="subtitle" >(campos precisam de pontuação)</h4>
-      <form th:action="@{/salvarContrato}" method="POST">
-        <section class="block-main2">
-        <div class="sub-main-right">
-          	<div th:object="${contrato}">
-            <br>
-            <label for="codigo">Codigo:</label><br>
-            <input maxlength="14" type="text" name="codigo" id="codigo" placeholder="00.000.000/0000-00" th:field="*{codigo}"> <br><br>
-            
-            <label for="concessionaria">Concessionaria:</label><br>
-            <select th:field="*{concessionaria}">
-            	<option value="0" hidden=hidden disabled selected>Selecione uma unidade...</option>
-        		<option th:each="concessionaria : ${listaConcessionaria}" th:value="${concessionaria.codigo}" th:text="${concessionaria.nome}"></option>
-			</select><br>
-            <label for="unidade">Unidade:</label><br>
-            <select th:field="*{unidade}">
-            	<option value="0" hidden=hidden disabled selected>Selecione uma unidade...</option>
-        		<option th:each="unidade : ${listaUnidade}" th:value="${unidade.cnpj}" th:text="${unidade.nome}"></option>
-			</select>
+      <h1 class="title">CADASTRO DE CONCESSIONARIA </h1> <br> <h4 style="font-size: 1rem;" class="subtitle" >(campos precisam de pontuaÃ§Ã£o)</h4>
+      <form th:action="@{/salvarConcessionaria}"  th:object="${concessionaria}" method="POST" role="form" class="text-start">
+        <div class="block-main">
+          <div class="card-body space" >
+            <label for="nomeConce">Nome:</label><br>
+            <input maxlength="60" type="text" name="nomeConce" id="nomeConce" placeholder="Sabesp" th:field="*{nome}" required> <br><br>
+            <label for="cnpj">CÃ³digo:</label><br>
+            <input size="25" maxlength="25" type="text" name="cnpj" id="cnpj" placeholder="110457 43.776.517/0001-80" th:field="*{codigo}" required> <br><br>
+          	<div id="tipo_conta">Tipo da Conta:
+              <br>
+              <input type="radio" id="energia" name="conta" value="energia" th:field="*{tipo_conta}">
+              <label for="energia">Energia</label>
+      
+              <input type="radio" id="agua" name="conta" value="agua" th:field="*{tipo_conta}">
+              <label for="agua">Ãgua</label>
+
+              <input type="radio" id="gas" name="conta" value="gas" th:field="*{tipo_conta}">
+              <label for="gas">GÃ¡s</label>
             </div>
           </div>
-          <div class="bt2">
+
+
+		  <div class="bt2">
           	<button class="btn bg-gradient-primary w-100 my-4 mb-2 " type="submit" value="Cadastrar" data-target="successToast">Cadastrar</button>
 		  </div>
-		  <div th:text="${successo}" th:if="${successo}" class="position-fixed bottom-1 end-4 z-index-2 corzinha"></div>
+
+		  <div th:text="${successo}" th:if="${successo}" class="position-fixed bottom-1 end-4 z-index-2 corzinha">
         <div  class="toast fade hide p-2 bg-white" role="alert" aria-live="assertive" id="successToast" aria-atomic="true">
           <div  class="toast-header border-0">
             <i class="material-icons text-success me-2">check</i>
@@ -263,27 +261,24 @@
           </div>
           <hr class="horizontal dark m-0">
           <div class="toast-body">
-            Contrato cadastrada com sucesso.
+            ConcessionÃ¡ria cadastrada com sucesso.
           </div>
         </div>
         <div class="toast fade hide p-2 mt-2 bg-white" role="alert" aria-live="assertive" id="warningToast" aria-atomic="true">
           <div class="toast-header border-0">
             <i class="material-icons text-warning me-2">travel_explore</i>
           </div>
-        </div>
-        </section>
-    
       </form>	
 
       <!-- END FORMS -->
 
       <!--
-      <footer class="footer py-4 ">
+      <footer class="footer py-4  ">
         <div class="container-fluid">
           <div class="row align-items-center justify-content-lg-between">
             <div class="col-lg-6 mb-lg-0 mb-4">
               <div class="copyright text-center text-sm text-muted text-lg-start">
-                © <script>
+                Ã‚Â© <script>
                   document.write(new Date().getFullYear())
                 </script>,
                 made with <i class="fa fa-heart"></i> by
@@ -313,7 +308,7 @@
       -->
     </div>
   </main>
- <div class="fixed-plugin">
+  <div class="fixed-plugin">
     <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
       <i class="material-icons py-2">help</i>
     </a>

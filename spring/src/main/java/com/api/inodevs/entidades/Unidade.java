@@ -13,6 +13,7 @@ public class Unidade {
 	private String nome;
 	public String telefone;
 	public Long endereco;
+	private String status;
 	 
 	// Getters e Setters:
 	public String getNome() {
@@ -38,5 +39,11 @@ public class Unidade {
 	}
 	public void setEndereco(Long endereco) {
 		this.endereco = endereco;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 }

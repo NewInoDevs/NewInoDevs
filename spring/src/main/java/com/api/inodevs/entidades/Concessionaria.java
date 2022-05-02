@@ -13,6 +13,8 @@ public class Concessionaria {
     public String nome;
     
 	private String tipo_conta;
+	
+	private String status;
     
     // Getters e Setters:
 	public Long getCodigo() {
@@ -32,5 +34,11 @@ public class Concessionaria {
 	}
 	public void setTipo_conta(String tipo_conta) {
 		this.tipo_conta = tipo_conta;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 }

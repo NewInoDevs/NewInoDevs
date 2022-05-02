@@ -37,6 +37,7 @@ public class ControleUnidade {
 	public String salvarUnidade(@ModelAttribute("endereco") Endereco endereco, @ModelAttribute("unidade") Unidade unidade, RedirectAttributes redirect) {
 		unidade.setEndereco(endereco.getCep()); // Adicionando no endereço da unidade o cep (ligando as duas entidades)
         redirect.addFlashAttribute("successo", "Cadastrado com sucesso!");
+        unidade.setStatus("Pendente");
 		unidadeRepo.save(unidade);
 		enderecoRepo.save(endereco);
 		return "redirect:cadastroUnidade";
@@ -60,7 +61,10 @@ public class ControleUnidade {
 	
 	// Salvar a unidade e endereço editados no banco de dados ao clicar em editar:
 	@PostMapping("/salvarUnidadeEdit")
-	public String salvarUnidadeEdit(@ModelAttribute("unidade") Unidade unidade, RedirectAttributes redirect, @ModelAttribute("endereco") Endereco endereco) {
+	public String salvarUnidadeEdit(@ModelAttribute("unidade") Unidade unidade, 
+									RedirectAttributes redirect, 
+									@ModelAttribute("endereco") Endereco endereco) {
+		unidade.setStatus("Pendente");
 		unidade.setEndereco(endereco.getCep());
 		unidadeRepo.save(unidade);
 		enderecoRepo.save(endereco);
@@ -75,12 +79,27 @@ public class ControleUnidade {
 		if (unidadeOpt.isEmpty()) {
 			throw new IllegalArgumentException("Unidade inválido");
 		}
-		unidadeRepo.deleteById(cnpj);
         Optional<Endereco> enderecoOpt = enderecoRepo.findById(endereco);
         if (enderecoOpt.isEmpty()) {
             throw new IllegalArgumentException("Endereco inválido");
         }
+        unidadeRepo.deleteById(cnpj);
 		enderecoRepo.deleteById(endereco);
 		return "redirect:/tabela";
 	}
+	
+	@PostMapping("/aprovarUnidade")
+	public String aprovarUnidade(@ModelAttribute("unidade") Unidade unidade) {
+		unidade.setStatus("Aprovado");
+		unidadeRepo.save(unidade);
+		return "redirect:/tabela";
+	}
+	
+	@PostMapping("/reprovarUnidade")
+	public String reprovarUnidade(@ModelAttribute("unidade") Unidade unidade) {
+		unidade.setStatus("Reprovado");
+		unidadeRepo.save(unidade);
+		return "redirect:/tabela";
+	}
+	
 }
