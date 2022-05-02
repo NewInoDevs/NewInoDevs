@@ -19,7 +19,6 @@
        	<select th:field="*{unidade}">
      		<option th:each="unidade : ${listaUnidade}" th:value="${unidade.cnpj}" th:text="${unidade.nome}"></option>
 		</select><br>
-		<input type="submit" value="Editar">
-    </form>
+		<input type="submit" value="Editar">    	</form>
 </body>
 </html>

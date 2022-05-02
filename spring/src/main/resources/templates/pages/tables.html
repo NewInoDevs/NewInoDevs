@@ -266,7 +266,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                             <img src="../assets/img/Icons/accountIcon.png"  class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
                           </div>
                           <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm" th:text="${conta.nome}"></h6>
+                            <h6 class="mb-0 text-sm" th:text="${conta.contrato.unidade.nome}"></h6>
 
                           </div>
                         </div>
@@ -274,23 +274,17 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                       <td>
                         <p class="text-xs font-weight-bold mb-0" th:text="${conta.codi}"></p>
                       </td>
-                      <td class="align-middle text-center text-sm" th:if="${conta.tipo_conta == 'agua'}">
-                        <p class="text-xs font-weight-bold mb-0">Água</p>
-                      </td>
-                      <td class="align-middle text-center text-sm" th:if="${conta.tipo_conta == 'energia'}">
-                        <p class="text-xs font-weight-bold mb-0">Energia</p>
-                      </td>
-                      <td class="align-middle text-center text-sm" th:if="${conta.tipo_conta == 'gas'}">
-                        <p class="text-xs font-weight-bold mb-0">Gás</p>
+                      <td class="align-middle text-center text-sm">
+                        <p class="text-xs font-weight-bold mb-0" th:text="${conta.contrato.concessionaria.tipo_conta}"></p>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold" th:text="${conta.contrato}"></span>
+                        <span class="text-secondary text-xs font-weight-bold" th:text="${conta.contrato.codigo}"></span>
                       </td>
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold" th:text="${conta.consumo}"></span>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">pendente</span>
+                        <span class="text-secondary text-xs font-weight-bold" th:text="${conta.status}"></span>
                       </td>
                       <td class="align-middle">
                         <a th:href="@{/conta/{codi}(codi=${conta.codi})}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
@@ -326,6 +320,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                     <tr> 
                       <th class="text-uppercase text-secondary  font-weight-bolder opacity-7" >Nome</th>
                       <th class="text-uppercase text-secondary  font-weight-bolder opacity-7 ps-2">Código</th>
+                      <th class="text-uppercase text-secondary  font-weight-bolder opacity-7 ps-2">Tipo</th>
                       <th class="text-uppercase text-secondary  font-weight-bolder opacity-7 ps-2">Status</th>
                       <th>AÇÕES</th>
                     </tr>
@@ -350,7 +345,10 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                         <p class="text-sm font-weight-bold mb-0" th:text="${concessionaria.codigo}"></p>
                       </td>
                       <td>
-                        <span class="text-xs font-weight-bold ">pendente</span>
+                        <p class="text-sm font-weight-bold mb-0" th:text="${concessionaria.tipo_conta}"></p>
+                      </td>
+                      <td class="align-middle text-center">
+                        <span class="text-secondary text-xs font-weight-bold" th:text="${concessionaria.status}"></span>
                       </td>
                       
                       <td class="align-middle">
@@ -396,13 +394,15 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                   </thead>
                   <tbody>
 
-                    <!-- PRIMEIRA LINHA -->
+
+
+ <!-- PRIMEIRA LINHA -->
                     <tr th:each="unidade: ${listaUnidade}">
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div>
                             <!-- LINK PARA VISUALIZAR A UNIDADE-->
-                            <a th:href="@{/unidade/{cnpj}/{endereco}(cnpj = ${unidade.cnpj}, endereco = ${unidade.endereco})}"> 
+                            <a th:href="@{/unidade/{cnpj}(cnpj = ${unidade.cnpj})}"> 
                             <!-- ALTERAR ICONE AQUI -->
                             <img src="../assets/img/Icons/accountIcon.png"  class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
                           </div>
@@ -419,17 +419,17 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                         <span class="text-secondary text-xs font-weight-bold" th:text="${unidade.telefone}"></span>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold" th:text="${unidade.endereco}"></span>
+                        <span class="text-secondary text-xs font-weight-bold" th:text="${unidade.endereco.cep}"></span>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">pendente</span>
+                        <span class="text-secondary text-xs font-weight-bold" th:text="${unidade.status}"></span>
                       </td>
                       <td class="align-middle">
-                        <a th:href="@{/unidade/{cnpj}/{endereco}(cnpj = ${unidade.cnpj}, endereco = ${unidade.endereco})}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                        <a th:href="@{/unidade/{cnpj}(cnpj = ${unidade.cnpj})}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Editar
                         </a>
                         <a onclick="javascript:return confirm('Você tem certeza que quer excluir este contrato?')" 
-                		th:href="@{/excluirUnidade/{cnpj}/{cep}(cnpj=${unidade.cnpj}, cep=${unidade.endereco})}"
+                		th:href="@{/excluirUnidade/{cnpj}(cnpj=${unidade.cnpj})}"
                 		href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">Excluir</a>
 					  </td>
                     </tr>
@@ -481,13 +481,13 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                         </div>
                       </td>
                       <td>
-                        <p class="text-xs font-weight-bold mb-0" th:each="concessionaria : ${listaConcessionaria}" th:if="${concessionaria.codigo == contrato.concessionaria}" th:text="${concessionaria.nome}"></p>
+                        <p class="text-xs font-weight-bold mb-0" th:text="${contrato.concessionaria.nome}"></p>
                       </td>
                       <td class="align-middle text-center">
-                        <p class="text-secondary text-xs font-weight-bold" th:each="unidade : ${listaUnidade}" th:if="${unidade.cnpj == contrato.unidade}" th:text="${unidade.nome}"></p>
+                        <p class="text-secondary text-xs font-weight-bold" th:text="${contrato.unidade.nome}"></p>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">pendente</span>
+                        <span class="text-secondary text-xs font-weight-bold" th:text="${contrato.status}"></span>
                       </td>
                       <td class="align-middle">
                         <a th:href="@{/contrato/{codigo}(codigo = ${contrato.codigo})}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">

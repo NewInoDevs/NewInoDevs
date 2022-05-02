@@ -1,7 +1,10 @@
 package com.api.inodevs.entidades;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 //Criando entidade da unidade:
 @Entity
@@ -12,7 +15,12 @@ public class Unidade {
 	
 	private String nome;
 	public String telefone;
-	public Long endereco;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cep_endereco", referencedColumnName = "cep")
+	public Endereco endereco;
+	
+	private String status;
 	 
 	// Getters e Setters:
 	public String getNome() {
@@ -33,10 +41,16 @@ public class Unidade {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	public Long getEndereco() {
+	public Endereco getEndereco() {
 		return endereco;
 	}
-	public void setEndereco(Long endereco) {
+	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 }

@@ -31,8 +31,6 @@ public class ControleContrato {
 	// Entrar na página de cadastro de contrato com o modelo da entidade:
 	@GetMapping("/cadastroContrato")
 	public String cadastroContrato(@ModelAttribute("contrato") Contrato contrato, Model modelo){
-		contrato.setConcessionaria(0L); // Pré-selecionando valor da concessionária ("Selecione uma concessionária...")
-        contrato.setUnidade(0L); // Pré-selecionando valor da unidade ("Selecione uma unidade...")
 		modelo.addAttribute("listaConcessionaria", concessionariaRepo.findAll());
 		modelo.addAttribute("listaUnidade", unidadeRepo.findAll());
 		return "pages/forms/contrato";
@@ -62,6 +60,7 @@ public class ControleContrato {
 	// Salvar o contrato editado no banco de dados ao clicar em editar:
 	@PostMapping("/salvarContratoEdit")
 	public String salvarContratoEdit(@ModelAttribute("contrato") Contrato contrato, RedirectAttributes redirect) {
+		contrato.setStatus("Pendente");
 		contratoRepo.save(contrato);
 		redirect.addFlashAttribute("sucesso", "Contrato editado com sucesso!");
 		return "redirect:/tabela";
@@ -78,4 +77,17 @@ public class ControleContrato {
 		return "redirect:/tabela";
 	}
 	
+	@PostMapping("/aprovarContrato")
+	public String aprovarContrato(@ModelAttribute("contrato") Contrato contrato) {
+		contrato.setStatus("Aprovado");
+		contratoRepo.save(contrato);
+		return "redirect:/tabela";
+	}
+	
+	@PostMapping("/reprovarContrato")
+	public String reprovarContrato(@ModelAttribute("contrato") Contrato contrato) {
+		contrato.setStatus("Reprovado");
+		contratoRepo.save(contrato);
+		return "redirect:/tabela";
+	}
 }
