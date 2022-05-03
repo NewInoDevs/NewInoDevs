@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" 
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head>
   <meta charset="utf-8" />
@@ -35,7 +36,7 @@
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white " href="/">
+          <a class="nav-link text-white " href="/" sec:authorize="hasAnyRole('ADMINISTRADOR', 'GESTOR')">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
@@ -67,7 +68,7 @@
               </div> 
          </li>
          <li class="nav-item">
-          <a class="nav-link text-white" href="/controleUsuario">
+          <a class="nav-link text-white" href="/controleUsuario" sec:authorize="hasAnyRole('ADMINISTRADOR', 'GESTOR')">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
@@ -255,6 +256,7 @@
             <div class="card-header p-3">
               <h5 class="mb-0">Atenção</h5>
               <p class="text-sm mb-0">
+              	Ao aprovar ou reprovar a conta, as edições feitas não serão salvas.<br>
                 Leia com atenção antes de qualquer ação. 
               </p>
             </div>
@@ -264,7 +266,7 @@
                   <input class="btn bg-gradient-warning w-100 mb-0 toast-btn" type="submit" data-target="warningToast" value="Editar"> <a href=""> </a>
                 </div>
     			</form>
-                <div class="col-lg-4 col-sm-8 col-12">
+                <div class="col-lg-4 col-sm-8 col-12" sec:authorize="hasAnyRole('ADMINISTRADOR', 'GESTOR')">
                 <form th:action="@{/aprovarContrato}" method="POST" th:object="${contrato}">
                 	<input type="hidden" th:field="*{codigo}">
                 	<input type="hidden" th:field="*{concessionaria}">
@@ -273,7 +275,7 @@
                	</form>
                 </div>
                
-                <div class="col-lg-4 col-sm-8 col-12 mt-lg-0 mt-2">
+                <div class="col-lg-4 col-sm-8 col-12 mt-lg-0 mt-2" sec:authorize="hasAnyRole('ADMINISTRADOR', 'GESTOR')">
 				<form th:action="@{/reprovarContrato}" method="POST" th:object="${contrato}">
                 	<input type="hidden" th:field="*{codigo}">
                 	<input type="hidden" th:field="*{concessionaria}">
