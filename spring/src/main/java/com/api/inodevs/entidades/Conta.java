@@ -12,7 +12,6 @@ public class Conta{
     @Id // Referenciando o Id
 	private Long codi;
 	
-	public String nome;
 	private String consumo;
 	private Float desconto;
 	private String data_de_criacao;
@@ -37,12 +36,6 @@ public class Conta{
 	}
 	public void setCodi(Long codi) {
 		this.codi = codi;
-	}
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
 	}
 	public String getConsumo() {
 		return consumo;

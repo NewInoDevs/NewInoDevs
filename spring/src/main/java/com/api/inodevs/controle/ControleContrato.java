@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.api.inodevs.entidades.Contrato;
-import com.api.inodevs.entidades.Unidade;
 import com.api.inodevs.repositorio.ConcessionariaRepositorio;
 import com.api.inodevs.repositorio.ContratoRepositorio;
 import com.api.inodevs.repositorio.UnidadeRepositorio;
@@ -91,5 +90,4 @@ public class ControleContrato {
 		contratoRepo.save(contrato);
 		return "redirect:/tabela";
 	}
-	
 }

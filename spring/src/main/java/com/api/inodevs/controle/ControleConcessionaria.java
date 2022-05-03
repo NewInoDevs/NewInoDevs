@@ -25,7 +25,7 @@ public class ControleConcessionaria {
 	// Entrar na página de cadastro de concessionária com o modelo da entidade:
 	@GetMapping("/cadastroConcessionaria")
 	public String cadastroConcessionaria(@ModelAttribute("concessionaria") Concessionaria concessionaria){
-		concessionaria.setTipo_conta("energia");
+		concessionaria.setTipo_conta("Energia");
 		return "pages/forms/concessionaria";
 	}
 	
@@ -51,7 +51,8 @@ public class ControleConcessionaria {
 	// Salvar a concessionária editada no banco de dados ao clicar em editar:
 	@PostMapping("/salvarConcessionariaEdit")
     public String salvarConcessionariaEdit(@ModelAttribute("concessionaria") Concessionaria concessionaria, RedirectAttributes redirect) {
-        concessionariaRepo.save(concessionaria);
+        concessionaria.setStatus("Pendente");
+		concessionariaRepo.save(concessionaria);
         redirect.addFlashAttribute("successo", "Editado com sucesso!");
         return "redirect:tabela";
     }
@@ -67,4 +68,17 @@ public class ControleConcessionaria {
 		return "redirect:/tabela";
 	}
 	
+	@PostMapping("/aprovarConcessionaria")
+	public String aprovarConcessionaria(@ModelAttribute("concessionaria") Concessionaria concessionaria) {
+		concessionaria.setStatus("Aprovado");
+		concessionariaRepo.save(concessionaria);
+		return "redirect:/tabela";
+	}
+	
+	@PostMapping("/reprovarConcessionaria")
+	public String reprovarConcessionaria(@ModelAttribute("concessionaria") Concessionaria concessionaria) {
+		concessionaria.setStatus("Reprovado");
+		concessionariaRepo.save(concessionaria);
+		return "redirect:/tabela";
+	}
 }

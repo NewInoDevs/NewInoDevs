@@ -394,13 +394,15 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                   </thead>
                   <tbody>
 
-                    <!-- PRIMEIRA LINHA -->
+
+
+ <!-- PRIMEIRA LINHA -->
                     <tr th:each="unidade: ${listaUnidade}">
                       <td>
                         <div class="d-flex px-2 py-1">
                           <div>
                             <!-- LINK PARA VISUALIZAR A UNIDADE-->
-                            <a th:href="@{/unidade/{cnpj}/{endereco}(cnpj = ${unidade.cnpj}, endereco = ${unidade.endereco})}"> 
+                            <a th:href="@{/unidade/{cnpj}(cnpj = ${unidade.cnpj})}"> 
                             <!-- ALTERAR ICONE AQUI -->
                             <img src="../assets/img/Icons/accountIcon.png"  class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
                           </div>
@@ -417,17 +419,17 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                         <span class="text-secondary text-xs font-weight-bold" th:text="${unidade.telefone}"></span>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold" th:text="${unidade.endereco}"></span>
+                        <span class="text-secondary text-xs font-weight-bold" th:text="${unidade.endereco.cep}"></span>
                       </td>
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold" th:text="${unidade.status}"></span>
                       </td>
                       <td class="align-middle">
-                        <a th:href="@{/unidade/{cnpj}/{endereco}(cnpj = ${unidade.cnpj}, endereco = ${unidade.endereco})}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                        <a th:href="@{/unidade/{cnpj}(cnpj = ${unidade.cnpj})}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Editar
                         </a>
                         <a onclick="javascript:return confirm('Você tem certeza que quer excluir este contrato?')" 
-                		th:href="@{/excluirUnidade/{cnpj}/{cep}(cnpj=${unidade.cnpj}, cep=${unidade.endereco})}"
+                		th:href="@{/excluirUnidade/{cnpj}(cnpj=${unidade.cnpj})}"
                 		href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">Excluir</a>
 					  </td>
                     </tr>
