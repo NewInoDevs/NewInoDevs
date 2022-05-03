@@ -1,9 +1,11 @@
 package com.api.inodevs.entidades;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 //Criando entidade da conta:
 @Entity
@@ -28,7 +30,9 @@ public class Conta{
 	@JoinColumn(name = "codigo_contrato")
 	private Contrato contrato;
 	
-	private Long fatura;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_fatura", referencedColumnName = "id")
+	private Fatura fatura;
 	
     // Getters e Setters:
 	public Long getCodi() {
@@ -97,7 +101,6 @@ public class Conta{
 	public void setBase_calculo(Integer base_calculo) {
 		this.base_calculo = base_calculo;
 	}
-	
 	public String getStatus() {
 		return status;
 	}
@@ -110,10 +113,10 @@ public class Conta{
 	public void setContrato(Contrato contrato) {
 		this.contrato = contrato;
 	}
-	public Long getFatura() {
+	public Fatura getFatura() {
 		return fatura;
 	}
-	public void setFatura(Long fatura) {
+	public void setFatura(Fatura fatura) {
 		this.fatura = fatura;
 	}
 }

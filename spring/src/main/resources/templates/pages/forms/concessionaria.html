@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>
-    PÃ¡gina de Cadastros
+    Página de Cadastros
   </title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
@@ -34,7 +35,7 @@
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white " href="/">
+          <a class="nav-link text-white " href="/" sec:authorize="hasAnyRole('ADMINISTRADOR', 'GESTOR')">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
@@ -66,7 +67,7 @@
               </div> 
          </li>
          <li class="nav-item">
-          <a class="nav-link text-white" href="/controleUsuario">
+          <a class="nav-link text-white" href="/controleUsuario" sec:authorize="hasAnyRole('ADMINISTRADOR', 'GESTOR')">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
@@ -225,13 +226,13 @@
 
     <!-- FORMS -->
     <div class="container-fluid py-4">
-      <h1 class="title">CADASTRO DE CONCESSIONARIA </h1> <br> <h4 style="font-size: 1rem;" class="subtitle" >(campos precisam de pontuaÃ§Ã£o)</h4>
+      <h1 class="title">CADASTRO DE CONCESSIONARIA </h1> <br> <h4 style="font-size: 1rem;" class="subtitle" >(campos precisam de pontuação)</h4>
       <form th:action="@{/salvarConcessionaria}"  th:object="${concessionaria}" method="POST" role="form" class="text-start">
         <div class="block-main">
           <div class="card-body space" >
             <label for="nomeConce">Nome:</label><br>
             <input maxlength="60" type="text" name="nomeConce" id="nomeConce" placeholder="Sabesp" th:field="*{nome}" required> <br><br>
-            <label for="cnpj">CÃ³digo:</label><br>
+            <label for="cnpj">Código:</label><br>
             <input size="25" maxlength="25" type="text" name="cnpj" id="cnpj" placeholder="110457 43.776.517/0001-80" th:field="*{codigo}" required> <br><br>
           	<div id="tipo_conta">Tipo da Conta:
               <br>
@@ -239,10 +240,10 @@
               <label for="energia">Energia</label>
       
               <input type="radio" id="agua" name="conta" value="Água" th:field="*{tipo_conta}">
-              <label for="agua">Ãgua</label>
+              <label for="agua">Água</label>
 
               <input type="radio" id="gas" name="conta" value="Gás" th:field="*{tipo_conta}">
-              <label for="gas">GÃ¡s</label>
+              <label for="gas">Gás</label>
             </div>
           </div>
 

@@ -15,10 +15,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.api.inodevs.entidades.Conta;
+import com.api.inodevs.entidades.Contrato;
 import com.api.inodevs.entidades.Fatura;
 import com.api.inodevs.repositorio.ContaRepositorio;
 import com.api.inodevs.repositorio.ContratoRepositorio;
-import com.api.inodevs.repositorio.FaturaRepositorio;
 
 //Classe de controle que permite a navegação e funcionalidades no sistema:
 @Controller
@@ -28,33 +28,33 @@ public class ControleConta {
 	@Autowired
 	private ContaRepositorio contaRepo;
 	@Autowired
-	private FaturaRepositorio faturaRepo;
-	@Autowired
 	private ContratoRepositorio contratoRepo;
 	
 	// Entrar na página de cadastro de conta com o modelo da entidade:
 	@GetMapping("/cadastroConta")
 	public String cadastroConta(@ModelAttribute("conta") Conta conta, Model modelo){
+		Contrato contrato = new Contrato();
+        contrato.setCodigo(0L);
+        conta.setContrato(contrato);
 		modelo.addAttribute("listaContrato", contratoRepo.findAll());
 		return "pages/forms/contas";
 	}
 	
 	// Salvar uma conta e uma fatura no banco ao clicar em cadastrar:
 	@PostMapping("/salvarConta")
-	public String salvarConta(@ModelAttribute("conta") Conta conta, @ModelAttribute("fatura") Fatura fatura, @RequestParam("faturaPdf") MultipartFile file, RedirectAttributes redirect) {
-        conta.setStatus("Pendente");
+	public String salvarConta(@ModelAttribute("conta") Conta conta, @RequestParam("faturaPdf") MultipartFile file, RedirectAttributes redirect) {
+		conta.setStatus("Pendente");
 		// Salvando o arquivo da fatura:
-		String nome = file.getOriginalFilename();
-        redirect.addFlashAttribute("successo", "Cadastrado com sucesso!");
+		redirect.addFlashAttribute("successo", "Cadastrado com sucesso!");
 		try {
-			fatura.setNome_fatura(nome);
+			Fatura fatura = new Fatura();
+			fatura.setNome_fatura(file.getOriginalFilename());
 			fatura.setTipo_fatura(file.getContentType());
 			fatura.setFatura(file.getBytes());
+			conta.setFatura(fatura);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		faturaRepo.save(fatura);
-		conta.setFatura(fatura.getId());
 		contaRepo.save(conta);
 		return "redirect:cadastroConta";
 	}
