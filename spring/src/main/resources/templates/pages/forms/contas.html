@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head>
   <meta charset="utf-8" />
@@ -36,7 +37,7 @@
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white " href="/">
+          <a class="nav-link text-white " href="/" sec:authorize="hasAnyRole('ADMINISTRADOR', 'GESTOR')">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
@@ -68,7 +69,7 @@
               </div> 
          </li>
          <li class="nav-item">
-          <a class="nav-link text-white" href="/controleUsuario">
+          <a class="nav-link text-white" href="/controleUsuario" sec:authorize="hasAnyRole('ADMINISTRADOR', 'GESTOR')">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
@@ -246,13 +247,13 @@
 		</div>
           <div class="sub-main-right">
             <br>         
-            <label for="codigoConta">CÃ³digo:</label><br>
+            <label for="codigoConta">Código:</label><br>
             <input maxlength="8" type="text" name="codi" id="codi" th:field="*{codi}" placeholder="1234567890"> <br><br>
             
-            <label for="createDataConta">Data de CriaÃ§Ã£o:</label><br>
+            <label for="createDataConta">Data de Criação:</label><br>
             <input maxlength="16" type="date" name="data_de_criacao" id="data_de_criacao" th:field="*{data_de_criacao}"> <br><br>
         
-            <label for="launchDataConta">Data de LanÃ§amento:</label><br>
+            <label for="launchDataConta">Data de Lançamento:</label><br>
             <input maxlength="16" type="date" name="data_de_lancamento" id="data_de_lancamento" th:field="*{data_de_lancamento}" > <br><br>
 
             <label for="launchDataConta">Data de Vencimento:</label><br>
@@ -267,7 +268,7 @@
           
           <div class="sub-main-left">
 
-            <label for="desconto">Base de CÃ¡lculo:</label><br>
+            <label for="desconto">Base de Cálculo:</label><br>
             <input maxlength="60" type="number" name="base_calculo" id="base_calculo" th:field="*{base_calculo}" placeholder="4+3=7"> <br><br>
             
             <label for="desconto">Desconto:</label><br>

@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.OneToOne;
 
 //Criando entidade da fatura:
 @Entity
@@ -19,6 +20,9 @@ public class Fatura {
 	
 	private String nome_fatura;
 	private String tipo_fatura;
+	
+	@OneToOne(mappedBy = "fatura")
+	private Conta conta;
 	
 	// Getters e Setters:
 	public Long getId() {
@@ -45,5 +49,10 @@ public class Fatura {
 	public void setTipo_fatura(String tipo_fatura) {
 		this.tipo_fatura = tipo_fatura;
 	}
-	
+	public Conta getConta() {
+		return conta;
+	}
+	public void setConta(Conta conta) {
+		this.conta = conta;
+	}
 }

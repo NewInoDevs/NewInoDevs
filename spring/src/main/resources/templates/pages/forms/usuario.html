@@ -7,7 +7,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
   <title>
-    Página de Usuários
+    Cadastro de Usuários
   </title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
@@ -20,7 +20,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="pagestyle" href="../../assets/css/material-dashboard.css?v=3.0.2" rel="stylesheet" />
-  <link id="formstyle" href="../../assets/css/unidade.css" rel="stylesheet" />
+  <link id="formstyle" href="../../assets/css/usuario.css" rel="stylesheet" />
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -53,22 +53,22 @@
         </li>
         <li class="nav-item">
           <div class="dropdown float-start text-white text-center me-2 d-flex align-items-center justify-content-center">
-            <a class="nav-link text-white active bg-gradient-primary long">
+            <a class="nav-link text-white long">
               <div class="text-white text-center me-4 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">person</i>
               </div>          
-				<span>Cadastros</span>
-             </a>
-                  <div class="dropdown-content">
-                    <a href="/cadastroConcessionaria">Concessionaria</a>
-                    <a href="/cadastroUnidade">Unidade</a>
-                    <a href="/cadastroConta">Conta</a>
-                    <a href="/cadastroContrato">Contrato</a>
-                  </div>
-              </div> 
+                <span>Cadastros</span>
+			</a>
+               <div class="dropdown-content">
+                 <a href="/cadastroConcessionaria">Concessionaria</a>
+                 <a href="/cadastroUnidade">Unidade</a>
+                 <a href="/cadastroConta">Conta</a>
+                 <a href="/cadastroContrato">Contrato</a>
+               </div>
+           </div> 
          </li>
          <li class="nav-item">
-          <a class="nav-link text-white" href="/controleUsuario">
+          <a class="nav-link text-white active bg-gradient-primary" href="/controleUsuario">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
@@ -231,16 +231,22 @@
     <!-- End Navbar -->
 
     <!-- FORMS -->
-          <h1 class="title">CADASTRO DE USUÁRIOS </h1> <br> <h4 class="subtitle" >(campos precisam de pontuação)</h4>
-    
-    <div class="container-fluid py-4">
-    
-        <form th:action="@{/salvarUsuario}" th:object="${usuario}" method="POST">
-	        <section class="block-main2">
-		    	Nome do Usuário: <input type="text" name="nome" id="nome" th:field="*{nome}"><br><br>
-				Sobrenome do Usuário: <input type="text" name="sobrenome" id="sobrenome" th:field="*{sobrenome}"><br><br>
-				Username do Usuário: <input type="text" name="username" id="username" th:field="*{username}"><br><br>
-				Senha do Usuário: <input type="password" name="senha" id="senha" th:field="*{senha}">
+        <section class="block-main2">
+	        <div class="container-fluid py-4">
+		    <h1 class="title">CADASTRO DE USUÁRIOS</h1>
+		    <form th:action="@{/salvarUsuario}" th:object="${usuario}" method="POST">
+		    	<div class="bt">
+			    	<label for="nomeUsuario">Nome do Usuário</label><br> 
+			    	<input type="text" name="nome" id="nome" th:field="*{nome}"><br><br>
+			    	
+			    	<label for="sobrenomeUsuario">Sobreome do Usuário</label><br>
+					<input type="text" name="sobrenome" id="sobrenome" th:field="*{sobrenome}"><br><br>
+					
+					<label for="usernameUsuario">Username do Usuário</label><br>
+					<input type="text" name="username" id="username" th:field="*{username}"><br><br>
+					
+			    	<label for="senhaUsuario">Senha do Usuário</label><br>				
+					<input type="password" name="senha" id="senha" th:field="*{senha}">
 					<div id="secao">Seção:
 				        <br>
 				        <input type="radio" id="administrador" name="usuario" value="ROLE_ADMINISTRADOR" th:field="*{secao}">

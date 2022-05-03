@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.api.inodevs.entidades.Concessionaria;
 import com.api.inodevs.entidades.Contrato;
+import com.api.inodevs.entidades.Unidade;
 import com.api.inodevs.repositorio.ConcessionariaRepositorio;
 import com.api.inodevs.repositorio.ContratoRepositorio;
 import com.api.inodevs.repositorio.UnidadeRepositorio;
@@ -31,6 +33,12 @@ public class ControleContrato {
 	// Entrar na página de cadastro de contrato com o modelo da entidade:
 	@GetMapping("/cadastroContrato")
 	public String cadastroContrato(@ModelAttribute("contrato") Contrato contrato, Model modelo){
+		Concessionaria concessionaria = new Concessionaria();
+		concessionaria.setCodigo(0L);
+		contrato.setConcessionaria(concessionaria);
+		Unidade unidade = new Unidade();
+		unidade.setCnpj(0L);
+		contrato.setUnidade(unidade);
 		modelo.addAttribute("listaConcessionaria", concessionariaRepo.findAll());
 		modelo.addAttribute("listaUnidade", unidadeRepo.findAll());
 		return "pages/forms/contrato";
