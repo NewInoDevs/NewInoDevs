@@ -1,0 +1,30 @@
+.title {
+    text-align : center;
+    padding: 0.2rem;
+}
+.block-main2 {
+    background-color: #f0f2f5; 
+    width: 90%;
+    height: 50%;
+    margin: 0;
+    padding: 0;
+    left: 9%;
+    position: relative;
+    border: solid;
+    border-radius: 2rem;
+}
+
+.bt {
+	padding-top: 1rem;
+    padding-left: 40% !important; 
+}
+.bt2 {
+    display: inline-block; 
+    content: flex-end; 
+    margin-left: 43%;
+    padding-bottom: 4%;
+}
+
+#secao {
+	padding-top: 1rem !important;
+}
