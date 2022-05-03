@@ -131,7 +131,10 @@
             <li class="nav-item d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
                 <i class="fa fa-user me-sm-1"></i>
-                <span class="d-sm-inline d-none">Sign In</span>
+                <form class="d-sm-inline d-none" action="/logout" method="post">
+					<input type="submit" value="Sair">      		
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+				</form>
               </a>
             </li>
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
@@ -255,26 +258,52 @@
 				        <input type="radio" id="digitador" name="usuario" value="ROLE_DIGITADOR" th:field="*{secao}">
 				        <label for="digitador">Digitador</label>
 			        </div>
-		    	</div>
 		        <input type="hidden" name="ativo" id="ativo" th:field="*{ativo}">
-		          <div class="bt2">
-		          	<button class="btn bg-gradient-primary w-100 my-4 mb-2 " type="submit" value="Cadastrar" data-target="successToast">Cadastrar</button>
-				  </div>
-				  <div th:text="${successo}" th:if="${successo}" class="position-fixed bottom-1 end-4 z-index-2 corzinha">
-		        <div  class="toast fade hide p-2 bg-white" role="alert" aria-live="assertive" id="successToast" aria-atomic="true">
-		          <hr class="horizontal dark m-0">
-		          <div class="toast-body">
-		            Unidade cadastrada com sucesso.
-		          </div>
-		        </div>
-		        <div class="toast fade hide p-2 mt-2 bg-white" role="alert" aria-live="assertive" id="warningToast" aria-atomic="true">
-		          <div class="toast-header border-0">
-		            <i class="material-icons text-warning me-2">travel_explore</i>
-		          </div>
-		        </div>
-	    	</form>	
-		</section>
+				<input type="submit" value="Cadastrar">
+	    </form>
+	    
+        <div class="sub-main-right">
+          	<div th:object="${contrato}">
+            <br>
+            <label for="codigo">Codigo:</label><br>
+            <input maxlength="14" type="text" name="codigo" id="codigo" placeholder="00.000.000/0000-00" th:field="*{codigo}"> <br><br>
+            
+            <label for="concessionaria">Concessionaria:</label><br>
+            <select th:field="*{concessionaria}">
+            	<option value="0" hidden=hidden disabled selected>Selecione uma unidade...</option>
+        		<option th:each="concessionaria : ${listaConcessionaria}" th:value="${concessionaria.codigo}" th:text="${concessionaria.nome}"></option>
+			</select><br><br>
+            <label for="unidade">Unidade:</label><br>
+            <select th:field="*{unidade}">
+            	<option value="0" hidden=hidden disabled selected>Selecione uma unidade...</option>
+        		<option th:each="unidade : ${listaUnidade}" th:value="${unidade.cnpj}" th:text="${unidade.nome}"></option>
+			</select>
+            </div>
+          </div>
+          <div class="bt2">
+          	<button class="btn bg-gradient-primary w-100 my-4 mb-2 " type="submit" value="Cadastrar" data-target="successToast">Cadastrar</button>
+		  </div>
+		  <div th:text="${successo}" th:if="${successo}" class="position-fixed bottom-1 end-4 z-index-2 corzinha"></div>
+        <div  class="toast fade hide p-2 bg-white" role="alert" aria-live="assertive" id="successToast" aria-atomic="true">
+          <div  class="toast-header border-0">
+            <i class="material-icons text-success me-2">check</i>
+            <span class="me-auto font-weight-bold">Cadastrado com sucesso</span>
+            <small class="text-body">Now</small>
+            <i class="fas fa-times text-md ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"></i>
+          </div>
+          <hr class="horizontal dark m-0">
+          <div class="toast-body">
+            Contrato cadastrada com sucesso.
+          </div>
+        </div>
+        <div class="toast fade hide p-2 mt-2 bg-white" role="alert" aria-live="assertive" id="warningToast" aria-atomic="true">
+          <div class="toast-header border-0">
+            <i class="material-icons text-warning me-2">travel_explore</i>
+          </div>
+        </div>
+        </section>
     
+      </form>	
 
       <!-- END FORMS -->
 
