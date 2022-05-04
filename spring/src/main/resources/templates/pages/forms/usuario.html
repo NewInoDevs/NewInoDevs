@@ -262,24 +262,6 @@
 				<input type="submit" value="Cadastrar">
 	    </form>
 	    
-        <div class="sub-main-right">
-          	<div th:object="${contrato}">
-            <br>
-            <label for="codigo">Codigo:</label><br>
-            <input maxlength="14" type="text" name="codigo" id="codigo" placeholder="00.000.000/0000-00" th:field="*{codigo}"> <br><br>
-            
-            <label for="concessionaria">Concessionaria:</label><br>
-            <select th:field="*{concessionaria}">
-            	<option value="0" hidden=hidden disabled selected>Selecione uma unidade...</option>
-        		<option th:each="concessionaria : ${listaConcessionaria}" th:value="${concessionaria.codigo}" th:text="${concessionaria.nome}"></option>
-			</select><br><br>
-            <label for="unidade">Unidade:</label><br>
-            <select th:field="*{unidade}">
-            	<option value="0" hidden=hidden disabled selected>Selecione uma unidade...</option>
-        		<option th:each="unidade : ${listaUnidade}" th:value="${unidade.cnpj}" th:text="${unidade.nome}"></option>
-			</select>
-            </div>
-          </div>
           <div class="bt2">
           	<button class="btn bg-gradient-primary w-100 my-4 mb-2 " type="submit" value="Cadastrar" data-target="successToast">Cadastrar</button>
 		  </div>
