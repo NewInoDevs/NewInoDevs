@@ -1,7 +1,10 @@
 package com.api.inodevs.entidades;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 // Criando entidade da concessionária:
 @Entity
@@ -15,8 +18,12 @@ public class Concessionaria {
 	private String tipo_conta;
 	
 	private String status;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_notificacoes", referencedColumnName = "id")
+    private Notificacoes notificacoes;
     
-    // Getters e Setters:
+	// Getters e Setters:
 	public Long getCodigo() {
 		return codigo;
 	}
@@ -41,4 +48,11 @@ public class Concessionaria {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	public Notificacoes getNotificacoes() {
+		return notificacoes;
+	}
+	public void setNotificacoes(Notificacoes notificacoes) {
+		this.notificacoes = notificacoes;
+	}
+	
 }

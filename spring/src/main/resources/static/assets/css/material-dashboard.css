@@ -27301,7 +27301,7 @@ pre[class*="language-"] {
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
-  margin-top: 14rem;
+  margin-top: 17.5rem;
   display: none;
   position: absolute;
   background-color: #f1f1f1;
@@ -27383,4 +27383,9 @@ navbar-vertical .nav-item:hover .navigation {
 
 .corzinha {
 	color: green;
+}
+
+.alinhadinho {
+	text-align: center;
+	margin: 2rem 0 0 28rem;
 }

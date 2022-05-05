@@ -61,7 +61,7 @@
         <li class="nav-item">
           <div class="dropdown float-start text-white text-center me-2 d-flex align-items-center justify-content-center">
             <a class="nav-link text-white long">
-              <div class="text-white text-center me-4 d-flex align-items-center justify-content-center">
+              <div class="text-white text-center me-3 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">person</i>
               </div>          
                 <span>Cadastros</span>
@@ -140,7 +140,10 @@
             <li class="nav-item d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
                 <i class="fa fa-user me-sm-1"></i>
-                <span class="d-sm-inline d-none">Sign In</span>
+                <form class="d-sm-inline d-none" action="/logout" method="post">
+					<input type="submit" value="Sair">      		
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+				</form>
               </a>
             </li>
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
