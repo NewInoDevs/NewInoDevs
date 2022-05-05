@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.api.inodevs.entidades.Concessionaria;
+import com.api.inodevs.entidades.Notificacoes;
 import com.api.inodevs.repositorio.ConcessionariaRepositorio;
+import com.api.inodevs.repositorio.NotificacoesRepositorio;
 
 // Classe de controle que permite a navegação e funcionalidades no sistema:
 @Controller
@@ -21,6 +23,8 @@ public class ControleConcessionaria {
 	// Adicionando repositório da concessionária para salvar e ler dados no banco:
 	@Autowired
 	private ConcessionariaRepositorio concessionariaRepo;
+	@Autowired
+	private NotificacoesRepositorio notificacoesRepo;
 	
 	// Entrar na página de cadastro de concessionária com o modelo da entidade:
 	@GetMapping("/cadastroConcessionaria")
@@ -32,8 +36,11 @@ public class ControleConcessionaria {
 	// Salvar uma concessionária no banco ao clicar em cadastrar:
 	@PostMapping("/salvarConcessionaria")
     public String salvarConcessionaria(@ModelAttribute("concessionaria") Concessionaria concessionaria, RedirectAttributes redirect) {
-        concessionariaRepo.save(concessionaria);
+        Notificacoes notificacoes = new Notificacoes("ROLE_GESTOR", "Concessionaria");
         redirect.addFlashAttribute("successo", "Cadastrado com sucesso!");
+        concessionaria.setNotificacoes(notificacoes);
+        concessionaria.setStatus("Pendente");
+        concessionariaRepo.save(concessionaria);
         return "redirect:cadastroConcessionaria";
     }
 	
@@ -59,26 +66,33 @@ public class ControleConcessionaria {
 	
 	// Excluir uma concessionária ao clicar em excluir na tabela:
 	@GetMapping("/excluirConcessionaria/{codigo}")
-	public String excluirConcessionaria(@PathVariable("codigo") long codigo) {
-		Optional<Concessionaria> usuarioOpt = concessionariaRepo.findById(codigo);
-		if (usuarioOpt.isEmpty()) {
-			throw new IllegalArgumentException("Concessionaria inválido");
-		}
-		concessionariaRepo.deleteById(codigo);
-		return "redirect:/tabela";
-	}
+    public String excluirConcessionaria(@PathVariable("codigo") long codigo) {
+        Optional<Concessionaria> concessionariaOpt = concessionariaRepo.findById(codigo);
+        if (concessionariaOpt.isEmpty()) {
+            throw new IllegalArgumentException("Concessionaria inválido");
+        }
+        concessionariaRepo.deleteById(codigo);
+        return "redirect:/tabela";
+    }
 	
-	@PostMapping("/aprovarConcessionaria")
-	public String aprovarConcessionaria(@ModelAttribute("concessionaria") Concessionaria concessionaria) {
+	@PostMapping("/aprovarConcessionaria/{id}")
+	public String aprovarConcessionaria(@ModelAttribute("concessionaria") Concessionaria concessionaria, @PathVariable("id") long id) {
+		concessionaria.setNotificacoes(null);
 		concessionaria.setStatus("Aprovado");
 		concessionariaRepo.save(concessionaria);
+		notificacoesRepo.deleteById(id);
 		return "redirect:/tabela";
 	}
 	
-	@PostMapping("/reprovarConcessionaria")
-	public String reprovarConcessionaria(@ModelAttribute("concessionaria") Concessionaria concessionaria) {
-		concessionaria.setStatus("Reprovado");
-		concessionariaRepo.save(concessionaria);
-		return "redirect:/tabela";
-	}
+	@PostMapping("/reprovarConcessionaria/{id}")
+    public String reprovarConcessionaria(@ModelAttribute("concessionaria") Concessionaria concessionaria, @PathVariable("id") long id) {
+        concessionaria.setNotificacoes(null);
+        concessionariaRepo.save(concessionaria);
+        notificacoesRepo.deleteById(id);
+        concessionaria.setStatus("Reprovado");
+        Notificacoes notificacoes = new Notificacoes("ROLE_DIGITADOR", "Concessionaria");
+        concessionaria.setNotificacoes(notificacoes);
+        concessionariaRepo.save(concessionaria);
+        return "redirect:/tabela";
+    }
 }

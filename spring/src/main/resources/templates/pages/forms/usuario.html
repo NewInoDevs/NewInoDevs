@@ -7,7 +7,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
   <title>
-    Página de Usuários
+    Cadastro de Usuários
   </title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
@@ -20,7 +20,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="pagestyle" href="../../assets/css/material-dashboard.css?v=3.0.2" rel="stylesheet" />
-  <link id="formstyle" href="../../assets/css/unidade.css" rel="stylesheet" />
+  <link id="formstyle" href="../../assets/css/usuario.css" rel="stylesheet" />
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -53,22 +53,22 @@
         </li>
         <li class="nav-item">
           <div class="dropdown float-start text-white text-center me-2 d-flex align-items-center justify-content-center">
-            <a class="nav-link text-white active bg-gradient-primary long">
-              <div class="text-white text-center me-4 d-flex align-items-center justify-content-center">
+            <a class="nav-link text-white long">
+              <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">person</i>
               </div>          
-				<span>Cadastros</span>
-             </a>
-                  <div class="dropdown-content">
-                    <a href="/cadastroConcessionaria">Concessionaria</a>
-                    <a href="/cadastroUnidade">Unidade</a>
-                    <a href="/cadastroConta">Conta</a>
-                    <a href="/cadastroContrato">Contrato</a>
-                  </div>
-              </div> 
+                <span>Cadastros</span>
+			</a>
+               <div class="dropdown-content">
+                 <a href="/cadastroConcessionaria">Concessionaria</a>
+                 <a href="/cadastroUnidade">Unidade</a>
+                 <a href="/cadastroConta">Conta</a>
+                 <a href="/cadastroContrato">Contrato</a>
+               </div>
+           </div> 
          </li>
          <li class="nav-item">
-          <a class="nav-link text-white" href="/controleUsuario">
+          <a class="nav-link text-white active bg-gradient-primary" href="/controleUsuario">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
@@ -116,9 +116,9 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Cadastros</li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Perfis</li>
           </ol>
-          <h6 class="font-weight-bolder mb-0">Notifications</h6>
+          <h6 class="font-weight-bolder mb-0">Cadastrar Usuários</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -231,16 +231,22 @@
     <!-- End Navbar -->
 
     <!-- FORMS -->
-          <h1 class="title">CADASTRO DE USUÁRIOS </h1> <br> <h4 class="subtitle" >(campos precisam de pontuação)</h4>
-    
-    <div class="container-fluid py-4">
-    
-        <form th:action="@{/salvarUsuario}" th:object="${usuario}" method="POST">
-	        <section class="block-main2">
-		    	Nome do Usuário: <input type="text" name="nome" id="nome" th:field="*{nome}"><br><br>
-				Sobrenome do Usuário: <input type="text" name="sobrenome" id="sobrenome" th:field="*{sobrenome}"><br><br>
-				Username do Usuário: <input type="text" name="username" id="username" th:field="*{username}"><br><br>
-				Senha do Usuário: <input type="password" name="senha" id="senha" th:field="*{senha}">
+        <section class="block-main2">
+	        <div class="container-fluid py-4">
+		    <h1 class="title">CADASTRO DE USUÁRIOS</h1>
+		    <form th:action="@{/salvarUsuario}" th:object="${usuario}" method="POST">
+		    	<div class="bt">
+			    	<label for="nomeUsuario">Nome do Usuário</label><br> 
+			    	<input type="text" name="nome" id="nome" th:field="*{nome}"><br><br>
+			    	
+			    	<label for="sobrenomeUsuario">Sobreome do Usuário</label><br>
+					<input type="text" name="sobrenome" id="sobrenome" th:field="*{sobrenome}"><br><br>
+					
+					<label for="usernameUsuario">Username do Usuário</label><br>
+					<input type="text" name="username" id="username" th:field="*{username}"><br><br>
+					
+			    	<label for="senhaUsuario">Senha do Usuário</label><br>				
+					<input type="password" name="senha" id="senha" th:field="*{senha}">
 					<div id="secao">Seção:
 				        <br>
 				        <input type="radio" id="administrador" name="usuario" value="ROLE_ADMINISTRADOR" th:field="*{secao}">
@@ -253,28 +259,9 @@
 				        <label for="digitador">Digitador</label>
 			        </div>
 		        <input type="hidden" name="ativo" id="ativo" th:field="*{ativo}">
-				<input type="submit" value="Cadastrar">
 	    </form>
 	    
-        <div class="sub-main-right">
-          	<div th:object="${contrato}">
-            <br>
-            <label for="codigo">Codigo:</label><br>
-            <input maxlength="14" type="text" name="codigo" id="codigo" placeholder="00.000.000/0000-00" th:field="*{codigo}"> <br><br>
-            
-            <label for="concessionaria">Concessionaria:</label><br>
-            <select th:field="*{concessionaria}">
-            	<option value="0" hidden=hidden disabled selected>Selecione uma unidade...</option>
-        		<option th:each="concessionaria : ${listaConcessionaria}" th:value="${concessionaria.codigo}" th:text="${concessionaria.nome}"></option>
-			</select><br><br>
-            <label for="unidade">Unidade:</label><br>
-            <select th:field="*{unidade}">
-            	<option value="0" hidden=hidden disabled selected>Selecione uma unidade...</option>
-        		<option th:each="unidade : ${listaUnidade}" th:value="${unidade.cnpj}" th:text="${unidade.nome}"></option>
-			</select>
-            </div>
-          </div>
-          <div class="bt2">
+          <div class="bt3">
           	<button class="btn bg-gradient-primary w-100 my-4 mb-2 " type="submit" value="Cadastrar" data-target="successToast">Cadastrar</button>
 		  </div>
 		  <div th:text="${successo}" th:if="${successo}" class="position-fixed bottom-1 end-4 z-index-2 corzinha"></div>

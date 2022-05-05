@@ -1,5 +1,74 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+    <script>
+    
+    function limpa_formulário_cep() {
+            //Limpa valores do formulário de cep.
+            document.getElementById('rua').value=("");
+            document.getElementById('bairro').value=("");
+            document.getElementById('cidade').value=("");
+            document.getElementById('uf').value=("");
+    }
+
+    function meu_callback(conteudo) {
+        if (!("erro" in conteudo)) {
+            //Atualiza os campos com os valores.
+            document.getElementById('rua').value=(conteudo.logradouro);
+            document.getElementById('bairro').value=(conteudo.bairro);
+            document.getElementById('cidade').value=(conteudo.localidade);
+            document.getElementById('uf').value=(conteudo.uf);
+        } //end if.
+        else {
+            //CEP não Encontrado.
+            limpa_formulário_cep();
+            alert("CEP não encontrado.");
+        }
+    }
+        
+    function pesquisacep(valor) {
+
+        //Nova variável "cep" somente com dígitos.
+        var cep = valor.replace(/\D/g, '');
+
+        //Verifica se campo cep possui valor informado.
+        if (cep != "") {
+
+            //Expressão regular para validar o CEP.
+            var validacep = /^[0-9]{8}$/;
+
+            //Valida o formato do CEP.
+            if(validacep.test(cep)) {
+
+                //Preenche os campos com "..." enquanto consulta webservice.
+                document.getElementById('rua').value="...";
+                document.getElementById('bairro').value="...";
+                document.getElementById('cidade').value="...";
+                document.getElementById('uf').value="...";
+                //Cria um elemento javascript.
+                var script = document.createElement('script');
+
+                //Sincroniza com o callback.
+                script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
+
+                //Insere script no documento e carrega o conteúdo.
+                document.body.appendChild(script);
+
+            } //end if.
+            else {
+                //cep é inválido.
+                limpa_formulário_cep();
+                alert("Formato de CEP inválido.");
+            }
+        } //end if.
+        else {
+            //cep sem valor, limpa formulário.
+            limpa_formulário_cep();
+        }
+    };
+
+    </script>
 
 <head>
   <meta charset="utf-8" />
@@ -36,7 +105,7 @@
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white " href="/">
+          <a class="nav-link text-white " href="/" sec:authorize="hasAnyRole('ADMINISTRADOR', 'GESTOR')">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
@@ -54,7 +123,7 @@
         <li class="nav-item">
           <div class="dropdown float-start text-white text-center me-2 d-flex align-items-center justify-content-center">
             <a class="nav-link text-white active bg-gradient-primary long">
-              <div class="text-white text-center me-4 d-flex align-items-center justify-content-center">
+              <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">person</i>
               </div>          
 				<span>Cadastros</span>
@@ -68,7 +137,7 @@
               </div> 
          </li>
          <li class="nav-item">
-          <a class="nav-link text-white" href="/controleUsuario">
+          <a class="nav-link text-white" href="/controleUsuario" sec:authorize="hasAnyRole('ADMINISTRADOR', 'GESTOR')">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
@@ -251,20 +320,20 @@
             
 
             <label for="cepContrato">Cep:</label><br>
-            <input maxlength="8" type="text" name="cepContrato" id="cepContrato" placeholder="12345-678" th:field="*{endereco.cep}"> <br><br>
+            <input maxlength="8" type="text" name="cep" id="cep" onblur="pesquisacep(this.value)" placeholder="12345-678" th:field="*{endereco.cep}"> <br><br>
             
             <label for="estadoContrato">Estado:</label><br>
-            <input maxlength="60" type="text" name="estadoContrato" id="estadoContrato" placeholder="São Paulo" th:field="*{endereco.estado}"> <br><br>
+            <input maxlength="60" type="text" name="uf" id="uf" placeholder="São Paulo" th:field="*{endereco.estado}"> <br><br>
 
           </div>
           
           <div class="sub-main-left">
 
             <label for="municipioContrato">Município:</label><br>
-            <input maxlength="60" type="text" name="municipioContrato" id="municipioContrato" placeholder="São José dos Campos" th:field="*{endereco.municipio}"> <br><br>
+            <input maxlength="60" type="text" name="cidade" id="cidade" placeholder="São José dos Campos" th:field="*{endereco.municipio}"> <br><br>
             
             <label for="bairro">Bairro:</label><br>
-            <input maxlength="60" type="text" name="bairroContrato" id="bairroContrato" placeholder="Altos de Santana" th:field="*{endereco.bairro}"> <br><br>
+            <input maxlength="60" type="text" name="bairro" id="bairro" placeholder="Altos de Santana" th:field="*{endereco.bairro}"> <br><br>
             
            	<label for="rua">Rua:</label><br>
             <input maxlength="60" type="text" name="rua" id="rua" th:field="*{endereco.rua}" placeholder="Altos de Santana"> <br><br>
@@ -273,7 +342,7 @@
             <input maxlength="10" type="number" name="numeroContrato" id="numeroContrato" placeholder="524" th:field="*{endereco.numero}"> <br><br>
             
             <label for="complementoContrato">Complemento:</label><br>
-            <input maxlength="60" type="text" name="complementoContrato" id="complementoContrato" placeholder="casa dos fundos" th:field="*{endereco.complemento}"> <br><br>
+            <input maxlength="60" type="text" name="complemento" id="complemento" placeholder="casa dos fundos" th:field="*{endereco.complemento}"> <br><br>
 
           </div>
           

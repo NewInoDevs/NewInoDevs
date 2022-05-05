@@ -15,10 +15,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.api.inodevs.entidades.Conta;
+import com.api.inodevs.entidades.Contrato;
 import com.api.inodevs.entidades.Fatura;
+import com.api.inodevs.entidades.Notificacoes;
 import com.api.inodevs.repositorio.ContaRepositorio;
 import com.api.inodevs.repositorio.ContratoRepositorio;
-import com.api.inodevs.repositorio.FaturaRepositorio;
+import com.api.inodevs.repositorio.NotificacoesRepositorio;
 
 //Classe de controle que permite a navegação e funcionalidades no sistema:
 @Controller
@@ -28,33 +30,37 @@ public class ControleConta {
 	@Autowired
 	private ContaRepositorio contaRepo;
 	@Autowired
-	private FaturaRepositorio faturaRepo;
-	@Autowired
 	private ContratoRepositorio contratoRepo;
+	@Autowired
+	private NotificacoesRepositorio notificacoesRepo;
 	
 	// Entrar na página de cadastro de conta com o modelo da entidade:
 	@GetMapping("/cadastroConta")
 	public String cadastroConta(@ModelAttribute("conta") Conta conta, Model modelo){
+		Contrato contrato = new Contrato();
+        contrato.setCodigo(0L);
+        conta.setContrato(contrato);
 		modelo.addAttribute("listaContrato", contratoRepo.findAll());
 		return "pages/forms/contas";
 	}
 	
 	// Salvar uma conta e uma fatura no banco ao clicar em cadastrar:
 	@PostMapping("/salvarConta")
-	public String salvarConta(@ModelAttribute("conta") Conta conta, @ModelAttribute("fatura") Fatura fatura, @RequestParam("faturaPdf") MultipartFile file, RedirectAttributes redirect) {
-        conta.setStatus("Pendente");
+	public String salvarConta(@ModelAttribute("conta") Conta conta, @RequestParam("faturaPdf") MultipartFile file, RedirectAttributes redirect) {
+		conta.setStatus("Pendente");
 		// Salvando o arquivo da fatura:
-		String nome = file.getOriginalFilename();
-        redirect.addFlashAttribute("successo", "Cadastrado com sucesso!");
+		redirect.addFlashAttribute("successo", "Cadastrado com sucesso!");
 		try {
-			fatura.setNome_fatura(nome);
+			Fatura fatura = new Fatura();
+			fatura.setNome_fatura(file.getOriginalFilename());
 			fatura.setTipo_fatura(file.getContentType());
 			fatura.setFatura(file.getBytes());
+			conta.setFatura(fatura);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		faturaRepo.save(fatura);
-		conta.setFatura(fatura.getId());
+		Notificacoes notificacoes = new Notificacoes("ROLE_GESTOR", "Conta");
+		conta.setNotificacoes(notificacoes);
 		contaRepo.save(conta);
 		return "redirect:cadastroConta";
 	}
@@ -72,12 +78,26 @@ public class ControleConta {
     }
 	
 	// Salvar a conta editada no banco de dados ao clicar em editar:
-	@PostMapping("/salvarContaEdit")
-	public String salvarContaEdit(@ModelAttribute("conta") Conta conta, RedirectAttributes redirect) {
-		conta.setStatus("Pendente");
-		contaRepo.save(conta);
-		return "redirect:tabela";
-	}
+	@PostMapping("/salvarContaEditRep/{id}")
+    public String salvarContaEditRep(@ModelAttribute("conta") Conta conta, @PathVariable("id") long id) {
+        conta.setNotificacoes(null);
+        contaRepo.save(conta);
+        notificacoesRepo.deleteById(id);
+        conta.setStatus("Pendente");
+        Notificacoes notificacoes = new Notificacoes("ROLE_GESTOR", "Conta");
+        conta.setNotificacoes(notificacoes);
+        contaRepo.save(conta);
+        return "redirect:/tabela";
+    }
+
+    @PostMapping("/salvarContaEdit")
+    public String salvarContaEdit(@ModelAttribute("conta") Conta conta, RedirectAttributes redirect) {
+        conta.setStatus("Pendente");
+        Notificacoes notificacoes = new Notificacoes("ROLE_GESTOR", "Conta");
+        conta.setNotificacoes(notificacoes);
+        contaRepo.save(conta);
+        return "redirect:/tabela";
+    }
 	
 	// Excluir uma conta ao clicar em excluir na tabela:
 	@GetMapping("/excluirConta/{codi}")
@@ -89,18 +109,26 @@ public class ControleConta {
         contaRepo.deleteById(codi);
         return "redirect:/tabela";
     }
-	@PostMapping("/aprovarConta")
-	public String aprovarConta(@ModelAttribute("conta") Conta conta) {
+	
+	@PostMapping("/aprovarConta/{id}")
+	public String aprovarConta(@ModelAttribute("conta") Conta conta, @PathVariable("id") long id) {
+		conta.setNotificacoes(null);
 		conta.setStatus("Aprovado");
 		contaRepo.save(conta);
+		notificacoesRepo.deleteById(id);
 		return "redirect:/tabela";
 	}
 	
-	@PostMapping("/reprovarConta")
-	public String reprovarConta(@ModelAttribute("conta") Conta conta) {
-		conta.setStatus("Reprovado");
-		contaRepo.save(conta);
-		return "redirect:/tabela";
-	}
+	@PostMapping("/reprovarConta/{id}")
+    public String reprovarConta(@ModelAttribute("conta") Conta conta, @PathVariable("id") long id) {
+        conta.setNotificacoes(null);
+        contaRepo.save(conta);
+        notificacoesRepo.deleteById(id);
+        conta.setStatus("Reprovado");
+        Notificacoes notificacoes = new Notificacoes("ROLE_DIGITADOR", "Conta");
+        conta.setNotificacoes(notificacoes);
+        contaRepo.save(conta);
+        return "redirect:/tabela";
+    }
 	
 }

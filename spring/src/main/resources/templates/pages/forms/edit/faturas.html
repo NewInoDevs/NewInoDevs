@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org" 
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -34,7 +36,7 @@
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/dashboard.html">
+          <a class="nav-link text-white " href="../pages/dashboard.html" sec:authorize="hasAnyRole('ADMINISTRADOR', 'GESTOR')">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
@@ -52,7 +54,7 @@
         <li class="nav-item">
           <div class="dropdown float-start text-white text-center me-2 d-flex align-items-center justify-content-center">
             <a class="nav-link text-white long">
-              <div class="text-white text-center me-4 d-flex align-items-center justify-content-center">
+              <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">person</i>
               </div>          
                 <span>Cadastros</span>
@@ -61,11 +63,12 @@
                     <a href="/cadastroConcessionaria">Concessionaria</a>
                     <a href="/cadastroUnidade">Unidade</a>
                     <a href="/cadastroConta">Conta</a>
+                    <a href="/cadastroContrato">Contrato</a>
                   </div>
               </div> 
          </li>
          <li class="nav-item">
-          <a class="nav-link text-white" href="/controleUsuario">
+          <a class="nav-link text-white" href="/controleUsuario" sec:authorize="hasAnyRole('ADMINISTRADOR', 'GESTOR')">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
@@ -300,9 +303,10 @@
                     <div class="input-group input-group-outline mb-3">
                       <input type="text" class="form-control" th:field=*{base_calculo}>
                     </div>
-         			Arquivo pdf da conta:<br><a type="button" class="btn btn-primary" th:href="@{'/download/'+${conta.fatura}}" download>Download</a>
-         			<a type="button" class="btn btn-primary" th:href="@{'/inserirFatura/'+${conta.fatura}}">Inserir Novo</a>
+         			Arquivo pdf da conta:<br><a type="button" class="btn btn-primary" th:href="@{'/download/'+${conta.fatura.id}}" download>Download</a>
+                     <a type="button" class="btn btn-primary" th:href="@{'/inserirFatura/'+${conta.fatura.id}}">Inserir Novo</a>
          			<input type="hidden" th:field="*{fatura}">
+         			<input type="hidden" th:field="*{notificacoes}">
             </div>
           </div>
           <div class="card mt-4">
@@ -317,53 +321,20 @@
                 <div class="col-lg-4 col-sm-8 col-12 mt-lg-0 mt-2">
                   <button class="btn bg-gradient-warning w-100 mb-0 toast-btn" type="submit" data-target="warningToast">Editar</button>
                 </div>
-       		</form>
-       		<div class="col-lg-4 col-sm-8 col-12">
-	       		<form th:action="@{/aprovarConta}" method="POST">
-		       		<div th:object="${conta}">
-		       			<input type="hidden" th:field="*{codi}">
-		       			<input type="hidden" th:field="*{data_de_criacao}">
-		       			<input type="hidden" th:field="*{data_de_lancamento}" >
-		       			<input type="hidden" th:field="*{data_de_vencimento}">
-		       			<input type="hidden" th:field="*{valor}">
-				       	<input type="hidden" th:field="*{contrato}">       			
-		       			<input type="hidden" th:field="*{consumo}">
-		       			<input type="hidden" th:field="*{base_calculo}">
-		       			<input type="hidden" th:field="*{desconto}">
-		       			<input type="hidden" th:field="*{dias}">
-		       			<input type="hidden" th:field="*{dados_adicionais}">
-		       			<input type="hidden" th:field="*{valor_total}">
-		       			<input type="hidden" th:field="*{fatura}">
+       		
+       		<div class="col-lg-4 col-sm-8 col-12" sec:authorize="hasAnyRole('ADMINISTRADOR', 'GESTOR')" th:if="${conta.notificacoes != null}">
 
-	       			</div>
-	                 <button class="btn bg-gradient-success w-100 mb-0 toast-btn" type="submit" data-target="successToast">Aprovar</button>
-	            </form>
+	                 <button class="btn bg-gradient-success w-100 mb-0 toast-btn" type="submit" th:formaction="@{'/aprovarConta/'+${conta.notificacoes.id}}" data-target="successToast">Aprovar</button>
+
             </div>
-                <div class="col-lg-4 col-sm-8 col-12 mt-lg-0 mt-2">
-	                <form th:action="@{/reprovarConta}" method="POST">
-			       		<div th:object="${conta}">
-	       					<input type="hidden" th:field="*{codi}">
-	       					<input type="hidden" th:field="*{data_de_criacao}">
-			       			<input type="hidden" th:field="*{data_de_lancamento}" >
-			       			<input type="hidden" th:field="*{data_de_vencimento}">
-			       			<input type="hidden" th:field="*{valor}">
-     						<input type="hidden" th:field="*{contrato}">  
-			       			<input type="hidden" th:field="*{consumo}">
-			       			<input type="hidden" th:field="*{base_calculo}">
-			       			<input type="hidden" th:field="*{desconto}">
-			       			<input type="hidden" th:field="*{dias}">
-			       			<input type="hidden" th:field="*{dados_adicionais}">
-			       			<input type="hidden" th:field="*{valor_total}">
-			       			<input type="hidden" th:field="*{fatura}">
-		       			</div>
-		       			<button class="btn bg-gradient-danger w-100 mb-0 toast-btn" type="submit" data-target="dangerToast">Reprovar</button>
-		       		</form>
+                <div class="col-lg-4 col-sm-8 col-12 mt-lg-0 mt-2" sec:authorize="hasAnyRole('ADMINISTRADOR', 'GESTOR')" th:if="${conta.notificacoes != null}">
+		       			<button class="btn bg-gradient-danger w-100 mb-0 toast-btn" type="submit" data-target="dangerToast" th:formaction="@{'/reprovarConta/'+${conta.notificacoes.id}}" >Reprovar</button>
                 </div>
               </div>
             </div>
           </div>  
         </div>
-      
+		</form>
       <div class="position-fixed top-1 end-1 z-index-2">
         <div class="toast fade hide p-2 bg-white" role="alert" aria-live="assertive" id="successToast" aria-atomic="true">
           <div class="toast-header border-0">
