@@ -14,17 +14,24 @@
     border-radius: 2rem;
 }
 
-.bt {
-	padding-top: 1rem;
-    padding-left: 40% !important; 
-}
-.bt3 {
-    display: inline-block; 
-    content: flex-end; 
-    margin-left: 8%;
-    padding-bottom: 2%;
+.space {
+    padding-left: 10%;
 }
 
-#secao {
-	padding-top: 1rem !important;
+.subtitle {
+    text-align : center;
+    padding-bottom: 1rem;
+    color: #868ba2;
+    font-size: 1rem;
+}
+
+.bt2 {
+    display: inline-block; 
+    content: flex-end; 
+    padding: 5% 0 0 43%;
+    }
+
+.sub-main {
+    display: inline-block; 
+    margin-left: 39%;
 }
