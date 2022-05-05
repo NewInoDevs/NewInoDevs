@@ -13,9 +13,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.api.inodevs.entidades.Concessionaria;
 import com.api.inodevs.entidades.Contrato;
+import com.api.inodevs.entidades.Notificacoes;
 import com.api.inodevs.entidades.Unidade;
 import com.api.inodevs.repositorio.ConcessionariaRepositorio;
 import com.api.inodevs.repositorio.ContratoRepositorio;
+import com.api.inodevs.repositorio.NotificacoesRepositorio;
 import com.api.inodevs.repositorio.UnidadeRepositorio;
 
 //Classe de controle que permite a navegação e funcionalidades no sistema:
@@ -29,6 +31,8 @@ public class ControleContrato {
 	private ConcessionariaRepositorio concessionariaRepo;
 	@Autowired
 	private UnidadeRepositorio unidadeRepo;
+	@Autowired
+	private NotificacoesRepositorio notificacoesRepo;
 	
 	// Entrar na página de cadastro de contrato com o modelo da entidade:
 	@GetMapping("/cadastroContrato")
@@ -46,11 +50,14 @@ public class ControleContrato {
 	
 	// Salvar uma contrato no banco ao clicar em cadastrar:
 	@PostMapping("/salvarContrato")
-	public String salvarConta(@ModelAttribute("contrato") Contrato contrato, RedirectAttributes redirect){
+    public String salvarContrato(@ModelAttribute("contrato") Contrato contrato, RedirectAttributes redirect) {
+        Notificacoes notificacoes = new Notificacoes("ROLE_GESTOR", "Contrato");
         redirect.addFlashAttribute("successo", "Cadastrado com sucesso!");
-		contratoRepo.save(contrato);
-		return "redirect:cadastroContrato";
-	}
+        contrato.setNotificacoes(notificacoes);
+        contrato.setStatus("Pendente");
+        contratoRepo.save(contrato);
+        return "redirect:cadastroContrato";
+    }
 	
 	// Abrir mais inforações do contrato clicando na tabela para permitir a edição de um cadastro:
 	@GetMapping("/contrato/{codigo}")
@@ -76,26 +83,33 @@ public class ControleContrato {
 	
 	// Excluir um contrato ao clicar em excluir na tabela:
 	@GetMapping("/excluirContrato/{codigo}")
-	public String excluirContrato(@PathVariable("codigo") long codigo) {
-		Optional<Contrato> contratoOpt = contratoRepo.findById(codigo);
-		if (contratoOpt.isEmpty()) {
-			throw new IllegalArgumentException("Contrato inválido");
-		}
-		contratoRepo.deleteById(codigo);
-		return "redirect:/tabela";
-	}
+    public String excluirContrato(@PathVariable("codigo") long codigo) {
+        Optional<Contrato> contratoOpt = contratoRepo.findById(codigo);
+        if (contratoOpt.isEmpty()) {
+            throw new IllegalArgumentException("Contrato inválido");
+        }
+        contratoRepo.deleteById(codigo);
+        return "redirect:/tabela";
+    }
+
+    @PostMapping("/aprovarContrato/{id}")
+    public String aprovarContrato(@ModelAttribute("contrato") Contrato contrato, @PathVariable("id") long id) {
+        contrato.setNotificacoes(null);
+        contrato.setStatus("Aprovado");
+        contratoRepo.save(contrato);
+        notificacoesRepo.deleteById(id);
+        return "redirect:/tabela";
+    }
 	
-	@PostMapping("/aprovarContrato")
-	public String aprovarContrato(@ModelAttribute("contrato") Contrato contrato) {
-		contrato.setStatus("Aprovado");
-		contratoRepo.save(contrato);
-		return "redirect:/tabela";
-	}
-	
-	@PostMapping("/reprovarContrato")
-	public String reprovarContrato(@ModelAttribute("contrato") Contrato contrato) {
-		contrato.setStatus("Reprovado");
-		contratoRepo.save(contrato);
-		return "redirect:/tabela";
-	}
+	@PostMapping("/reprovarContrato/{id}")
+    public String reprovarContrato(@ModelAttribute("contrato") Contrato contrato, @PathVariable("id") long id) {
+        contrato.setNotificacoes(null);
+        contratoRepo.save(contrato);
+        notificacoesRepo.deleteById(id);
+        contrato.setStatus("Reprovado");
+        Notificacoes notificacoes = new Notificacoes("ROLE_DIGITADOR", "Contrato");
+        contrato.setNotificacoes(notificacoes);
+        contratoRepo.save(contrato);
+        return "redirect:/tabela";
+    }
 }

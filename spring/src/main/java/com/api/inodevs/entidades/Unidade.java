@@ -22,6 +22,10 @@ public class Unidade {
 	
 	private String status;
 	 
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_notificacoes", referencedColumnName = "id")
+    private Notificacoes notificacoes;
+	
 	// Getters e Setters:
 	public String getNome() {
 		return nome;
@@ -53,4 +57,11 @@ public class Unidade {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	public Notificacoes getNotificacoes() {
+		return notificacoes;
+	}
+	public void setNotificacoes(Notificacoes notificacoes) {
+		this.notificacoes = notificacoes;
+	}
+	
 }

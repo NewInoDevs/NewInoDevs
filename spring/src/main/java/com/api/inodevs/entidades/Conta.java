@@ -34,6 +34,10 @@ public class Conta{
 	@JoinColumn(name = "id_fatura", referencedColumnName = "id")
 	private Fatura fatura;
 	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_notificacoes", referencedColumnName = "id")
+	private Notificacoes notificacoes;
+	
     // Getters e Setters:
 	public Long getCodi() {
 		return codi;
@@ -119,4 +123,11 @@ public class Conta{
 	public void setFatura(Fatura fatura) {
 		this.fatura = fatura;
 	}
+	public Notificacoes getNotificacoes() {
+		return notificacoes;
+	}
+	public void setNotificacoes(Notificacoes notificacoes) {
+		this.notificacoes = notificacoes;
+	}
+	
 }
