@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.api.inodevs.entidades.Notificacoes;
 import com.api.inodevs.entidades.Unidade;
+import com.api.inodevs.repositorio.NotificacoesRepositorio;
 import com.api.inodevs.repositorio.UnidadeRepositorio;
 
 //Classe de controle que permite a navegação e funcionalidades no sistema:
@@ -21,6 +23,8 @@ public class ControleUnidade {
 	// Adicionando repositório da unidade para salvar e ler dados no banco:
 	@Autowired
 	private UnidadeRepositorio unidadeRepo;
+	@Autowired
+	private NotificacoesRepositorio notificacoesRepo;
 	
 	// Entrar na página de cadastro de unidade com o modelo da entidade com o modelo da entidade:
 	@GetMapping("/cadastroUnidade")
@@ -30,12 +34,14 @@ public class ControleUnidade {
 	
 	// Salvar uma unidade e endereço no banco ao clicar em cadastrar:
 	@PostMapping("/salvarUnidade")
-	public String salvarUnidade(@ModelAttribute("unidade") Unidade unidade, RedirectAttributes redirect) {
+    public String salvarUnidade(@ModelAttribute("unidade") Unidade unidade, RedirectAttributes redirect) {
+        Notificacoes notificacoes = new Notificacoes("ROLE_GESTOR", "Unidade");
         redirect.addFlashAttribute("successo", "Cadastrado com sucesso!");
+        unidade.setNotificacoes(notificacoes);
         unidade.setStatus("Pendente");
-		unidadeRepo.save(unidade);
-		return "redirect:cadastroUnidade";
-	}
+        unidadeRepo.save(unidade);
+        return "redirect:cadastroUnidade";
+    }
 	
 	// Abrir mais inforações da unidade com o seu endereço clicando na tabela para permitir a edição de um cadastro:
 	@GetMapping("/unidade/{cnpj}")
@@ -60,27 +66,34 @@ public class ControleUnidade {
 	
 	// Excluir uma unidade (junto com o seu endereço) ao clicar em excluir na tabela:
 	@GetMapping("/excluirUnidade/{cnpj}")
-	public String excluirUnidade(@PathVariable("cnpj") long cnpj) {
-		Optional<Unidade> unidadeOpt = unidadeRepo.findById(cnpj);
-		if (unidadeOpt.isEmpty()) {
-			throw new IllegalArgumentException("Unidade inválido");
-		}
+    public String excluirUnidade(@PathVariable("cnpj") long cnpj) {
+        Optional<Unidade> unidadeOpt = unidadeRepo.findById(cnpj);
+        if (unidadeOpt.isEmpty()) {
+            throw new IllegalArgumentException("Unidade inválido");
+        }
         unidadeRepo.deleteById(cnpj);
-		return "redirect:/tabela";
-	}
+        return "redirect:/tabela";
+    }
 	
-	@PostMapping("/aprovarUnidade")
-	public String aprovarUnidade(@ModelAttribute("unidade") Unidade unidade) {
+	@PostMapping("/aprovarUnidade/{id}")
+	public String aprovarConta(@ModelAttribute("unidade") Unidade unidade, @PathVariable("id") long id) {
+		unidade.setNotificacoes(null);
 		unidade.setStatus("Aprovado");
 		unidadeRepo.save(unidade);
+		notificacoesRepo.deleteById(id);
 		return "redirect:/tabela";
 	}
 	
-	@PostMapping("/reprovarUnidade")
-	public String reprovarUnidade(@ModelAttribute("unidade") Unidade unidade) {
-		unidade.setStatus("Reprovado");
-		unidadeRepo.save(unidade);
-		return "redirect:/tabela";
-	}
+	@PostMapping("/reprovarUnidade/{id}")
+    public String reprovarUnidade(@ModelAttribute("unidade") Unidade unidade, @PathVariable("id") long id) {
+        unidade.setNotificacoes(null);
+        unidadeRepo.save(unidade);
+        notificacoesRepo.deleteById(id);
+        unidade.setStatus("Reprovado");
+        Notificacoes notificacoes = new Notificacoes("ROLE_DIGITADOR", "Unidade");
+        unidade.setNotificacoes(notificacoes);
+        unidadeRepo.save(unidade);
+        return "redirect:/tabela";
+    }
 	
 }

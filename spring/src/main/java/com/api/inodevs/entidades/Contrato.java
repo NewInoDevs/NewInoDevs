@@ -1,9 +1,11 @@
 package com.api.inodevs.entidades;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 //Criando entidade da cotrato:
 @Entity
@@ -21,6 +23,10 @@ public class Contrato {
 	private Unidade unidade;
 	
 	private String status;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_notificacoes", referencedColumnName = "id")
+    private Notificacoes notificacoes;
 	
 	 // Getters e Setters:
 	public Long getCodigo() {
@@ -47,4 +53,11 @@ public class Contrato {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	public Notificacoes getNotificacoes() {
+		return notificacoes;
+	}
+	public void setNotificacoes(Notificacoes notificacoes) {
+		this.notificacoes = notificacoes;
+	}
+	
 }
