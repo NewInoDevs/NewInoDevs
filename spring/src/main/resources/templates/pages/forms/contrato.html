@@ -21,7 +21,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="pagestyle" href="../../assets/css/material-dashboard.css?v=3.0.2" rel="stylesheet" />
-  <link id="formstyle" href="../../assets/css/unidade.css" rel="stylesheet" />
+  <link id="formstyle" href="../../assets/css/contrato.css" rel="stylesheet" />
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
@@ -55,7 +55,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
         <li class="nav-item">
           <div class="dropdown float-start text-white text-center me-2 d-flex align-items-center justify-content-center">
             <a class="nav-link text-white active bg-gradient-primary long">
-              <div class="text-white text-center me-4 d-flex align-items-center justify-content-center">
+              <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">person</i>
               </div>          
 				<span>Cadastros</span>
@@ -236,7 +236,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
       <h1 class="title">CADASTRO DE CONTRATO </h1> <br> <h4 style="font-size: 1rem;" class="subtitle" >(campos precisam de pontuação)</h4>
       <form th:action="@{/salvarContrato}" method="POST">
         <section class="block-main2">
-        <div class="sub-main-right">
+        <div class="sub-main">
           	<div th:object="${contrato}">
             <br>
             <label for="codigo">Codigo:</label><br>
@@ -255,7 +255,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
             </div>
           </div>
           <div class="bt2">
-          	<button class="btn bg-gradient-primary w-100 my-4 mb-2 " type="submit" value="Cadastrar" data-target="successToast">Cadastrar</button>
+          	<button class="btn bg-gradient-primary w-100 mb-4 " type="submit" value="Cadastrar" data-target="successToast">Cadastrar</button>
 		  </div>
 		  <div th:text="${successo}" th:if="${successo}" class="position-fixed bottom-1 end-4 z-index-2 corzinha"></div>
         <div  class="toast fade hide p-2 bg-white" role="alert" aria-live="assertive" id="successToast" aria-atomic="true">

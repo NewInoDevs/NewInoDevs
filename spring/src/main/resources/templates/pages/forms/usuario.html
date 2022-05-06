@@ -54,7 +54,7 @@
         <li class="nav-item">
           <div class="dropdown float-start text-white text-center me-2 d-flex align-items-center justify-content-center">
             <a class="nav-link text-white long">
-              <div class="text-white text-center me-4 d-flex align-items-center justify-content-center">
+              <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">person</i>
               </div>          
                 <span>Cadastros</span>
@@ -116,9 +116,9 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Cadastros</li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Perfis</li>
           </ol>
-          <h6 class="font-weight-bolder mb-0">Notifications</h6>
+          <h6 class="font-weight-bolder mb-0">Cadastrar Usuários</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -259,10 +259,9 @@
 				        <label for="digitador">Digitador</label>
 			        </div>
 		        <input type="hidden" name="ativo" id="ativo" th:field="*{ativo}">
-				<input type="submit" value="Cadastrar">
 	    </form>
 	    
-          <div class="bt2">
+          <div class="bt3">
           	<button class="btn bg-gradient-primary w-100 my-4 mb-2 " type="submit" value="Cadastrar" data-target="successToast">Cadastrar</button>
 		  </div>
 		  <div th:text="${successo}" th:if="${successo}" class="position-fixed bottom-1 end-4 z-index-2 corzinha"></div>

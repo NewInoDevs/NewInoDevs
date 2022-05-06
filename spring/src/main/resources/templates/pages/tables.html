@@ -54,7 +54,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
         <li class="nav-item">
           <div class="dropdown float-start text-white text-center me-2 d-flex align-items-center justify-content-center">
             <a class="nav-link text-white long">
-              <div class="text-white text-center me-4 d-flex align-items-center justify-content-center">
+              <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="material-icons opacity-10">person</i>
               </div>          
                 <span>Cadastros</span>
@@ -167,14 +167,14 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                   <a class="dropdown-item border-radius-md" href="/tabela">
                     <div class="d-flex py-1">
                       <div class="my-auto">
-                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
+                        <img src="../assets/img/Icons/pendente.png" class="avatar avatar-sm  me-3 ">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1">
-                          <span class="font-weight-bold">Contas </span>
+                          <span class="font-weight-bold">Contas Pendentes</span>
                         </h6>
                         <p class="text-xs text-secondary mb-0">
-                          Cadastros Pendentes: <span th:text="${quantidadeConta}"></span>
+                          Quantidade de cadastros:  <span th:text="${quantidadeConta}"></span>
                         </p>
                       </div>
                     </div>
@@ -184,14 +184,14 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                   <a class="dropdown-item border-radius-md" href="/tabela">
                     <div class="d-flex py-1">
                       <div class="my-auto">
-                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
+                        <img src="../assets/img/Icons/pendente.png" class="avatar avatar-sm  me-3 ">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1">
-                          <span class="font-weight-bold">Concessionárias </span>
+                          <span class="font-weight-bold">Concessionárias Pendentes</span>
                         </h6>
                         <p class="text-xs text-secondary mb-0">
-                          Cadastros Pendentes: <span th:text="${quantidadeConcessionaria}"></span>
+                          Quantidade de cadastros: <span th:text="${quantidadeConcessionaria}">.</span>
                         </p>
                       </div>
                     </div>
@@ -201,14 +201,14 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                   <a class="dropdown-item border-radius-md" href="/tabela">
                     <div class="d-flex py-1">
                       <div class="my-auto">
-                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
+                        <img src="../assets/img/Icons/pendente.png" class="avatar avatar-sm  me-3 ">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1">
-                          <span class="font-weight-bold">Unidades </span>
+                          <span class="font-weight-bold">Unidades Pendentes</span>
                         </h6>
                         <p class="text-xs text-secondary mb-0">
-                          Cadastros Pendentes: <span th:text="${quantidadeUnidade}"></span>
+                          Quantidade de cadastros: <span th:text="${quantidadeUnidade}">.</span>
                         </p>
                       </div>
                     </div>
@@ -218,14 +218,14 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                   <a class="dropdown-item border-radius-md" href="/tabela">
                     <div class="d-flex py-1">
                       <div class="my-auto">
-                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
+                        <img src="../assets/img/Icons/pendente.png" class="avatar avatar-sm  me-3 ">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1">
-                          <span class="font-weight-bold">Contratos </span>
+                          <span class="font-weight-bold">Contratos Pendentes</span>
                         </h6>
                         <p class="text-xs text-secondary mb-0">
-                          Cadastros Pendentes: <span th:text="${quantidadeContrato}"></span>
+                          Quantidade de cadastros: <span th:text="${quantidadeContrato}"></span>
                         </p>
                       </div>
                     </div>
@@ -234,6 +234,9 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                 <li class="mb-2" sec:authorize="hasRole('GESTOR')" th:if="${quantidadeContrato == 0 && quantidadeConta == 0 && quantidadeConcessionaria == 0 && quantidadeUnidade == 0}">
                   <a class="dropdown-item border-radius-md">
                     <div class="d-flex py-1">
+                     <div class="my-auto">
+                        <img src="../assets/img/Icons/fantasma.png" class="avatar avatar-sm  me-3 ">
+                      </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1">
                           <span class="font-weight-bold"> Não há notificações </span>
@@ -249,14 +252,14 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                   <a class="dropdown-item border-radius-md" href="/tabela">
                     <div class="d-flex py-1">
                       <div class="my-auto">
-                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
+                        <img src="../assets/img/Icons/reprovado.png" class="avatar avatar-sm  me-3 ">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1">
-                          <span class="font-weight-bold">Contas </span>
+                          <span class="font-weight-bold">Contas Reprovadas</span>
                         </h6>
                         <p class="text-xs text-secondary mb-0">
-                          Cadastros Reprovados: <span th:text="${quantidadeContaRep}"></span>
+                           Quantidade de cadastros: <span th:text="${quantidadeContaRep}"></span>
                         </p>
                       </div>
                     </div>
@@ -266,14 +269,14 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                   <a class="dropdown-item border-radius-md" href="/tabela">
                     <div class="d-flex py-1">
                       <div class="my-auto">
-                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
+                        <img src="../assets/img/Icons/reprovado.png" class="avatar avatar-sm  me-3 ">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1">
-                          <span class="font-weight-bold">Concessionárias </span>
+                          <span class="font-weight-bold">Concessionárias Reprovadas</span>
                         </h6>
                         <p class="text-xs text-secondary mb-0">
-                          Cadastros Reprovados: <span th:text="${quantidadeConcessionariaRep}"></span>
+                           Quantidade de cadastros: <span th:text="${quantidadeConcessionariaRep}"></span>
                         </p>
                       </div>
                     </div>
@@ -283,14 +286,14 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                   <a class="dropdown-item border-radius-md" href="/tabela">
                     <div class="d-flex py-1">
                       <div class="my-auto">
-                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
+                        <img src="../assets/img/Icons/reprovado.png" class="avatar avatar-sm  me-3 ">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1">
-                          <span class="font-weight-bold">Unidades </span>
+                          <span class="font-weight-bold">Unidades Reprovadas</span>
                         </h6>
                         <p class="text-xs text-secondary mb-0">
-                          Cadastros Reprovados: <span th:text="${quantidadeUnidadeRep}"></span>
+                           Quantidade de cadastros: <span th:text="${quantidadeUnidadeRep}"></span>
                         </p>
                       </div>
                     </div>
@@ -300,14 +303,14 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                   <a class="dropdown-item border-radius-md" href="/tabela">
                     <div class="d-flex py-1">
                       <div class="my-auto">
-                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm  me-3 ">
+                        <img src="../assets/img/Icons/reprovado.png" class="avatar avatar-sm  me-3 ">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1">
-                          <span class="font-weight-bold">Contratos </span>
+                          <span class="font-weight-bold">Contratos Reprovados</span>
                         </h6>
                         <p class="text-xs text-secondary mb-0">
-                          Cadastros Reprovados: <span th:text="${quantidadeContratoRep}"></span>
+                          Quantidade de reprovados:: <span th:text="${quantidadeContratoRep}"></span>
                         </p>
                       </div>
                     </div>
@@ -316,6 +319,9 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                 <li class="mb-2" sec:authorize="hasRole('DIGITADOR')" th:if="${quantidadeContratoRep == 0 && quantidadeContaRep == 0 && quantidadeConcessionariaRep == 0 && quantidadeUnidadeRep == 0}">
                   <a class="dropdown-item border-radius-md">
                     <div class="d-flex py-1">
+                    <div class="my-auto">
+                        <img src="../assets/img/Icons/fantasma.png" class="avatar avatar-sm  me-3 ">
+                      </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1">
                           <span class="font-weight-bold"> Não há notificações </span>

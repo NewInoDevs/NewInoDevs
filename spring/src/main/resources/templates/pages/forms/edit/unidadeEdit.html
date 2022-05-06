@@ -299,13 +299,17 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                    <div class="col-lg-4 col-sm-8 col-12 mt-lg-0 mt-2" th:if="${unidade.notificacoes != null}">
                   <button class="btn bg-gradient-warning w-100 mb-0 toast-btn" type="submit" data-target="warningToast" th:formaction="@{'/salvarUnidadeEditRep/'+${unidade.notificacoes.id}}">Editar</button>
                 </div>
-                <div class="col-lg-4 col-sm-8 col-12" sec:authorize="hasAnyRole('ADMINISTRADOR', 'GESTOR')" th:if="${unidade.notificacoes != null}">
-
+               <div class="col-lg-4 col-sm-8 col-12" sec:authorize="hasAnyRole('ADMINISTRADOR', 'GESTOR')" th:if="${unidade.notificacoes != null}">
                      <button class="btn bg-gradient-success w-100 mb-0 toast-btn" type="submit" th:formaction="@{'/aprovarUnidade/'+${unidade.notificacoes.id}}" data-target="successToast">Aprovar</button>
-
-            	</div>
+                </div>
+				<div class="col-lg-4 col-sm-8 col-12" sec:authorize="hasAnyRole('ADMINISTRADOR', 'GESTOR')" th:if="${unidade.notificacoes == null}">
+                     <button class="btn bg-gradient-success w-100 mb-0 toast-btn" type="submit" th:formaction="@{/aprovarUnidadeRep}" data-target="successToast">Aprovar</button>
+                </div>
                 <div class="col-lg-4 col-sm-8 col-12 mt-lg-0 mt-2" sec:authorize="hasAnyRole('ADMINISTRADOR', 'GESTOR')" th:if="${unidade.notificacoes != null}">
-                           <button class="btn bg-gradient-danger w-100 mb-0 toast-btn" type="submit" data-target="dangerToast" th:formaction="@{'/reprovarUnidade/'+${unidade.notificacoes.id}}" >Reprovar</button>
+                      <button class="btn bg-gradient-danger w-100 mb-0 toast-btn" type="submit" data-target="dangerToast" th:formaction="@{'/reprovarUnidade/'+${unidade.notificacoes.id}}" >Reprovar</button>
+                </div>
+                <div class="col-lg-4 col-sm-8 col-12 mt-lg-0 mt-2" sec:authorize="hasAnyRole('ADMINISTRADOR', 'GESTOR')" th:if="${unidade.notificacoes == null}">
+                     <button class="btn bg-gradient-danger w-100 mb-0 toast-btn" type="submit" th:formaction="@{/reprovarUnidadeRep}" data-target="successToast">Reprovar</button>
                 </div>
               </div>
             </div>
