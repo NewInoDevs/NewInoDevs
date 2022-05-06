@@ -92,7 +92,7 @@ public class ControleConta {
 
     @PostMapping("/salvarContaEdit")
     public String salvarContaEdit(@ModelAttribute("conta") Conta conta, RedirectAttributes redirect) {
-        conta.setStatus("Pendente");
+    	conta.setStatus("Pendente");
         Notificacoes notificacoes = new Notificacoes("ROLE_GESTOR", "Conta");
         conta.setNotificacoes(notificacoes);
         contaRepo.save(conta);
@@ -119,11 +119,27 @@ public class ControleConta {
 		return "redirect:/tabela";
 	}
 	
+	@PostMapping("/aprovarContaRep")
+	public String aprovarContaRep(@ModelAttribute("conta") Conta conta) {
+		conta.setStatus("Aprovado");
+		contaRepo.save(conta);
+		return "redirect:/tabela";
+	}
+	
 	@PostMapping("/reprovarConta/{id}")
     public String reprovarConta(@ModelAttribute("conta") Conta conta, @PathVariable("id") long id) {
         conta.setNotificacoes(null);
         contaRepo.save(conta);
         notificacoesRepo.deleteById(id);
+        conta.setStatus("Reprovado");
+        Notificacoes notificacoes = new Notificacoes("ROLE_DIGITADOR", "Conta");
+        conta.setNotificacoes(notificacoes);
+        contaRepo.save(conta);
+        return "redirect:/tabela";
+    }
+	
+	@PostMapping("/reprovarContaRep")
+    public String reprovarContaRep(@ModelAttribute("conta") Conta conta) {
         conta.setStatus("Reprovado");
         Notificacoes notificacoes = new Notificacoes("ROLE_DIGITADOR", "Conta");
         conta.setNotificacoes(notificacoes);

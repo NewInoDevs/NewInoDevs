@@ -269,13 +269,17 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                    <div class="col-lg-4 col-sm-8 col-12 mt-lg-0 mt-2" th:if="${contrato.notificacoes != null}">
                   <button class="btn bg-gradient-warning w-100 mb-0 toast-btn" type="submit" data-target="warningToast" th:formaction="@{'/salvarContratoEditRep/'+${contrato.notificacoes.id}}">Editar</button>
                 </div>
-                <div class="col-lg-4 col-sm-8 col-12" sec:authorize="hasAnyRole('ADMINISTRADOR', 'GESTOR')" th:if="${contrato.notificacoes != null}">
-
+               <div class="col-lg-4 col-sm-8 col-12" sec:authorize="hasAnyRole('ADMINISTRADOR', 'GESTOR')" th:if="${contrato.notificacoes != null}">
                      <button class="btn bg-gradient-success w-100 mb-0 toast-btn" type="submit" th:formaction="@{'/aprovarContrato/'+${contrato.notificacoes.id}}" data-target="successToast">Aprovar</button>
-
-            	</div>
+                </div>
+				<div class="col-lg-4 col-sm-8 col-12" sec:authorize="hasAnyRole('ADMINISTRADOR', 'GESTOR')" th:if="${contrato.notificacoes == null}">
+                     <button class="btn bg-gradient-success w-100 mb-0 toast-btn" type="submit" th:formaction="@{/aprovarContratoRep}" data-target="successToast">Aprovar</button>
+                </div>
                 <div class="col-lg-4 col-sm-8 col-12 mt-lg-0 mt-2" sec:authorize="hasAnyRole('ADMINISTRADOR', 'GESTOR')" th:if="${contrato.notificacoes != null}">
-                           <button class="btn bg-gradient-danger w-100 mb-0 toast-btn" type="submit" data-target="dangerToast" th:formaction="@{'/reprovarContrato/'+${contrato.notificacoes.id}}" >Reprovar</button>
+                      <button class="btn bg-gradient-danger w-100 mb-0 toast-btn" type="submit" data-target="dangerToast" th:formaction="@{'/reprovarContrato/'+${contrato.notificacoes.id}}" >Reprovar</button>
+                </div>
+                <div class="col-lg-4 col-sm-8 col-12 mt-lg-0 mt-2" sec:authorize="hasAnyRole('ADMINISTRADOR', 'GESTOR')" th:if="${contrato.notificacoes == null}">
+                     <button class="btn bg-gradient-danger w-100 mb-0 toast-btn" type="submit" th:formaction="@{/reprovarContratoRep}" data-target="successToast">Reprovar</button>
                 </div>
               </div>
             </div>

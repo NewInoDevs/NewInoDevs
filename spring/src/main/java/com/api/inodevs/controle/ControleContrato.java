@@ -73,13 +73,26 @@ public class ControleContrato {
     }
 	
 	// Salvar o contrato editado no banco de dados ao clicar em editar:
-	@PostMapping("/salvarContratoEdit")
-	public String salvarContratoEdit(@ModelAttribute("contrato") Contrato contrato, RedirectAttributes redirect) {
-		contrato.setStatus("Pendente");
-		contratoRepo.save(contrato);
-		redirect.addFlashAttribute("sucesso", "Contrato editado com sucesso!");
-		return "redirect:/tabela";
-	}
+	@PostMapping("/salvarContratoEditRep/{id}")
+    public String salvarContratoEditRep(@ModelAttribute("contrato") Contrato contrato, @PathVariable("id") long id) {
+        contrato.setNotificacoes(null);
+        contratoRepo.save(contrato);
+        notificacoesRepo.deleteById(id);
+        contrato.setStatus("Pendente");
+        Notificacoes notificacoes = new Notificacoes("ROLE_GESTOR", "Contrato");
+        contrato.setNotificacoes(notificacoes);
+        contratoRepo.save(contrato);
+        return "redirect:/tabela";
+    }
+
+    @PostMapping("/salvarContratoEdit")
+    public String salvarContratoEdit(@ModelAttribute("contrato") Contrato contrato, RedirectAttributes redirect) {
+        contrato.setStatus("Pendente");
+        Notificacoes notificacoes = new Notificacoes("ROLE_GESTOR", "Contrato");
+        contrato.setNotificacoes(notificacoes);
+        contratoRepo.save(contrato);
+        return "redirect:/tabela";
+    }
 	
 	// Excluir um contrato ao clicar em excluir na tabela:
 	@GetMapping("/excluirContrato/{codigo}")
@@ -109,6 +122,21 @@ public class ControleContrato {
         contrato.setStatus("Reprovado");
         Notificacoes notificacoes = new Notificacoes("ROLE_DIGITADOR", "Contrato");
         contrato.setNotificacoes(notificacoes);
+        contratoRepo.save(contrato);
+        return "redirect:/tabela";
+    }
+	
+	@PostMapping("/reprovarContratoRep")
+    public String reprovarContratoRep(@ModelAttribute("contrato") Contrato contrato) {
+        contrato.setStatus("Reprovado");
+        Notificacoes notificacoes = new Notificacoes("ROLE_DIGITADOR", "Contrato");
+        contrato.setNotificacoes(notificacoes);
+        contratoRepo.save(contrato);
+        return "redirect:/tabela";
+    }
+	@PostMapping("/aprovarContratoRep")
+    public String aprovarContratoRep(@ModelAttribute("contrato") Contrato contrato) {
+        contrato.setStatus("Aprovado");
         contratoRepo.save(contrato);
         return "redirect:/tabela";
     }

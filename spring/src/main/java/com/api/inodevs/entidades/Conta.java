@@ -25,6 +25,7 @@ public class Conta{
 	private Float valor_total;
 	private Integer base_calculo;
 	private String status;
+	private String mensagem;
 
 	@ManyToOne
 	@JoinColumn(name = "codigo_contrato")
@@ -129,5 +130,10 @@ public class Conta{
 	public void setNotificacoes(Notificacoes notificacoes) {
 		this.notificacoes = notificacoes;
 	}
-	
+	public String getMensagem() {
+		return mensagem;
+	}
+	public void setMensagem(String mensagem) {
+		this.mensagem = mensagem;
+	}
 }

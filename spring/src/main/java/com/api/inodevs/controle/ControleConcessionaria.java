@@ -56,12 +56,25 @@ public class ControleConcessionaria {
     }
 	
 	// Salvar a concessionária editada no banco de dados ao clicar em editar:
-	@PostMapping("/salvarConcessionariaEdit")
+	@PostMapping("/salvarConcessionariaEditRep/{id}")
+    public String salvarConcessionariaEditRep(@ModelAttribute("concessionaria") Concessionaria concessionaria, @PathVariable("id") long id) {
+        concessionaria.setNotificacoes(null);
+        concessionariaRepo.save(concessionaria);
+        notificacoesRepo.deleteById(id);
+        concessionaria.setStatus("Pendente");
+        Notificacoes notificacoes = new Notificacoes("ROLE_GESTOR", "Concessionaria");
+        concessionaria.setNotificacoes(notificacoes);
+        concessionariaRepo.save(concessionaria);
+        return "redirect:/tabela";
+    }
+
+    @PostMapping("/salvarConcessionariaEdit")
     public String salvarConcessionariaEdit(@ModelAttribute("concessionaria") Concessionaria concessionaria, RedirectAttributes redirect) {
         concessionaria.setStatus("Pendente");
-		concessionariaRepo.save(concessionaria);
-        redirect.addFlashAttribute("successo", "Editado com sucesso!");
-        return "redirect:tabela";
+        Notificacoes notificacoes = new Notificacoes("ROLE_GESTOR", "Concessionaria");
+        concessionaria.setNotificacoes(notificacoes);
+        concessionariaRepo.save(concessionaria);
+        return "redirect:/tabela";
     }
 	
 	// Excluir uma concessionária ao clicar em excluir na tabela:
@@ -92,6 +105,21 @@ public class ControleConcessionaria {
         concessionaria.setStatus("Reprovado");
         Notificacoes notificacoes = new Notificacoes("ROLE_DIGITADOR", "Concessionaria");
         concessionaria.setNotificacoes(notificacoes);
+        concessionariaRepo.save(concessionaria);
+        return "redirect:/tabela";
+    }
+	
+	@PostMapping("/reprovarConcessionariaRep")
+    public String reprovarConcessionariaRep(@ModelAttribute("concessionaria") Concessionaria concessionaria) {
+        concessionaria.setStatus("Reprovado");
+        Notificacoes notificacoes = new Notificacoes("ROLE_DIGITADOR", "Concessionaria");
+        concessionaria.setNotificacoes(notificacoes);
+        concessionariaRepo.save(concessionaria);
+        return "redirect:/tabela";
+    }
+	@PostMapping("/aprovarCocessionariaRep")
+    public String aprovarConcessionariaRep(@ModelAttribute("concessionaria") Concessionaria concessionaria) {
+        concessionaria.setStatus("Aprovado");
         concessionariaRepo.save(concessionaria);
         return "redirect:/tabela";
     }

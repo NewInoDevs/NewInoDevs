@@ -8,7 +8,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
   <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
   <title>
-    PÃ¡gina de Contas
+    Página de Contas
   </title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
@@ -242,7 +242,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
             	<select th:field="*{contrato}">
 	            	<option value="0" hidden=hidden disabled selected>Selecione um contrato...</option>
 	        		<option th:each="contrato : ${listaContrato}" th:value="${contrato.codigo}" 
-	        		th:text="${contrato.codigo} + ' // Unidade: ' + ${contrato.unidade.nome} + ' // ConcessionÃ¡ria: ' + ${contrato.concessionaria.nome} + ' // Tipo: ' + ${contrato.concessionaria.tipo_conta}"></option>
+	        		th:text="${contrato.codigo} + ' // Unidade: ' + ${contrato.unidade.nome} + ' // Concessionária: ' + ${contrato.concessionaria.nome} + ' // Tipo: ' + ${contrato.concessionaria.tipo_conta}"></option>
 				</select><br>
 		</div>
           <div class="sub-main-right">
@@ -263,7 +263,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
             <input maxlength="60" type="number" name="valor" id="valor" th:field="*{valor}" placeholder="R$100,00" step="0.01"> <br><br>
             
             <label for="consumoConta">Consumo:</label><br>
-            <input maxlength="500" type="text" name="consumo" id="consumo" th:field="*{consumo}" placeholder="111mÂ³"> <br><br>
+            <input maxlength="500" type="text" name="consumo" id="consumo" th:field="*{consumo}" placeholder="111m³"> <br><br>
           </div>
           
           <div class="sub-main-left">
@@ -272,7 +272,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
             <input maxlength="60" type="number" name="base_calculo" id="base_calculo" th:field="*{base_calculo}" placeholder="4+3=7"> <br><br>
             
             <label for="desconto">Desconto:</label><br>
-            <input maxlength="60" type="number" name="desconto" id="desconto" th:field="*{desconto}" placeholder="DevoluÃ§Ã£o de SubsÃ­dio-4,36" step="0.01"> <br><br>
+            <input maxlength="60" type="number" name="desconto" id="desconto" th:field="*{desconto}" placeholder="Devolução de Subsídio-4,36" step="0.01"> <br><br>
             
             <label for="diasConta">Dias:</label><br>
             <input maxlength="3" type="text" name="dias" id="dias" th:field="*{dias}" placeholder="32"> <br><br>
