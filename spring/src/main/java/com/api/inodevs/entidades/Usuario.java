@@ -1,5 +1,6 @@
 package com.api.inodevs.entidades;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -10,10 +11,19 @@ public class Usuario{
     @Id // Referenciando o Id
 	private Long username;
 
+    @Column(nullable = false)
 	private String nome;
+    
+    @Column(nullable = false)
 	private String sobrenome;
+    
+    @Column(nullable = false)
 	private String senha;
+    
+    @Column(nullable = false)
 	private String secao;
+    
+    @Column(nullable = false)
 	private Integer ativo;
 	
 	// Getters e Setters:

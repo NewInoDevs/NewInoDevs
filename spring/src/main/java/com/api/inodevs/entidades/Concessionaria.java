@@ -3,6 +3,7 @@ package com.api.inodevs.entidades;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -16,11 +17,17 @@ public class Concessionaria {
     @Id // Referenciando o Id
     private Long codigo;
 
+    @Column(nullable = false)
     public String nome;
     
+    @Column(nullable = false)
 	private String tipo_conta;
 	
+    @Column
 	private String status;
+    
+	@Column
+	private String mensagem;
 	
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_notificacoes", referencedColumnName = "id")
@@ -29,8 +36,6 @@ public class Concessionaria {
 	@OneToMany(mappedBy = "concessionaria", cascade = CascadeType.REMOVE)
 	private Set<Contrato> contrato;
 	
-	private String mensagem;
-    
 	// Getters e Setters:
 	public Long getCodigo() {
 		return codigo;

@@ -240,22 +240,23 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
           	<div th:object="${contrato}">
             <br>
             <label for="codigo">Codigo:</label><br>
-            <input maxlength="14" type="text" name="codigo" id="codigo" placeholder="00.000.000/0000-00" th:field="*{codigo}"> <br><br>
-            
+            <input maxlength="14" type="text" name="codigo" id="codigo" placeholder="00.000.000/0000-00" th:field="*{codigo}" required> <br><br>
             <label for="concessionaria">Concessionaria:</label><br>
-            <select th:field="*{concessionaria}">
+            <select th:field="*{concessionaria}" id="concessionaria">
             	<option value="0" hidden=hidden disabled selected>Selecione uma unidade...</option>
         		<option th:each="concessionaria : ${listaConcessionaria}" th:value="${concessionaria.codigo}" th:text="${concessionaria.nome}"></option>
-			</select><br><br>
+			</select>
+			<div id="concessionariaErro"></div><br>
             <label for="unidade">Unidade:</label><br>
-            <select th:field="*{unidade}">
+            <select th:field="*{unidade}" id="unidade">
             	<option value="0" hidden=hidden disabled selected>Selecione uma unidade...</option>
         		<option th:each="unidade : ${listaUnidade}" th:value="${unidade.cnpj}" th:text="${unidade.nome}"></option>
 			</select>
+			<div id="unidadeErro"></div>
             </div>
           </div>
           <div class="bt2">
-          	<button class="btn bg-gradient-primary w-100 mb-4 " type="submit" value="Cadastrar" data-target="successToast">Cadastrar</button>
+          	<button  onclick="verificar()" class="btn bg-gradient-primary w-100 mb-4 " type="submit" value="Cadastrar" data-target="successToast">Cadastrar</button>
 		  </div>
 		  <div th:text="${successo}" th:if="${successo}" class="position-fixed bottom-1 end-4 z-index-2 corzinha"></div>
         <div  class="toast fade hide p-2 bg-white" role="alert" aria-live="assertive" id="successToast" aria-atomic="true">
@@ -353,6 +354,23 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
         damping: '0.5'
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+    
+    function verificar(){		
+        var concessionaria = document.getElementById("concessionaria").value
+        var erroC = document.getElementById("concessionariaErro")
+       	var unidade = document.getElementById("unidade").value
+        var erroU = document.getElementById("unidadeErro")
+        erroC.innerHTML = ''
+        if (concessionaria == 0){
+        	erroC.innerHTML += `Selecione uma concessionária!`
+        	event.preventDefault();	
+        } else{
+	        if (unidade == 0){
+	        	erroU.innerHTML += `Selecione uma unidade!`
+	        	event.preventDefault();	
+	        }
+        }
     }
   </script>
   <!-- Github buttons -->

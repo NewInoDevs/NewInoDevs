@@ -237,16 +237,16 @@
 		    <form th:action="@{/salvarUsuario}" th:object="${usuario}" method="POST">
 		    	<div class="bt">
 			    	<label for="nomeUsuario">Nome do Usuário</label><br> 
-			    	<input type="text" name="nome" id="nome" th:field="*{nome}"><br><br>
+			    	<input type="text" name="nome" id="nome" th:field="*{nome}" required><br><br>
 			    	
 			    	<label for="sobrenomeUsuario">Sobreome do Usuário</label><br>
-					<input type="text" name="sobrenome" id="sobrenome" th:field="*{sobrenome}"><br><br>
+					<input type="text" name="sobrenome" id="sobrenome" th:field="*{sobrenome}" required><br><br>
 					
 					<label for="usernameUsuario">Username do Usuário</label><br>
-					<input type="text" name="username" id="username" th:field="*{username}"><br><br>
+					<input type="text" name="username" id="username" th:field="*{username}" required><br><br>
 					
 			    	<label for="senhaUsuario">Senha do Usuário</label><br>				
-					<input type="password" name="senha" id="senha" th:field="*{senha}">
+					<input type="password" name="senha" id="senha" th:field="*{senha}" required>
 					<div id="secao">Seção:
 				        <br>
 				        <input type="radio" id="administrador" name="usuario" value="ROLE_ADMINISTRADOR" th:field="*{secao}">

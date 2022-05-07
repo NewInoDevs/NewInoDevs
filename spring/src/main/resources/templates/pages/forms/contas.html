@@ -239,56 +239,57 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
         <br>
         <div class="sub-main-right">
         	 <label>Contrato:</label><br>
-            	<select th:field="*{contrato}">
+            	<select th:field="*{contrato}" id="contrato" style="width:37.5rem;">
 	            	<option value="0" hidden=hidden disabled selected>Selecione um contrato...</option>
 	        		<option th:each="contrato : ${listaContrato}" th:value="${contrato.codigo}" 
 	        		th:text="${contrato.codigo} + ' // Unidade: ' + ${contrato.unidade.nome} + ' // Concessionária: ' + ${contrato.concessionaria.nome} + ' // Tipo: ' + ${contrato.concessionaria.tipo_conta}"></option>
-				</select><br>
+				</select>
+				<div id="contratoErro"></div>
 		</div>
           <div class="sub-main-right">
             <br>         
             <label for="codigoConta">Código:</label><br>
-            <input maxlength="8" type="text" name="codi" id="codi" th:field="*{codi}" placeholder="1234567890"> <br><br>
+            <input maxlength="8" type="text" name="codi" id="codi" th:field="*{codi}" placeholder="1234567890" required> <br><br>
             
             <label for="createDataConta">Data de Criação:</label><br>
-            <input maxlength="16" type="date" name="data_de_criacao" id="data_de_criacao" th:field="*{data_de_criacao}"> <br><br>
+            <input maxlength="16" type="date" name="data_de_criacao" id="data_de_criacao" th:field="*{data_de_criacao}" required> <br><br>
         
             <label for="launchDataConta">Data de Lançamento:</label><br>
-            <input maxlength="16" type="date" name="data_de_lancamento" id="data_de_lancamento" th:field="*{data_de_lancamento}" > <br><br>
+            <input maxlength="16" type="date" name="data_de_lancamento" id="data_de_lancamento" th:field="*{data_de_lancamento}" required> <br><br>
 
             <label for="launchDataConta">Data de Vencimento:</label><br>
-            <input maxlength="16" type="date" name="data_de_vencimento" id="data_de_vencimento" th:field="*{data_de_vencimento}"> <br><br>
+            <input maxlength="16" type="date" name="data_de_vencimento" id="data_de_vencimento" th:field="*{data_de_vencimento}" required> <br><br>
             
             <label for="valoeContrato">Valor:</label><br>
-            <input maxlength="60" type="number" name="valor" id="valor" th:field="*{valor}" placeholder="R$100,00" step="0.01"> <br><br>
+            <input maxlength="60" type="number" name="valor" id="valor" th:field="*{valor}" placeholder="R$100,00" step="0.01" required> <br><br>
             
             <label for="consumoConta">Consumo:</label><br>
-            <input maxlength="500" type="text" name="consumo" id="consumo" th:field="*{consumo}" placeholder="111m³"> <br><br>
+            <input maxlength="500" type="text" name="consumo" id="consumo" th:field="*{consumo}" placeholder="111m³" required> <br><br>
           </div>
           
           <div class="sub-main-left">
 
             <label for="desconto">Base de Cálculo:</label><br>
-            <input maxlength="60" type="number" name="base_calculo" id="base_calculo" th:field="*{base_calculo}" placeholder="4+3=7"> <br><br>
+            <input maxlength="60" type="number" name="base_calculo" id="base_calculo" th:field="*{base_calculo}" placeholder="4+3=7" required> <br><br>
             
             <label for="desconto">Desconto:</label><br>
             <input maxlength="60" type="number" name="desconto" id="desconto" th:field="*{desconto}" placeholder="Devolução de Subsídio-4,36" step="0.01"> <br><br>
             
             <label for="diasConta">Dias:</label><br>
-            <input maxlength="3" type="text" name="dias" id="dias" th:field="*{dias}" placeholder="32"> <br><br>
+            <input maxlength="3" type="text" name="dias" id="dias" th:field="*{dias}" placeholder="32" required> <br><br>
             
             <label for="dadosAdConta">Dados Adicionais:</label><br>
             <input maxlength="500" type="text" name="dados_adicionais" id="dados_adicionais" th:field="*{dados_adicionais}" placeholder="Algo importante a ser ressaltado"> <br><br>
             
             <label for="valorTotConta">Valor Total:</label><br>
-            <input maxlength="20" type="number" name="valor_total" id="valor_total" th:field="*{valor_total}" placeholder="R$100,00" step="0.01"> <br><br>   
+            <input maxlength="20" type="number" name="valor_total" id="valor_total" th:field="*{valor_total}" placeholder="R$100,00" step="0.01" required> <br><br>   
             
             <label for="faturaPdf">Arquivo pdf da conta: </label><br>
-            <input type="file" name="faturaPdf" id="faturaPdf"> <br><br>
+            <input type="file" name="faturaPdf" id="faturaPdf" required> <br><br>
           </div>
           
           <div class="bt2">
-          	<button class="btn bg-gradient-primary w-100 my-4 mb-2 " type="submit" value="Cadastrar" data-target="successToast">Cadastrar</button>
+          	<button onclick="verificar()" class="btn bg-gradient-primary w-100 my-4 mb-2 " type="submit" value="Cadastrar" data-target="successToast">Cadastrar</button>
 		  </div>
 
 		  <div th:text="${successo}" th:if="${successo}" class="position-fixed bottom-1 end-4 z-index-2 corzinha">
@@ -386,6 +387,16 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
         damping: '0.5'
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+    
+    function verificar(){		
+        var contrato = document.getElementById("contrato").value
+        var contratoErro = document.getElementById("contratoErro")
+        contratoErro.innerHTML = ''
+        if (contrato == 0){
+        	contratoErro.innerHTML += `Selecione um contrato!`
+        	event.preventDefault();	
+        }
     }
   </script>
   <!-- Github buttons -->

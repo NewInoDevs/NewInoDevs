@@ -1,5 +1,6 @@
 package com.api.inodevs.entidades;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -11,11 +12,22 @@ public class Endereco {
     @Id // Referenciando o Id
 	public Long cep;
 	
+    @Column(nullable = false)
 	public String estado;
+    
+    @Column(nullable = false)
 	public String municipio;
+    
+    @Column(nullable = false)
 	public String bairro;
+    
+    @Column(nullable = false)
 	public String rua;
+    
+    @Column(nullable = false)
 	public Integer numero;
+    
+    @Column
 	public String complemento;
 	
 	@OneToOne(mappedBy = "endereco")

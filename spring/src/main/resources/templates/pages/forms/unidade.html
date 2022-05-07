@@ -309,37 +309,37 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
             <br>
             <label for="cnpjContrato">CPNJ:</label><br>
-            <input maxlength="14" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" name="cnpjContrato" id="cnpjContrato" placeholder="00.000.000/0000-00" th:field="*{cnpj}"> <br><br>
+            <input maxlength="14" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" name="cnpjContrato" id="cnpjContrato" placeholder="00.000.000/0000-00" th:field="*{cnpj}" required> <br><br>
             
             <label for="nomeContrato">Nome:</label><br>
-            <input maxlength="60" type="text" name="nomeContrato" id="nomeContrato" placeholder="Kaua Gustavo Luis" th:field="*{nome}"> <br><br>
+            <input maxlength="60" type="text" name="nomeContrato" id="nomeContrato" placeholder="Kaua Gustavo Luis" th:field="*{nome}" required> <br><br>
             
             <label for="telefoneContrato">Telefone:</label><br>
-            <input maxlength="16" type="text" name="telefoneContrato" id="telefoneContrato" placeholder="(DDD) 12345-6789" th:field="*{telefone}"> <br><br>
+            <input maxlength="16" type="text" name="telefoneContrato" id="telefoneContrato" placeholder="(DDD) 12345-6789" th:field="*{telefone}" required> <br><br>
 
             
 
             <label for="cepContrato">Cep:</label><br>
-            <input maxlength="8" type="text" name="cep" id="cep" onblur="pesquisacep(this.value)" placeholder="12345-678" th:field="*{endereco.cep}"> <br><br>
+            <input maxlength="8" type="text" name="cep" id="cep" onblur="pesquisacep(this.value)" placeholder="12345-678" th:field="*{endereco.cep}" required> <br><br>
             
             <label for="estadoContrato">Estado:</label><br>
-            <input maxlength="60" type="text" name="uf" id="uf" placeholder="São Paulo" th:field="*{endereco.estado}"> <br><br>
+            <input maxlength="2" type="text" name="uf" id="uf" placeholder="SP" th:field="*{endereco.estado}" required> <br><br>
 
           </div>
           
           <div class="sub-main-left">
 
             <label for="municipioContrato">Município:</label><br>
-            <input maxlength="60" type="text" name="cidade" id="cidade" placeholder="São José dos Campos" th:field="*{endereco.municipio}"> <br><br>
+            <input maxlength="60" type="text" name="cidade" id="cidade" placeholder="São José dos Campos" th:field="*{endereco.municipio}" required> <br><br>
             
             <label for="bairro">Bairro:</label><br>
-            <input maxlength="60" type="text" name="bairro" id="bairro" placeholder="Altos de Santana" th:field="*{endereco.bairro}"> <br><br>
+            <input maxlength="60" type="text" name="bairro" id="bairro" placeholder="Altos de Santana" th:field="*{endereco.bairro}" required> <br><br>
             
            	<label for="rua">Rua:</label><br>
-            <input maxlength="60" type="text" name="rua" id="rua" th:field="*{endereco.rua}" placeholder="Altos de Santana"> <br><br>
+            <input maxlength="60" type="text" name="rua" id="rua" th:field="*{endereco.rua}" placeholder="Altos de Santana" required> <br><br>
             
             <label for="numeroContrato">Número:</label><br>
-            <input maxlength="10" type="number" name="numeroContrato" id="numeroContrato" placeholder="524" th:field="*{endereco.numero}"> <br><br>
+            <input maxlength="10" type="number" name="numeroContrato" id="numeroContrato" placeholder="524" th:field="*{endereco.numero}" required> <br><br>
             
             <label for="complementoContrato">Complemento:</label><br>
             <input maxlength="60" type="text" name="complemento" id="complemento" placeholder="casa dos fundos" th:field="*{endereco.complemento}"> <br><br>
