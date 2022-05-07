@@ -58,7 +58,7 @@ do contrato).<br>
 ## :computer: Protótipo
 
 Acesse o link para visualizar:
-> * [Protótipo interativo no Figma.](https://www.figma.com/file/AeyU0W19dA8KmriaZEmQVZ/Wireframe?node-id=1%3A2)
+> * [Protótipo interativo no Figma.](https://www.figma.com/file/J7tcAZx38a8CymG7RXSG7J/Untitled?node-id=0%3A1)
   
   <br>
      
