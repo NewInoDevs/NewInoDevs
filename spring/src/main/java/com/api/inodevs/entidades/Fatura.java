@@ -1,5 +1,6 @@
 package com.api.inodevs.entidades;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,7 +19,10 @@ public class Fatura {
 	@Lob // Referenciando como Lob (Tipo para arquivos - Imagens, pdfs etc.)
 	private byte[] fatura;
 	
+	@Column
 	private String nome_fatura;
+	
+	@Column
 	private String tipo_fatura;
 	
 	@OneToOne(mappedBy = "fatura")

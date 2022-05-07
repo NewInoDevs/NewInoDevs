@@ -394,9 +394,9 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                         <span class="text-secondary text-xs font-weight-bold" th:text="${conta.consumo}"></span>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold" th:text="${conta.status}" th:if="${conta.status=='Aprovado'}" style= "color:green"></span>
-                        <span class="text-secondary text-xs font-weight-bold" th:text="${conta.status}" th:if="${conta.status=='Pendente'}" style= "color:black"></span>
-                        <span class="text-secondary text-xs font-weight-bold" th:text="${conta.status}" th:if="${conta.status=='Reprovado'}" style= "color:red"></span>
+                        <span class="text-secondary text-xs font-weight-bold text-success" th:text="${conta.status}" th:if="${conta.status=='Aprovado'}" ></span>
+                        <span class="text-secondary text-xs font-weight-bold text-warning" th:text="${conta.status}" th:if="${conta.status=='Pendente'}" ></span>
+                        <span class="text-secondary text-xs font-weight-bold text-danger" th:text="${conta.status}" th:if="${conta.status=='Reprovado'}" ></span>
                       </td>
                       <td class="align-middle">
                         <a th:href="@{/conta/{codi}(codi=${conta.codi})}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
@@ -459,17 +459,17 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                       <td>
                         <p class="text-sm font-weight-bold mb-0" th:text="${concessionaria.tipo_conta}"></p>
                       </td>
-                      <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold" th:text="${concessionaria.status}" th:if="${concessionaria.status=='Aprovado'}" style= "color:green;"></span>
-                        <span class="text-secondary text-xs font-weight-bold" th:text="${concessionaria.status}" th:if="${concessionaria.status=='Pendente'}" style= "color:black;"></span>
-                        <span class="text-secondary text-xs font-weight-bold" th:text="${concessionaria.status}" th:if="${concessionaria.status=='Reprovado'}" style= "color:red;"></span>
+                      <td class="align-middle">
+                        <span class="text-secondary text-xs font-weight-bold text-sucess" th:text="${concessionaria.status}" th:if="${concessionaria.status=='Aprovado'}"></span>
+                        <span class="text-secondary text-xs font-weight-bold text-warning" th:text="${concessionaria.status}" th:if="${concessionaria.status=='Pendente'}"></span>
+                        <span class="text-secondary text-xs font-weight-bold text-danger" th:text="${concessionaria.status}" th:if="${concessionaria.status=='Reprovado'}"></span>
                       </td>
                       
                       <td class="align-middle">
                         <a th:href="@{/concessionaria/{codigo}(codigo=${concessionaria.codigo})}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Editar
                         </a>
-                        <a onclick="javascript:return confirm('Você tem certeza que quer excluir este concessionaria?')" 
+                        <a onclick="javascript:return confirm('Você tem certeza que quer excluir essa concessionaria? \n\nAo excluir essa concessionaria, todos os outros contratos associados a ela também serão excluídos e, consequentemente, as contas associadas a esse contrato também serão.')" 
                 		th:href="@{/excluirConcessionaria/{codigo}(codigo=${concessionaria.codigo})}" 
                 		href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">Excluir</a>
                       </td>
@@ -536,13 +536,15 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                         <span class="text-secondary text-xs font-weight-bold" th:text="${unidade.endereco.cep}"></span>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold" th:text="${unidade.status}"></span>
+                         <span class="text-secondary text-xs font-weight-bold text-sucess" th:text="${unidade.status}" th:if="${unidade.status=='Aprovado'}"></span>
+                        <span class="text-secondary text-xs font-weight-bold text-warning" th:text="${unidade.status}" th:if="${unidade.status=='Pendente'}"></span>
+                        <span class="text-secondary text-xs font-weight-bold text-danger" th:text="${undiade.status}" th:if="${unidade.status=='Reprovado'}"></span>
                       </td>
                       <td class="align-middle">
                         <a th:href="@{/unidade/{cnpj}(cnpj = ${unidade.cnpj})}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Editar
                         </a>
-                        <a onclick="javascript:return confirm('Você tem certeza que quer excluir este contrato?')" 
+                        <a onclick="javascript:return confirm('Você tem certeza que quer excluir essa unidade? \n\nAo excluir essa unidade, todas os outros contratos associados a ela também serão excluídos e, consequentemente, as contas associadas a esse contrato também serão.')" 
                 		th:href="@{/excluirUnidade/{cnpj}(cnpj=${unidade.cnpj})}"
                 		href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">Excluir</a>
 					  </td>
@@ -601,13 +603,15 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                         <p class="text-secondary text-xs font-weight-bold" th:text="${contrato.unidade.nome}"></p>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold" th:text="${contrato.status}"></span>
+                        <span class="text-secondary text-xs font-weight-bold text-sucess" th:text="${contrato.status}" th:if="${contrato.status=='Aprovado'}"></span>
+                        <span class="text-secondary text-xs font-weight-bold text-warning" th:text="${contrato.status}" th:if="${contrato.status=='Pendente'}"></span>
+                        <span class="text-secondary text-xs font-weight-bold text-danger" th:text="${contrato.status}" th:if="${contrato.status=='Reprovado'}"></span>
                       </td>
                       <td class="align-middle">
                         <a th:href="@{/contrato/{codigo}(codigo = ${contrato.codigo})}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Editar
                         </a>
-                        <a onclick="javascript:return confirm('Você tem certeza que quer excluir este contrato?')" 
+                        <a onclick="javascript:return confirm('Você tem certeza que quer excluir esse contrato? \n\nAo excluir esse contrato, todas as outras contas associadas a ela também será excluídas')" 
                 		th:href="@{/excluirContrato/{codigo}(codigo=${contrato.codigo})}"
                 		href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">Excluir</a>
                       </td>

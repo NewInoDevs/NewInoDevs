@@ -3,6 +3,7 @@ package com.api.inodevs.entidades;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -16,20 +17,25 @@ public class Unidade {
     @Id // Referenciando o Id
 	private Long cnpj;
 	
+    @Column(nullable = false)
 	private String nome;
+    
+    @Column(nullable = false)
 	public String telefone;
 	
+	@Column
+	private String status;
+	 
+	@Column
+	private String mensagem;
+    
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cep_endereco", referencedColumnName = "cep")
 	public Endereco endereco;
 	
-	private String status;
-	 
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_notificacoes", referencedColumnName = "id")
     private Notificacoes notificacoes;
-	
-	private String mensagem;
 	
 	@OneToMany(mappedBy = "unidade", cascade = CascadeType.REMOVE)
 	private Set<Contrato> contrato;
