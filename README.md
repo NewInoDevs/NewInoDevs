@@ -70,9 +70,9 @@ Acesse o link para visualizar:
 * **Ferramentas:** GitHub, VS Code, eclipse, Canva, Excel, Figma e Jira.
 <br>
   
-## :gear: Execução 
+<!--## :gear: Execução 
 <h1 align="center"><img src = " " width="100%" height="580px"></h1>
-<br>
+<br>-->
 
 ## :mortar_board: Dev Team
 
