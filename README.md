@@ -47,8 +47,8 @@ do contrato).<br>
 ## :calendar: Plano de Ação
 
 - [x] Kick-off - 14/03 a 18/03 - Concluído :heavy_check_mark:
-- [x] [Sprint 1]() - 25/03 a 14/04 
-- [x] [Sprint 2]() - 25/04 a 15/05 
+- [x] [Sprint 1](https://github.com/NewInoDevs/NewInoDevs/blob/1º-Sprint/README.md) - 25/03 a 14/04 - Concluído :heavy_check_mark:
+- [x] [Sprint 2](https://github.com/NewInoDevs/NewInoDevs/blob/2ºSprint/README.md) - 25/04 a 15/05 
 - [x] [Sprint 3]() - 16/05 a 05/06 
 - [x] Feira de Soluções - 15/06 
 
