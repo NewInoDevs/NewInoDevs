@@ -23,7 +23,7 @@ salvamento em banco de dados para eventuais consultas e análises técnicas/fina
 trazer ao cliente oportunidades de redução de custos e alteração de contratos. 
 
 
-> [Documentação](https://github.com/Inodevs/Inodevs/blob/sprint-4/Documenta%C3%A7%C3%A3o/InodevsSprint4.pdf)
+> [Documentação](https://github.com/NewInoDevs/NewInoDevs/blob/2ºSprint/Documentação/Inodevs3sem.pdf)
 <br>
 
 ## :pushpin: Requisitos
