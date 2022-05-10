@@ -301,54 +301,88 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
     <!-- FORMS -->
     <div class="container-fluid py-4">
-      <h1 class="title">CADASTRO DE UNIDADE </h1> <br> <h4 style="font-size: 1rem;" class="subtitle" >(campos precisam de pontuação)</h4>
-      <form th:action="@{/salvarUnidade}" method="POST" th:object="${unidade}">
-        <section class="block-main2">
-        <div>
-        <div class="sub-main-right">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="card mt-4">
+            <div class="card-header p-3">
+              <h2 class="mb-0">Cadastro de Unidade (campos precisam de pontuação)</h2>
+            </div>
+            <div class="card-body p-3 pb-0">
+              <div class="card-body">
+                 <form th:action="@{/salvarUnidade}" method="POST" th:object="${unidade}">
+            
+            <div class="sub-main-left">
 
-            <br>
+            <label for="municipioContrato">Município:</label><br>
+            <div class="input-group input-group-outline mb-3">
+            <input class="form-control" maxlength="60" type="text" name="cidade" id="cidade" placeholder="São José dos Campos" th:field="*{endereco.municipio}" required> <br><br>
+            </div>
+            <label for="bairro">Bairro:</label><br>
+            <div class="input-group input-group-outline mb-3">
+            <input class="form-control" maxlength="60" type="text" name="bairro" id="bairro" placeholder="Altos de Santana" th:field="*{endereco.bairro}" required> <br><br>
+            </div>
+           	<label for="rua">Rua:</label><br>
+           	<div class="input-group input-group-outline mb-3">
+            <input class="form-control" maxlength="60" type="text" name="rua" id="rua" th:field="*{endereco.rua}" placeholder="Altos de Santana" required> <br><br>
+            </div>
+            <label for="numeroContrato">Número:</label><br>
+            <div class="input-group input-group-outline mb-3">
+            <input class="form-control" maxlength="10" type="number" name="numeroContrato" id="numeroContrato" placeholder="524" th:field="*{endereco.numero}" required> <br><br>
+            </div>
+            <label for="complementoContrato">Complemento:</label><br>
+            <div class="input-group input-group-outline mb-3">
+            <input class="form-control" maxlength="60" type="text" name="complemento" id="complemento" placeholder="casa dos fundos" th:field="*{endereco.complemento}"> <br><br>
+            </div>
+
+         	</div>
+          
+			<div class="sub-main-right">
+
             <label for="cnpjContrato">CPNJ:</label><br>
-            <input maxlength="14" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" name="cnpjContrato" id="cnpjContrato" placeholder="00.000.000/0000-00" th:field="*{cnpj}" required> <br><br>
-            
+            <div class="input-group input-group-outline mb-3">
+            <input class="form-control" maxlength="14" type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" name="cnpjContrato" id="cnpjContrato" placeholder="00.000.000/0000-00" th:field="*{cnpj}" required> <br><br>
+            </div>
             <label for="nomeContrato">Nome:</label><br>
-            <input maxlength="60" type="text" name="nomeContrato" id="nomeContrato" placeholder="Kaua Gustavo Luis" th:field="*{nome}" required> <br><br>
-            
+            <div class="input-group input-group-outline mb-3">
+            <input class="form-control" maxlength="60" type="text" name="nomeContrato" id="nomeContrato" placeholder="Kaua Gustavo Luis" th:field="*{nome}" required> <br><br>
+            </div>
             <label for="telefoneContrato">Telefone:</label><br>
-            <input maxlength="16" type="text" name="telefoneContrato" id="telefoneContrato" placeholder="(DDD) 12345-6789" th:field="*{telefone}" required> <br><br>
-
+            <div class="input-group input-group-outline mb-3">
+            <input class="form-control" maxlength="16" type="text" name="telefoneContrato" id="telefoneContrato" placeholder="(DDD) 12345-6789" th:field="*{telefone}" required> <br><br>
+			</div>
             
 
             <label for="cepContrato">Cep:</label><br>
-            <input maxlength="8" type="text" name="cep" id="cep" onblur="pesquisacep(this.value)" placeholder="12345-678" th:field="*{endereco.cep}" required> <br><br>
+            <div class="input-group input-group-outline mb-3">
+            <input class="form-control" maxlength="9" type="text" name="cep" id="cep" onblur="pesquisacep(this.value)" placeholder="12345-6783" th:field="*{endereco.cep}" required> <br><br>
+            </div>
             
             <label for="estadoContrato">Estado:</label><br>
-            <input maxlength="2" type="text" name="uf" id="uf" placeholder="SP" th:field="*{endereco.estado}" required> <br><br>
-
+            <div class="input-group input-group-outline mb-3">
+            <input class="form-control" maxlength="2" type="text" name="uf" id="uf" placeholder="SP" th:field="*{endereco.estado}" required> <br><br>
+			</div>
           </div>
-          
-          <div class="sub-main-left">
+            </div>
+            </div>
 
-            <label for="municipioContrato">Município:</label><br>
-            <input maxlength="60" type="text" name="cidade" id="cidade" placeholder="São José dos Campos" th:field="*{endereco.municipio}" required> <br><br>
-            
-            <label for="bairro">Bairro:</label><br>
-            <input maxlength="60" type="text" name="bairro" id="bairro" placeholder="Altos de Santana" th:field="*{endereco.bairro}" required> <br><br>
-            
-           	<label for="rua">Rua:</label><br>
-            <input maxlength="60" type="text" name="rua" id="rua" th:field="*{endereco.rua}" placeholder="Altos de Santana" required> <br><br>
-            
-            <label for="numeroContrato">Número:</label><br>
-            <input maxlength="10" type="number" name="numeroContrato" id="numeroContrato" placeholder="524" th:field="*{endereco.numero}" required> <br><br>
-            
-            <label for="complementoContrato">Complemento:</label><br>
-            <input maxlength="60" type="text" name="complemento" id="complemento" placeholder="casa dos fundos" th:field="*{endereco.complemento}"> <br><br>
-
-          </div>
-          
-          <div class="bt2">
-          	<button class="btn bg-gradient-primary w-100 my-4 mb-2 " type="submit" value="Cadastrar" data-target="successToast">Cadastrar</button>
-		  </div>
+          <div class="card mt-4">
+            <div class="card-header p-3">
+              <h5 class="mb-0">Atenção</h5>
+              <p class="text-sm mb-0">
+                Leia com atenção antes de qualquer ação. 
+              </p>
+            </div>
+            <div class="card-body p-3">
+              <div class="row">
+                <div class="col-lg-12 col-sm-8 col-12 mt-lg-0 mt-2">
+                  <button class="btn bg-gradient-primary w-100 my-4 mb-2 " type="submit" value="Cadastrar" data-target="successToast">Cadastrar</button>
+                </div>
+              </div>
+            </div>
+          </div>  
+        </div>
+		</form>
+		
 		  <div th:text="${successo}" th:if="${successo}" class="position-fixed bottom-1 end-4 z-index-2 corzinha">
         <div  class="toast fade hide p-2 bg-white" role="alert" aria-live="assertive" id="successToast" aria-atomic="true">
           <div  class="toast-header border-0">
@@ -359,17 +393,15 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
           </div>
           <hr class="horizontal dark m-0">
           <div class="toast-body">
-            Unidade cadastrada com sucesso.
+            Concessionária cadastrada com sucesso.
           </div>
         </div>
         <div class="toast fade hide p-2 mt-2 bg-white" role="alert" aria-live="assertive" id="warningToast" aria-atomic="true">
           <div class="toast-header border-0">
             <i class="material-icons text-warning me-2">travel_explore</i>
           </div>
-        </div>
-        </section>
-    
       </form>	
+ 
 
       <!-- END FORMS -->
 
