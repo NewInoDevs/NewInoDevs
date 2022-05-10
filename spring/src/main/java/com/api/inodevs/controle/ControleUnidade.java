@@ -28,7 +28,15 @@ public class ControleUnidade {
 	
 	// Entrar na página de cadastro de unidade com o modelo da entidade com o modelo da entidade:
 	@GetMapping("/cadastroUnidade")
-	public String cadastroUnidade(@ModelAttribute("unidade") Unidade unidade){
+	public String cadastroUnidade(@ModelAttribute("unidade") Unidade unidade, Model modelo){
+        modelo.addAttribute("quantidadeConta", notificacoesRepo.contar("Conta", "ROLE_GESTOR"));
+        modelo.addAttribute("quantidadeConcessionaria", notificacoesRepo.contar("Concessionaria", "ROLE_GESTOR"));
+        modelo.addAttribute("quantidadeUnidade", notificacoesRepo.contar("Unidade", "ROLE_GESTOR"));
+        modelo.addAttribute("quantidadeContrato", notificacoesRepo.contar("Contrato", "ROLE_GESTOR"));
+        modelo.addAttribute("quantidadeContaRep", notificacoesRepo.contar("Conta", "ROLE_DIGITADOR"));
+        modelo.addAttribute("quantidadeConcessionariaRep", notificacoesRepo.contar("Concessionaria", "ROLE_DIGITADOR"));
+        modelo.addAttribute("quantidadeUnidadeRep", notificacoesRepo.contar("Unidade", "ROLE_DIGITADOR"));
+        modelo.addAttribute("quantidadeContratoRep", notificacoesRepo.contar("Contrato", "ROLE_DIGITADOR"));
 		return "pages/forms/unidade";
 	}
 	
@@ -51,18 +59,38 @@ public class ControleUnidade {
             throw new IllegalArgumentException("Unidade inválida");
         }
         modelo.addAttribute("unidade", unidadeOpt.get());
+        modelo.addAttribute("quantidadeConta", notificacoesRepo.contar("Conta", "ROLE_GESTOR"));
+        modelo.addAttribute("quantidadeConcessionaria", notificacoesRepo.contar("Concessionaria", "ROLE_GESTOR"));
+        modelo.addAttribute("quantidadeUnidade", notificacoesRepo.contar("Unidade", "ROLE_GESTOR"));
+        modelo.addAttribute("quantidadeContrato", notificacoesRepo.contar("Contrato", "ROLE_GESTOR"));
+        modelo.addAttribute("quantidadeContaRep", notificacoesRepo.contar("Conta", "ROLE_DIGITADOR"));
+        modelo.addAttribute("quantidadeConcessionariaRep", notificacoesRepo.contar("Concessionaria", "ROLE_DIGITADOR"));
+        modelo.addAttribute("quantidadeUnidadeRep", notificacoesRepo.contar("Unidade", "ROLE_DIGITADOR"));
+        modelo.addAttribute("quantidadeContratoRep", notificacoesRepo.contar("Contrato", "ROLE_DIGITADOR"));
         return "pages/forms/edit/unidadeEdit";
     }
 	
 	// Salvar a unidade e endereço editados no banco de dados ao clicar em editar:
-	@PostMapping("/salvarUnidadeEdit")
-	public String salvarUnidadeEdit(@ModelAttribute("unidade") Unidade unidade, 
-									RedirectAttributes redirect) {
-		unidade.setStatus("Pendente");
-		unidadeRepo.save(unidade);
-		redirect.addFlashAttribute("sucesso", "Unidade salvo com sucesso!");
-		return "redirect:/tabela";
-	}
+	@PostMapping("/salvarUnidadeEditRep/{id}")
+    public String salvarUnidadeEditRep(@ModelAttribute("unidade") Unidade unidade, @PathVariable("id") long id) {
+        unidade.setNotificacoes(null);
+        unidadeRepo.save(unidade);
+        notificacoesRepo.deleteById(id);
+        unidade.setStatus("Pendente");
+        Notificacoes notificacoes = new Notificacoes("ROLE_GESTOR", "Unidade");
+        unidade.setNotificacoes(notificacoes);
+        unidadeRepo.save(unidade);
+        return "redirect:/tabela";
+    }
+
+    @PostMapping("/salvarUnidadeEdit")
+    public String salvaUnidadeaEdit(@ModelAttribute("unidade") Unidade unidade, RedirectAttributes redirect) {
+        unidade.setStatus("Pendente");
+        Notificacoes notificacoes = new Notificacoes("ROLE_GESTOR", "Unidade");
+        unidade.setNotificacoes(notificacoes);
+        unidadeRepo.save(unidade);
+        return "redirect:/tabela";
+    }
 	
 	// Excluir uma unidade (junto com o seu endereço) ao clicar em excluir na tabela:
 	@GetMapping("/excluirUnidade/{cnpj}")
@@ -96,4 +124,19 @@ public class ControleUnidade {
         return "redirect:/tabela";
     }
 	
+	@PostMapping("/reprovarUnidadeRep")
+    public String reprovarUnidadeRep(@ModelAttribute("unidade") Unidade unidade) {
+        unidade.setStatus("Reprovado");
+        Notificacoes notificacoes = new Notificacoes("ROLE_DIGITADOR", "Unidade");
+        unidade.setNotificacoes(notificacoes);
+        unidadeRepo.save(unidade);
+        return "redirect:/tabela";
+    }
+	
+	@PostMapping("/aprovarUnidadeRep")
+    public String aprovarUnidadeRep(@ModelAttribute("unidade") Unidade unidade) {
+        unidade.setStatus("Aprovado");
+        unidadeRepo.save(unidade);
+        return "redirect:/tabela";
+    }
 }

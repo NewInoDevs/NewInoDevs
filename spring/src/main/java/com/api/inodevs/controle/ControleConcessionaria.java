@@ -28,7 +28,15 @@ public class ControleConcessionaria {
 	
 	// Entrar na página de cadastro de concessionária com o modelo da entidade:
 	@GetMapping("/cadastroConcessionaria")
-	public String cadastroConcessionaria(@ModelAttribute("concessionaria") Concessionaria concessionaria){
+	public String cadastroConcessionaria(@ModelAttribute("concessionaria") Concessionaria concessionaria, Model modelo){
+        modelo.addAttribute("quantidadeConta", notificacoesRepo.contar("Conta", "ROLE_GESTOR"));
+        modelo.addAttribute("quantidadeConcessionaria", notificacoesRepo.contar("Concessionaria", "ROLE_GESTOR"));
+        modelo.addAttribute("quantidadeUnidade", notificacoesRepo.contar("Unidade", "ROLE_GESTOR"));
+        modelo.addAttribute("quantidadeContrato", notificacoesRepo.contar("Contrato", "ROLE_GESTOR"));
+        modelo.addAttribute("quantidadeContaRep", notificacoesRepo.contar("Conta", "ROLE_DIGITADOR"));
+        modelo.addAttribute("quantidadeConcessionariaRep", notificacoesRepo.contar("Concessionaria", "ROLE_DIGITADOR"));
+        modelo.addAttribute("quantidadeUnidadeRep", notificacoesRepo.contar("Unidade", "ROLE_DIGITADOR"));
+        modelo.addAttribute("quantidadeContratoRep", notificacoesRepo.contar("Contrato", "ROLE_DIGITADOR"));
 		concessionaria.setTipo_conta("Energia");
 		return "pages/forms/concessionaria";
 	}
@@ -52,16 +60,37 @@ public class ControleConcessionaria {
             throw new IllegalArgumentException("Concessionária inválida");
         }
         modelo.addAttribute("concessionaria", concessionariaOpt.get());
+        modelo.addAttribute("quantidadeConta", notificacoesRepo.contar("Conta", "ROLE_GESTOR"));
+        modelo.addAttribute("quantidadeConcessionaria", notificacoesRepo.contar("Concessionaria", "ROLE_GESTOR"));
+        modelo.addAttribute("quantidadeUnidade", notificacoesRepo.contar("Unidade", "ROLE_GESTOR"));
+        modelo.addAttribute("quantidadeContrato", notificacoesRepo.contar("Contrato", "ROLE_GESTOR"));
+        modelo.addAttribute("quantidadeContaRep", notificacoesRepo.contar("Conta", "ROLE_DIGITADOR"));
+        modelo.addAttribute("quantidadeConcessionariaRep", notificacoesRepo.contar("Concessionaria", "ROLE_DIGITADOR"));
+        modelo.addAttribute("quantidadeUnidadeRep", notificacoesRepo.contar("Unidade", "ROLE_DIGITADOR"));
+        modelo.addAttribute("quantidadeContratoRep", notificacoesRepo.contar("Contrato", "ROLE_DIGITADOR"));
         return "pages/forms/edit/concessionariaEdit";
     }
 	
 	// Salvar a concessionária editada no banco de dados ao clicar em editar:
-	@PostMapping("/salvarConcessionariaEdit")
+	@PostMapping("/salvarConcessionariaEditRep/{id}")
+    public String salvarConcessionariaEditRep(@ModelAttribute("concessionaria") Concessionaria concessionaria, @PathVariable("id") long id) {
+        concessionaria.setNotificacoes(null);
+        concessionariaRepo.save(concessionaria);
+        notificacoesRepo.deleteById(id);
+        concessionaria.setStatus("Pendente");
+        Notificacoes notificacoes = new Notificacoes("ROLE_GESTOR", "Concessionaria");
+        concessionaria.setNotificacoes(notificacoes);
+        concessionariaRepo.save(concessionaria);
+        return "redirect:/tabela";
+    }
+
+    @PostMapping("/salvarConcessionariaEdit")
     public String salvarConcessionariaEdit(@ModelAttribute("concessionaria") Concessionaria concessionaria, RedirectAttributes redirect) {
         concessionaria.setStatus("Pendente");
-		concessionariaRepo.save(concessionaria);
-        redirect.addFlashAttribute("successo", "Editado com sucesso!");
-        return "redirect:tabela";
+        Notificacoes notificacoes = new Notificacoes("ROLE_GESTOR", "Concessionaria");
+        concessionaria.setNotificacoes(notificacoes);
+        concessionariaRepo.save(concessionaria);
+        return "redirect:/tabela";
     }
 	
 	// Excluir uma concessionária ao clicar em excluir na tabela:
@@ -92,6 +121,21 @@ public class ControleConcessionaria {
         concessionaria.setStatus("Reprovado");
         Notificacoes notificacoes = new Notificacoes("ROLE_DIGITADOR", "Concessionaria");
         concessionaria.setNotificacoes(notificacoes);
+        concessionariaRepo.save(concessionaria);
+        return "redirect:/tabela";
+    }
+	
+	@PostMapping("/reprovarConcessionariaRep")
+    public String reprovarConcessionariaRep(@ModelAttribute("concessionaria") Concessionaria concessionaria) {
+        concessionaria.setStatus("Reprovado");
+        Notificacoes notificacoes = new Notificacoes("ROLE_DIGITADOR", "Concessionaria");
+        concessionaria.setNotificacoes(notificacoes);
+        concessionariaRepo.save(concessionaria);
+        return "redirect:/tabela";
+    }
+	@PostMapping("/aprovarCocessionariaRep")
+    public String aprovarConcessionariaRep(@ModelAttribute("concessionaria") Concessionaria concessionaria) {
+        concessionaria.setStatus("Aprovado");
         concessionariaRepo.save(concessionaria);
         return "redirect:/tabela";
     }

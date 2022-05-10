@@ -41,6 +41,14 @@ public class ControleConta {
         contrato.setCodigo(0L);
         conta.setContrato(contrato);
 		modelo.addAttribute("listaContrato", contratoRepo.findAll());
+        modelo.addAttribute("quantidadeConta", notificacoesRepo.contar("Conta", "ROLE_GESTOR"));
+        modelo.addAttribute("quantidadeConcessionaria", notificacoesRepo.contar("Concessionaria", "ROLE_GESTOR"));
+        modelo.addAttribute("quantidadeUnidade", notificacoesRepo.contar("Unidade", "ROLE_GESTOR"));
+        modelo.addAttribute("quantidadeContrato", notificacoesRepo.contar("Contrato", "ROLE_GESTOR"));
+        modelo.addAttribute("quantidadeContaRep", notificacoesRepo.contar("Conta", "ROLE_DIGITADOR"));
+        modelo.addAttribute("quantidadeConcessionariaRep", notificacoesRepo.contar("Concessionaria", "ROLE_DIGITADOR"));
+        modelo.addAttribute("quantidadeUnidadeRep", notificacoesRepo.contar("Unidade", "ROLE_DIGITADOR"));
+        modelo.addAttribute("quantidadeContratoRep", notificacoesRepo.contar("Contrato", "ROLE_DIGITADOR"));
 		return "pages/forms/contas";
 	}
 	
@@ -74,6 +82,14 @@ public class ControleConta {
             throw new IllegalArgumentException("Conta inválida");
         }
         modelo.addAttribute("conta", contaOpt.get());
+        modelo.addAttribute("quantidadeConta", notificacoesRepo.contar("Conta", "ROLE_GESTOR"));
+        modelo.addAttribute("quantidadeConcessionaria", notificacoesRepo.contar("Concessionaria", "ROLE_GESTOR"));
+        modelo.addAttribute("quantidadeUnidade", notificacoesRepo.contar("Unidade", "ROLE_GESTOR"));
+        modelo.addAttribute("quantidadeContrato", notificacoesRepo.contar("Contrato", "ROLE_GESTOR"));
+        modelo.addAttribute("quantidadeContaRep", notificacoesRepo.contar("Conta", "ROLE_DIGITADOR"));
+        modelo.addAttribute("quantidadeConcessionariaRep", notificacoesRepo.contar("Concessionaria", "ROLE_DIGITADOR"));
+        modelo.addAttribute("quantidadeUnidadeRep", notificacoesRepo.contar("Unidade", "ROLE_DIGITADOR"));
+        modelo.addAttribute("quantidadeContratoRep", notificacoesRepo.contar("Contrato", "ROLE_DIGITADOR"));
         return "pages/forms/edit/faturas";
     }
 	
@@ -92,7 +108,7 @@ public class ControleConta {
 
     @PostMapping("/salvarContaEdit")
     public String salvarContaEdit(@ModelAttribute("conta") Conta conta, RedirectAttributes redirect) {
-        conta.setStatus("Pendente");
+    	conta.setStatus("Pendente");
         Notificacoes notificacoes = new Notificacoes("ROLE_GESTOR", "Conta");
         conta.setNotificacoes(notificacoes);
         contaRepo.save(conta);
@@ -119,11 +135,27 @@ public class ControleConta {
 		return "redirect:/tabela";
 	}
 	
+	@PostMapping("/aprovarContaRep")
+	public String aprovarContaRep(@ModelAttribute("conta") Conta conta) {
+		conta.setStatus("Aprovado");
+		contaRepo.save(conta);
+		return "redirect:/tabela";
+	}
+	
 	@PostMapping("/reprovarConta/{id}")
     public String reprovarConta(@ModelAttribute("conta") Conta conta, @PathVariable("id") long id) {
         conta.setNotificacoes(null);
         contaRepo.save(conta);
         notificacoesRepo.deleteById(id);
+        conta.setStatus("Reprovado");
+        Notificacoes notificacoes = new Notificacoes("ROLE_DIGITADOR", "Conta");
+        conta.setNotificacoes(notificacoes);
+        contaRepo.save(conta);
+        return "redirect:/tabela";
+    }
+	
+	@PostMapping("/reprovarContaRep")
+    public String reprovarContaRep(@ModelAttribute("conta") Conta conta) {
         conta.setStatus("Reprovado");
         Notificacoes notificacoes = new Notificacoes("ROLE_DIGITADOR", "Conta");
         conta.setNotificacoes(notificacoes);

@@ -1,6 +1,7 @@
 package com.api.inodevs.entidades;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -14,17 +15,41 @@ public class Conta{
     @Id // Referenciando o Id
 	private Long codi;
 	
+    @Column(nullable = false)
 	private String consumo;
+    
+    @Column
 	private Float desconto;
+    
+    @Column(nullable = false)
 	private String data_de_criacao;
+    
+    @Column(nullable = false)
 	private String data_de_lancamento;
+    
+    @Column(nullable = false)
 	private String data_de_vencimento;
+    
+    @Column(nullable = false)
 	private String dias;
+    
+    @Column
 	private String dados_adicionais;
+	
+    @Column(nullable = false)
 	private Float valor;
+    
+    @Column(nullable = false)
 	private Float valor_total;
+    
+    @Column(nullable = false)
 	private Integer base_calculo;
+    
+    @Column
 	private String status;
+	
+    @Column
+	private String mensagem;
 
 	@ManyToOne
 	@JoinColumn(name = "codigo_contrato")
@@ -129,5 +154,10 @@ public class Conta{
 	public void setNotificacoes(Notificacoes notificacoes) {
 		this.notificacoes = notificacoes;
 	}
-	
+	public String getMensagem() {
+		return mensagem;
+	}
+	public void setMensagem(String mensagem) {
+		this.mensagem = mensagem;
+	}
 }
