@@ -538,7 +538,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                       <td class="align-middle text-center">
                          <span class="text-secondary text-xs font-weight-bold text-sucess" th:text="${unidade.status}" th:if="${unidade.status=='Aprovado'}"></span>
                         <span class="text-secondary text-xs font-weight-bold text-warning" th:text="${unidade.status}" th:if="${unidade.status=='Pendente'}"></span>
-                        <span class="text-secondary text-xs font-weight-bold text-danger" th:text="${undiade.status}" th:if="${unidade.status=='Reprovado'}"></span>
+                        <span class="text-secondary text-xs font-weight-bold text-danger" th:text="${unidade.status}" th:if="${unidade.status=='Reprovado'}"></span>
                       </td>
                       <td class="align-middle">
                         <a th:href="@{/unidade/{cnpj}(cnpj = ${unidade.cnpj})}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">

@@ -268,15 +268,7 @@
 					        <input type="radio" id="digitador" name="usuario" value="ROLE_DIGITADOR" th:field="*{secao}">
 					        <label for="digitador">Digitador</label>
 				        </div>
-	                	<div id="ativo">Ativo:
-					        <br>
-					        <input type="radio" id="sim" name="usuario" value="1" th:field="*{ativo}">
-					        <label for="sim">Sim</label>
-					
-					        <input type="radio" id="nao" name="usuario" value="0" th:field="*{ativo}">
-					        <label for="nao">Não</label>
-			        	</div>
-				        <input type="hidden" id="senha" name="senha" th:field="*{senha}">
+				         <input type="hidden" name="ativo" id="ativo" th:field="*{ativo}">
             </div>
           </div>
           <div class="card mt-4">
@@ -318,6 +310,16 @@
         </section>
     
       </form>	
+      
+          <hr class="horizontal dark m-0">
+          <div class="toast-body">
+            Contrato cadastrado com sucesso.
+          </div>
+        </div>
+        <div class="toast fade hide p-2 mt-2 bg-white" role="alert" aria-live="assertive" id="warningToast" aria-atomic="true">
+          <div class="toast-header border-0">
+            <i class="material-icons text-warning me-2">travel_explore</i>
+          </div>
 
       <!-- END FORMS -->
 
