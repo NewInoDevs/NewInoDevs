@@ -117,13 +117,14 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
                 
               <div class="card-body">
+               <label class = "text-danger" th:if="${param.error}">Login e/ou senha inválidos!</label>
                 <form role="form" action="/login" method="POST" class="text-start">
-                  <div class="input-group input-group-outline my-3">
-                    <label class="form-label">Login</label>
+                  <label class="form-label">Login   </label>
+                  <div class="input-group input-group-outline mb-3">
                     <input type="text" name="username" class="form-control">
                   </div>
+                  <label class="form-label">Senha</label>
                   <div class="input-group input-group-outline mb-3">
-                    <label class="form-label">Senha</label>
                     <input type="password" name="password" class="form-control">
                   </div>
                   <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
@@ -144,6 +145,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
         </div>
       </div>
       
+      
+<div th:if="${param.logout}">Até logo!</div>
       <!--  
       <footer class="footer position-absolute bottom-2 py-2 w-100">
         <div class="container">

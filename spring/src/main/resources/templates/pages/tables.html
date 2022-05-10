@@ -122,8 +122,10 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             <div class="input-group input-group-outline">
-              <label class="form-label">Type here...</label>
-              <input type="text" class="form-control">
+             	<form th:action="@{/tabela}">
+		    		<input type="search" name="palavraChave" id="palavraChave" th:value="${palavraChave}" placeholder="Pesquisar...">
+		    		<input type="submit" value="Pesquisar">
+				</form>
             </div>
           </div>
           <ul class="navbar-nav  justify-content-end">
@@ -333,6 +335,23 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                     </div>
                   </a>
                 </li>
+                 <li class="mb-2" sec:authorize="hasRole('ADMINISTRADOR')" >
+                  <a class="dropdown-item border-radius-md">
+                    <div class="d-flex py-1">
+                    <div class="my-auto">
+                        <img src="../assets/img/Icons/fantasma.png" class="avatar avatar-sm  me-3 ">
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1">
+                          <span class="font-weight-bold"> Não há notificações </span>
+                        </h6>
+                        <p class="text-xs text-secondary mb-0">
+                          Sem notificaçõess.
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
           </ul>
         </div>
       </div>
@@ -460,7 +479,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                         <p class="text-sm font-weight-bold mb-0" th:text="${concessionaria.tipo_conta}"></p>
                       </td>
                       <td class="align-middle">
-                        <span class="text-secondary text-xs font-weight-bold text-sucess" th:text="${concessionaria.status}" th:if="${concessionaria.status=='Aprovado'}"></span>
+                        <span class="text-secondary text-xs font-weight-bold text-success" th:text="${concessionaria.status}" th:if="${concessionaria.status=='Aprovado'}"></span>
                         <span class="text-secondary text-xs font-weight-bold text-warning" th:text="${concessionaria.status}" th:if="${concessionaria.status=='Pendente'}"></span>
                         <span class="text-secondary text-xs font-weight-bold text-danger" th:text="${concessionaria.status}" th:if="${concessionaria.status=='Reprovado'}"></span>
                       </td>
@@ -536,9 +555,9 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                         <span class="text-secondary text-xs font-weight-bold" th:text="${unidade.endereco.cep}"></span>
                       </td>
                       <td class="align-middle text-center">
-                         <span class="text-secondary text-xs font-weight-bold text-sucess" th:text="${unidade.status}" th:if="${unidade.status=='Aprovado'}"></span>
+                         <span class="text-secondary text-xs font-weight-bold text-success" th:text="${unidade.status}" th:if="${unidade.status=='Aprovado'}"></span>
                         <span class="text-secondary text-xs font-weight-bold text-warning" th:text="${unidade.status}" th:if="${unidade.status=='Pendente'}"></span>
-                        <span class="text-secondary text-xs font-weight-bold text-danger" th:text="${undiade.status}" th:if="${unidade.status=='Reprovado'}"></span>
+                        <span class="text-secondary text-xs font-weight-bold text-danger" th:text="${unidade.status}" th:if="${unidade.status=='Reprovado'}"></span>
                       </td>
                       <td class="align-middle">
                         <a th:href="@{/unidade/{cnpj}(cnpj = ${unidade.cnpj})}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
@@ -603,7 +622,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                         <p class="text-secondary text-xs font-weight-bold" th:text="${contrato.unidade.nome}"></p>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold text-sucess" th:text="${contrato.status}" th:if="${contrato.status=='Aprovado'}"></span>
+                        <span class="text-secondary text-xs font-weight-bold text-success" th:text="${contrato.status}" th:if="${contrato.status=='Aprovado'}"></span>
                         <span class="text-secondary text-xs font-weight-bold text-warning" th:text="${contrato.status}" th:if="${contrato.status=='Pendente'}"></span>
                         <span class="text-secondary text-xs font-weight-bold text-danger" th:text="${contrato.status}" th:if="${contrato.status=='Reprovado'}"></span>
                       </td>
