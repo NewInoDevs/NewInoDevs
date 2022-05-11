@@ -366,6 +366,13 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
             </div>
             <div class="card-body p-3 pb-0">
             	<div class="card-body">
+            		<div sec:authorize="hasRole('DIGITADOR')" th:if="${contrato.status == 'Reprovado'}">
+              		 <label>Comentário para ajustes:</label>
+		              <div class="input-group input-group-outline mb-3">
+                      <textarea class="form-control" th:field="*{mensagem}" rows="5" disabled></textarea>
+                      <input type="hidden" th:field="*{mensagem}">
+                     </div>
+                     </div>
                     <label >Código</label>
                     <div class="input-group input-group-outline mb-3">
                       <input type="text" class="form-control" th:field="*{codigo}" disabled>
@@ -378,7 +385,14 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 			        <label for="unidade">Unidade:</label><br>
 			       	<select th:field="*{unidade}">
 			     		<option th:each="unidade : ${listaUnidade}" th:value="${unidade.cnpj}" th:text="${unidade.nome}"></option>
-					</select><br>          
+					</select><br>  
+					<div sec:authorize="hasRole('GESTOR')">
+		              <br><label>Comentário:</label>
+		              <div class="input-group input-group-outline mb-3">
+                      <textarea class="form-control" th:field="*{mensagem}" rows="5" placeholder="Ajustes a serem realizados"></textarea>
+                   	  </div>
+                    </div>  
+        
             	</div>
           	</div>
           <div class="card mt-4">

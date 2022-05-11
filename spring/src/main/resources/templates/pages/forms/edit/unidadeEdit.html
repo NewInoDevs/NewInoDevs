@@ -367,6 +367,13 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
             <div class="card-body p-3 pb-0">
               <div class="card-body">
                   <form role="form" th:action="@{/salvarUnidadeEdit}" method="POST" th:object="${unidade}">
+                  	<div sec:authorize="hasRole('DIGITADOR')" th:if="${unidade.status == 'Reprovado'}">
+              		 <label>Comentário para ajustes:</label>
+		              <div class="input-group input-group-outline mb-3">
+                      <textarea class="form-control" th:field="*{mensagem}" rows="5" disabled></textarea>
+                      <input type="hidden" th:field="*{mensagem}">
+                     </div>
+                     </div>
                   		<label >CNPJ</label>
 	                    <div class=" input-group input-group-outline mb-3 ">
 	                      <input type="text" class="form-control" th:field="*{cnpj}" disabled>
@@ -409,6 +416,12 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 	                    <div class="input-group input-group-outline mb-3">
 	                      <input type="text" class="form-control" th:field="*{endereco.complemento}">
 	                    </div>
+	                    <div sec:authorize="hasRole('GESTOR')">
+		              <br><label>Comentário:</label>
+		              <div class="input-group input-group-outline mb-3">
+                      <textarea class="form-control" th:field="*{mensagem}" rows="5" placeholder="Ajustes a serem realizados"></textarea>
+                   	  </div>
+                    </div> 
             </div>
           </div>
 		<div class="card mt-4">
