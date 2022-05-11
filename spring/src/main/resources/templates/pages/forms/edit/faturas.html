@@ -367,6 +367,13 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
             </div>
             <div class="card-body p-3 pb-0">
               <div class="card-body">
+               		<div sec:authorize="hasRole('DIGITADOR')" th:if="${conta.status == 'Reprovado'}">
+              		 <label>Comentário para ajustes:</label>
+		              <div class="input-group input-group-outline mb-3">
+                      <textarea class="form-control" th:field="*{mensagem}" rows="5" disabled></textarea>
+                      <input type="hidden" th:field="*{mensagem}">
+                     </div>
+                     </div>
                     <label >Código</label>
                     <div class="input-group input-group-outline mb-3">
                       <input type="text" class="form-control" th:field=*{codi} disabled>
@@ -432,6 +439,12 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                     </div>
          			Arquivo pdf da conta:<br><a type="button" class="btn btn-primary" th:href="@{'/download/'+${conta.fatura.id}}" download>Download</a>
                      <a type="button" class="btn btn-primary" th:href="@{'/inserirFatura/'+${conta.fatura.id}}">Inserir Novo</a>
+		              <div sec:authorize="hasRole('GESTOR')">
+		              <label>Comentário:</label>
+		              <div class="input-group input-group-outline mb-3">
+                      <textarea class="form-control" th:field="*{mensagem}" rows="5" placeholder="Ajustes a serem realizados"></textarea>
+                   	  </div>
+                    </div>   
          			<input type="hidden" th:field="*{fatura}">
          			<input type="hidden" th:field="*{notificacoes}">
             </div>
