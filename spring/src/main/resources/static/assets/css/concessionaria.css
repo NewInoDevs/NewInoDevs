@@ -18,12 +18,6 @@
     padding-left: 9.5rem;
 }
 
-.subtitle {
-    text-align : center;
-    padding-bottom: 1rem;
-    color: #868ba2;
-}
-
 .bt {
     display: inline-block; 
     content: flex-end; 

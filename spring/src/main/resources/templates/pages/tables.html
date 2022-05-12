@@ -421,7 +421,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                         <a th:href="@{/conta/{codi}(codi=${conta.codi})}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Editar
                         </a>
-                        <a onclick="javascript:return confirm('Você tem certeza que quer excluir esta conta?')" 
+                        <a sec:authorize="hasAnyRole('ADMINISTRADOR', 'GESTOR')" onclick="javascript:return confirm('Você tem certeza que quer excluir esta conta?')" 
                 		th:href="@{/excluirConta/{codi}(codi=${conta.codi})}" 
                 		href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">Excluir</a>
                       </td>
@@ -488,7 +488,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                         <a th:href="@{/concessionaria/{codigo}(codigo=${concessionaria.codigo})}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Editar
                         </a>
-                        <a onclick="javascript:return confirm('Você tem certeza que quer excluir essa concessionaria? \n\nAo excluir essa concessionaria, todos os outros contratos associados a ela também serão excluídos e, consequentemente, as contas associadas a esse contrato também serão.')" 
+                        <a sec:authorize="hasAnyRole('ADMINISTRADOR', 'GESTOR')" onclick="javascript:return confirm('Você tem certeza que quer excluir essa concessionaria? \n\nAo excluir essa concessionaria, todos os outros contratos associados a ela também serão excluídos e, consequentemente, as contas associadas a esse contrato também serão.')" 
                 		th:href="@{/excluirConcessionaria/{codigo}(codigo=${concessionaria.codigo})}" 
                 		href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">Excluir</a>
                       </td>
@@ -563,7 +563,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                         <a th:href="@{/unidade/{cnpj}(cnpj = ${unidade.cnpj})}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Editar
                         </a>
-                        <a onclick="javascript:return confirm('Você tem certeza que quer excluir essa unidade? \n\nAo excluir essa unidade, todas os outros contratos associados a ela também serão excluídos e, consequentemente, as contas associadas a esse contrato também serão.')" 
+                        <a sec:authorize="hasAnyRole('ADMINISTRADOR', 'GESTOR')" onclick="javascript:return confirm('Você tem certeza que quer excluir essa unidade? \n\nAo excluir essa unidade, todas os outros contratos associados a ela também serão excluídos e, consequentemente, as contas associadas a esse contrato também serão.')" 
                 		th:href="@{/excluirUnidade/{cnpj}(cnpj=${unidade.cnpj})}"
                 		href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">Excluir</a>
 					  </td>
@@ -630,7 +630,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                         <a th:href="@{/contrato/{codigo}(codigo = ${contrato.codigo})}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                           Editar
                         </a>
-                        <a onclick="javascript:return confirm('Você tem certeza que quer excluir esse contrato? \n\nAo excluir esse contrato, todas as outras contas associadas a ela também será excluídas')" 
+                        <a sec:authorize="hasAnyRole('ADMINISTRADOR', 'GESTOR')" onclick="javascript:return confirm('Você tem certeza que quer excluir esse contrato? \n\nAo excluir esse contrato, todas as outras contas associadas a ela também será excluídas')" 
                 		th:href="@{/excluirContrato/{codigo}(codigo=${contrato.codigo})}"
                 		href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">Excluir</a>
                       </td>

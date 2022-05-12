@@ -14,12 +14,6 @@
     border-radius: 2rem;
 }
 
-.subtitle {
-    text-align : center;
-    padding-bottom: 1rem;
-    color: #868ba2;
-}
-
 .bt2 {
     display: inline-block; 
     content: flex-end; 
@@ -27,16 +21,12 @@
     padding-bottom: 4%;
 }
 
-.sub-main-right {
-    display: inline-block; 
-    margin-left: 20%;
-}
-.sub-main-left {
-    display: inline-block; 
-    margin-left: 20%;
-}
+
 
 .space {
-    margin-top: 2rem;
-    margin-left: 23rem;
+    margin-left: 12%;
+}
+
+.tam {
+	width: 200%;
 }
