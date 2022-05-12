@@ -364,27 +364,28 @@
           <div class="card mt-4">
             <div class="card-header p-3">
               <h2 class="mb-0">Cadastro de Usuários</h2>
+			  <h5 class="mx-0">(use pontuação)</h5>
             </div>
             <div class="card-body p-3 pb-0">
               <div class="card-body">
                  <form th:action="@{/salvarUsuario}" th:object="${usuario}" method="POST">
-                  		<label >Nome</label>
+                  		<label class="subtitle" >Nome</label>
 	                    <div class=" input-group input-group-outline mb-3 ">
-	                      <input type="text" class= "form-control" name="nome" id="nome" th:field="*{nome}" required>
+	                      <input type="text" class= "form-control subtitle" name="nome" id="nome" th:field="*{nome}" required>
 	                    </div>
-	                      <label >Sobreome</label>
+	                      <label class="subtitle">Sobreome</label>
 	                    <div class="input-group input-group-outline mb-3">
-	                      <input type="text" class="form-control" name="sobrenome" id="sobrenome" th:field="*{sobrenome}" required>
+	                      <input type="text" class="form-control subtitle" name="sobrenome" id="sobrenome" th:field="*{sobrenome}" required>
 	                    </div>
-	                      <label >Username</label>
+	                      <label class="subtitle">Username</label>
 	                    <div class="input-group input-group-outline mb-3">
 	                      <input type="text" class="form-control" name="username" id="username" th:field="*{username}" required>
 	                    </div> 
-	                    <label >Senha</label>
+	                    <label class="subtitle">Senha</label>
 	                    <div class="input-group input-group-outline mb-3">
-	                      <input type="password" class="form-control" name="senha" id="senha" th:field="*{senha}" required>
+	                      <input type="password" class="form-control subtitle" name="senha" id="senha" th:field="*{senha}" required>
 	                    </div>   
-	                    <div id="secao">Seção:
+	                    <div class="subtitle" id="secao">Seção:
 					        <br>
 					        <input type="radio" id="administrador" name="usuario" value="ROLE_ADMINISTRADOR" th:field="*{secao}">
 					        <label for="administrador">Adiministrador  </label>
@@ -400,10 +401,7 @@
           </div>
           <div class="card mt-4">
             <div class="card-header p-3">
-              <h5 class="mb-0">Atenção</h5>
-              <p class="text-sm mb-0">
-                Leia com atenção antes de qualquer ação. 
-              </p>
+              <h5 class="mb-0">Leia com atenção antes de qualquer ação.</h5>
             </div>
             <div class="card-body p-3">
               <div class="row">
