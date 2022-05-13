@@ -65,7 +65,7 @@ do contrato).<br>
 🟢- Baixa,
 🔵- Seria bom ter.<br></h5>
 
-<h1 align="center"><img src = "https://github.com/NewInoDevs/NewInoDevs/blob/2ºSprint/Artefatos/SprintBacklog.png" width="35%"></h1>
+<h1 align="center"><img src = "https://github.com/NewInoDevs/NewInoDevs/blob/2ºSprint/Artefatos/SprintBacklog2.png" width="35%"></h1>
 <br>
 
 ## :computer: Wireframe
