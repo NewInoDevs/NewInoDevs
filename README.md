@@ -57,7 +57,7 @@ do contrato).<br>
 
 ## Backlog
 
-<h1 align="center"><img src = "https://github.com/NewInoDevs/NewInoDevs/blob/1º-Sprint/Artefatos/Backlog.jpg" width="80%"></h1>
+<h1 align="center"><img src = "https://github.com/NewInoDevs/NewInoDevs/blob/2ºSprint/Artefatos/BacklogTotal.png" width="80%"></h1>
 
 <h5 align="center">Prioridade:<br>
 🔴- Alta,
@@ -65,7 +65,7 @@ do contrato).<br>
 🟢- Baixa,
 🔵- Seria bom ter.<br></h5>
 
-<h1 align="center"><img src = "" width="35%"></h1>
+<h1 align="center"><img src = "https://github.com/NewInoDevs/NewInoDevs/blob/2ºSprint/Artefatos/SprintBacklog.png" width="35%"></h1>
 <br>
 
 ## :computer: Wireframe
