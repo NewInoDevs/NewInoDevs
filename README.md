@@ -83,8 +83,25 @@ Acesse o link para visualizar:
 * **Ferramentas:** GitHub, VS Code, Eclipse IDE, Canva, Excel,Figma e Jira.
 <br>
   
-## :gear: Execução 
+# :gear: Execução:
+
+## Perfil digitador
+
 <h1 align="center"><img src = " " width="100%" height="580px"></h1>
+Cadastra contas,concessionárias, unidades e contratos. Os formularios possuem preenchimento automático das informações que são usadas em mais de um cadastro e do estado, município, bairro e rua após inserção do cep. A navegação nos formulários pode ser feita pelo tab, esse perfil recebe notificações caso o cadastro seja reprovado com comentários do gestor.
+<br>
+
+## Perfil gestor
+
+<h1 align="center"><img src = " " width="100%" height="580px"></h1>
+Possui acesso as tabelas de cadastros realizados pelos digitadores(tabelas de contas,concessionária, unidade e contratos), recebe notificações quando os cadastros são realizados para aprova-los caso corretos, existindo erros ele pode reprova-los e deixar um comentário para o digitador. Esse perfil também pode excluir os cadastros ou edita-los. 
+<br>
+
+
+## Perfil administrador
+
+<h1 align="center"><img src = " " width="100%" height="580px"></h1>
+Possui acesso as tabelas, pode cadastrar, editar ou excluir perfis(adm,gestor,digitador) no sistema.
 <br>
 
 ## :mortar_board: Dev Team
