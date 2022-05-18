@@ -1,8 +1,12 @@
 package com.api.inodevs.controle;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,9 +16,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.api.inodevs.entidades.Notificacoes;
+import com.api.inodevs.entidades.Registros;
 import com.api.inodevs.entidades.Unidade;
+import com.api.inodevs.entidades.Usuario;
 import com.api.inodevs.repositorio.NotificacoesRepositorio;
+import com.api.inodevs.repositorio.RegistrosRepositorio;
 import com.api.inodevs.repositorio.UnidadeRepositorio;
+import com.api.inodevs.repositorio.UsuarioRepositorio;
 
 //Classe de controle que permite a navegação e funcionalidades no sistema:
 @Controller
@@ -25,6 +33,10 @@ public class ControleUnidade {
 	private UnidadeRepositorio unidadeRepo;
 	@Autowired
 	private NotificacoesRepositorio notificacoesRepo;
+	@Autowired
+	private RegistrosRepositorio registrosRepo;
+	@Autowired
+	private UsuarioRepositorio usuarioRepo;
 	
 	// Entrar na página de cadastro de unidade com o modelo da entidade com o modelo da entidade:
 	@GetMapping("/cadastroUnidade")
@@ -42,12 +54,21 @@ public class ControleUnidade {
 	
 	// Salvar uma unidade e endereço no banco ao clicar em cadastrar:
 	@PostMapping("/salvarUnidade")
-    public String salvarUnidade(@ModelAttribute("unidade") Unidade unidade, RedirectAttributes redirect) {
+    public String salvarUnidade(@ModelAttribute("unidade") Unidade unidade, RedirectAttributes redirect, @Param("username") String username) {
         Notificacoes notificacoes = new Notificacoes("ROLE_GESTOR", "Unidade");
         redirect.addFlashAttribute("successo", "Cadastrado com sucesso!");
         unidade.setNotificacoes(notificacoes);
         unidade.setStatus("Pendente");
         unidadeRepo.save(unidade);
+        Registros registros = new Registros();
+        registros.setAtividade("cadastrou uma unidade");
+        registros.setData_atividade(LocalDateTime.now ());
+		Optional <Usuario> usuarioOpt = usuarioRepo.findById(Long.parseLong(username, 10));
+		if (usuarioOpt.isEmpty()) {
+			throw new IllegalArgumentException("Usuário inválido");
+		}
+        registros.setUsuario(usuarioOpt.get());
+        registrosRepo.save(registros);
         return "redirect:cadastroUnidade";
     }
 	
@@ -94,12 +115,21 @@ public class ControleUnidade {
 	
 	// Excluir uma unidade (junto com o seu endereço) ao clicar em excluir na tabela:
 	@GetMapping("/excluirUnidade/{cnpj}")
-    public String excluirUnidade(@PathVariable("cnpj") long cnpj) {
+    public String excluirUnidade(@PathVariable("cnpj") long cnpj, @AuthenticationPrincipal User usuario) {
         Optional<Unidade> unidadeOpt = unidadeRepo.findById(cnpj);
         if (unidadeOpt.isEmpty()) {
             throw new IllegalArgumentException("Unidade inválido");
         }
         unidadeRepo.deleteById(cnpj);
+        Registros registros = new Registros();
+        registros.setAtividade("excluiu uma unidade");
+        registros.setData_atividade(LocalDateTime.now ());
+		Optional <Usuario> usuarioOpt = usuarioRepo.findById(Long.parseLong(usuario.getUsername(), 10));
+		if (usuarioOpt.isEmpty()) {
+			throw new IllegalArgumentException("Usuário inválido");
+		}
+        registros.setUsuario(usuarioOpt.get());
+        registrosRepo.save(registros);
         return "redirect:/tabela";
     }
 	

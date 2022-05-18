@@ -1,8 +1,12 @@
 package com.api.inodevs.controle;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,8 +17,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.api.inodevs.entidades.Concessionaria;
 import com.api.inodevs.entidades.Notificacoes;
+import com.api.inodevs.entidades.Registros;
+import com.api.inodevs.entidades.Usuario;
 import com.api.inodevs.repositorio.ConcessionariaRepositorio;
 import com.api.inodevs.repositorio.NotificacoesRepositorio;
+import com.api.inodevs.repositorio.RegistrosRepositorio;
+import com.api.inodevs.repositorio.UsuarioRepositorio;
 
 // Classe de controle que permite a navegação e funcionalidades no sistema:
 @Controller
@@ -25,6 +33,10 @@ public class ControleConcessionaria {
 	private ConcessionariaRepositorio concessionariaRepo;
 	@Autowired
 	private NotificacoesRepositorio notificacoesRepo;
+	@Autowired
+	private RegistrosRepositorio registrosRepo;
+	@Autowired
+	private UsuarioRepositorio usuarioRepo;
 	
 	// Entrar na página de cadastro de concessionária com o modelo da entidade:
 	@GetMapping("/cadastroConcessionaria")
@@ -43,12 +55,21 @@ public class ControleConcessionaria {
 	
 	// Salvar uma concessionária no banco ao clicar em cadastrar:
 	@PostMapping("/salvarConcessionaria")
-    public String salvarConcessionaria(@ModelAttribute("concessionaria") Concessionaria concessionaria, RedirectAttributes redirect) {
+    public String salvarConcessionaria(@ModelAttribute("concessionaria") Concessionaria concessionaria, RedirectAttributes redirect, @Param("username") String username) {
         Notificacoes notificacoes = new Notificacoes("ROLE_GESTOR", "Concessionaria");
         redirect.addFlashAttribute("successo", "Cadastrado com sucesso!");
         concessionaria.setNotificacoes(notificacoes);
         concessionaria.setStatus("Pendente");
         concessionariaRepo.save(concessionaria);
+        Registros registros = new Registros();
+        registros.setAtividade("cadastrou uma concessionaria");
+        registros.setData_atividade(LocalDateTime.now ());
+		Optional <Usuario> usuarioOpt = usuarioRepo.findById(Long.parseLong(username, 10));
+		if (usuarioOpt.isEmpty()) {
+			throw new IllegalArgumentException("Usuário inválido");
+		}
+        registros.setUsuario(usuarioOpt.get());
+        registrosRepo.save(registros);
         return "redirect:cadastroConcessionaria";
     }
 	
@@ -95,12 +116,21 @@ public class ControleConcessionaria {
 	
 	// Excluir uma concessionária ao clicar em excluir na tabela:
 	@GetMapping("/excluirConcessionaria/{codigo}")
-    public String excluirConcessionaria(@PathVariable("codigo") long codigo) {
+    public String excluirConcessionaria(@PathVariable("codigo") long codigo, @AuthenticationPrincipal User usuario) {
         Optional<Concessionaria> concessionariaOpt = concessionariaRepo.findById(codigo);
         if (concessionariaOpt.isEmpty()) {
             throw new IllegalArgumentException("Concessionaria inválido");
         }
         concessionariaRepo.deleteById(codigo);
+        Registros registros = new Registros();
+        registros.setAtividade("excluiu uma concessionaria");
+        registros.setData_atividade(LocalDateTime.now ());
+		Optional <Usuario> usuarioOpt = usuarioRepo.findById(Long.parseLong(usuario.getUsername(), 10));
+		if (usuarioOpt.isEmpty()) {
+			throw new IllegalArgumentException("Usuário inválido");
+		}
+        registros.setUsuario(usuarioOpt.get());
+        registrosRepo.save(registros);
         return "redirect:/tabela";
     }
 	
