@@ -18,13 +18,6 @@
     padding-left: 10%;
 }
 
-.subtitle {
-    text-align : center;
-    padding-bottom: 1rem;
-    color: #868ba2;
-    font-size: 1rem;
-}
-
 .bt2 {
     display: inline-block; 
     content: flex-end; 
@@ -32,11 +25,3 @@
     padding-bottom: 4%;
 }
 
-.sub-main-right {
-    display: inline-block; 
-    margin-left: 20%;
-}
-.sub-main-left {
-    display: inline-block; 
-    margin-left: 20%;
-}

@@ -1,5 +1,6 @@
 package com.api.inodevs.controle;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.api.inodevs.entidades.Concessionaria;
 import com.api.inodevs.entidades.Contrato;
 import com.api.inodevs.entidades.Notificacoes;
+import com.api.inodevs.entidades.Registros;
 import com.api.inodevs.entidades.Unidade;
 import com.api.inodevs.repositorio.ConcessionariaRepositorio;
 import com.api.inodevs.repositorio.ContratoRepositorio;
 import com.api.inodevs.repositorio.NotificacoesRepositorio;
+import com.api.inodevs.repositorio.RegistrosRepositorio;
 import com.api.inodevs.repositorio.UnidadeRepositorio;
 
 //Classe de controle que permite a navegação e funcionalidades no sistema:
@@ -33,6 +36,8 @@ public class ControleContrato {
 	private UnidadeRepositorio unidadeRepo;
 	@Autowired
 	private NotificacoesRepositorio notificacoesRepo;
+	@Autowired
+	private RegistrosRepositorio registrosRepo;
 	
 	// Entrar na página de cadastro de contrato com o modelo da entidade:
 	@GetMapping("/cadastroContrato")
@@ -64,6 +69,10 @@ public class ControleContrato {
         contrato.setNotificacoes(notificacoes);
         contrato.setStatus("Pendente");
         contratoRepo.save(contrato);
+		Registros registros = new Registros();
+        registros.setAtividade("Cadastrou um contrato");
+        registros.setData_atividade(LocalDateTime.now ());
+        registrosRepo.save(registros);
         return "redirect:cadastroContrato";
     }
 	
@@ -118,6 +127,10 @@ public class ControleContrato {
             throw new IllegalArgumentException("Contrato inválido");
         }
         contratoRepo.deleteById(codigo);
+        Registros registros = new Registros();
+        registros.setAtividade("Cadastrou uma concessionaria");
+        registros.setData_atividade(LocalDateTime.now ());
+        registrosRepo.save(registros);
         return "redirect:/tabela";
     }
 

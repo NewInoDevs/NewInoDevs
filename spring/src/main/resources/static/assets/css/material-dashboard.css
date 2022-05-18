@@ -27390,3 +27390,19 @@ navbar-vertical .nav-item:hover .navigation {
 	text-align: center;
 	margin: 2% 0 0 40%;
 }
+
+.subtitle {
+    color: #868ba2;
+    font-size: 1.3rem;
+}
+
+.sub-main-right {
+    display: inline-block; 
+    margin-left: 15%;
+    width: 30%
+}
+.sub-main-left {
+    display: inline-block; 
+    margin-left: 12%;
+	width: 30%
+}

@@ -10,7 +10,7 @@ public class ControleDashboard {
 	// Entrar no dashboard:
 	@GetMapping("/")
 	public String dash() {
-		return "index";
+		return "pages/dashboard";
 	}
 	
 }

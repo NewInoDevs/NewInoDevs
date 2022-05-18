@@ -53,6 +53,7 @@ public class SegurancaConfig extends WebSecurityConfigurerAdapter {
 			.and()
 				// Adicionando página de login personalizada:
 				.formLogin()
+				.defaultSuccessUrl("/tabela", true)
 				.loginPage("/login") 
 				.permitAll()
 			.and()

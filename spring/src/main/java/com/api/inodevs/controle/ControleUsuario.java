@@ -1,5 +1,6 @@
 package com.api.inodevs.controle;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.api.inodevs.entidades.Registros;
 import com.api.inodevs.entidades.Usuario;
 import com.api.inodevs.repositorio.NotificacoesRepositorio;
+import com.api.inodevs.repositorio.RegistrosRepositorio;
 import com.api.inodevs.repositorio.UsuarioRepositorio;
 
 @Controller
@@ -24,6 +27,8 @@ public class ControleUsuario {
 	private UsuarioRepositorio usuarioRepo;
 	@Autowired
 	private NotificacoesRepositorio notificacoesRepo;
+	@Autowired
+	private RegistrosRepositorio registrosRepo;
 	
 	// Entrar na página de Login
 	@GetMapping("/login")
@@ -68,6 +73,10 @@ public class ControleUsuario {
 		String senhaCriptografada = new BCryptPasswordEncoder().encode(usuario.getSenha()); // Criptografando senha
 		usuario.setSenha(senhaCriptografada); // Inserindo a senha criptografada
 		usuarioRepo.save(usuario);
+		Registros registros = new Registros();
+        registros.setAtividade("Cadastrou uma usuário");
+        registros.setData_atividade(LocalDateTime.now ());
+        registrosRepo.save(registros);
 		redirect.addFlashAttribute("sucesso", "Usuário salvo com sucesso!");
 		return "redirect:/controleUsuario";
 	}
@@ -107,6 +116,10 @@ public class ControleUsuario {
 			throw new IllegalArgumentException("Usuário inválido");
 		}
 		usuarioRepo.deleteById(username);
+        Registros registros = new Registros();
+        registros.setAtividade("Cadastrou uma concessionaria");
+        registros.setData_atividade(LocalDateTime.now ());
+        registrosRepo.save(registros);
 		return "redirect:/controleUsuario";
 	}
 	

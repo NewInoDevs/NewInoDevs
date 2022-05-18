@@ -1,6 +1,7 @@
 package com.api.inodevs.controle;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,11 @@ import com.api.inodevs.entidades.Conta;
 import com.api.inodevs.entidades.Contrato;
 import com.api.inodevs.entidades.Fatura;
 import com.api.inodevs.entidades.Notificacoes;
+import com.api.inodevs.entidades.Registros;
 import com.api.inodevs.repositorio.ContaRepositorio;
 import com.api.inodevs.repositorio.ContratoRepositorio;
 import com.api.inodevs.repositorio.NotificacoesRepositorio;
+import com.api.inodevs.repositorio.RegistrosRepositorio;
 
 //Classe de controle que permite a navegação e funcionalidades no sistema:
 @Controller
@@ -33,6 +36,8 @@ public class ControleConta {
 	private ContratoRepositorio contratoRepo;
 	@Autowired
 	private NotificacoesRepositorio notificacoesRepo;
+	@Autowired
+	private RegistrosRepositorio registrosRepo;
 	
 	// Entrar na página de cadastro de conta com o modelo da entidade:
 	@GetMapping("/cadastroConta")
@@ -70,6 +75,10 @@ public class ControleConta {
 		Notificacoes notificacoes = new Notificacoes("ROLE_GESTOR", "Conta");
 		conta.setNotificacoes(notificacoes);
 		contaRepo.save(conta);
+		Registros registros = new Registros();
+        registros.setAtividade("Cadastrou uma conta");
+        registros.setData_atividade(LocalDateTime.now ());
+        registrosRepo.save(registros);
 		return "redirect:cadastroConta";
 	}
 	
@@ -123,6 +132,10 @@ public class ControleConta {
             throw new IllegalArgumentException("Conta inválido");
         }
         contaRepo.deleteById(codi);
+        Registros registros = new Registros();
+        registros.setAtividade("Cadastrou uma concessionaria");
+        registros.setData_atividade(LocalDateTime.now ());
+        registrosRepo.save(registros);
         return "redirect:/tabela";
     }
 	

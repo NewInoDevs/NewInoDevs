@@ -1,5 +1,6 @@
 package com.api.inodevs.controle;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.api.inodevs.entidades.Notificacoes;
+import com.api.inodevs.entidades.Registros;
 import com.api.inodevs.entidades.Unidade;
 import com.api.inodevs.repositorio.NotificacoesRepositorio;
+import com.api.inodevs.repositorio.RegistrosRepositorio;
 import com.api.inodevs.repositorio.UnidadeRepositorio;
 
 //Classe de controle que permite a navegação e funcionalidades no sistema:
@@ -25,6 +28,8 @@ public class ControleUnidade {
 	private UnidadeRepositorio unidadeRepo;
 	@Autowired
 	private NotificacoesRepositorio notificacoesRepo;
+	@Autowired
+	private RegistrosRepositorio registrosRepo;
 	
 	// Entrar na página de cadastro de unidade com o modelo da entidade com o modelo da entidade:
 	@GetMapping("/cadastroUnidade")
@@ -48,6 +53,10 @@ public class ControleUnidade {
         unidade.setNotificacoes(notificacoes);
         unidade.setStatus("Pendente");
         unidadeRepo.save(unidade);
+		Registros registros = new Registros();
+        registros.setAtividade("Cadastrou uma conta");
+        registros.setData_atividade(LocalDateTime.now ());
+        registrosRepo.save(registros);
         return "redirect:cadastroUnidade";
     }
 	
@@ -100,6 +109,10 @@ public class ControleUnidade {
             throw new IllegalArgumentException("Unidade inválido");
         }
         unidadeRepo.deleteById(cnpj);
+        Registros registros = new Registros();
+        registros.setAtividade("Cadastrou uma concessionaria");
+        registros.setData_atividade(LocalDateTime.now ());
+        registrosRepo.save(registros);
         return "redirect:/tabela";
     }
 	
