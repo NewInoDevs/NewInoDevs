@@ -83,7 +83,14 @@
             <span class="nav-link-text ms-1">Perfis</span>
           </a>
         </li>
-
+		<li class="nav-item">
+          <a class="nav-link text-white" href="/log" sec:authorize="hasAnyRole('ADMINISTRADOR', 'GESTOR')">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
+            <span class="nav-link-text ms-1">Histórico</span>
+          </a>
+        </li>
 <!--  
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
@@ -137,15 +144,35 @@
             </div>
           </div>
           <ul class="navbar-nav  justify-content-end">
-            <li class="nav-item d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
+            <li class="nav-item dropdown pe-2 d-flex align-items-center">
+              <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-user me-sm-1"></i>
+              </a>
+              <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
+                <li class="mb-2">
+                  <a class="dropdown-item border-radius-md" href="javascript:;">
+                    <div class="d-flex py-1">
+                      <div class="my-auto">
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <p class="text-xs mb-0">
+                          <i class="fa fa-clock me-1"></i>
+                          Nome: Japoneis
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                  </li>
+                  <li class="nav-item d-flex align-items-center">
+              <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
                 <form class="d-sm-inline d-none" action="/logout" method="post">
 					<input type="submit" value="Sair">      		
 					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 				</form>
               </a>
             </li>
+                </li>
+             </ul>   
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
                 <div class="sidenav-toggler-inner">
@@ -160,78 +187,206 @@
                 <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
               </a>
             </li>
-            <li class="nav-item dropdown pe-2 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+              <li class="nav-item dropdown pe-2 d-flex align-items-center">
+              <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" sec:authorize="hasRole('GESTOR')">
+                <i th:if="${quantidadeConta == 0 && quantidadeContrato == 0 && quantidadeConcessionaria == 0 && quantidadeUnidade == 0}" class="fa fa-bell cursor-pointer"></i>
+                <i th:if="${quantidadeConta != 0 || quantidadeContrato != 0 || quantidadeConcessionaria != 0 || quantidadeUnidade != 0}" class="fa fa-bell cursor-pointer" style="color:red;"></i>
+              </a>
+             <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" sec:authorize="hasRole('DIGITADOR')">
+                <i th:if="${quantidadeContaRep == 0 && quantidadeContratoRep == 0 && quantidadeConcessionariaRep == 0 && quantidadeUnidadeRep == 0}" class="fa fa-bell cursor-pointer"></i>
+                <i th:if="${quantidadeContaRep != 0 || quantidadeContratoRep != 0 || quantidadeConcessionariaRep != 0 || quantidadeUnidadeRep != 0}" class="fa fa-bell cursor-pointer" style="color:red;"></i>
+              </a>
+             <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" sec:authorize="hasRole('ADMINISTRADOR')">
                 <i class="fa fa-bell cursor-pointer"></i>
               </a>
               <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
-                               <li class="mb-2">
-                  <a class="dropdown-item border-radius-md" href="javascript:;">
+                <li class="mb-2" sec:authorize="hasRole('GESTOR')" th:if="${quantidadeConta != 0}">
+                  <a class="dropdown-item border-radius-md" href="/tabela">
                     <div class="d-flex py-1">
                       <div class="my-auto">
-                        <img src="../assets/img/icons/accountIcon.png" class="avatar avatar-sm  me-3 ">
+                        <img src="../assets/img/Icons/pendente.png" class="avatar avatar-sm  me-3 ">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1">
-                          <span class="font-weight-bold">Novo cadastro </span> conta de água
+                          <span class="font-weight-bold">Contas Pendentes</span>
                         </h6>
                         <p class="text-xs text-secondary mb-0">
-                          <i class="fa fa-clock me-1"></i>
-                          13 minutes ago
+                          Quantidade de cadastros:  <span th:text="${quantidadeConta}"></span>
                         </p>
                       </div>
                     </div>
                   </a>
                 </li>
-                <li class="mb-2">
-                  <a class="dropdown-item border-radius-md" href="javascript:;">
+                 <li class="mb-2" sec:authorize="hasRole('GESTOR')" th:if="${quantidadeConcessionaria != 0}">
+                  <a class="dropdown-item border-radius-md" href="/tabela">
                     <div class="d-flex py-1">
                       <div class="my-auto">
-                        <img src="../assets/img/icons/accountIcon.png" class="avatar avatar-sm bg-gradient-dark  me-3 ">
+                        <img src="../assets/img/Icons/pendente.png" class="avatar avatar-sm  me-3 ">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1">
-                          <span class="font-weight-bold">Conta aprovada(Água) </span> by Gestor
+                          <span class="font-weight-bold">Concessionárias Pendentes</span>
                         </h6>
                         <p class="text-xs text-secondary mb-0">
-                          <i class="fa fa-clock me-1"></i>
-                          1 day
+                          Quantidade de cadastros: <span th:text="${quantidadeConcessionaria}">.</span>
                         </p>
                       </div>
                     </div>
                   </a>
                 </li>
-
-                  <a class="dropdown-item border-radius-md" href="javascript:;">
+               <li class="mb-2" sec:authorize="hasRole('GESTOR')" th:if="${quantidadeUnidade != 0}">
+                  <a class="dropdown-item border-radius-md" href="/tabela">
                     <div class="d-flex py-1">
-                      <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
-                        <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                          <title>credit-card</title>
-                          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                            <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
-                              <g transform="translate(1716.000000, 291.000000)">
-                                <g transform="translate(453.000000, 454.000000)">
-                                  <path class="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" opacity="0.593633743"></path>
-                                  <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
-                                </g>
-                              </g>
-                            </g>
-                          </g>
-                        </svg>
+                      <div class="my-auto">
+                        <img src="../assets/img/Icons/pendente.png" class="avatar avatar-sm  me-3 ">
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="text-sm font-weight-normal mb-1">
-                          Payment successfully completed
+                          <span class="font-weight-bold">Unidades Pendentes</span>
                         </h6>
                         <p class="text-xs text-secondary mb-0">
-                          <i class="fa fa-clock me-1"></i>
-                          2 days
+                          Quantidade de cadastros: <span th:text="${quantidadeUnidade}">.</span>
                         </p>
                       </div>
                     </div>
                   </a>
                 </li>
-              </ul>
+               	<li class="mb-2" sec:authorize="hasRole('GESTOR')" th:if="${quantidadeContrato != 0}">
+                  <a class="dropdown-item border-radius-md" href="/tabela">
+                    <div class="d-flex py-1">
+                      <div class="my-auto">
+                        <img src="../assets/img/Icons/pendente.png" class="avatar avatar-sm  me-3 ">
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1">
+                          <span class="font-weight-bold">Contratos Pendentes</span>
+                        </h6>
+                        <p class="text-xs text-secondary mb-0">
+                          Quantidade de cadastros: <span th:text="${quantidadeContrato}"></span>
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li class="mb-2" sec:authorize="hasRole('GESTOR')" th:if="${quantidadeContrato == 0 && quantidadeConta == 0 && quantidadeConcessionaria == 0 && quantidadeUnidade == 0}">
+                  <a class="dropdown-item border-radius-md">
+                    <div class="d-flex py-1">
+                     <div class="my-auto">
+                        <img src="../assets/img/Icons/fantasma.png" class="avatar avatar-sm  me-3 ">
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1">
+                          <span class="font-weight-bold"> Não há notificações </span>
+                        </h6>
+                        <p class="text-xs text-secondary mb-0">
+                          Sem cadastros pendentes.
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li class="mb-2" sec:authorize="hasRole('DIGITADOR')" th:if="${quantidadeContaRep != 0}">
+                  <a class="dropdown-item border-radius-md" href="/tabela">
+                    <div class="d-flex py-1">
+                      <div class="my-auto">
+                        <img src="../assets/img/Icons/reprovado.png" class="avatar avatar-sm  me-3 ">
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1">
+                          <span class="font-weight-bold">Contas Reprovadas</span>
+                        </h6>
+                        <p class="text-xs text-secondary mb-0">
+                           Quantidade de cadastros: <span th:text="${quantidadeContaRep}"></span>
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                 <li class="mb-2" sec:authorize="hasRole('DIGITADOR')" th:if="${quantidadeConcessionariaRep != 0}">
+                  <a class="dropdown-item border-radius-md" href="/tabela">
+                    <div class="d-flex py-1">
+                      <div class="my-auto">
+                        <img src="../assets/img/Icons/reprovado.png" class="avatar avatar-sm  me-3 ">
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1">
+                          <span class="font-weight-bold">Concessionárias Reprovadas</span>
+                        </h6>
+                        <p class="text-xs text-secondary mb-0">
+                           Quantidade de cadastros: <span th:text="${quantidadeConcessionariaRep}"></span>
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+               <li class="mb-2" sec:authorize="hasRole('DIGITADOR')" th:if="${quantidadeUnidadeRep != 0}">
+                  <a class="dropdown-item border-radius-md" href="/tabela">
+                    <div class="d-flex py-1">
+                      <div class="my-auto">
+                        <img src="../assets/img/Icons/reprovado.png" class="avatar avatar-sm  me-3 ">
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1">
+                          <span class="font-weight-bold">Unidades Reprovadas</span>
+                        </h6>
+                        <p class="text-xs text-secondary mb-0">
+                           Quantidade de cadastros: <span th:text="${quantidadeUnidadeRep}"></span>
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+               	<li class="mb-2" sec:authorize="hasRole('DIGITADOR')" th:if="${quantidadeContratoRep != 0}">
+                  <a class="dropdown-item border-radius-md" href="/tabela">
+                    <div class="d-flex py-1">
+                      <div class="my-auto">
+                        <img src="../assets/img/Icons/reprovado.png" class="avatar avatar-sm  me-3 ">
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1">
+                          <span class="font-weight-bold">Contratos Reprovados</span>
+                        </h6>
+                        <p class="text-xs text-secondary mb-0">
+                          Quantidade de reprovados:: <span th:text="${quantidadeContratoRep}"></span>
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li class="mb-2" sec:authorize="hasRole('DIGITADOR')" th:if="${quantidadeContratoRep == 0 && quantidadeContaRep == 0 && quantidadeConcessionariaRep == 0 && quantidadeUnidadeRep == 0}">
+                  <a class="dropdown-item border-radius-md">
+                    <div class="d-flex py-1">
+                    <div class="my-auto">
+                        <img src="../assets/img/Icons/fantasma.png" class="avatar avatar-sm  me-3 ">
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1">
+                          <span class="font-weight-bold"> Não há notificações </span>
+                        </h6>
+                        <p class="text-xs text-secondary mb-0">
+                          Sem cadastros reprovados.
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                 <li class="mb-2" sec:authorize="hasRole('ADMINISTRADOR')" >
+                  <a class="dropdown-item border-radius-md">
+                    <div class="d-flex py-1">
+                    <div class="my-auto">
+                        <img src="../assets/img/Icons/fantasma.png" class="avatar avatar-sm  me-3 ">
+                      </div>
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="text-sm font-weight-normal mb-1">
+                          <span class="font-weight-bold"> Não há notificações </span>
+                        </h6>
+                        <p class="text-xs text-secondary mb-0">
+                          Sem notificaçõess.
+                        </p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
             </li>
           </ul>
         </div>
