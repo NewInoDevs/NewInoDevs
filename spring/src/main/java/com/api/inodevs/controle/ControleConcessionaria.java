@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -114,15 +116,20 @@ public class ControleConcessionaria {
 	
 	// Excluir uma concessionária ao clicar em excluir na tabela:
 	@GetMapping("/excluirConcessionaria/{codigo}")
-    public String excluirConcessionaria(@PathVariable("codigo") long codigo) {
+    public String excluirConcessionaria(@PathVariable("codigo") long codigo, @AuthenticationPrincipal User usuario) {
         Optional<Concessionaria> concessionariaOpt = concessionariaRepo.findById(codigo);
         if (concessionariaOpt.isEmpty()) {
             throw new IllegalArgumentException("Concessionaria inválido");
         }
         concessionariaRepo.deleteById(codigo);
         Registros registros = new Registros();
-        registros.setAtividade("Deletou uma concessionaria");
+        registros.setAtividade("excluiu uma concessionaria");
         registros.setData_atividade(LocalDateTime.now ());
+		Optional <Usuario> usuarioOpt = usuarioRepo.findById(Long.parseLong(usuario.getUsername(), 10));
+		if (usuarioOpt.isEmpty()) {
+			throw new IllegalArgumentException("Usuário inválido");
+		}
+        registros.setUsuario(usuarioOpt.get());
         registrosRepo.save(registros);
         return "redirect:/tabela";
     }

@@ -1,10 +1,13 @@
 package com.api.inodevs.entidades;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 //Criando entidade da usuário:
@@ -29,9 +32,8 @@ public class Usuario{
     @Column(nullable = false)
 	private Integer ativo;
     
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_registro", referencedColumnName = "id")
-	private Registros registros;
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
+	private Set<Registros> registros;
 	
 	// Getters e Setters:
 	public Long getUsername() {

@@ -75,7 +75,14 @@
             <span class="nav-link-text ms-1">Perfis</span>
           </a>
         </li>
-        
+        <li class="nav-item">
+          <a class="nav-link text-white" href="/log" sec:authorize="hasAnyRole('ADMINISTRADOR', 'GESTOR')">
+            <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="material-icons opacity-10">table_view</i>
+            </div>
+            <span class="nav-link-text ms-1">Histórico</span>
+          </a>
+        </li>
        <!-- <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
         </li>
@@ -369,6 +376,7 @@
             <div class="card-body p-3 pb-0">
               <div class="card-body">
                  <form th:action="@{/salvarUsuario}" th:object="${usuario}" method="POST">
+                 <input type="hidden" name="username_login" id="username_login" th:value="${#authentication.getPrincipal().getUsername()}">
                   		<label class="subtitle" >Nome</label>
 	                    <div class=" input-group input-group-outline mb-3 ">
 	                      <input type="text" class= "form-control subtitle" name="nome" id="nome" th:field="*{nome}" required>

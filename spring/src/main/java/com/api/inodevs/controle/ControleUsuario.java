@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -69,13 +72,18 @@ public class ControleUsuario {
 	
 	// Salvar um usuário no banco ao clicar em cadastrar:
 	@PostMapping("/salvarUsuario")
-	public String salvarUsuarios(@ModelAttribute("usuario") Usuario usuario, RedirectAttributes redirect) {
+	public String salvarUsuarios(@ModelAttribute("usuario") Usuario usuario, RedirectAttributes redirect, @Param("username_login") String username_login) {
 		String senhaCriptografada = new BCryptPasswordEncoder().encode(usuario.getSenha()); // Criptografando senha
 		usuario.setSenha(senhaCriptografada); // Inserindo a senha criptografada
 		usuarioRepo.save(usuario);
-		Registros registros = new Registros();
-        registros.setAtividade("Cadastrou uma usuário");
+        Registros registros = new Registros();
+        registros.setAtividade("cadastrou um usuário");
         registros.setData_atividade(LocalDateTime.now ());
+		Optional <Usuario> usuarioOpt = usuarioRepo.findById(Long.parseLong(username_login, 10));
+		if (usuarioOpt.isEmpty()) {
+			throw new IllegalArgumentException("Usuário inválido");
+		}
+        registros.setUsuario(usuarioOpt.get());
         registrosRepo.save(registros);
 		redirect.addFlashAttribute("sucesso", "Usuário salvo com sucesso!");
 		return "redirect:/controleUsuario";
@@ -110,15 +118,20 @@ public class ControleUsuario {
 	
 	// Excluir um usuário ao clicar em excluir na tabela:
 	@GetMapping("/excluirUsuario/{username}")
-	public String excluirUsuarios(@PathVariable("username") long username) {
+	public String excluirUsuarios(@PathVariable("username") long username, @AuthenticationPrincipal User usuario) {
 		Optional<Usuario> usuarioOpt = usuarioRepo.findById(username);
 		if (usuarioOpt.isEmpty()) {
 			throw new IllegalArgumentException("Usuário inválido");
 		}
 		usuarioRepo.deleteById(username);
         Registros registros = new Registros();
-        registros.setAtividade("Cadastrou uma concessionaria");
+        registros.setAtividade("excluiu um usuário");
         registros.setData_atividade(LocalDateTime.now ());
+		Optional <Usuario> usuarioOpt1 = usuarioRepo.findById(Long.parseLong(usuario.getUsername(), 10));
+		if (usuarioOpt1.isEmpty()) {
+			throw new IllegalArgumentException("Usuário inválido");
+		}
+        registros.setUsuario(usuarioOpt1.get());
         registrosRepo.save(registros);
 		return "redirect:/controleUsuario";
 	}

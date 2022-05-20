@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,10 +23,12 @@ import com.api.inodevs.entidades.Contrato;
 import com.api.inodevs.entidades.Fatura;
 import com.api.inodevs.entidades.Notificacoes;
 import com.api.inodevs.entidades.Registros;
+import com.api.inodevs.entidades.Usuario;
 import com.api.inodevs.repositorio.ContaRepositorio;
 import com.api.inodevs.repositorio.ContratoRepositorio;
 import com.api.inodevs.repositorio.NotificacoesRepositorio;
 import com.api.inodevs.repositorio.RegistrosRepositorio;
+import com.api.inodevs.repositorio.UsuarioRepositorio;
 
 //Classe de controle que permite a navegação e funcionalidades no sistema:
 @Controller
@@ -38,6 +43,8 @@ public class ControleConta {
 	private NotificacoesRepositorio notificacoesRepo;
 	@Autowired
 	private RegistrosRepositorio registrosRepo;
+	@Autowired
+	private UsuarioRepositorio usuarioRepo;
 	
 	// Entrar na página de cadastro de conta com o modelo da entidade:
 	@GetMapping("/cadastroConta")
@@ -59,7 +66,7 @@ public class ControleConta {
 	
 	// Salvar uma conta e uma fatura no banco ao clicar em cadastrar:
 	@PostMapping("/salvarConta")
-	public String salvarConta(@ModelAttribute("conta") Conta conta, @RequestParam("faturaPdf") MultipartFile file, RedirectAttributes redirect) {
+	public String salvarConta(@ModelAttribute("conta") Conta conta, @RequestParam("faturaPdf") MultipartFile file, RedirectAttributes redirect, @Param("username") String username) {
 		conta.setStatus("Pendente");
 		// Salvando o arquivo da fatura:
 		redirect.addFlashAttribute("successo", "Cadastrado com sucesso!");
@@ -75,9 +82,14 @@ public class ControleConta {
 		Notificacoes notificacoes = new Notificacoes("ROLE_GESTOR", "Conta");
 		conta.setNotificacoes(notificacoes);
 		contaRepo.save(conta);
-		Registros registros = new Registros();
-        registros.setAtividade("Cadastrou uma conta");
+        Registros registros = new Registros();
+        registros.setAtividade("cadastrou uma conta");
         registros.setData_atividade(LocalDateTime.now ());
+		Optional <Usuario> usuarioOpt = usuarioRepo.findById(Long.parseLong(username, 10));
+		if (usuarioOpt.isEmpty()) {
+			throw new IllegalArgumentException("Usuário inválido");
+		}
+        registros.setUsuario(usuarioOpt.get());
         registrosRepo.save(registros);
 		return "redirect:cadastroConta";
 	}
@@ -126,15 +138,20 @@ public class ControleConta {
 	
 	// Excluir uma conta ao clicar em excluir na tabela:
 	@GetMapping("/excluirConta/{codi}")
-    public String excluirConta(@PathVariable("codi") long codi) {
+    public String excluirConta(@PathVariable("codi") long codi, @AuthenticationPrincipal User usuario) {
         Optional<Conta> contaOpt = contaRepo.findById(codi);
         if (contaOpt.isEmpty()) {
             throw new IllegalArgumentException("Conta inválido");
         }
         contaRepo.deleteById(codi);
         Registros registros = new Registros();
-        registros.setAtividade("Cadastrou uma concessionaria");
+        registros.setAtividade("excluiu uma conta");
         registros.setData_atividade(LocalDateTime.now ());
+		Optional <Usuario> usuarioOpt = usuarioRepo.findById(Long.parseLong(usuario.getUsername(), 10));
+		if (usuarioOpt.isEmpty()) {
+			throw new IllegalArgumentException("Usuário inválido");
+		}
+        registros.setUsuario(usuarioOpt.get());
         registrosRepo.save(registros);
         return "redirect:/tabela";
     }

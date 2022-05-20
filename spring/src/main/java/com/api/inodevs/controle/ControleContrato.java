@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,11 +20,13 @@ import com.api.inodevs.entidades.Contrato;
 import com.api.inodevs.entidades.Notificacoes;
 import com.api.inodevs.entidades.Registros;
 import com.api.inodevs.entidades.Unidade;
+import com.api.inodevs.entidades.Usuario;
 import com.api.inodevs.repositorio.ConcessionariaRepositorio;
 import com.api.inodevs.repositorio.ContratoRepositorio;
 import com.api.inodevs.repositorio.NotificacoesRepositorio;
 import com.api.inodevs.repositorio.RegistrosRepositorio;
 import com.api.inodevs.repositorio.UnidadeRepositorio;
+import com.api.inodevs.repositorio.UsuarioRepositorio;
 
 //Classe de controle que permite a navegação e funcionalidades no sistema:
 @Controller
@@ -38,6 +43,8 @@ public class ControleContrato {
 	private NotificacoesRepositorio notificacoesRepo;
 	@Autowired
 	private RegistrosRepositorio registrosRepo;
+	@Autowired
+	private UsuarioRepositorio usuarioRepo;
 	
 	// Entrar na página de cadastro de contrato com o modelo da entidade:
 	@GetMapping("/cadastroContrato")
@@ -63,15 +70,20 @@ public class ControleContrato {
 	
 	// Salvar uma contrato no banco ao clicar em cadastrar:
 	@PostMapping("/salvarContrato")
-    public String salvarContrato(@ModelAttribute("contrato") Contrato contrato, RedirectAttributes redirect) {
+    public String salvarContrato(@ModelAttribute("contrato") Contrato contrato, RedirectAttributes redirect, @Param("username") String username) {
         Notificacoes notificacoes = new Notificacoes("ROLE_GESTOR", "Contrato");
         redirect.addFlashAttribute("successo", "Cadastrado com sucesso!");
         contrato.setNotificacoes(notificacoes);
         contrato.setStatus("Pendente");
         contratoRepo.save(contrato);
-		Registros registros = new Registros();
-        registros.setAtividade("Cadastrou um contrato");
+        Registros registros = new Registros();
+        registros.setAtividade("cadastrou um contrato");
         registros.setData_atividade(LocalDateTime.now ());
+		Optional <Usuario> usuarioOpt = usuarioRepo.findById(Long.parseLong(username, 10));
+		if (usuarioOpt.isEmpty()) {
+			throw new IllegalArgumentException("Usuário inválido");
+		}
+        registros.setUsuario(usuarioOpt.get());
         registrosRepo.save(registros);
         return "redirect:cadastroContrato";
     }
@@ -121,15 +133,20 @@ public class ControleContrato {
 	
 	// Excluir um contrato ao clicar em excluir na tabela:
 	@GetMapping("/excluirContrato/{codigo}")
-    public String excluirContrato(@PathVariable("codigo") long codigo) {
+    public String excluirContrato(@PathVariable("codigo") long codigo, @AuthenticationPrincipal User usuario) {
         Optional<Contrato> contratoOpt = contratoRepo.findById(codigo);
         if (contratoOpt.isEmpty()) {
             throw new IllegalArgumentException("Contrato inválido");
         }
         contratoRepo.deleteById(codigo);
         Registros registros = new Registros();
-        registros.setAtividade("Cadastrou uma concessionaria");
+        registros.setAtividade("excluiu um contrato");
         registros.setData_atividade(LocalDateTime.now ());
+		Optional <Usuario> usuarioOpt = usuarioRepo.findById(Long.parseLong(usuario.getUsername(), 10));
+		if (usuarioOpt.isEmpty()) {
+			throw new IllegalArgumentException("Usuário inválido");
+		}
+        registros.setUsuario(usuarioOpt.get());
         registrosRepo.save(registros);
         return "redirect:/tabela";
     }
