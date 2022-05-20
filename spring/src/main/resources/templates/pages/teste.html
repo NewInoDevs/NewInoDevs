@@ -358,20 +358,35 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
     </nav>
     <!-- End Navbar -->
 
-Mês: [[${mes}]]
-<div th:each="conta : ${listaContasAgua}">
-	Consumo Água: [[${conta.consumo}]]
-	Valor Total Água: [[${conta.valor_total}]]
+Mês: [[${mes}]] <br>
+Ano: [[${ano}]] <br>
+<div th:if="${contaAguaAtual != null}">
+	Valor Total Água: [[${contaAguaAtual.valor_total}]]	<br>
+	Consumo Água: [[${contaAguaAtual.consumo}]]<br>
+	Média de Consumo Anual: [[${contaAguaMedia}]] 
 </div>
-<div th:each="conta : ${listaContasGas}">
-	Consumo Gás: [[${conta.consumo}]]
-	Total Gás: [[${conta.valor_total}]]
+<div th:if="${contaGasAtual != null}">
+	Total Gás: [[${contaGasAtual.valor_total}]] <br>
+	Consumo Gás: [[${contaGasAtual.consumo}]]<br>
+	Média de Consumo: 
 </div>
-<div th:each="conta : ${listaContasEnergia}">
-	Consumo Energia: [[${conta.consumo}]]
-	Total Energia: [[${conta.valor_total}]]
+<div  th:if="${contaEnergiaAtual != null}">
+	Total Energia: [[${contaEnergiaAtual.valor_total}]] <br>
+	Consumo Energia: [[${contaEnergiaAtual.consumo}]]<br>
+	Média de Consumo: 
 </div>
-
+<input type="hidden" th:value="${contaAguaJan}" id="contaAguaJan">
+<input type="hidden" th:value="${contaAguaFev}" id="contaAguaFev">
+<input type="hidden" th:value="${contaAguaMar}" id="contaAguaMar">
+<input type="hidden" th:value="${contaAguaAbr}" id="contaAguaAbr">
+<input type="hidden" th:value="${contaAguaMai}" id="contaAguaMai">
+<input type="hidden" th:value="${contaAguaJun}" id="contaAguaJun">
+<input type="hidden" th:value="${contaAguaJul}" id="contaAguaJul">
+<input type="hidden" th:value="${contaAguaAgo}" id="contaAguaAgo">
+<input type="hidden" th:value="${contaAguaSet}" id="contaAguaSet">
+<input type="hidden" th:value="${contaAguaOut}" id="contaAguaOut">
+<input type="hidden" th:value="${contaAguaNov}" id="contaAguaNov">
+<input type="hidden" th:value="${contaAguaDez}" id="contaAguaDez">
  <div class="container-fluid py-4">
       <div class="row">
         <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
@@ -885,20 +900,33 @@ Mês: [[${mes}]]
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
     var ctx = document.getElementById("chart-bars").getContext("2d");
-
+	
+    var janAg = document.getElementById("contaAguaJan").value
+    var fevAg = document.getElementById("contaAguaFev").value
+    var marAg = document.getElementById("contaAguaMar").value
+    var abrAg = document.getElementById("contaAguaAbr").value
+    var maiAg = document.getElementById("contaAguaMai").value
+    var junAg = document.getElementById("contaAguaJun").value
+    var julAg = document.getElementById("contaAguaJul").value
+    var agoAg = document.getElementById("contaAguaAgo").value
+    var setAg = document.getElementById("contaAguaSet").value
+    var outAg = document.getElementById("contaAguaOut").value
+    var novAg = document.getElementById("contaAguaNov").value
+    var dezAg = document.getElementById("contaAguaDez").value
+    
     new Chart(ctx, {
       type: "bar",
       data: {
-        labels: ["M", "T", "W", "T", "F", "S", "S"],
+        labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
         datasets: [{
           label: "Sales",
           tension: 0.4,
           borderWidth: 0,
           borderRadius: 4,
           borderSkipped: false,
-          backgroundColor: "rgba(255, 255, 255, .8)",
-          data: [50, 20, 10, 22, 50, 10, 40],
-          maxBarThickness: 6
+          backgroundColor: "lightblue",
+          data: [janAg, fevAg, marAg, abrAg, maiAg, junAg, julAg, agoAg, setAg, outAg, novAg, dezAg],
+          maxBarThickness: 10
         }, ],
       },
       options: {
@@ -952,7 +980,7 @@ Mês: [[${mes}]]
               color: '#f8f9fa',
               padding: 10,
               font: {
-                size: 14,
+                size: 10.5,
                 weight: 300,
                 family: "Roboto",
                 style: 'normal',
@@ -968,167 +996,163 @@ Mês: [[${mes}]]
     var ctx2 = document.getElementById("chart-line").getContext("2d");
 
     new Chart(ctx2, {
-      type: "line",
-      data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [{
-          label: "Mobile apps",
-          tension: 0,
-          borderWidth: 0,
-          pointRadius: 5,
-          pointBackgroundColor: "rgba(255, 255, 255, .8)",
-          pointBorderColor: "transparent",
-          borderColor: "rgba(255, 255, 255, .8)",
-          borderColor: "rgba(255, 255, 255, .8)",
-          borderWidth: 4,
-          backgroundColor: "transparent",
-          fill: true,
-          data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
-          maxBarThickness: 6
-
-        }],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          }
+        type: "bar",
+        data: {
+          labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
+          datasets: [{
+            label: "Sales",
+            tension: 0.4,
+            borderWidth: 0,
+            borderRadius: 4,
+            borderSkipped: false,
+            backgroundColor: "tomato",
+            data:  [50, 20, 10, 22, 50, 10, 40, 40, 40, 40, 40, 40],            
+            maxBarThickness: 10
+          }, ],
         },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5],
-              color: 'rgba(255, 255, 255, .2)'
-            },
-            ticks: {
-              display: true,
-              color: '#f8f9fa',
-              padding: 10,
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-          x: {
-            grid: {
-              drawBorder: false,
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
               display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
-              borderDash: [5, 5]
-            },
-            ticks: {
-              display: true,
-              color: '#f8f9fa',
-              padding: 10,
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
             }
           },
+          interaction: {
+            intersect: false,
+            mode: 'index',
+          },
+          scales: {
+            y: {
+              grid: {
+                drawBorder: false,
+                display: true,
+                drawOnChartArea: true,
+                drawTicks: false,
+                borderDash: [5, 5],
+                color: 'rgba(255, 255, 255, .2)'
+              },
+              ticks: {
+                suggestedMin: 0,
+                suggestedMax: 500,
+                beginAtZero: true,
+                padding: 10,
+                font: {
+                  size: 14,
+                  weight: 300,
+                  family: "Roboto",
+                  style: 'normal',
+                  lineHeight: 2
+                },
+                color: "#fff"
+              },
+            },
+            x: {
+              grid: {
+                drawBorder: false,
+                display: true,
+                drawOnChartArea: true,
+                drawTicks: false,
+                borderDash: [5, 5],
+                color: 'rgba(255, 255, 255, .2)'
+              },
+              ticks: {
+                display: true,
+                color: '#f8f9fa',
+                padding: 11,
+                font: {
+                  size: 11,
+                  weight: 300,
+                  family: "Roboto",
+                  style: 'normal',
+                  lineHeight: 2
+                },
+              }
+            },
+          },
         },
-      },
-    });
+      });
 
     var ctx3 = document.getElementById("chart-line-tasks").getContext("2d");
 
     new Chart(ctx3, {
-      type: "line",
-      data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [{
-          label: "Mobile apps",
-          tension: 0,
-          borderWidth: 0,
-          pointRadius: 5,
-          pointBackgroundColor: "rgba(255, 255, 255, .8)",
-          pointBorderColor: "transparent",
-          borderColor: "rgba(255, 255, 255, .8)",
-          borderWidth: 4,
-          backgroundColor: "transparent",
-          fill: true,
-          data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-          maxBarThickness: 6
-
-        }],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          }
+        type: "bar",
+        data: {
+          labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
+          datasets: [{
+            label: "Sales",
+            tension: 0.4,
+            borderWidth: 0,
+            borderRadius: 4,
+            borderSkipped: false,
+            backgroundColor: "lightgreen",
+            data: [50, 20, 10, 22, 50, 10, 40, 40, 40, 40, 40, 40],
+            maxBarThickness: 10
+          }, ],
         },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5],
-              color: 'rgba(255, 255, 255, .2)'
-            },
-            ticks: {
-              display: true,
-              padding: 10,
-              color: '#f8f9fa',
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-          x: {
-            grid: {
-              drawBorder: false,
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
               display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
-              borderDash: [5, 5]
-            },
-            ticks: {
-              display: true,
-              color: '#f8f9fa',
-              padding: 10,
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
             }
           },
+          interaction: {
+            intersect: false,
+            mode: 'index',
+          },
+          scales: {
+            y: {
+              grid: {
+                drawBorder: false,
+                display: true,
+                drawOnChartArea: true,
+                drawTicks: false,
+                borderDash: [5, 5],
+                color: 'rgba(255, 255, 255, .2)'
+              },
+              ticks: {
+                suggestedMin: 0,
+                suggestedMax: 500,
+                beginAtZero: true,
+                padding: 10,
+                font: {
+                  size: 14,
+                  weight: 300,
+                  family: "Roboto",
+                  style: 'normal',
+                  lineHeight: 2
+                },
+                color: "#fff"
+              },
+            },
+            x: {
+              grid: {
+                drawBorder: false,
+                display: true,
+                drawOnChartArea: true,
+                drawTicks: false,
+                borderDash: [5, 5],
+                color: 'rgba(255, 255, 255, .2)'
+              },
+              ticks: {
+                display: true,
+                color: '#f8f9fa',
+                padding: 10,
+                font: {
+                  size: 11,
+                  weight: 300,
+                  family: "Roboto",
+                  style: 'normal',
+                  lineHeight: 2
+                },
+              }
+            },
+          },
         },
-      },
-    });
+      });
+
   </script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;

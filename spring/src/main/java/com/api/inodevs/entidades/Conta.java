@@ -16,7 +16,7 @@ public class Conta{
 	private Long codi;
 	
     @Column(nullable = false)
-	private String consumo;
+	private Float consumo;
     
     @Column
 	private Float desconto;
@@ -70,10 +70,10 @@ public class Conta{
 	public void setCodi(Long codi) {
 		this.codi = codi;
 	}
-	public String getConsumo() {
+	public Float getConsumo() {
 		return consumo;
 	}
-	public void setConsumo(String consumo) {
+	public void setConsumo(Float consumo) {
 		this.consumo = consumo;
 	}
 	public Float getDesconto() {
