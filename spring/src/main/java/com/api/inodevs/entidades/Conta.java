@@ -16,7 +16,7 @@ public class Conta{
 	private Long codi;
 	
     @Column(nullable = false)
-	private String consumo;
+	private Float consumo;
     
     @Column
 	private Float desconto;
@@ -43,7 +43,7 @@ public class Conta{
 	private Float valor_total;
     
     @Column(nullable = false)
-	private Integer base_calculo;
+	private String media_consumo;
     
     @Column
 	private String status;
@@ -70,10 +70,10 @@ public class Conta{
 	public void setCodi(Long codi) {
 		this.codi = codi;
 	}
-	public String getConsumo() {
+	public Float getConsumo() {
 		return consumo;
 	}
-	public void setConsumo(String consumo) {
+	public void setConsumo(Float consumo) {
 		this.consumo = consumo;
 	}
 	public Float getDesconto() {
@@ -124,11 +124,11 @@ public class Conta{
 	public void setValor_total(Float valor_total) {
 		this.valor_total = valor_total;
 	}
-	public Integer getBase_calculo() {
-		return base_calculo;
+	public String getMedia_consumo() {
+		return media_consumo;
 	}
-	public void setBase_calculo(Integer base_calculo) {
-		this.base_calculo = base_calculo;
+	public void setMedia_consumo(String media_consumo) {
+		this.media_consumo = media_consumo;
 	}
 	public String getStatus() {
 		return status;

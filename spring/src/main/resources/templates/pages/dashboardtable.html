@@ -1,56 +1,62 @@
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html lang="pt-BR">
 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="./assets/icons/img/favicon.png">
   <title>
-    Tabelas
+    Home - InoDevs
   </title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
   <!-- Nucleo Icons -->
-  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link href="./assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="./assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <!-- Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
-  <link id="pagestyle" href="../assets/css/material-dashboard.css?v=3.0.2" rel="stylesheet" />
+  <link id="pagestyle" href="./assets/css/material-dashboard.css?v=3.0.2" rel="stylesheet" />
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
+
+  <!-- MENU BAR START HERE -->
+
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0"  target="_blank">
-        <img src="../assets/img/icons/menuIcon.png" class="navbar-brand-img h-100" alt="main_logo">
+      <a class="navbar-brand m-0" href=" " target="_blank">
+        <img src="./assets/img/icons/menuIcon.png" class="navbar-brand-img h-100" alt="main_logo">
         <span class="ms-1 font-weight-bold text-white">Menu</span>
       </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
-    <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+    <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-white active bg-gradient-primary" href="/" sec:authorize="hasAnyRole('ADMINISTRADOR', 'GESTOR')">
+          <a class="nav-link text-white active bg-gradient-primary" href="/">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">dashboard</i>
             </div>
             <span class="nav-link-text ms-1">Dashboard</span>
           </a>
         </li>
+
+
         <li class="nav-item">
-          <a class="nav-link text-white" href="/tabela">
+          <a class="nav-link text-white " href="/tabela">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
             <span class="nav-link-text ms-1">Tabelas</span>
           </a>
         </li>
+        
+
         <li class="nav-item">
           <div class="dropdown float-start text-white text-center me-2 d-flex align-items-center justify-content-center">
             <a class="nav-link text-white long">
@@ -67,15 +73,16 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                   </div>
               </div> 
          </li>
+         
          <li class="nav-item">
-          <a class="nav-link text-white" href="/controleUsuario" sec:authorize="hasAnyRole('ADMINISTRADOR', 'GESTOR')">
+          <a class="nav-link text-white" href="/controleUsuario">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
             <span class="nav-link-text ms-1">Perfis</span>
           </a>
         </li>
-        <li class="nav-item">
+		<li class="nav-item">
           <a class="nav-link text-white" href="/log" sec:authorize="hasAnyRole('ADMINISTRADOR', 'GESTOR')">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
@@ -83,11 +90,12 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
             <span class="nav-link-text ms-1">Histórico</span>
           </a>
         </li>
-       <!-- <li class="nav-item mt-3">
+<!--  
+        <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Account pages</h6>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/profile.html">
+          <a class="nav-link text-white " href="./pages/profile.html">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">person</i>
             </div>
@@ -95,7 +103,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/sign-in.html">
+          <a class="nav-link text-white " href="./pages/sign-in.html">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">login</i>
             </div>
@@ -103,7 +111,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/sign-up.html">
+          <a class="nav-link text-white " href="./pages/sign-up.html">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">assignment</i>
             </div>
@@ -113,10 +121,10 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
         -->
       </ul>
     </div>
-    
   </aside>
-  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-    
+<!-- MENU BAR FINISH HERE -->
+
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">  
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
       <div class="container-fluid py-1 px-3">
@@ -135,7 +143,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
             </div>
           </div>
           <ul class="navbar-nav  justify-content-end">
-            <li class="nav-item dropdown d-flex align-items-center">
+            <li class="nav-item dropdown pe-2 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-user me-sm-1"></i>
               </a>
@@ -178,7 +186,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                 <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
               </a>
             </li>
-            <li class="nav-item dropdown pe-2 d-flex align-items-center">
+              <li class="nav-item dropdown pe-2 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" sec:authorize="hasRole('GESTOR')">
                 <i th:if="${quantidadeConta == 0 && quantidadeContrato == 0 && quantidadeConcessionaria == 0 && quantidadeUnidade == 0}" class="fa fa-bell cursor-pointer"></i>
                 <i th:if="${quantidadeConta != 0 || quantidadeContrato != 0 || quantidadeConcessionaria != 0 || quantidadeUnidade != 0}" class="fa fa-bell cursor-pointer" style="color:red;"></i>
@@ -378,162 +386,54 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                     </div>
                   </a>
                 </li>
+            </li>
           </ul>
         </div>
       </div>
     </nav>
     <!-- End Navbar -->
-<input type="hidden" th:value="${contaAguaJan}" id="contaAguaJan">
-<input type="hidden" th:value="${contaAguaFev}" id="contaAguaFev">
-<input type="hidden" th:value="${contaAguaMar}" id="contaAguaMar">
-<input type="hidden" th:value="${contaAguaAbr}" id="contaAguaAbr">
-<input type="hidden" th:value="${contaAguaMai}" id="contaAguaMai">
-<input type="hidden" th:value="${contaAguaJun}" id="contaAguaJun">
-<input type="hidden" th:value="${contaAguaJul}" id="contaAguaJul">
-<input type="hidden" th:value="${contaAguaAgo}" id="contaAguaAgo">
-<input type="hidden" th:value="${contaAguaSet}" id="contaAguaSet">
-<input type="hidden" th:value="${contaAguaOut}" id="contaAguaOut">
-<input type="hidden" th:value="${contaAguaNov}" id="contaAguaNov">
-<input type="hidden" th:value="${contaAguaDez}" id="contaAguaDez">
+     <div class="container-fluid py-4">
+	   <div class="row">
+        <div class="col-12">
+          <div class="card my-4">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+              <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-1">
+                <h6 class="text-white text-capitalize ps-3">Dashboards</h6>
+              </div>
+            </div>
+            <div class="card-body px-0 pb-2">
+              <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary font-weight-bolder opacity-7">Nome da Unidade</th>
+                      <th class="text-uppercase text-secondary font-weight-bolder opacity-7 ps-2">Contratos:</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:each="unidade: ${listaUnidade}">
+                      <td>
+                        <div class="d-flex px-2 py-1">
+                          <div>
+                            <!-- LINK PARA VISUALIZAR A UNIDADE-->
+                            <a th:href="@{/dashboard/{cnpj}(cnpj = ${unidade.cnpj})}"> 
+                            <!-- ALTERAR ICONE AQUI -->
+                            <img src="../assets/img/Icons/accountIcon.png"  class="avatar avatar-sm me-3 border-radius-lg" alt="user1">
+                          </div>
+                          <div class="d-flex flex-column justify-content-center">
+                            <h6 class="mb-0 text-sm" th:text="${unidade.nome}"></h6>
 
-<input type="hidden" th:value="${contaEnergiaJan}" id="contaEnergiaJan">
-<input type="hidden" th:value="${contaEnergiaFev}" id="contaEnergiaFev">
-<input type="hidden" th:value="${contaEnergiaMar}" id="contaEnergiaMar">
-<input type="hidden" th:value="${contaEnergiaAbr}" id="contaEnergiaAbr">
-<input type="hidden" th:value="${contaEnergiaMai}" id="contaEnergiaMai">
-<input type="hidden" th:value="${contaEnergiaJun}" id="contaEnergiaJun">
-<input type="hidden" th:value="${contaEnergiaJul}" id="contaEnergiaJul">
-<input type="hidden" th:value="${contaEnergiaAgo}" id="contaEnergiaAgo">
-<input type="hidden" th:value="${contaEnergiaSet}" id="contaEnergiaSet">
-<input type="hidden" th:value="${contaEnergiaOut}" id="contaEnergiaOut">
-<input type="hidden" th:value="${contaEnergiaNov}" id="contaEnergiaNov">
-<input type="hidden" th:value="${contaEnergiaDez}" id="contaEnergiaDez">
-
-<input type="hidden" th:value="${contaGasJan}" id="contaGasJan">
-<input type="hidden" th:value="${contaGasFev}" id="contaGasFev">
-<input type="hidden" th:value="${contaGasMar}" id="contaGasMar">
-<input type="hidden" th:value="${contaGasAbr}" id="contaGasAbr">
-<input type="hidden" th:value="${contaGasMai}" id="contaGasMai">
-<input type="hidden" th:value="${contaGasJun}" id="contaGasJun">
-<input type="hidden" th:value="${contaGasJul}" id="contaGasJul">
-<input type="hidden" th:value="${contaGasAgo}" id="contaGasAgo">
-<input type="hidden" th:value="${contaGasSet}" id="contaGasSet">
-<input type="hidden" th:value="${contaGasOut}" id="contaGasOut">
-<input type="hidden" th:value="${contaGasNov}" id="contaGasNov">
-<input type="hidden" th:value="${contaGasDez}" id="contaGasDez">
-
-<div class=" p-3">
-     <h2 class="mb-">Relatório de [[${mes}]] de [[${ano}]]</h2>
-</div>
- <div class="container-fluid py-4">
-      <div class="row">
-        <div class="col-lg-4 col-md-6 mt-4 mb-4">
-          <div class="card">
-            <div class="card-header p-3 pt-2">
-              <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                <i class="material-icons opacity-10">assignments</i>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p class="text-xs font-weight-bold mb-0" th:each="contrato : ${listaContrato}" th:if="${unidade.nome == contrato.unidade.nome}" 
+                        th:text="${contrato.codigo} + ' (' + ${contrato.concessionaria.nome} + ' - ' + ${contrato.concessionaria.tipo_conta} + ')'"></p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
-              <div class="text-end pt-1">
-				<h4>Relatório de Água</h4>
-              </div>
-            </div>
-            <hr class="dark horizontal my-0">
-            <div class="card-footer p-3">
-				<div th:if="${contaAguaAtual != null}">
-					Valor Total Água: [[${contaAguaAtual.valor_total}]]	<br>
-					Consumo Água: [[${contaAguaAtual.consumo}]]<br>
-					Média de Consumo Anual: [[${contaAguaMedia}]] 
-				</div>          
-			</div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 mt-4 mb-4">
-          <div class="card">
-            <div class="card-header p-3 pt-2">
-              <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                <i class="material-icons opacity-10">assignments</i>
-              </div>
-              <div class="text-end pt-1">
-				<h4>Relatório de Energia</h4>
-              </div>
-            </div>
-            <hr class="dark horizontal my-0">
-            <div class="card-footer p-3">
-				<div  th:if="${contaEnergiaAtual != null}">
-					Total Energia: [[${contaEnergiaAtual.valor_total}]] <br>
-					Consumo Energia: [[${contaEnergiaAtual.consumo}]]<br>
-					Média de Consumo: [[${contaEnergiaMedia}]]
-				</div>            
-			</div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 mt-4 mb-4">
-          <div class="card">
-            <div class="card-header p-3 pt-2">
-              <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                <i class="material-icons opacity-10">assignments</i>
-              </div>
-              <div class="text-end pt-1">
-				<h4>Relatório de Gas</h4>
-              </div>
-            </div>
-            <hr class="dark horizontal my-0">
-            <div class="card-footer p-3">
-				<div th:if="${contaGasAtual != null}">
-					Total Gás: [[${contaGasAtual.valor_total}]] <br>
-					Consumo Gás: [[${contaGasAtual.consumo}]]<br>
-					Média de Consumo: [[${contaGasMedia}]]
-				</div>           
-			</div>
-          </div>
-        </div>
-        
-      <div class="row mt-4">
-        <div class="col-lg-4 col-md-6 mt-4 mb-4">
-          <div class="card z-index-2 ">
-            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-              <div class="bg-gradient-dark shadow-dark border-radius-lg py-3 pe-1">
-                <div class="chart">
-                  <canvas id="chart-bars" class="chart-canvas" height="170"></canvas>
-                </div>
-              </div>
-            </div>
-            <div class="card-body">
-              <h6 class="mb-0 "> Conta de Água</h6>
-              <p class="text-sm ">m²</p>
-              <hr class="dark horizontal">
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 mt-4 mb-4">
-          <div class="card z-index-2  ">
-            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-              <div class="bg-gradient-dark shadow-dark border-radius-lg py-3 pe-1">
-                <div class="chart">
-                  <canvas id="chart-line" class="chart-canvas" height="170"></canvas>
-                </div>
-              </div>
-            </div>
-            <div class="card-body">
-              <h6 class="mb-0 "> Conta da Luz </h6>
-              <p class="text-sm "> kW/h </p>
-              <hr class="dark horizontal">
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 mt-4 mb-3">
-          <div class="card z-index-2 ">
-            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-              <div class="bg-gradient-dark shadow-dark border-radius-lg py-3 pe-1">
-                <div class="chart">
-                  <canvas id="chart-line-tasks" class="chart-canvas" height="170"></canvas>
-                </div>
-              </div>
-            </div>
-            <div class="card-body">
-              <h6 class="mb-0 ">Conta de Gás</h6>
-              <p class="text-sm ">m³</p>
-              <hr class="dark horizontal">
             </div>
           </div>
         </div>
@@ -886,15 +786,15 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 	-->
     </div>
   </main>
-    <div class="fixed-plugin">
+  <div class="fixed-plugin">
     <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
-      <i class="material-icons py-2">help</i>
+      <i class="material-icons py-2">settings</i>
     </a>
     <div class="card shadow-lg">
       <div class="card-header pb-0 pt-3">
         <div class="float-start">
-          <h5 class="mt-3 mb-0">Ajuda</h5>
-          <p>Entre em contato com suporte.</p>
+          <h5 class="mt-3 mb-0">Material UI Configurator</h5>
+          <p>See our dashboard options.</p>
         </div>
         <div class="float-end mt-4">
           <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
@@ -903,6 +803,40 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
         </div>
         <!-- End Toggle Button -->
       </div>
+      <hr class="horizontal dark my-1">
+      <div class="card-body pt-sm-3 pt-0">
+        <!-- Sidebar Backgrounds -->
+        <div>
+          <h6 class="mb-0">Sidebar Colors</h6>
+        </div>
+        <a href="javascript:void(0)" class="switch-trigger background-color">
+          <div class="badge-colors my-2 text-start">
+            <span class="badge filter bg-gradient-primary active" data-color="primary" onclick="sidebarColor(this)"></span>
+            <span class="badge filter bg-gradient-dark" data-color="dark" onclick="sidebarColor(this)"></span>
+            <span class="badge filter bg-gradient-info" data-color="info" onclick="sidebarColor(this)"></span>
+            <span class="badge filter bg-gradient-success" data-color="success" onclick="sidebarColor(this)"></span>
+            <span class="badge filter bg-gradient-warning" data-color="warning" onclick="sidebarColor(this)"></span>
+            <span class="badge filter bg-gradient-danger" data-color="danger" onclick="sidebarColor(this)"></span>
+          </div>
+        </a>
+        <!-- Sidenav Type -->
+        <div class="mt-3">
+          <h6 class="mb-0">Sidenav Type</h6>
+          <p class="text-sm">Choose between 2 different sidenav types.</p>
+        </div>
+        <div class="d-flex">
+          <button class="btn bg-gradient-dark px-3 mb-2 active" data-class="bg-gradient-dark" onclick="sidebarType(this)">Dark</button>
+          <button class="btn bg-gradient-dark px-3 mb-2 ms-2" data-class="bg-transparent" onclick="sidebarType(this)">Transparent</button>
+          <button class="btn bg-gradient-dark px-3 mb-2 ms-2" data-class="bg-white" onclick="sidebarType(this)">White</button>
+        </div>
+        <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop view.</p>
+        <!-- Navbar Fixed -->
+        <div class="mt-3 d-flex">
+          <h6 class="mb-0">Navbar Fixed</h6>
+          <div class="form-check form-switch ps-0 ms-auto my-auto">
+            <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarFixed" onclick="navbarFixed(this)">
+          </div>
+        </div>
         <hr class="horizontal dark my-3">
         <div class="mt-2 d-flex">
           <h6 class="mb-0">Light / Dark</h6>
@@ -910,67 +844,43 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
             <input class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version" onclick="darkMode(this)">
           </div>
         </div>
+        <hr class="horizontal dark my-sm-4">
+        <a class="btn btn-outline-dark w-100" href="">View documentation</a>
+        <div class="w-100 text-center">
+          <a class="github-button" href="https://github.com/creativetimofficial/material-dashboard" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star creativetimofficial/material-dashboard on GitHub">Star</a>
+          <h6 class="mt-3">Thank you for sharing!</h6>
+          <a href="https://twitter.com/intent/tweet?text=Check%20Material%20UI%20Dashboard%20made%20by%20%40CreativeTim%20%23webdesign%20%23dashboard%20%23bootstrap5&amp;url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fsoft-ui-dashboard" class="btn btn-dark mb-0 me-2" target="_blank">
+            <i class="fab fa-twitter me-1" aria-hidden="true"></i> Tweet
+          </a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/material-dashboard" class="btn btn-dark mb-0 me-2" target="_blank">
+            <i class="fab fa-facebook-square me-1" aria-hidden="true"></i> Share
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
   <!--   Core JS Files   -->
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap.min.js"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
+  <script src="./assets/js/core/popper.min.js"></script>
+  <script src="./assets/js/core/bootstrap.min.js"></script>
+  <script src="./assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="./assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="./assets/js/plugins/chartjs.min.js"></script>
+  <script>
     var ctx = document.getElementById("chart-bars").getContext("2d");
-	
-    var janAg = document.getElementById("contaAguaJan").value
-    var fevAg = document.getElementById("contaAguaFev").value
-    var marAg = document.getElementById("contaAguaMar").value
-    var abrAg = document.getElementById("contaAguaAbr").value
-    var maiAg = document.getElementById("contaAguaMai").value
-    var junAg = document.getElementById("contaAguaJun").value
-    var julAg = document.getElementById("contaAguaJul").value
-    var agoAg = document.getElementById("contaAguaAgo").value
-    var setAg = document.getElementById("contaAguaSet").value
-    var outAg = document.getElementById("contaAguaOut").value
-    var novAg = document.getElementById("contaAguaNov").value
-    var dezAg = document.getElementById("contaAguaDez").value
-    
-    var janEn = document.getElementById("contaEnergiaJan").value
-    var fevEn = document.getElementById("contaEnergiaFev").value
-    var marEn = document.getElementById("contaEnergiaMar").value
-    var abrEn = document.getElementById("contaEnergiaAbr").value
-    var maiEn = document.getElementById("contaEnergiaMai").value
-    var junEn = document.getElementById("contaEnergiaJun").value
-    var julEn = document.getElementById("contaEnergiaJul").value
-    var agoEn = document.getElementById("contaEnergiaAgo").value
-    var setEn = document.getElementById("contaEnergiaSet").value
-    var outEn = document.getElementById("contaEnergiaOut").value
-    var novEn = document.getElementById("contaEnergiaNov").value
-    var dezEn = document.getElementById("contaEnergiaDez").value
-    
-    var janGas = document.getElementById("contaGasJan").value
-    var fevGas = document.getElementById("contaGasFev").value
-    var marGas = document.getElementById("contaGasMar").value
-    var abrGas = document.getElementById("contaGasAbr").value
-    var maiGas = document.getElementById("contaGasMai").value
-    var junGas = document.getElementById("contaGasJun").value
-    var julGas = document.getElementById("contaGasJul").value
-    var agoGas = document.getElementById("contaGasAgo").value
-    var setGas = document.getElementById("contaGasSet").value
-    var outGas = document.getElementById("contaGasOut").value
-    var novGas = document.getElementById("contaGasNov").value
-    var dezGas = document.getElementById("contaGasDez").value
-    
+
     new Chart(ctx, {
       type: "bar",
       data: {
-        labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
+        labels: ["M", "T", "W", "T", "F", "S", "S"],
         datasets: [{
           label: "Sales",
           tension: 0.4,
           borderWidth: 0,
           borderRadius: 4,
           borderSkipped: false,
-          backgroundColor: "lightblue",
-          data: [janAg, fevAg, marAg, abrAg, maiAg, junAg, julAg, agoAg, setAg, outAg, novAg, dezAg],
-          maxBarThickness: 10
+          backgroundColor: "rgba(255, 255, 255, .8)",
+          data: [50, 20, 10, 22, 50, 10, 40],
+          maxBarThickness: 6
         }, ],
       },
       options: {
@@ -1024,7 +934,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
               color: '#f8f9fa',
               padding: 10,
               font: {
-                size: 9,
+                size: 14,
                 weight: 300,
                 family: "Roboto",
                 style: 'normal',
@@ -1040,163 +950,167 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
     var ctx2 = document.getElementById("chart-line").getContext("2d");
 
     new Chart(ctx2, {
-        type: "bar",
-        data: {
-          labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
-          datasets: [{
-            label: "Sales",
-            tension: 0.4,
-            borderWidth: 0,
-            borderRadius: 4,
-            borderSkipped: false,
-            backgroundColor: "tomato",
-            data: [janEn, fevEn, marEn, abrEn, maiEn, junEn, julEn, agoEn, setEn, outEn, novEn, dezEn],
-            maxBarThickness: 10
-          }, ],
+      type: "line",
+      data: {
+        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        datasets: [{
+          label: "Mobile apps",
+          tension: 0,
+          borderWidth: 0,
+          pointRadius: 5,
+          pointBackgroundColor: "rgba(255, 255, 255, .8)",
+          pointBorderColor: "transparent",
+          borderColor: "rgba(255, 255, 255, .8)",
+          borderColor: "rgba(255, 255, 255, .8)",
+          borderWidth: 4,
+          backgroundColor: "transparent",
+          fill: true,
+          data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
+          maxBarThickness: 6
+
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          }
         },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              display: false,
+        interaction: {
+          intersect: false,
+          mode: 'index',
+        },
+        scales: {
+          y: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5],
+              color: 'rgba(255, 255, 255, .2)'
+            },
+            ticks: {
+              display: true,
+              color: '#f8f9fa',
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: 'normal',
+                lineHeight: 2
+              },
             }
           },
-          interaction: {
-            intersect: false,
-            mode: 'index',
-          },
-          scales: {
-            y: {
-              grid: {
-                drawBorder: false,
-                display: true,
-                drawOnChartArea: true,
-                drawTicks: false,
-                borderDash: [5, 5],
-                color: 'rgba(255, 255, 255, .2)'
-              },
-              ticks: {
-                suggestedMin: 0,
-                suggestedMax: 500,
-                beginAtZero: true,
-                padding: 10,
-                font: {
-                  size: 14,
-                  weight: 300,
-                  family: "Roboto",
-                  style: 'normal',
-                  lineHeight: 2
-                },
-                color: "#fff"
-              },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: false,
+              drawOnChartArea: false,
+              drawTicks: false,
+              borderDash: [5, 5]
             },
-            x: {
-              grid: {
-                drawBorder: false,
-                display: true,
-                drawOnChartArea: true,
-                drawTicks: false,
-                borderDash: [5, 5],
-                color: 'rgba(255, 255, 255, .2)'
+            ticks: {
+              display: true,
+              color: '#f8f9fa',
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: 'normal',
+                lineHeight: 2
               },
-              ticks: {
-                display: true,
-                color: '#f8f9fa',
-                padding: 11,
-                font: {
-                  size: 9.4,
-                  weight: 300,
-                  family: "Roboto",
-                  style: 'normal',
-                  lineHeight: 2
-                },
-              }
-            },
+            }
           },
         },
-      });
+      },
+    });
 
     var ctx3 = document.getElementById("chart-line-tasks").getContext("2d");
 
     new Chart(ctx3, {
-        type: "bar",
-        data: {
-          labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
-          datasets: [{
-            label: "Sales",
-            tension: 0.4,
-            borderWidth: 0,
-            borderRadius: 4,
-            borderSkipped: false,
-            backgroundColor: "lightgreen",
-            data: [janGas, fevGas, marGas, abrGas, maiGas, junGas, julGas, agoGas, setGas, outGas, novGas, dezGas],
-            maxBarThickness: 10
-          }, ],
+      type: "line",
+      data: {
+        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        datasets: [{
+          label: "Mobile apps",
+          tension: 0,
+          borderWidth: 0,
+          pointRadius: 5,
+          pointBackgroundColor: "rgba(255, 255, 255, .8)",
+          pointBorderColor: "transparent",
+          borderColor: "rgba(255, 255, 255, .8)",
+          borderWidth: 4,
+          backgroundColor: "transparent",
+          fill: true,
+          data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+          maxBarThickness: 6
+
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          }
         },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              display: false,
+        interaction: {
+          intersect: false,
+          mode: 'index',
+        },
+        scales: {
+          y: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5],
+              color: 'rgba(255, 255, 255, .2)'
+            },
+            ticks: {
+              display: true,
+              padding: 10,
+              color: '#f8f9fa',
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: 'normal',
+                lineHeight: 2
+              },
             }
           },
-          interaction: {
-            intersect: false,
-            mode: 'index',
-          },
-          scales: {
-            y: {
-              grid: {
-                drawBorder: false,
-                display: true,
-                drawOnChartArea: true,
-                drawTicks: false,
-                borderDash: [5, 5],
-                color: 'rgba(255, 255, 255, .2)'
-              },
-              ticks: {
-                suggestedMin: 0,
-                suggestedMax: 500,
-                beginAtZero: true,
-                padding: 10,
-                font: {
-                  size: 14,
-                  weight: 300,
-                  family: "Roboto",
-                  style: 'normal',
-                  lineHeight: 2
-                },
-                color: "#fff"
-              },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: false,
+              drawOnChartArea: false,
+              drawTicks: false,
+              borderDash: [5, 5]
             },
-            x: {
-              grid: {
-                drawBorder: false,
-                display: true,
-                drawOnChartArea: true,
-                drawTicks: false,
-                borderDash: [5, 5],
-                color: 'rgba(255, 255, 255, .2)'
+            ticks: {
+              display: true,
+              color: '#f8f9fa',
+              padding: 10,
+              font: {
+                size: 14,
+                weight: 300,
+                family: "Roboto",
+                style: 'normal',
+                lineHeight: 2
               },
-              ticks: {
-                display: true,
-                color: '#f8f9fa',
-                padding: 10,
-                font: {
-                  size: 9.4,
-                  weight: 300,
-                  family: "Roboto",
-                  style: 'normal',
-                  lineHeight: 2
-                },
-              }
-            },
+            }
           },
         },
-      });
-
+      },
+    });
   </script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
@@ -1210,7 +1124,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/material-dashboard.min.js?v=3.0.2"></script>
+  <script src="./assets/js/material-dashboard.min.js?v=3.0.2"></script>
 </body>
 
 </html>

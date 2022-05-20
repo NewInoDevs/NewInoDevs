@@ -385,7 +385,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                       <th class="text-uppercase text-secondary font-weight-bolder opacity-7 ps-2">Código</th>
                       <th class="text-center text-uppercase text-secondary font-weight-bolder opacity-7">Tipo</th>
                       <th class="text-center text-uppercase text-secondary  font-weight-bolder opacity-7">Contrato</th>
-                      <th class="text-center text-uppercase text-secondary  font-weight-bolder opacity-7">Consumo</th>
+                      <th class="text-center text-uppercase text-secondary  font-weight-bolder opacity-7">MIC</th>
                       <th class="text-center text-uppercase text-secondary  font-weight-bolder opacity-7">Status</th>
                       <th class="text-secondary opacity-7">AÇÕES</th>
                     </tr>
@@ -418,7 +418,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                         <span class="text-secondary text-xs font-weight-bold" th:text="${conta.contrato.codigo}"></span>
                       </td>
                       <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold" th:text="${conta.consumo}"></span>
+                        <span class="text-secondary text-xs font-weight-bold" th:text="${conta.media_consumo}"></span>
                       </td>
                       <td class="align-middle text-center">
                         <span class="text-secondary text-xs font-weight-bold text-success" th:text="${conta.status}" th:if="${conta.status=='Aprovado'}" ></span>

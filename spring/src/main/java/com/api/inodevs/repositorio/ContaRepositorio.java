@@ -18,4 +18,7 @@ public interface ContaRepositorio extends JpaRepository<Conta, Long>{
     		+ "OR c.codi LIKE %?1%"
     		+ "OR c.status LIKE %?1%")
     public List<Conta> pesquisarConta(String palavraChave);
+    
+    @Query("SELECT c FROM Conta c WHERE c.contrato.codigo = ?1")
+    public List<Conta> contasContrato(Long codigoContrato);
 }
