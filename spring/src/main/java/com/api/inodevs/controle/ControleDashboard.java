@@ -425,5 +425,6 @@ public class ControleDashboard {
         modelo.addAttribute("contaEnergiaDez", contaEnergiaDez); 
        
 		return "pages/dashboard";
+
 	}	
 }
