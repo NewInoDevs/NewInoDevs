@@ -431,9 +431,9 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                       <input type="text" class="form-control subtitle" th:field=*{dados_adicionais}>
                     </div>
                     
-                    <label class="subtitle">Base de Cálculo</label>
+                    <label class="subtitle">MIC</label>
                     <div class="input-group input-group-outline mb-3">
-                      <input type="text" class="form-control subtitle" th:field=*{base_calculo}>
+                      <input type="text" class="form-control subtitle" th:field=*{media_consumo}>
                     </div>
          			<label class="subtitle">Arquivo pdf da conta:</label>
          			<br><a type="button" class="btn btn-primary" th:href="@{'/download/'+${conta.fatura.id}}" download>Download</a>
