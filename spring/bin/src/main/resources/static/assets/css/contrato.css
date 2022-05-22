@@ -1,0 +1,30 @@
+.title {
+    text-align : center;
+    padding: 0.2rem;
+}
+.block-main2 {
+    background-color: #f0f2f5; 
+    width: 90%;
+    height: 50%;
+    margin: 0;
+    padding: 0;
+    left: 9%;
+    position: relative;
+    border: solid;
+    border-radius: 2rem;
+}
+
+.space {
+    padding-left: 10%;
+}
+
+.bt2 {
+    display: inline-block; 
+    content: flex-end; 
+    padding: 5% 0 0 43%;
+    }
+
+.sub-main {
+    display: inline-block; 
+    margin-left: 39%;
+}

@@ -424,10 +424,12 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <div class=" p-3">
      <h2 class="mb-">Relatório de [[${mes}]] de [[${ano}]]</h2>
+     <p th:text="'Unidade: ' + ${unidade.nome}"></p>
+     <h4 th:if="${contratoAgua == null && contratoEnergia == null && contratoGas == null}">Não há contratos cadastrados nessa unidade.</h4>
 </div>
  <div class="container-fluid py-4">
       <div class="row">
-        <div class="col-lg-4 col-md-6 mt-4 mb-4">
+        <div class="col-lg-4 col-md-6 mt-4 mb-4" th:if="${contratoAgua != null}">
           <div class="card">
             <div class="card-header p-3 pt-2">
               <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
@@ -435,6 +437,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
               </div>
               <div class="text-end pt-1">
 				<h4>Relatório de Água</h4>
+				<span th:if="${contratoAgua != null}" th:text="${contratoAgua.concessionaria.nome}"></span>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -443,11 +446,12 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 					Valor Total Água: [[${contaAguaAtual.valor_total}]]	<br>
 					Consumo Água: [[${contaAguaAtual.consumo}]]<br>
 					Média de Consumo Anual: [[${contaAguaMedia}]] 
-				</div>          
+				</div>  
+				<span th:if="${contaAguaAtual == null}">Ainda não há contas de água esse mês</span>         
 			</div>
           </div>
         </div>
-        <div class="col-lg-4 col-md-6 mt-4 mb-4">
+        <div class="col-lg-4 col-md-6 mt-4 mb-4"  th:if="${contratoEnergia != null}">
           <div class="card">
             <div class="card-header p-3 pt-2">
               <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
@@ -455,19 +459,21 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
               </div>
               <div class="text-end pt-1">
 				<h4>Relatório de Energia</h4>
+				<span th:if="${contratoEnergia != null}" th:text="${contratoEnergia.concessionaria.nome}"></span>
               </div>
             </div>
             <hr class="dark horizontal my-0">
             <div class="card-footer p-3">
-				<div  th:if="${contaEnergiaAtual != null}">
+				<div th:if="${contratoEnergiaAtual != null}">
 					Total Energia: [[${contaEnergiaAtual.valor_total}]] <br>
 					Consumo Energia: [[${contaEnergiaAtual.consumo}]]<br>
 					Média de Consumo: [[${contaEnergiaMedia}]]
-				</div>            
+				</div> 
+				<span  th:if="${contaEnergiaAtual == null}">Ainda não há contas de energia esse mês</span>   
 			</div>
           </div>
         </div>
-        <div class="col-lg-4 col-md-6 mt-4 mb-4">
+        <div class="col-lg-4 col-md-6 mt-4 mb-4"  th:if="${contratoGas != null}">
           <div class="card">
             <div class="card-header p-3 pt-2">
               <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
@@ -475,6 +481,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
               </div>
               <div class="text-end pt-1">
 				<h4>Relatório de Gas</h4>
+				<span th:if="${contratoGas != null}" th:text="${contratoGas.concessionaria.nome}"></span>
               </div>
             </div>
             <hr class="dark horizontal my-0">
@@ -483,13 +490,14 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 					Total Gás: [[${contaGasAtual.valor_total}]] <br>
 					Consumo Gás: [[${contaGasAtual.consumo}]]<br>
 					Média de Consumo: [[${contaGasMedia}]]
-				</div>           
+				</div>   
+				<span  th:if="${contaGasAtual == null}">Ainda não há contas de gás esse mês</span>         
 			</div>
           </div>
         </div>
         
       <div class="row mt-4">
-        <div class="col-lg-4 col-md-6 mt-4 mb-4">
+        <div class="col-lg-4 col-md-6 mt-4 mb-4"  th:if="${contratoAgua != null}">
           <div class="card z-index-2 ">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
               <div class="bg-gradient-dark shadow-dark border-radius-lg py-3 pe-1">
@@ -505,7 +513,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
             </div>
           </div>
         </div>
-        <div class="col-lg-4 col-md-6 mt-4 mb-4">
+        <div class="col-lg-4 col-md-6 mt-4 mb-4"  th:if="${contratoEnergia != null}">
           <div class="card z-index-2  ">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
               <div class="bg-gradient-dark shadow-dark border-radius-lg py-3 pe-1">
@@ -521,7 +529,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
             </div>
           </div>
         </div>
-        <div class="col-lg-4 mt-4 mb-3">
+        <div class="col-lg-4 mt-4 mb-3"  th:if="${contratoGas != null}">
           <div class="card z-index-2 ">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
               <div class="bg-gradient-dark shadow-dark border-radius-lg py-3 pe-1">
@@ -916,288 +924,295 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
   <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-    var ctx = document.getElementById("chart-bars").getContext("2d");
+   <script>
+   
+   teste1 = document.getElementById("chart-bars")
+   if (teste1 != null){
+	   var ctx1 = document.getElementById("chart-bars").getContext("2d");
+	   var janAg = document.getElementById("contaAguaJan").value
+	   var fevAg = document.getElementById("contaAguaFev").value
+	   var marAg = document.getElementById("contaAguaMar").value
+	   var abrAg = document.getElementById("contaAguaAbr").value
+	   var maiAg = document.getElementById("contaAguaMai").value
+	   var junAg = document.getElementById("contaAguaJun").value
+	   var julAg = document.getElementById("contaAguaJul").value
+	   var agoAg = document.getElementById("contaAguaAgo").value
+	   var setAg = document.getElementById("contaAguaSet").value
+	   var outAg = document.getElementById("contaAguaOut").value
+	   var novAg = document.getElementById("contaAguaNov").value
+	   var dezAg = document.getElementById("contaAguaDez").value
+	  
+	   new Chart(ctx1, {
+	     type: "bar",
+	     data: {
+	       labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
+	       datasets: [{
+	         label: "Consumo",
+	         tension: 0.4,
+	         borderWidth: 0,
+	         borderRadius: 4,
+	         borderSkipped: false,
+	         backgroundColor: "lightblue",
+	         data: [janAg, fevAg, marAg, abrAg, maiAg, junAg, julAg, agoAg, setAg, outAg, novAg, dezAg],
+	         maxBarThickness: 10
+	       }, ],
+	     },
+	     options: {
+	       responsive: true,
+	       maintainAspectRatio: false,
+	       plugins: {
+	         legend: {
+	           display: false,
+	         }
+	       },
+	       interaction: {
+	         intersect: false,
+	         mode: 'index',
+	       },
+	       scales: {
+	         y: {
+	           grid: {
+	             drawBorder: false,
+	             display: true,
+	             drawOnChartArea: true,
+	             drawTicks: false,
+	             borderDash: [5, 5],
+	             color: 'rgba(255, 255, 255, .2)'
+	           },
+	           ticks: {
+	             suggestedMin: 0,
+	             suggestedMax: 500,
+	             beginAtZero: true,
+	             padding: 10,
+	             font: {
+	               size: 14,
+	               weight: 300,
+	               family: "Roboto",
+	               style: 'normal',
+	               lineHeight: 2
+	             },
+	             color: "#fff"
+	           },
+	         },
+	         x: {
+	           grid: {
+	             drawBorder: false,
+	             display: true,
+	             drawOnChartArea: true,
+	             drawTicks: false,
+	             borderDash: [5, 5],
+	             color: 'rgba(255, 255, 255, .2)'
+	           },
+	           ticks: {
+	             display: true,
+	             color: '#f8f9fa',
+	             padding: 10,
+	             font: {
+	               size: 9,
+	               weight: 300,
+	               family: "Roboto",
+	               style: 'normal',
+	               lineHeight: 2
+	             },
+	           }
+	         },
+	       },
+	     },
+	   });
+   }
+   
+   teste2 = document.getElementById("chart-line")
+   if (teste2 != null){
+	   var janEn = document.getElementById("contaEnergiaJan").value
+	   var fevEn = document.getElementById("contaEnergiaFev").value
+	   var marEn = document.getElementById("contaEnergiaMar").value
+	   var abrEn = document.getElementById("contaEnergiaAbr").value
+	   var maiEn = document.getElementById("contaEnergiaMai").value
+	   var junEn = document.getElementById("contaEnergiaJun").value
+	   var julEn = document.getElementById("contaEnergiaJul").value
+	   var agoEn = document.getElementById("contaEnergiaAgo").value
+	   var setEn = document.getElementById("contaEnergiaSet").value
+	   var outEn = document.getElementById("contaEnergiaOut").value
+	   var novEn = document.getElementById("contaEnergiaNov").value
+	   var dezEn = document.getElementById("contaEnergiaDez").value
 	
-    var janAg = document.getElementById("contaAguaJan").value
-    var fevAg = document.getElementById("contaAguaFev").value
-    var marAg = document.getElementById("contaAguaMar").value
-    var abrAg = document.getElementById("contaAguaAbr").value
-    var maiAg = document.getElementById("contaAguaMai").value
-    var junAg = document.getElementById("contaAguaJun").value
-    var julAg = document.getElementById("contaAguaJul").value
-    var agoAg = document.getElementById("contaAguaAgo").value
-    var setAg = document.getElementById("contaAguaSet").value
-    var outAg = document.getElementById("contaAguaOut").value
-    var novAg = document.getElementById("contaAguaNov").value
-    var dezAg = document.getElementById("contaAguaDez").value
-    
-    var janEn = document.getElementById("contaEnergiaJan").value
-    var fevEn = document.getElementById("contaEnergiaFev").value
-    var marEn = document.getElementById("contaEnergiaMar").value
-    var abrEn = document.getElementById("contaEnergiaAbr").value
-    var maiEn = document.getElementById("contaEnergiaMai").value
-    var junEn = document.getElementById("contaEnergiaJun").value
-    var julEn = document.getElementById("contaEnergiaJul").value
-    var agoEn = document.getElementById("contaEnergiaAgo").value
-    var setEn = document.getElementById("contaEnergiaSet").value
-    var outEn = document.getElementById("contaEnergiaOut").value
-    var novEn = document.getElementById("contaEnergiaNov").value
-    var dezEn = document.getElementById("contaEnergiaDez").value
-    
-    var janGas = document.getElementById("contaGasJan").value
-    var fevGas = document.getElementById("contaGasFev").value
-    var marGas = document.getElementById("contaGasMar").value
-    var abrGas = document.getElementById("contaGasAbr").value
-    var maiGas = document.getElementById("contaGasMai").value
-    var junGas = document.getElementById("contaGasJun").value
-    var julGas = document.getElementById("contaGasJul").value
-    var agoGas = document.getElementById("contaGasAgo").value
-    var setGas = document.getElementById("contaGasSet").value
-    var outGas = document.getElementById("contaGasOut").value
-    var novGas = document.getElementById("contaGasNov").value
-    var dezGas = document.getElementById("contaGasDez").value
-    
-    new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
-        datasets: [{
-          label: "Sales",
-          tension: 0.4,
-          borderWidth: 0,
-          borderRadius: 4,
-          borderSkipped: false,
-          backgroundColor: "lightblue",
-          data: [janAg, fevAg, marAg, abrAg, maiAg, junAg, julAg, agoAg, setAg, outAg, novAg, dezAg],
-          maxBarThickness: 10
-        }, ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5],
-              color: 'rgba(255, 255, 255, .2)'
-            },
-            ticks: {
-              suggestedMin: 0,
-              suggestedMax: 500,
-              beginAtZero: true,
-              padding: 10,
-              font: {
-                size: 14,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
-              color: "#fff"
-            },
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5],
-              color: 'rgba(255, 255, 255, .2)'
-            },
-            ticks: {
-              display: true,
-              color: '#f8f9fa',
-              padding: 10,
-              font: {
-                size: 9,
-                weight: 300,
-                family: "Roboto",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-        },
-      },
-    });
-
-
-    var ctx2 = document.getElementById("chart-line").getContext("2d");
-
-    new Chart(ctx2, {
-        type: "bar",
-        data: {
-          labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
-          datasets: [{
-            label: "Sales",
-            tension: 0.4,
-            borderWidth: 0,
-            borderRadius: 4,
-            borderSkipped: false,
-            backgroundColor: "tomato",
-            data: [janEn, fevEn, marEn, abrEn, maiEn, junEn, julEn, agoEn, setEn, outEn, novEn, dezEn],
-            maxBarThickness: 10
-          }, ],
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              display: false,
-            }
-          },
-          interaction: {
-            intersect: false,
-            mode: 'index',
-          },
-          scales: {
-            y: {
-              grid: {
-                drawBorder: false,
-                display: true,
-                drawOnChartArea: true,
-                drawTicks: false,
-                borderDash: [5, 5],
-                color: 'rgba(255, 255, 255, .2)'
-              },
-              ticks: {
-                suggestedMin: 0,
-                suggestedMax: 500,
-                beginAtZero: true,
-                padding: 10,
-                font: {
-                  size: 14,
-                  weight: 300,
-                  family: "Roboto",
-                  style: 'normal',
-                  lineHeight: 2
-                },
-                color: "#fff"
-              },
-            },
-            x: {
-              grid: {
-                drawBorder: false,
-                display: true,
-                drawOnChartArea: true,
-                drawTicks: false,
-                borderDash: [5, 5],
-                color: 'rgba(255, 255, 255, .2)'
-              },
-              ticks: {
-                display: true,
-                color: '#f8f9fa',
-                padding: 11,
-                font: {
-                  size: 9.4,
-                  weight: 300,
-                  family: "Roboto",
-                  style: 'normal',
-                  lineHeight: 2
-                },
-              }
-            },
-          },
-        },
-      });
-
-    var ctx3 = document.getElementById("chart-line-tasks").getContext("2d");
-
-    new Chart(ctx3, {
-        type: "bar",
-        data: {
-          labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
-          datasets: [{
-            label: "Sales",
-            tension: 0.4,
-            borderWidth: 0,
-            borderRadius: 4,
-            borderSkipped: false,
-            backgroundColor: "lightgreen",
-            data: [janGas, fevGas, marGas, abrGas, maiGas, junGas, julGas, agoGas, setGas, outGas, novGas, dezGas],
-            maxBarThickness: 10
-          }, ],
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              display: false,
-            }
-          },
-          interaction: {
-            intersect: false,
-            mode: 'index',
-          },
-          scales: {
-            y: {
-              grid: {
-                drawBorder: false,
-                display: true,
-                drawOnChartArea: true,
-                drawTicks: false,
-                borderDash: [5, 5],
-                color: 'rgba(255, 255, 255, .2)'
-              },
-              ticks: {
-                suggestedMin: 0,
-                suggestedMax: 500,
-                beginAtZero: true,
-                padding: 10,
-                font: {
-                  size: 14,
-                  weight: 300,
-                  family: "Roboto",
-                  style: 'normal',
-                  lineHeight: 2
-                },
-                color: "#fff"
-              },
-            },
-            x: {
-              grid: {
-                drawBorder: false,
-                display: true,
-                drawOnChartArea: true,
-                drawTicks: false,
-                borderDash: [5, 5],
-                color: 'rgba(255, 255, 255, .2)'
-              },
-              ticks: {
-                display: true,
-                color: '#f8f9fa',
-                padding: 10,
-                font: {
-                  size: 9.4,
-                  weight: 300,
-                  family: "Roboto",
-                  style: 'normal',
-                  lineHeight: 2
-                },
-              }
-            },
-          },
-        },
-      });
-
-  </script>
+	   var ctx2 = document.getElementById("chart-line").getContext("2d");
+	
+	   new Chart(ctx2, {
+	       type: "bar",
+	       data: {
+	         labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
+	         datasets: [{
+	           label: "Consumo",
+	           tension: 0.4,
+	           borderWidth: 0,
+	           borderRadius: 4,
+	           borderSkipped: false,
+	           backgroundColor: "tomato",
+	           data: [janEn, fevEn, marEn, abrEn, maiEn, junEn, julEn, agoEn, setEn, outEn, novEn, dezEn],
+	           maxBarThickness: 10
+	         }, ],
+	       },
+	       options: {
+	         responsive: true,
+	         maintainAspectRatio: false,
+	         plugins: {
+	           legend: {
+	             display: false,
+	           }
+	         },
+	         interaction: {
+	           intersect: false,
+	           mode: 'index',
+	         },
+	         scales: {
+	           y: {
+	             grid: {
+	               drawBorder: false,
+	               display: true,
+	               drawOnChartArea: true,
+	               drawTicks: false,
+	               borderDash: [5, 5],
+	               color: 'rgba(255, 255, 255, .2)'
+	             },
+	             ticks: {
+	               suggestedMin: 0,
+	               suggestedMax: 500,
+	               beginAtZero: true,
+	               padding: 10,
+	               font: {
+	                 size: 14,
+	                 weight: 300,
+	                 family: "Roboto",
+	                 style: 'normal',
+	                 lineHeight: 2
+	               },
+	               color: "#fff"
+	             },
+	           },
+	           x: {
+	             grid: {
+	               drawBorder: false,
+	               display: true,
+	               drawOnChartArea: true,
+	               drawTicks: false,
+	               borderDash: [5, 5],
+	               color: 'rgba(255, 255, 255, .2)'
+	             },
+	             ticks: {
+	               display: true,
+	               color: '#f8f9fa',
+	               padding: 11,
+	               font: {
+	                 size: 9.4,
+	                 weight: 300,
+	                 family: "Roboto",
+	                 style: 'normal',
+	                 lineHeight: 2
+	               },
+	             }
+	           },
+	         },
+	       },
+	     });
+   		}
+	teste3 = document.getElementById("chart-line-tasks")
+	if(teste3 != null){
+	   var janGas = document.getElementById("contaGasJan").value
+	   var fevGas = document.getElementById("contaGasFev").value
+	   var marGas = document.getElementById("contaGasMar").value
+	   var abrGas = document.getElementById("contaGasAbr").value
+	   var maiGas = document.getElementById("contaGasMai").value
+	   var junGas = document.getElementById("contaGasJun").value
+	   var julGas = document.getElementById("contaGasJul").value
+	   var agoGas = document.getElementById("contaGasAgo").value
+	   var setGas = document.getElementById("contaGasSet").value
+	   var outGas = document.getElementById("contaGasOut").value
+	   var novGas = document.getElementById("contaGasNov").value
+	   var dezGas = document.getElementById("contaGasDez").value
+	
+	   var ctx3 = document.getElementById("chart-line-tasks").getContext("2d");
+	
+	   new Chart(ctx3, {
+	       type: "bar",
+	       data: {
+	         labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
+	         datasets: [{
+	           label: "Consumo",
+	           tension: 0.4,
+	           borderWidth: 0,
+	           borderRadius: 4,
+	           borderSkipped: false,
+	           backgroundColor: "lightgreen",
+	           data: [janGas, fevGas, marGas, abrGas, maiGas, junGas, julGas, agoGas, setGas, outGas, novGas, dezGas],
+	           maxBarThickness: 10
+	         }, ],
+	       },
+	       options: {
+	         responsive: true,
+	         maintainAspectRatio: false,
+	         plugins: {
+	           legend: {
+	             display: false,
+	           }
+	         },
+	         interaction: {
+	           intersect: false,
+	           mode: 'index',
+	         },
+	         scales: {
+	           y: {
+	             grid: {
+	               drawBorder: false,
+	               display: true,
+	               drawOnChartArea: true,
+	               drawTicks: false,
+	               borderDash: [5, 5],
+	               color: 'rgba(255, 255, 255, .2)'
+	             },
+	             ticks: {
+	               suggestedMin: 0,
+	               suggestedMax: 500,
+	               beginAtZero: true,
+	               padding: 10,
+	               font: {
+	                 size: 14,
+	                 weight: 300,
+	                 family: "Roboto",
+	                 style: 'normal',
+	                 lineHeight: 2
+	               },
+	               color: "#fff"
+	             },
+	           },
+	           x: {
+	             grid: {
+	               drawBorder: false,
+	               display: true,
+	               drawOnChartArea: true,
+	               drawTicks: false,
+	               borderDash: [5, 5],
+	               color: 'rgba(255, 255, 255, .2)'
+	             },
+	             ticks: {
+	               display: true,
+	               color: '#f8f9fa',
+	               padding: 10,
+	               font: {
+	                 size: 9.4,
+	                 weight: 300,
+	                 family: "Roboto",
+	                 style: 'normal',
+	                 lineHeight: 2
+	               },
+	             }
+	           },
+	         },
+	       },
+	     });
+		}
+	
+   </script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {

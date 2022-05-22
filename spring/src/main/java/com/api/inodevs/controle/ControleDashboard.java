@@ -1,9 +1,11 @@
 package com.api.inodevs.controle;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.api.inodevs.entidades.Conta;
+import com.api.inodevs.entidades.Unidade;
 import com.api.inodevs.repositorio.ContaRepositorio;
 import com.api.inodevs.repositorio.ContratoRepositorio;
 import com.api.inodevs.repositorio.UnidadeRepositorio;
@@ -37,6 +40,12 @@ public class ControleDashboard {
 	
 	@GetMapping("/dashboard/{cnpj}")
 	public String teste(@PathVariable("cnpj") long cnpj, Model modelo) {
+        
+        Optional<Unidade> unidadeOpt = unidadeRepo.findById(cnpj);
+        if (unidadeOpt.isEmpty()) {
+            throw new IllegalArgumentException("Unidade inválida");
+        }
+        modelo.addAttribute("unidade", unidadeOpt.get());
         
 		// MÊS ANTERIOR:
 		Date data = new Date();
@@ -91,9 +100,19 @@ public class ControleDashboard {
 				break;
 		}
 		
-        List<Conta> contasAgua = contaRepo.contasContrato(contratoRepo.contratoAgua(cnpj));
-        List<Conta> contasGas = contaRepo.contasContrato(contratoRepo.contratoGas(cnpj));
-        List<Conta> contasEnergia = contaRepo.contasContrato(contratoRepo.contratoEnergia(cnpj));
+		List<Conta> contasAgua = new ArrayList<>();
+		List<Conta> contasEnergia = new ArrayList<>();
+		List<Conta> contasGas = new ArrayList<>();
+
+		if (contratoRepo.contratoAgua(cnpj) != null) {
+			contasAgua = contaRepo.contasContrato(contratoRepo.contratoAgua(cnpj).getCodigo());
+		}
+        if (contratoRepo.contratoGas(cnpj) != null) {
+        	contasGas = contaRepo.contasContrato(contratoRepo.contratoGas(cnpj).getCodigo());
+        } 
+        if (contratoRepo.contratoEnergia(cnpj) != null) {
+        	contasEnergia = contaRepo.contasContrato(contratoRepo.contratoEnergia(cnpj).getCodigo());
+        }
         
         Conta contaAguaAtual = null;
         float contaAguaJan = 0;
@@ -373,6 +392,13 @@ public class ControleDashboard {
         	}
 		}
         
+        modelo.addAttribute("unidade", unidadeOpt.get());
+        
+        modelo.addAttribute("contratoAgua", contratoRepo.contratoAgua(cnpj));  
+        modelo.addAttribute("contratoEnergia", contratoRepo.contratoEnergia(cnpj)); 
+        modelo.addAttribute("contratoGas", contratoRepo.contratoGas(cnpj)); 
+       
+        
         modelo.addAttribute("contaAguaAtual", contaAguaAtual);  
         modelo.addAttribute("contaGasAtual", contaGasAtual); 
         modelo.addAttribute("contaEnergiaAtual", contaEnergiaAtual); 
@@ -391,8 +417,7 @@ public class ControleDashboard {
         modelo.addAttribute("contaAguaOut", contaAguaOut);  
         modelo.addAttribute("contaAguaNov", contaAguaNov);  
         modelo.addAttribute("contaAguaDez", contaAguaDez); 
-       
-        
+           
 		modelo.addAttribute("contaGasMedia", somaG/contG);
 		
         modelo.addAttribute("contaGasJan", contaGasJan);  

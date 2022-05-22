@@ -62,8 +62,11 @@ public class Conta{
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_notificacoes", referencedColumnName = "id")
 	private Notificacoes notificacoes;
-	
-    // Getters e Setters:
+
+    public Conta() {
+	}
+    
+	// Getters e Setters:
 	public Long getCodi() {
 		return codi;
 	}
