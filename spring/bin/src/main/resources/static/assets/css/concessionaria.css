@@ -1,0 +1,32 @@
+.title {
+    text-align : center;
+    padding: 0.2rem;
+}
+.block-main {
+    background-color: #f0f2f5; 
+    width: 50%;
+    height: 40%;
+    margin: 0;
+    padding: 0;
+    left: 25%;
+    position: relative;
+    border: solid;
+    border-radius: 2rem;
+}
+
+.space {
+    padding-left: 9.5rem;
+}
+
+.bt {
+    display: inline-block; 
+    content: flex-end; 
+    margin-left: 40%;
+    padding-bottom: 4%;
+}
+.bt2 {
+    display: inline-block; 
+    content: flex-end; 
+    margin-left: 40%;
+    padding-bottom: 4%;
+}
