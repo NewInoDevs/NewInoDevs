@@ -125,7 +125,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
             <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
           </ol>
-          <h6 class="font-weight-bolder mb-0">Dashboard</h6>
+          <h6 class="font-weight-bolder mb-0">Relatórios</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -143,19 +143,14 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                 <li class="mb-2">
                   <a class="dropdown-item border-radius-md" href="javascript:;">
                     <div class="d-flex py-1">
-                      <div class="my-auto">
-                      </div>
                       <div class="d-flex flex-column justify-content-center">
-                        <p class="text-xs mb-0">
-                          <i class="fa fa-clock me-1"></i>
+                        <p class="text mb-0">
                           Nome: <span th:text="${usuarioInfo.nome} + ' ' + ${usuarioInfo.sobrenome}"></span>
                         </p>
-                        <p class="text-xs mb-0">
-                          <i class="fa fa-clock me-1"></i>
+                        <p class="text mb-0">
                           Username: <span th:text="${usuarioInfo.username}"></span>
                         </p>
-                        <p class="text-xs mb-0">
-                          <i class="fa fa-clock me-1"></i>
+                        <p class="text mb-0">
                           Nível de Acesso: 
                           <span th:if="${usuarioInfo.secao == 'ROLE_ADMINISTRADOR'}">Administrador</span>
                           <span th:if="${usuarioInfo.secao == 'ROLE_GESTOR'}">Gestor</span>
@@ -166,7 +161,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                   </a>
                   </li>
                   <li class="nav-item d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
+              <a href="javascript:;" class="text-body font-weight-bold px-8">
                 <form class="d-sm-inline d-none" action="/logout" method="post">
 					<input type="submit" value="Sair">      		
 					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
@@ -485,13 +480,13 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
               </div>
               <div class="text-end pt-1">
 				<h4>Relatório de Energia</h4>
-				<span th:if="${contratoEnergia != null}" th:text="${contratoEnergia.concessionaria.nome}"></span>
+				<span th:if="${contaEnergia != null}" th:text="${contaEnergia.concessionaria.nome}"></span>
               </div>
             </div>
             <hr class="dark horizontal my-0">
             <div class="card-footer p-3">
-				<div th:if="${contratoEnergiaAtual != null}">
-					<div class="text-danger" th:if="${contaAtual.consumo > contaAtual.media_consumo}">Consumo acima da média ideal!</div>  
+				<div th:if="${contaEnergiaAtual != null}">
+					<div class="text-danger" th:if="${contaEnergiaAtual.consumo > contaEnergiaAtual.media_consumo}">Consumo acima da média ideal!</div>  
 					Total Energia: [[${contaEnergiaAtual.valor_total}]] <br>
 					Consumo Energia: [[${contaEnergiaAtual.consumo}]]<br>
 					Média de Consumo Anual: [[${contaEnergiaMedia}]] <br>
@@ -578,6 +573,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
           </div>
         </div>
       </div>
+     </div>
       <!-- <div class="row mb-4"> 
         <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
           <div class="card">
@@ -950,6 +946,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
             <input class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version" onclick="darkMode(this)">
           </div>
         </div>
+       </div>
+      </div>
   <!--   Core JS Files   -->
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>
