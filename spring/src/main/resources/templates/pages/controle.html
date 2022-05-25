@@ -131,8 +131,10 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             <div class="input-group input-group-outline">
-              <label class="form-label">Type here...</label>
-              <input type="text" class="form-control">
+             	<form th:action="@{/controleUsuario}">
+		    		<input type="search" name="palavraChave" id="palavraChave" th:value="${palavraChave}" placeholder="Pesquisar...">
+		    		<input type="submit" value="Pesquisar">
+				</form>
             </div>
           </div>
           <ul class="navbar-nav  justify-content-end">
@@ -424,7 +426,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                       </td>
                       
                       <td class="align-middle text-center text-sm">
-                        <p class="text-xs font-weight-bold mb-0" th:text="${usuario.ativo}"></p>
+                        <p class="text-xs font-weight-bold mb-0" th:if="${usuario.ativo == 1}">Ativado</p>
+                        <p class="text-xs font-weight-bold mb-0" th:if="${usuario.ativo == 0}">Desativado</p>
                       </td>
                       <td class="align-middle text-center">
                         <a th:href="@{/editarUsuario/{username}(username=${usuario.username})}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">Editar |</a>

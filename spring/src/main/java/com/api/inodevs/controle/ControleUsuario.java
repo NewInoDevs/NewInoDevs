@@ -41,8 +41,15 @@ public class ControleUsuario {
 	
 	// Entrar na página da tabela de usuários com dados do banco:
 	@GetMapping("/controleUsuario")
-	public String controleUsuario(Model modelo) {
-		modelo.addAttribute("listaUsuario", usuarioRepo.findAll());
+	public String controleUsuario(Model modelo, @Param("palavraChave") String palavraChave) {
+		
+		if (palavraChave != null) {
+			modelo.addAttribute("listaUsuario", usuarioRepo.pesquisarUsuario(palavraChave));
+        } else {
+        	modelo.addAttribute("listaUsuario", usuarioRepo.findAll());
+        }
+		modelo.addAttribute("palavraChave", palavraChave);
+		
         modelo.addAttribute("quantidadeConta", notificacoesRepo.contar("Conta", "ROLE_GESTOR"));
         modelo.addAttribute("quantidadeConcessionaria", notificacoesRepo.contar("Concessionaria", "ROLE_GESTOR"));
         modelo.addAttribute("quantidadeUnidade", notificacoesRepo.contar("Unidade", "ROLE_GESTOR"));

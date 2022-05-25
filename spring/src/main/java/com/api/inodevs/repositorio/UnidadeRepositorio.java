@@ -17,4 +17,7 @@ public interface UnidadeRepositorio extends JpaRepository<Unidade, Long>{
     		+ "OR u.endereco.cep LIKE %?1%"
     		+ "OR u.status LIKE %?1%")
     public List<Unidade> pesquisarUnidade(String palavraChave);
+    
+    @Query("SELECT u FROM Unidade u WHERE u.nome LIKE %?1%")
+    public List<Unidade> pesquisarRelatorio(String palavraChave);
 }

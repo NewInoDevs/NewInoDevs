@@ -43,7 +43,7 @@ public class Conta{
 	private Float valor_total;
     
     @Column(nullable = false)
-	private String media_consumo;
+	private Float media_consumo;
     
     @Column
 	private String status;
@@ -127,10 +127,10 @@ public class Conta{
 	public void setValor_total(Float valor_total) {
 		this.valor_total = valor_total;
 	}
-	public String getMedia_consumo() {
+	public Float getMedia_consumo() {
 		return media_consumo;
 	}
-	public void setMedia_consumo(String media_consumo) {
+	public void setMedia_consumo(Float media_consumo) {
 		this.media_consumo = media_consumo;
 	}
 	public String getStatus() {
