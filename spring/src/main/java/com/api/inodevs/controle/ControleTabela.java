@@ -70,9 +70,15 @@ public class ControleTabela {
         
         return "index";
     }
+	
 	@GetMapping("/log")
-	public String log(Model modelo){
-    	modelo.addAttribute("listaRegistros", registrosRepo.findAll());
+	public String log(Model modelo, @Param("palavraChave") String palavraChave){
+    	if (palavraChave != null) {
+    		modelo.addAttribute("listaRegistros", registrosRepo.pesquisarRegistro(palavraChave));
+    	} else {
+    		modelo.addAttribute("listaRegistros", registrosRepo.findAll());
+    	}
+    	modelo.addAttribute("palavraChave", palavraChave);
 		return "pages/log";
 	}
 }

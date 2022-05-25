@@ -394,18 +394,18 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
       </div>
     </nav>
     <!-- End Navbar -->
-<input type="hidden" th:value="${contaAguaJan}" id="contaAguaJan">
-<input type="hidden" th:value="${contaAguaFev}" id="contaAguaFev">
-<input type="hidden" th:value="${contaAguaMar}" id="contaAguaMar">
-<input type="hidden" th:value="${contaAguaAbr}" id="contaAguaAbr">
-<input type="hidden" th:value="${contaAguaMai}" id="contaAguaMai">
-<input type="hidden" th:value="${contaAguaJun}" id="contaAguaJun">
-<input type="hidden" th:value="${contaAguaJul}" id="contaAguaJul">
-<input type="hidden" th:value="${contaAguaAgo}" id="contaAguaAgo">
-<input type="hidden" th:value="${contaAguaSet}" id="contaAguaSet">
-<input type="hidden" th:value="${contaAguaOut}" id="contaAguaOut">
-<input type="hidden" th:value="${contaAguaNov}" id="contaAguaNov">
-<input type="hidden" th:value="${contaAguaDez}" id="contaAguaDez">
+<input type="hidden" th:value="${contaAguaMes1}" id="contaAguaJan">
+<input type="hidden" th:value="${contaAguaMes2}" id="contaAguaFev">
+<input type="hidden" th:value="${contaAguaMes3}" id="contaAguaMar">
+<input type="hidden" th:value="${contaAguaMes4}" id="contaAguaAbr">
+<input type="hidden" th:value="${contaAguaMes5}" id="contaAguaMai">
+<input type="hidden" th:value="${contaAguaMes6}" id="contaAguaJun">
+<input type="hidden" th:value="${contaAguaMes7}" id="contaAguaJul">
+<input type="hidden" th:value="${contaAguaMes8}" id="contaAguaAgo">
+<input type="hidden" th:value="${contaAguaMes9}" id="contaAguaSet">
+<input type="hidden" th:value="${contaAguaMes10}" id="contaAguaOut">
+<input type="hidden" th:value="${contaAguaMes11}" id="contaAguaNov">
+<input type="hidden" th:value="${contaAguaMes12}" id="contaAguaDez">
 
 <input type="hidden" th:value="${contaEnergiaJan}" id="contaEnergiaJan">
 <input type="hidden" th:value="${contaEnergiaFev}" id="contaEnergiaFev">
@@ -433,6 +433,19 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <input type="hidden" th:value="${contaGasNov}" id="contaGasNov">
 <input type="hidden" th:value="${contaGasDez}" id="contaGasDez">
 
+<input type="hidden" th:value="${mes1}" id="mes1">
+<input type="hidden" th:value="${mes2}" id="mes2">
+<input type="hidden" th:value="${mes3}" id="mes3">
+<input type="hidden" th:value="${mes4}" id="mes4">
+<input type="hidden" th:value="${mes5}" id="mes5">
+<input type="hidden" th:value="${mes6}" id="mes6">
+<input type="hidden" th:value="${mes7}" id="mes7">
+<input type="hidden" th:value="${mes8}" id="mes8">
+<input type="hidden" th:value="${mes9}" id="mes9">
+<input type="hidden" th:value="${mes10}" id="mes10">
+<input type="hidden" th:value="${mes11}" id="mes11">
+<input type="hidden" th:value="${mes12}" id="mes12">
+
 <div class=" p-3">
      <h2 class="mb-">Relatório de [[${mes}]] de [[${ano}]]</h2>
      <p th:text="'Unidade: ' + ${unidade.nome}"></p>
@@ -454,6 +467,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
             <hr class="dark horizontal my-0">
             <div class="card-footer p-3">
 				<div th:if="${contaAguaAtual != null}">
+					<div class="text-danger" th:if="${contaAguaAtual.consumo > contaAguaAtual.media_consumo}">Consumo de água acima da média ideal!</div>
 					Valor Total Água: [[${contaAguaAtual.valor_total}]]	<br>
 					Consumo Água: [[${contaAguaAtual.consumo}]]<br>
 					Média de Consumo Anual: [[${contaAguaMedia}]] <br>
@@ -477,12 +491,15 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
             <hr class="dark horizontal my-0">
             <div class="card-footer p-3">
 				<div th:if="${contratoEnergiaAtual != null}">
+					<div class="text-danger" th:if="${contaAtual.consumo > contaAtual.media_consumo}">Consumo acima da média ideal!</div>  
 					Total Energia: [[${contaEnergiaAtual.valor_total}]] <br>
 					Consumo Energia: [[${contaEnergiaAtual.consumo}]]<br>
 					Média de Consumo Anual: [[${contaEnergiaMedia}]] <br>
 					Média Ideal: [[${contaEnergiaAtual.media_consumo}]]
 				</div> 
-				<span  th:if="${contaEnergiaAtual == null}">Ainda não há contas de energia esse mês</span>   
+			
+				<span  th:if="${contaEnergiaAtual == null}">Ainda não há contas de energia esse mês</span
+				>   
 			</div>
           </div>
         </div>
@@ -500,11 +517,12 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
             <hr class="dark horizontal my-0">
             <div class="card-footer p-3">
 				<div th:if="${contaGasAtual != null}">
+					<div class="text-danger" th:if="${contaGasAtual.consumo > contaGasAtual.media_consumo}">Consumo de Gás acima da média ideal!</div>  
 					Total Gás: [[${contaGasAtual.valor_total}]] <br>
 					Consumo Gás: [[${contaGasAtual.consumo}]]<br>
 					Média de Consumo: [[${contaGasMedia}]] <br>
 					Média Ideal: [[${contaGasAtual.media_consumo}]]
-				</div>   
+				</div> 
 				<span  th:if="${contaGasAtual == null}">Ainda não há contas de gás esse mês</span>         
 			</div>
           </div>
@@ -941,6 +959,20 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
    <script>
    
    teste1 = document.getElementById("chart-bars")
+   
+   var mes1 = document.getElementById("mes1").value
+   var mes2 = document.getElementById("mes2").value
+   var mes3 = document.getElementById("mes3").value
+   var mes4 = document.getElementById("mes4").value
+   var mes5 = document.getElementById("mes5").value
+   var mes6 = document.getElementById("mes6").value
+   var mes7 = document.getElementById("mes7").value
+   var mes8 = document.getElementById("mes8").value
+   var mes9 = document.getElementById("mes9").value
+   var mes10 = document.getElementById("mes10").value
+   var mes11 = document.getElementById("mes11").value
+   var mes12 = document.getElementById("mes12").value
+   
    if (teste1 != null){
 	   var ctx1 = document.getElementById("chart-bars").getContext("2d");
 	   var janAg = document.getElementById("contaAguaJan").value
@@ -959,7 +991,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 	   new Chart(ctx1, {
 	     type: "bar",
 	     data: {
-	       labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
+	     labels: [mes1, mes2, mes3, mes4, mes5, mes6, mes7, mes8, mes9, mes10, mes11, mes12],
 	       datasets: [{
 	         label: "Consumo",
 	         tension: 0.4,
@@ -1055,7 +1087,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 	   new Chart(ctx2, {
 	       type: "bar",
 	       data: {
-	         labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
+	    	 labels: [mes1, mes2, mes3, mes4, mes5, mes6, mes7, mes8, mes9, mes10, mes11, mes12],
 	         datasets: [{
 	           label: "Consumo",
 	           tension: 0.4,

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -38,78 +39,101 @@ public class ControleDashboard {
 	
 	// Entrar no dashboard:
 	@GetMapping("/")
-	public String dash(Model modelo) {
-        modelo.addAttribute("listaUnidade", unidadeRepo.findAll());
-        modelo.addAttribute("listaContrato", contratoRepo.findAll());
+	public String dash(Model modelo, @Param("palavraChave") String palavraChave) {
+		if (palavraChave != null) {
+			modelo.addAttribute("listaUnidade", unidadeRepo.pesquisarRelatorio(palavraChave));
+		} else {
+	        modelo.addAttribute("listaUnidade", unidadeRepo.findAll());    
+		}
+		modelo.addAttribute("listaContrato", contratoRepo.findAll());
 		return "pages/dashboardtable";
+	}
+	
+	// Mes por extenso
+	public String mesExtenso(int mes) {
+		switch (mes) {
+			case 1:
+				return "Janeiro";
+			case 2:
+				return "Fevereiro";
+			case 3:
+				return "Março";
+			case 4:
+				return "Abril";
+			case 5:
+				return "Maio";
+			case 6:
+				return "Junho";
+			case 7:
+				return "Julho";
+			case 8:
+				return "Agosto";
+			case 9:
+				return "Setembro";
+			case 10:
+				return "Outubro";
+			case 11:
+				return "Novembro";
+			case 12:
+				return "Dezembro";
+		}
+		return null;
+	}
+	
+	// Mes por extenso abreviado
+	public String mesExtensoAbr(int mes) {
+		switch (mes) {
+			case 1:
+				return "Jan";
+			case 2:
+				return "Fev";
+			case 3:
+				return "Mar";
+			case 4:
+				return "Abr";
+			case 5:
+				return "Mai";
+			case 6:
+				return "Jun";
+			case 7:
+				return "Jul";
+			case 8:
+				return "Ago";
+			case 9:
+				return "Set";
+			case 10:
+				return "Out";
+			case 11:
+				return "Nov";
+			case 12:
+				return "Dez";
+		}
+		return null;
 	}
 	
 	@GetMapping("/dashboard/{cnpj}")
 	public String relatorios(@PathVariable("cnpj") long cnpj, Model modelo, @AuthenticationPrincipal User user) {
         
+		// Pegando unidade pelo cnpj
         Optional<Unidade> unidadeOpt = unidadeRepo.findById(cnpj);
         if (unidadeOpt.isEmpty()) {
             throw new IllegalArgumentException("Unidade inválida");
         }
         modelo.addAttribute("unidade", unidadeOpt.get());
         
-		// MÊS ANTERIOR:
+		// Mês e Ano Atual
 		Date data = new Date();
 		GregorianCalendar dataCal = new GregorianCalendar();
 		dataCal.setTime(data);
-		int mes = dataCal.get(Calendar.MONTH);
-		if (mes == 0) {
-			mes = 12;
-		}
+		int mes = dataCal.get(Calendar.MONTH) + 1;	
 		int ano = dataCal.get(Calendar.YEAR);
-		if (mes == 12) {
-			ano = dataCal.get(Calendar.YEAR)-1;
-		}
-		
 		modelo.addAttribute("ano", ano);
-		switch (mes) {
-			case 1:
-				modelo.addAttribute("mes", "Janeiro");
-				break;
-			case 2:
-				modelo.addAttribute("mes", "Fevereiro");
-				break;
-			case 3:
-				modelo.addAttribute("mes", "Março");
-				break;
-			case 4:
-				modelo.addAttribute("mes", "Abril");
-				break;
-			case 5:
-				modelo.addAttribute("mes", "Maio");
-				break;
-			case 6:
-				modelo.addAttribute("mes", "Junho");
-				break;
-			case 7:
-				modelo.addAttribute("mes", "Julho");
-				break;
-			case 8:
-				modelo.addAttribute("mes", "Agosto");
-				break;
-			case 9:
-				modelo.addAttribute("mes", "Setembro");
-				break;
-			case 10:
-				modelo.addAttribute("mes", "Outubro");
-				break;
-			case 11:
-				modelo.addAttribute("mes", "Novembro");
-				break;
-			case 12:
-				modelo.addAttribute("mes", "Dezembro");
-				break;
-		}
+		modelo.addAttribute("mes", mesExtenso(mes));
 		
+		// Adicionando em uma lista todas as contas de cada contrato (tipos)
 		List<Conta> contasAgua = new ArrayList<>();
 		List<Conta> contasEnergia = new ArrayList<>();
 		List<Conta> contasGas = new ArrayList<>();
-
 		if (contratoRepo.contratoAgua(cnpj) != null) {
 			contasAgua = contaRepo.contasContrato(contratoRepo.contratoAgua(cnpj).getCodigo());
 		}
@@ -120,22 +144,11 @@ public class ControleDashboard {
         	contasEnergia = contaRepo.contasContrato(contratoRepo.contratoEnergia(cnpj).getCodigo());
         }
         
-        Conta contaAguaAtual = null;
-        float contaAguaJan = 0;
-        float contaAguaFev = 0;
-        float contaAguaMar = 0;
-        float contaAguaAbr = 0;
-        float contaAguaMai = 0;
-        float contaAguaJun = 0;
-        float contaAguaJul = 0;
-        float contaAguaAgo = 0;
-        float contaAguaSet = 0;
-        float contaAguaOut = 0;
-        float contaAguaNov = 0;
-        float contaAguaDez = 0;
-        
+        // Verificando mês e ano para serem adicionados ao gráfico de água
+        Conta contaAguaAtual = null;        
         int contA = 0;
         float somaA = 0;
+        Float[] contaAguaMes = new Float[12];
         for (Conta conta : contasAgua) {
         	String mesConta = conta.getData_de_lancamento();
         	String dataSplit[] = new String[3];
@@ -144,66 +157,22 @@ public class ControleDashboard {
         	if (Integer.parseInt(dataSplit[1]) == mes && Integer.parseInt(dataSplit[0]) == ano) {
         		contaAguaAtual = conta;
         	}
-        	if (Integer.parseInt(dataSplit[1]) == 1 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaAguaJan = conta.getConsumo();
-        		somaA += conta.getConsumo();
-        		contA++;
-        	}
-        	if (Integer.parseInt(dataSplit[1]) == 2 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaAguaFev = conta.getConsumo();
-        		somaA += conta.getConsumo();
-        		contA++;
-        	}
-        	if (Integer.parseInt(dataSplit[1]) == 3 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaAguaMar = conta.getConsumo();
-        		somaA += conta.getConsumo();
-        		contA++;
-        	}
-        	if (Integer.parseInt(dataSplit[1]) == 4 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaAguaAbr = conta.getConsumo();
-        		somaA += conta.getConsumo();
-        		contA++;
-        	}
-        	if (Integer.parseInt(dataSplit[1]) == 5 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaAguaMai = conta.getConsumo();
-        		somaA += conta.getConsumo();
-        		contA++;
-        	}
-        	if (Integer.parseInt(dataSplit[1]) == 6 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaAguaJun = conta.getConsumo();
-        		somaA += conta.getConsumo();
-        		contA++;
-        	}
-        	if (Integer.parseInt(dataSplit[1]) == 7 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaAguaJul = conta.getConsumo();
-        		somaA += conta.getConsumo();
-        		contA++;
-        	}
-        	if (Integer.parseInt(dataSplit[1]) == 8 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaAguaAgo = conta.getConsumo();
-        		somaA += conta.getConsumo();
-        		contA++;
-        	}
-        	if (Integer.parseInt(dataSplit[1]) == 9 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaAguaSet = conta.getConsumo();
-        		somaA += conta.getConsumo();
-        		contA++;
-        	}
-        	if (Integer.parseInt(dataSplit[1]) == 10 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaAguaOut = conta.getConsumo();
-        		somaA += conta.getConsumo();
-        		contA++;
-        	}
-        	if (Integer.parseInt(dataSplit[1]) == 11 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaAguaNov = conta.getConsumo();
-        		somaA += conta.getConsumo();
-        		contA++;
-        	}
-        	if (Integer.parseInt(dataSplit[1]) == 12 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaAguaDez = conta.getConsumo();
-        		somaA += conta.getConsumo();
-        		contA++;
-        	}
+        	
+    		int mesVar = mes;
+    		int anoVar = ano;
+        	
+        	for (int i = 0; i < 12; i++) {
+           		if (mesVar <= 0) {
+        			mesVar += 12;
+        			anoVar -= 1;
+        		}
+            	if (Integer.parseInt(dataSplit[1]) == mesVar && Integer.parseInt(dataSplit[0]) == anoVar) {
+            		contaAguaMes[i] = conta.getConsumo();
+            		somaA += conta.getConsumo();
+            		contA++;
+            	}
+            	mesVar -= 1;
+			}
 		}
       
         Conta contaGasAtual = null;
@@ -398,6 +367,29 @@ public class ControleDashboard {
         	}
 		}
         
+        int mesRel = mes;
+        String[] mesesGrafico = new String[12];
+        for (int i = 0; i < 12; i++) {
+        	if (mesRel <= 0) {
+        		mesRel += 12;
+        	}
+			mesesGrafico[i] = mesExtensoAbr(mesRel);
+			mesRel -= 1;
+		}
+        
+        modelo.addAttribute("mes1", mesesGrafico[11]);  
+        modelo.addAttribute("mes2", mesesGrafico[10]);  
+        modelo.addAttribute("mes3", mesesGrafico[9]);  
+        modelo.addAttribute("mes4", mesesGrafico[8]);  
+        modelo.addAttribute("mes5", mesesGrafico[7]);  
+        modelo.addAttribute("mes6", mesesGrafico[6]);  
+        modelo.addAttribute("mes7", mesesGrafico[5]);  
+        modelo.addAttribute("mes8", mesesGrafico[4]);  
+        modelo.addAttribute("mes9", mesesGrafico[3]);  
+        modelo.addAttribute("mes10", mesesGrafico[2]);  
+        modelo.addAttribute("mes11", mesesGrafico[1]);  
+        modelo.addAttribute("mes12", mesesGrafico[0]);    
+        
         modelo.addAttribute("unidade", unidadeOpt.get());
         
         modelo.addAttribute("contratoAgua", contratoRepo.contratoAgua(cnpj));  
@@ -410,19 +402,19 @@ public class ControleDashboard {
         
         modelo.addAttribute("contaAguaMedia", somaA/contA);
         
-        modelo.addAttribute("contaAguaJan", contaAguaJan);  
-        modelo.addAttribute("contaAguaFev", contaAguaFev);  
-        modelo.addAttribute("contaAguaMar", contaAguaMar);  
-        modelo.addAttribute("contaAguaAbr", contaAguaAbr);  
-        modelo.addAttribute("contaAguaMai", contaAguaMai);  
-        modelo.addAttribute("contaAguaJun", contaAguaJun);  
-        modelo.addAttribute("contaAguaJul", contaAguaJul);  
-        modelo.addAttribute("contaAguaAgo", contaAguaAgo);  
-        modelo.addAttribute("contaAguaSet", contaAguaSet);  
-        modelo.addAttribute("contaAguaOut", contaAguaOut);  
-        modelo.addAttribute("contaAguaNov", contaAguaNov);  
-        modelo.addAttribute("contaAguaDez", contaAguaDez); 
-           
+        modelo.addAttribute("contaAguaMes1", contaAguaMes[11]);  
+        modelo.addAttribute("contaAguaMes2", contaAguaMes[10]);  
+        modelo.addAttribute("contaAguaMes3", contaAguaMes[9]);  
+        modelo.addAttribute("contaAguaMes4", contaAguaMes[8]);  
+        modelo.addAttribute("contaAguaMes5", contaAguaMes[7]);  
+        modelo.addAttribute("contaAguaMes6", contaAguaMes[6]);  
+        modelo.addAttribute("contaAguaMes7", contaAguaMes[5]);  
+        modelo.addAttribute("contaAguaMes8", contaAguaMes[4]);  
+        modelo.addAttribute("contaAguaMes9", contaAguaMes[3]);  
+        modelo.addAttribute("contaAguaMes10", contaAguaMes[2]);  
+        modelo.addAttribute("contaAguaMes11", contaAguaMes[1]);  
+        modelo.addAttribute("contaAguaMes12", contaAguaMes[0]);    
+        
 		modelo.addAttribute("contaGasMedia", somaG/contG);
 		
         modelo.addAttribute("contaGasJan", contaGasJan);  
@@ -437,7 +429,6 @@ public class ControleDashboard {
         modelo.addAttribute("contaGasOut", contaGasOut);  
         modelo.addAttribute("contaGasNov", contaGasNov);  
         modelo.addAttribute("contaGasDez", contaGasDez); 
-       
         
 		modelo.addAttribute("contaEnergiaMedia", somaE/contE);
         
