@@ -148,7 +148,18 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
                       <div class="d-flex flex-column justify-content-center">
                         <p class="text-xs mb-0">
                           <i class="fa fa-clock me-1"></i>
-                          Nome: Japoneis
+                          Nome: <span th:text="${usuarioInfo.nome} + ' ' + ${usuarioInfo.sobrenome}"></span>
+                        </p>
+                        <p class="text-xs mb-0">
+                          <i class="fa fa-clock me-1"></i>
+                          Username: <span th:text="${usuarioInfo.username}"></span>
+                        </p>
+                        <p class="text-xs mb-0">
+                          <i class="fa fa-clock me-1"></i>
+                          Nível de Acesso: 
+                          <span th:if="${usuarioInfo.secao == 'ROLE_ADMINISTRADOR'}">Administrador</span>
+                          <span th:if="${usuarioInfo.secao == 'ROLE_GESTOR'}">Gestor</span>
+                          <span th:if="${usuarioInfo.secao == 'ROLE_DIGITADOR'}">Digitador</span>
                         </p>
                       </div>
                     </div>
@@ -445,7 +456,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 				<div th:if="${contaAguaAtual != null}">
 					Valor Total Água: [[${contaAguaAtual.valor_total}]]	<br>
 					Consumo Água: [[${contaAguaAtual.consumo}]]<br>
-					Média de Consumo Anual: [[${contaAguaMedia}]] 
+					Média de Consumo Anual: [[${contaAguaMedia}]] <br>
+					Média Ideal: [[${contaAguaAtual.media_consumo}]]
 				</div>  
 				<span th:if="${contaAguaAtual == null}">Ainda não há contas de água esse mês</span>         
 			</div>
@@ -467,7 +479,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 				<div th:if="${contratoEnergiaAtual != null}">
 					Total Energia: [[${contaEnergiaAtual.valor_total}]] <br>
 					Consumo Energia: [[${contaEnergiaAtual.consumo}]]<br>
-					Média de Consumo: [[${contaEnergiaMedia}]]
+					Média de Consumo Anual: [[${contaEnergiaMedia}]] <br>
+					Média Ideal: [[${contaEnergiaAtual.media_consumo}]]
 				</div> 
 				<span  th:if="${contaEnergiaAtual == null}">Ainda não há contas de energia esse mês</span>   
 			</div>
@@ -489,7 +502,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 				<div th:if="${contaGasAtual != null}">
 					Total Gás: [[${contaGasAtual.valor_total}]] <br>
 					Consumo Gás: [[${contaGasAtual.consumo}]]<br>
-					Média de Consumo: [[${contaGasMedia}]]
+					Média de Consumo: [[${contaGasMedia}]] <br>
+					Média Ideal: [[${contaGasAtual.media_consumo}]]
 				</div>   
 				<span  th:if="${contaGasAtual == null}">Ainda não há contas de gás esse mês</span>         
 			</div>
