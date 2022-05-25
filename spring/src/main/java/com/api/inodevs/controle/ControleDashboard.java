@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,9 +17,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.api.inodevs.entidades.Conta;
 import com.api.inodevs.entidades.Unidade;
+import com.api.inodevs.entidades.Usuario;
 import com.api.inodevs.repositorio.ContaRepositorio;
 import com.api.inodevs.repositorio.ContratoRepositorio;
 import com.api.inodevs.repositorio.UnidadeRepositorio;
+import com.api.inodevs.repositorio.UsuarioRepositorio;
 
 //Classe de controle que permite a navegação e funcionalidades no sistema:
 @Controller
@@ -29,6 +33,8 @@ public class ControleDashboard {
 	private UnidadeRepositorio unidadeRepo;
 	@Autowired
 	private ContaRepositorio contaRepo;
+	@Autowired
+	private UsuarioRepositorio usuarioRepo;
 	
 	// Entrar no dashboard:
 	@GetMapping("/")
@@ -39,7 +45,7 @@ public class ControleDashboard {
 	}
 	
 	@GetMapping("/dashboard/{cnpj}")
-	public String teste(@PathVariable("cnpj") long cnpj, Model modelo) {
+	public String relatorios(@PathVariable("cnpj") long cnpj, Model modelo, @AuthenticationPrincipal User user) {
         
         Optional<Unidade> unidadeOpt = unidadeRepo.findById(cnpj);
         if (unidadeOpt.isEmpty()) {
@@ -398,7 +404,6 @@ public class ControleDashboard {
         modelo.addAttribute("contratoEnergia", contratoRepo.contratoEnergia(cnpj)); 
         modelo.addAttribute("contratoGas", contratoRepo.contratoGas(cnpj)); 
        
-        
         modelo.addAttribute("contaAguaAtual", contaAguaAtual);  
         modelo.addAttribute("contaGasAtual", contaGasAtual); 
         modelo.addAttribute("contaEnergiaAtual", contaEnergiaAtual); 
@@ -448,8 +453,10 @@ public class ControleDashboard {
         modelo.addAttribute("contaEnergiaOut", contaEnergiaOut);  
         modelo.addAttribute("contaEnergiaNov", contaEnergiaNov);  
         modelo.addAttribute("contaEnergiaDez", contaEnergiaDez); 
+        
+        Optional<Usuario> usuarioOpt = usuarioRepo.findById(Long.parseLong(user.getUsername()));
+        modelo.addAttribute("usuarioInfo", usuarioOpt.get());
        
 		return "pages/dashboard";
-
 	}	
 }
