@@ -46,14 +46,15 @@ public class SegurancaConfig extends WebSecurityConfigurerAdapter {
 				// Permitindo que todos (mesmo sem logar) tenham acesso aos arquivos dentro do static
 				.antMatchers(staticResources).permitAll()
 			 	// Páginas somente disponível para Administradores e gestores:
-				.antMatchers("/controleUsuario", "/cadastroUsuario", "/editarUsuario/{id}","/excluirUsuario/{id}")
+				.antMatchers("/controleUsuario", "/cadastroUsuario", "/editarUsuario/{id}","/excluirUsuario/{id}", "/log", "/dashboard/{id}", 
+						"/excluirConcessionaria/{id}", "/excluirUnidade/{id}", "/excluirContrato/{id}", "/excluirConta/{id}")
 					.hasAnyRole("ADMINISTRADOR", "GESTOR")
 				.anyRequest()
 				.authenticated()
 			.and()
 				// Adicionando página de login personalizada:
 				.formLogin()
-				.defaultSuccessUrl("/tabela", true)
+				// .defaultSuccessUrl("/tabela", true)
 				.loginPage("/login") 
 				.permitAll()
 			.and()

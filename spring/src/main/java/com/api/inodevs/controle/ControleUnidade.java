@@ -40,7 +40,7 @@ public class ControleUnidade {
 	
 	// Entrar na página de cadastro de unidade com o modelo da entidade com o modelo da entidade:
 	@GetMapping("/cadastroUnidade")
-	public String cadastroUnidade(@ModelAttribute("unidade") Unidade unidade, Model modelo){
+	public String cadastroUnidade(@ModelAttribute("unidade") Unidade unidade, Model modelo, @AuthenticationPrincipal User user){
         modelo.addAttribute("quantidadeConta", notificacoesRepo.contar("Conta", "ROLE_GESTOR"));
         modelo.addAttribute("quantidadeConcessionaria", notificacoesRepo.contar("Concessionaria", "ROLE_GESTOR"));
         modelo.addAttribute("quantidadeUnidade", notificacoesRepo.contar("Unidade", "ROLE_GESTOR"));
@@ -49,6 +49,9 @@ public class ControleUnidade {
         modelo.addAttribute("quantidadeConcessionariaRep", notificacoesRepo.contar("Concessionaria", "ROLE_DIGITADOR"));
         modelo.addAttribute("quantidadeUnidadeRep", notificacoesRepo.contar("Unidade", "ROLE_DIGITADOR"));
         modelo.addAttribute("quantidadeContratoRep", notificacoesRepo.contar("Contrato", "ROLE_DIGITADOR"));
+        
+        Optional<Usuario> usuarioOpt = usuarioRepo.findById(Long.parseLong(user.getUsername()));
+        modelo.addAttribute("usuarioInfo", usuarioOpt.get());
 		return "pages/forms/unidade";
 	}
 	
@@ -74,7 +77,7 @@ public class ControleUnidade {
 	
 	// Abrir mais inforações da unidade com o seu endereço clicando na tabela para permitir a edição de um cadastro:
 	@GetMapping("/unidade/{cnpj}")
-    public String abrirUnidade(@PathVariable("cnpj") long cnpj, Model modelo) {
+    public String abrirUnidade(@PathVariable("cnpj") long cnpj, Model modelo, @AuthenticationPrincipal User user) {
         Optional<Unidade> unidadeOpt = unidadeRepo.findById(cnpj);
         if (unidadeOpt.isEmpty()) {
             throw new IllegalArgumentException("Unidade inválida");
@@ -88,6 +91,9 @@ public class ControleUnidade {
         modelo.addAttribute("quantidadeConcessionariaRep", notificacoesRepo.contar("Concessionaria", "ROLE_DIGITADOR"));
         modelo.addAttribute("quantidadeUnidadeRep", notificacoesRepo.contar("Unidade", "ROLE_DIGITADOR"));
         modelo.addAttribute("quantidadeContratoRep", notificacoesRepo.contar("Contrato", "ROLE_DIGITADOR"));
+        
+        Optional<Usuario> usuarioOpt = usuarioRepo.findById(Long.parseLong(user.getUsername()));
+        modelo.addAttribute("usuarioInfo", usuarioOpt.get());
         return "pages/forms/edit/unidadeEdit";
     }
 	

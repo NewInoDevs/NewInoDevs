@@ -40,7 +40,7 @@ public class ControleConcessionaria {
 	
 	// Entrar na página de cadastro de concessionária com o modelo da entidade:
 	@GetMapping("/cadastroConcessionaria")
-	public String cadastroConcessionaria(@ModelAttribute("concessionaria") Concessionaria concessionaria, Model modelo){
+	public String cadastroConcessionaria(@ModelAttribute("concessionaria") Concessionaria concessionaria, Model modelo, @AuthenticationPrincipal User user){
         modelo.addAttribute("quantidadeConta", notificacoesRepo.contar("Conta", "ROLE_GESTOR"));
         modelo.addAttribute("quantidadeConcessionaria", notificacoesRepo.contar("Concessionaria", "ROLE_GESTOR"));
         modelo.addAttribute("quantidadeUnidade", notificacoesRepo.contar("Unidade", "ROLE_GESTOR"));
@@ -50,6 +50,9 @@ public class ControleConcessionaria {
         modelo.addAttribute("quantidadeUnidadeRep", notificacoesRepo.contar("Unidade", "ROLE_DIGITADOR"));
         modelo.addAttribute("quantidadeContratoRep", notificacoesRepo.contar("Contrato", "ROLE_DIGITADOR"));
 		concessionaria.setTipo_conta("Energia");
+		
+        Optional<Usuario> usuarioOpt = usuarioRepo.findById(Long.parseLong(user.getUsername()));
+        modelo.addAttribute("usuarioInfo", usuarioOpt.get());
 		return "pages/forms/concessionaria";
 	}
 	
@@ -75,7 +78,7 @@ public class ControleConcessionaria {
 	
 	// Abrir mais inforações da concessionária clicando na tabela para permitir a edição de um cadastro:
 	@GetMapping("/concessionaria/{codigo}")
-    public String abrirConcessionaria(@PathVariable("codigo") long codigo, Model modelo) {
+    public String abrirConcessionaria(@PathVariable("codigo") long codigo, Model modelo, @AuthenticationPrincipal User user) {
         Optional<Concessionaria> concessionariaOpt = concessionariaRepo.findById(codigo);
         if (concessionariaOpt.isEmpty()) {
             throw new IllegalArgumentException("Concessionária inválida");
@@ -89,6 +92,9 @@ public class ControleConcessionaria {
         modelo.addAttribute("quantidadeConcessionariaRep", notificacoesRepo.contar("Concessionaria", "ROLE_DIGITADOR"));
         modelo.addAttribute("quantidadeUnidadeRep", notificacoesRepo.contar("Unidade", "ROLE_DIGITADOR"));
         modelo.addAttribute("quantidadeContratoRep", notificacoesRepo.contar("Contrato", "ROLE_DIGITADOR"));
+        
+        Optional<Usuario> usuarioOpt = usuarioRepo.findById(Long.parseLong(user.getUsername()));
+        modelo.addAttribute("usuarioInfo", usuarioOpt.get());
         return "pages/forms/edit/concessionariaEdit";
     }
 	

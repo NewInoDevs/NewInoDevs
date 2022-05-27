@@ -15,7 +15,6 @@ import com.api.inodevs.repositorio.ConcessionariaRepositorio;
 import com.api.inodevs.repositorio.ContaRepositorio;
 import com.api.inodevs.repositorio.ContratoRepositorio;
 import com.api.inodevs.repositorio.NotificacoesRepositorio;
-import com.api.inodevs.repositorio.RegistrosRepositorio;
 import com.api.inodevs.repositorio.UnidadeRepositorio;
 import com.api.inodevs.repositorio.UsuarioRepositorio;
 
@@ -35,8 +34,6 @@ public class ControleTabela {
 	private UsuarioRepositorio usuarioRepo;
 	@Autowired
 	private NotificacoesRepositorio notificacoesRepo;
-	@Autowired
-	private RegistrosRepositorio registrosRepo;
 
 	// Entrar na página das tabelas com dados do banco de dados:
 	@GetMapping("/tabela")
@@ -70,15 +67,5 @@ public class ControleTabela {
         
         return "index";
     }
-	
-	@GetMapping("/log")
-	public String log(Model modelo, @Param("palavraChave") String palavraChave){
-    	if (palavraChave != null) {
-    		modelo.addAttribute("listaRegistros", registrosRepo.pesquisarRegistro(palavraChave));
-    	} else {
-    		modelo.addAttribute("listaRegistros", registrosRepo.findAll());
-    	}
-    	modelo.addAttribute("palavraChave", palavraChave);
-		return "pages/log";
-	}
+
 }

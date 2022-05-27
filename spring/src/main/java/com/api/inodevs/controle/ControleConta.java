@@ -48,7 +48,7 @@ public class ControleConta {
 	
 	// Entrar na página de cadastro de conta com o modelo da entidade:
 	@GetMapping("/cadastroConta")
-	public String cadastroConta(@ModelAttribute("conta") Conta conta, Model modelo){
+	public String cadastroConta(@ModelAttribute("conta") Conta conta, Model modelo, @AuthenticationPrincipal User user){
 		Contrato contrato = new Contrato();
         contrato.setCodigo(0L);
         conta.setContrato(contrato);
@@ -61,6 +61,9 @@ public class ControleConta {
         modelo.addAttribute("quantidadeConcessionariaRep", notificacoesRepo.contar("Concessionaria", "ROLE_DIGITADOR"));
         modelo.addAttribute("quantidadeUnidadeRep", notificacoesRepo.contar("Unidade", "ROLE_DIGITADOR"));
         modelo.addAttribute("quantidadeContratoRep", notificacoesRepo.contar("Contrato", "ROLE_DIGITADOR"));
+        
+        Optional<Usuario> usuarioOpt = usuarioRepo.findById(Long.parseLong(user.getUsername()));
+        modelo.addAttribute("usuarioInfo", usuarioOpt.get());
 		return "pages/forms/contas";
 	}
 	
@@ -96,7 +99,7 @@ public class ControleConta {
 	
 	// Abrir mais inforações da conta clicando na tabela para permitir a edição de um cadastro:
 	@GetMapping("/conta/{codi}")
-    public String abrirConta(@PathVariable("codi") long codi, Model modelo) {
+    public String abrirConta(@PathVariable("codi") long codi, Model modelo, @AuthenticationPrincipal User user) {
 		modelo.addAttribute("listaContrato", contratoRepo.findAll());
         Optional<Conta> contaOpt = contaRepo.findById(codi);
         if (contaOpt.isEmpty()) {
@@ -111,6 +114,9 @@ public class ControleConta {
         modelo.addAttribute("quantidadeConcessionariaRep", notificacoesRepo.contar("Concessionaria", "ROLE_DIGITADOR"));
         modelo.addAttribute("quantidadeUnidadeRep", notificacoesRepo.contar("Unidade", "ROLE_DIGITADOR"));
         modelo.addAttribute("quantidadeContratoRep", notificacoesRepo.contar("Contrato", "ROLE_DIGITADOR"));
+        		
+        Optional<Usuario> usuarioOpt = usuarioRepo.findById(Long.parseLong(user.getUsername()));
+        modelo.addAttribute("usuarioInfo", usuarioOpt.get());
         return "pages/forms/edit/faturas";
     }
 	
@@ -157,7 +163,7 @@ public class ControleConta {
     }
 	
 	@PostMapping("/aprovarConta/{id}")
-	public String aprovarConta(@ModelAttribute("conta") Conta conta, @PathVariable("id") long id) {
+	public String aprovarConta(@ModelAttribute("conta") Conta conta, @PathVariable("id") long id, @AuthenticationPrincipal User user) {
 		conta.setNotificacoes(null);
 		conta.setStatus("Aprovado");
 		contaRepo.save(conta);

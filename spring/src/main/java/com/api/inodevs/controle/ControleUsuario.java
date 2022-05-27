@@ -41,7 +41,7 @@ public class ControleUsuario {
 	
 	// Entrar na página da tabela de usuários com dados do banco:
 	@GetMapping("/controleUsuario")
-	public String controleUsuario(Model modelo, @Param("palavraChave") String palavraChave) {
+	public String controleUsuario(Model modelo, @Param("palavraChave") String palavraChave, @AuthenticationPrincipal User user) {
 		
 		if (palavraChave != null) {
 			modelo.addAttribute("listaUsuario", usuarioRepo.pesquisarUsuario(palavraChave));
@@ -58,12 +58,15 @@ public class ControleUsuario {
         modelo.addAttribute("quantidadeConcessionariaRep", notificacoesRepo.contar("Concessionaria", "ROLE_DIGITADOR"));
         modelo.addAttribute("quantidadeUnidadeRep", notificacoesRepo.contar("Unidade", "ROLE_DIGITADOR"));
         modelo.addAttribute("quantidadeContratoRep", notificacoesRepo.contar("Contrato", "ROLE_DIGITADOR"));
+        
+        Optional<Usuario> usuarioOptInfo = usuarioRepo.findById(Long.parseLong(user.getUsername()));
+        modelo.addAttribute("usuarioInfo", usuarioOptInfo.get());
 		return "pages/controle";
 	}
 	
 	// Entrar na página de cadastro de usuário com o modelo da entidade: 
 	@GetMapping("/cadastroUsuario")
-	public String cadastroUsuario(@ModelAttribute("usuario") Usuario usuario, Model modelo){
+	public String cadastroUsuario(@ModelAttribute("usuario") Usuario usuario, Model modelo, @AuthenticationPrincipal User user){
         modelo.addAttribute("quantidadeConta", notificacoesRepo.contar("Conta", "ROLE_GESTOR"));
         modelo.addAttribute("quantidadeConcessionaria", notificacoesRepo.contar("Concessionaria", "ROLE_GESTOR"));
         modelo.addAttribute("quantidadeUnidade", notificacoesRepo.contar("Unidade", "ROLE_GESTOR"));
@@ -74,12 +77,15 @@ public class ControleUsuario {
         modelo.addAttribute("quantidadeContratoRep", notificacoesRepo.contar("Contrato", "ROLE_DIGITADOR"));
 		usuario.setSecao("ROLE_DIGITADOR");
 		usuario.setAtivo(1);
+		
+        Optional<Usuario> usuarioOptInfo = usuarioRepo.findById(Long.parseLong(user.getUsername()));
+        modelo.addAttribute("usuarioInfo", usuarioOptInfo.get());
 		return "pages/forms/usuario";
 	}
 	
 	// Salvar um usuário no banco ao clicar em cadastrar:
 	@PostMapping("/salvarUsuario")
-	public String salvarUsuarios(@ModelAttribute("usuario") Usuario usuario, RedirectAttributes redirect, @Param("username_login") String username_login) {
+	public String salvarUsuarios(@ModelAttribute("usuario") Usuario usuario, @Param("username_login") String username_login) {
 		String senhaCriptografada = new BCryptPasswordEncoder().encode(usuario.getSenha()); // Criptografando senha
 		usuario.setSenha(senhaCriptografada); // Inserindo a senha criptografada
 		usuarioRepo.save(usuario);
@@ -92,13 +98,12 @@ public class ControleUsuario {
 		}
         registros.setUsuario(usuarioOpt.get());
         registrosRepo.save(registros);
-		redirect.addFlashAttribute("sucesso", "Usuário salvo com sucesso!");
 		return "redirect:/controleUsuario";
 	}
 	
 	// Abrir mais inforações do usuário clicando na tabela para permitir a edição de um cadastro:
 	@GetMapping("/editarUsuario/{username}")
-	public String editarUsuarios(@PathVariable("username") long username, Model modelo) {
+	public String editarUsuarios(@PathVariable("username") long username, Model modelo, @AuthenticationPrincipal User user) {
 		Optional<Usuario> usuarioOpt = usuarioRepo.findById(username);
 		if (usuarioOpt.isEmpty()) {
 			throw new IllegalArgumentException("Usuário inválido");
@@ -112,6 +117,9 @@ public class ControleUsuario {
         modelo.addAttribute("quantidadeConcessionariaRep", notificacoesRepo.contar("Concessionaria", "ROLE_DIGITADOR"));
         modelo.addAttribute("quantidadeUnidadeRep", notificacoesRepo.contar("Unidade", "ROLE_DIGITADOR"));
         modelo.addAttribute("quantidadeContratoRep", notificacoesRepo.contar("Contrato", "ROLE_DIGITADOR"));
+        
+        Optional<Usuario> usuarioOptInfo = usuarioRepo.findById(Long.parseLong(user.getUsername()));
+        modelo.addAttribute("usuarioInfo", usuarioOptInfo.get());
 		return "pages/forms/edit/usuarioEdit";
 	}
 	
@@ -144,7 +152,7 @@ public class ControleUsuario {
 	}
 	
 	@GetMapping("/redefinirSenha/{username}")
-	public String redefinirSenha(@PathVariable("username") long username, Model modelo) {
+	public String redefinirSenha(@PathVariable("username") long username, Model modelo, @AuthenticationPrincipal User user) {
 		Optional<Usuario> usuarioOpt = usuarioRepo.findById(username);
 		if (usuarioOpt.isEmpty()) {
 			throw new IllegalArgumentException("Usuário inválido");
@@ -158,6 +166,10 @@ public class ControleUsuario {
         modelo.addAttribute("quantidadeConcessionariaRep", notificacoesRepo.contar("Concessionaria", "ROLE_DIGITADOR"));
         modelo.addAttribute("quantidadeUnidadeRep", notificacoesRepo.contar("Unidade", "ROLE_DIGITADOR"));
         modelo.addAttribute("quantidadeContratoRep", notificacoesRepo.contar("Contrato", "ROLE_DIGITADOR"));
+        		
+        Optional<Usuario> usuarioOptInfo = usuarioRepo.findById(Long.parseLong(user.getUsername()));
+        modelo.addAttribute("usuarioInfo", usuarioOptInfo.get());
+
 		return "pages/forms/edit/redefinirSenha";
 	}
 	

@@ -48,7 +48,7 @@ public class ControleContrato {
 	
 	// Entrar na página de cadastro de contrato com o modelo da entidade:
 	@GetMapping("/cadastroContrato")
-	public String cadastroContrato(@ModelAttribute("contrato") Contrato contrato, Model modelo){
+	public String cadastroContrato(@ModelAttribute("contrato") Contrato contrato, Model modelo, @AuthenticationPrincipal User user){
 		Concessionaria concessionaria = new Concessionaria();
 		concessionaria.setCodigo(0L);
 		contrato.setConcessionaria(concessionaria);
@@ -65,6 +65,9 @@ public class ControleContrato {
         modelo.addAttribute("quantidadeConcessionariaRep", notificacoesRepo.contar("Concessionaria", "ROLE_DIGITADOR"));
         modelo.addAttribute("quantidadeUnidadeRep", notificacoesRepo.contar("Unidade", "ROLE_DIGITADOR"));
         modelo.addAttribute("quantidadeContratoRep", notificacoesRepo.contar("Contrato", "ROLE_DIGITADOR"));
+        
+        Optional<Usuario> usuarioOpt = usuarioRepo.findById(Long.parseLong(user.getUsername()));
+        modelo.addAttribute("usuarioInfo", usuarioOpt.get());
 		return "pages/forms/contrato";
 	}
 	
@@ -90,7 +93,7 @@ public class ControleContrato {
 	
 	// Abrir mais inforações do contrato clicando na tabela para permitir a edição de um cadastro:
 	@GetMapping("/contrato/{codigo}")
-    public String abrirContrato(@PathVariable("codigo") long codigo, Model modelo) {
+    public String abrirContrato(@PathVariable("codigo") long codigo, Model modelo, @AuthenticationPrincipal User user) {
 		modelo.addAttribute("listaConcessionaria", concessionariaRepo.findAll()); // Adicionando todas as concessionárias cadastradas no select
 		modelo.addAttribute("listaUnidade", unidadeRepo.findAll()); // Adicionando todas as unidades cadastradas no select
         Optional<Contrato> contratoOpt = contratoRepo.findById(codigo);
@@ -106,6 +109,9 @@ public class ControleContrato {
         modelo.addAttribute("quantidadeConcessionariaRep", notificacoesRepo.contar("Concessionaria", "ROLE_DIGITADOR"));
         modelo.addAttribute("quantidadeUnidadeRep", notificacoesRepo.contar("Unidade", "ROLE_DIGITADOR"));
         modelo.addAttribute("quantidadeContratoRep", notificacoesRepo.contar("Contrato", "ROLE_DIGITADOR"));
+        
+        Optional<Usuario> usuarioOpt = usuarioRepo.findById(Long.parseLong(user.getUsername()));
+        modelo.addAttribute("usuarioInfo", usuarioOpt.get());
         return "pages/forms/edit/contratoEdit";
     }
 	

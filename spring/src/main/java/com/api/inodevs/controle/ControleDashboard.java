@@ -21,6 +21,7 @@ import com.api.inodevs.entidades.Unidade;
 import com.api.inodevs.entidades.Usuario;
 import com.api.inodevs.repositorio.ContaRepositorio;
 import com.api.inodevs.repositorio.ContratoRepositorio;
+import com.api.inodevs.repositorio.NotificacoesRepositorio;
 import com.api.inodevs.repositorio.UnidadeRepositorio;
 import com.api.inodevs.repositorio.UsuarioRepositorio;
 
@@ -36,16 +37,37 @@ public class ControleDashboard {
 	private ContaRepositorio contaRepo;
 	@Autowired
 	private UsuarioRepositorio usuarioRepo;
+	@Autowired
+	private NotificacoesRepositorio notificacoesRepo;
 	
 	// Entrar no dashboard:
 	@GetMapping("/")
-	public String dash(Model modelo, @Param("palavraChave") String palavraChave) {
+	public String tabelaDashboards(Model modelo, @Param("palavraChave") String palavraChave, @AuthenticationPrincipal User user) {
+		
+        Optional<Usuario> usuarioOpt = usuarioRepo.findById(Long.parseLong(user.getUsername()));
+		Usuario usuario = usuarioOpt.get();
+        
+        if(usuario.getSecao().equals("ROLE_DIGITADOR")) {
+        	return "redirect:/tabela";
+        } 
+        
 		if (palavraChave != null) {
 			modelo.addAttribute("listaUnidade", unidadeRepo.pesquisarRelatorio(palavraChave));
 		} else {
 	        modelo.addAttribute("listaUnidade", unidadeRepo.findAll());    
 		}
 		modelo.addAttribute("listaContrato", contratoRepo.findAll());
+		
+        modelo.addAttribute("usuarioInfo", usuario);
+        
+        modelo.addAttribute("quantidadeConta", notificacoesRepo.contar("Conta", "ROLE_GESTOR"));
+        modelo.addAttribute("quantidadeConcessionaria", notificacoesRepo.contar("Concessionaria", "ROLE_GESTOR"));
+        modelo.addAttribute("quantidadeUnidade", notificacoesRepo.contar("Unidade", "ROLE_GESTOR"));
+        modelo.addAttribute("quantidadeContrato", notificacoesRepo.contar("Contrato", "ROLE_GESTOR"));
+        modelo.addAttribute("quantidadeContaRep", notificacoesRepo.contar("Conta", "ROLE_DIGITADOR"));
+        modelo.addAttribute("quantidadeConcessionariaRep", notificacoesRepo.contar("Concessionaria", "ROLE_DIGITADOR"));
+        modelo.addAttribute("quantidadeUnidadeRep", notificacoesRepo.contar("Unidade", "ROLE_DIGITADOR"));
+        modelo.addAttribute("quantidadeContratoRep", notificacoesRepo.contar("Contrato", "ROLE_DIGITADOR"));
 		return "pages/dashboardtable";
 	}
 	
@@ -112,7 +134,7 @@ public class ControleDashboard {
 	}
 	
 	@GetMapping("/dashboard/{cnpj}")
-	public String relatorios(@PathVariable("cnpj") long cnpj, Model modelo, @AuthenticationPrincipal User user) {
+	public String dashboard(@PathVariable("cnpj") long cnpj, Model modelo, @AuthenticationPrincipal User user) {
         
 		// Pegando unidade pelo cnpj
         Optional<Unidade> unidadeOpt = unidadeRepo.findById(cnpj);
@@ -175,32 +197,10 @@ public class ControleDashboard {
 			}
 		}
       
-        Conta contaGasAtual = null;
-        for (Conta conta : contasGas) {
-        	String mesConta = conta.getData_de_lancamento();
-        	String dataSplit[] = new String[3];
-        	dataSplit = mesConta.split("-");
-        	
-        	if (Integer.parseInt(dataSplit[1]) == mes && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaGasAtual = conta;
-        	}
-		}
-        
-        float contaGasJan = 0;
-        float contaGasFev = 0;
-        float contaGasMar = 0;
-        float contaGasAbr = 0;
-        float contaGasMai = 0;
-        float contaGasJun = 0;
-        float contaGasJul = 0;
-        float contaGasAgo = 0;
-        float contaGasSet = 0;
-        float contaGasOut = 0;
-        float contaGasNov = 0;
-        float contaGasDez = 0;
-        
+        Conta contaGasAtual = null;        
         int contG = 0;
         float somaG = 0;
+        Float[] contaGasMes = new Float[12];
         for (Conta conta : contasGas) {
         	String mesConta = conta.getData_de_lancamento();
         	String dataSplit[] = new String[3];
@@ -209,94 +209,28 @@ public class ControleDashboard {
         	if (Integer.parseInt(dataSplit[1]) == mes && Integer.parseInt(dataSplit[0]) == ano) {
         		contaGasAtual = conta;
         	}
-        	if (Integer.parseInt(dataSplit[1]) == 1 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaGasJan = conta.getConsumo();
-        		somaG += conta.getConsumo();
-        		contG++;
-        	}
-        	if (Integer.parseInt(dataSplit[1]) == 2 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaGasFev = conta.getConsumo();
-        		somaG += conta.getConsumo();
-        		contG++;
-        	}
-        	if (Integer.parseInt(dataSplit[1]) == 3 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaGasMar = conta.getConsumo();
-        		somaG += conta.getConsumo();
-        		contG++;
-        	}
-        	if (Integer.parseInt(dataSplit[1]) == 4 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaGasAbr = conta.getConsumo();
-        		somaG += conta.getConsumo();
-        		contG++;
-        	}
-        	if (Integer.parseInt(dataSplit[1]) == 5 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaGasMai = conta.getConsumo();
-        		somaG += conta.getConsumo();
-        		contG++;
-        	}
-        	if (Integer.parseInt(dataSplit[1]) == 6 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaGasJun = conta.getConsumo();
-        		somaG += conta.getConsumo();
-        		contG++;
-        	}
-        	if (Integer.parseInt(dataSplit[1]) == 7 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaGasJul = conta.getConsumo();
-        		somaG += conta.getConsumo();
-        		contG++;
-        	}
-        	if (Integer.parseInt(dataSplit[1]) == 8 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaGasAgo = conta.getConsumo();
-        		somaG += conta.getConsumo();
-        		contG++;
-        	}
-        	if (Integer.parseInt(dataSplit[1]) == 9 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaGasSet = conta.getConsumo();
-        		somaG += conta.getConsumo();
-        		contG++;
-        	}
-        	if (Integer.parseInt(dataSplit[1]) == 10 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaGasOut = conta.getConsumo();
-        		somaG += conta.getConsumo();
-        		contG++;
-        	}
-        	if (Integer.parseInt(dataSplit[1]) == 11 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaGasNov = conta.getConsumo();
-        		somaG += conta.getConsumo();
-        		contG++;
-        	}
-        	if (Integer.parseInt(dataSplit[1]) == 12 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaGasDez = conta.getConsumo();
-        		somaG += conta.getConsumo();
-        		contG++;
-        	}
-		}
-        
-        Conta contaEnergiaAtual = null;
-        for (Conta conta : contasEnergia) {
-        	String mesConta = conta.getData_de_lancamento();
-        	String dataSplit[] = new String[3];
-        	dataSplit = mesConta.split("-");
         	
-        	if (Integer.parseInt(dataSplit[1]) == mes && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaEnergiaAtual = conta;
-        	}
+    		int mesVar = mes;
+    		int anoVar = ano;
+        	
+        	for (int i = 0; i < 12; i++) {
+           		if (mesVar <= 0) {
+        			mesVar += 12;
+        			anoVar -= 1;
+        		}
+            	if (Integer.parseInt(dataSplit[1]) == mesVar && Integer.parseInt(dataSplit[0]) == anoVar) {
+            		contaGasMes[i] = conta.getConsumo();
+            		somaG += conta.getConsumo();
+            		contG++;
+            	}
+            	mesVar -= 1;
+			}
 		}
         
-        float contaEnergiaJan = 0;
-        float contaEnergiaFev = 0;
-        float contaEnergiaMar = 0;
-        float contaEnergiaAbr = 0;
-        float contaEnergiaMai = 0;
-        float contaEnergiaJun = 0;
-        float contaEnergiaJul = 0;
-        float contaEnergiaAgo = 0;
-        float contaEnergiaSet = 0;
-        float contaEnergiaOut = 0;
-        float contaEnergiaNov = 0;
-        float contaEnergiaDez = 0;
-        
+        Conta contaEnergiaAtual = null;        
         int contE = 0;
         float somaE = 0;
+        Float[] contaEnergiaMes = new Float[12];
         for (Conta conta : contasEnergia) {
         	String mesConta = conta.getData_de_lancamento();
         	String dataSplit[] = new String[3];
@@ -305,66 +239,22 @@ public class ControleDashboard {
         	if (Integer.parseInt(dataSplit[1]) == mes && Integer.parseInt(dataSplit[0]) == ano) {
         		contaEnergiaAtual = conta;
         	}
-        	if (Integer.parseInt(dataSplit[1]) == 1 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaEnergiaJan = conta.getConsumo();
-        		somaE += conta.getConsumo();
-        		contE++;
-        	}
-        	if (Integer.parseInt(dataSplit[1]) == 2 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaEnergiaFev = conta.getConsumo();
-        		somaE += conta.getConsumo();
-        		contE++;
-        	}
-        	if (Integer.parseInt(dataSplit[1]) == 3 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaEnergiaMar = conta.getConsumo();
-        		somaE += conta.getConsumo();
-        		contE++;
-        	}
-        	if (Integer.parseInt(dataSplit[1]) == 4 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaEnergiaAbr = conta.getConsumo();
-        		somaE += conta.getConsumo();
-        		contE++;
-        	}
-        	if (Integer.parseInt(dataSplit[1]) == 5 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaEnergiaMai = conta.getConsumo();
-        		somaE+= conta.getConsumo();
-        		contE++;
-        	}
-        	if (Integer.parseInt(dataSplit[1]) == 6 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaEnergiaJun = conta.getConsumo();
-        		somaE += conta.getConsumo();
-        		contE++;
-        	}
-        	if (Integer.parseInt(dataSplit[1]) == 7 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaEnergiaJul = conta.getConsumo();
-        		somaE += conta.getConsumo();
-        		contE++;
-        	}
-        	if (Integer.parseInt(dataSplit[1]) == 8 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaEnergiaAgo = conta.getConsumo();
-        		somaE += conta.getConsumo();
-        		contE++;
-        	}
-        	if (Integer.parseInt(dataSplit[1]) == 9 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaEnergiaSet = conta.getConsumo();
-        		somaE += conta.getConsumo();
-        		contE++;
-        	}
-        	if (Integer.parseInt(dataSplit[1]) == 10 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaEnergiaOut = conta.getConsumo();
-        		somaE += conta.getConsumo();
-        		contE++;
-        	}
-        	if (Integer.parseInt(dataSplit[1]) == 11 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaEnergiaNov = conta.getConsumo();
-        		somaE += conta.getConsumo();
-        		contE++;
-        	}
-        	if (Integer.parseInt(dataSplit[1]) == 12 && Integer.parseInt(dataSplit[0]) == ano) {
-        		contaEnergiaDez = conta.getConsumo();
-        		somaE += conta.getConsumo();
-        		contE++;
-        	}
+        	
+    		int mesVar = mes;
+    		int anoVar = ano;
+        	
+        	for (int i = 0; i < 12; i++) {
+           		if (mesVar <= 0) {
+        			mesVar += 12;
+        			anoVar -= 1;
+        		}
+            	if (Integer.parseInt(dataSplit[1]) == mesVar && Integer.parseInt(dataSplit[0]) == anoVar) {
+            		contaEnergiaMes[i] = conta.getConsumo();
+            		somaE += conta.getConsumo();
+            		contE++;
+            	}
+            	mesVar -= 1;
+			}
 		}
         
         int mesRel = mes;
@@ -417,37 +307,46 @@ public class ControleDashboard {
         
 		modelo.addAttribute("contaGasMedia", somaG/contG);
 		
-        modelo.addAttribute("contaGasJan", contaGasJan);  
-        modelo.addAttribute("contaGasFev", contaGasFev);  
-        modelo.addAttribute("contaGasMar", contaGasMar);  
-        modelo.addAttribute("contaGasAbr", contaGasAbr);  
-        modelo.addAttribute("contaGasMai", contaGasMai);  
-        modelo.addAttribute("contaGasJun", contaGasJun);  
-        modelo.addAttribute("contaGasJul", contaGasJul);  
-        modelo.addAttribute("contaGasAgo", contaGasAgo);  
-        modelo.addAttribute("contaGasSet", contaGasSet);  
-        modelo.addAttribute("contaGasOut", contaGasOut);  
-        modelo.addAttribute("contaGasNov", contaGasNov);  
-        modelo.addAttribute("contaGasDez", contaGasDez); 
+        modelo.addAttribute("contaGasMes1", contaGasMes[11]);  
+        modelo.addAttribute("contaGasMes2", contaGasMes[10]);  
+        modelo.addAttribute("contaGasMes3", contaGasMes[9]);  
+        modelo.addAttribute("contaGasMes4", contaGasMes[8]);  
+        modelo.addAttribute("contaGasMes5", contaGasMes[7]);  
+        modelo.addAttribute("contaGasMes6", contaGasMes[6]);  
+        modelo.addAttribute("contaGasMes7", contaGasMes[5]);  
+        modelo.addAttribute("contaGasMes8", contaGasMes[4]);  
+        modelo.addAttribute("contaGasMes9", contaGasMes[3]);  
+        modelo.addAttribute("contaGasMes10", contaGasMes[2]);  
+        modelo.addAttribute("contaGasMes11", contaGasMes[1]);  
+        modelo.addAttribute("contaGasMes12", contaGasMes[0]); 
         
 		modelo.addAttribute("contaEnergiaMedia", somaE/contE);
         
-        modelo.addAttribute("contaEnergiaJan", contaEnergiaJan);  
-        modelo.addAttribute("contaEnergiaFev", contaEnergiaFev);  
-        modelo.addAttribute("contaEnergiaMar", contaEnergiaMar);  
-        modelo.addAttribute("contaEnergiaAbr", contaEnergiaAbr);  
-        modelo.addAttribute("contaEnergiaMai", contaEnergiaMai);  
-        modelo.addAttribute("contaEnergiaJun", contaEnergiaJun);  
-        modelo.addAttribute("contaEnergiaJul", contaEnergiaJul);  
-        modelo.addAttribute("contaEnergiaAgo", contaEnergiaAgo);  
-        modelo.addAttribute("contaEnergiaSet", contaEnergiaSet);  
-        modelo.addAttribute("contaEnergiaOut", contaEnergiaOut);  
-        modelo.addAttribute("contaEnergiaNov", contaEnergiaNov);  
-        modelo.addAttribute("contaEnergiaDez", contaEnergiaDez); 
+        modelo.addAttribute("contaEnergiaMes1", contaEnergiaMes[11]);  
+        modelo.addAttribute("contaEnergiaMes2", contaEnergiaMes[10]);  
+        modelo.addAttribute("contaEnergiaMes3", contaEnergiaMes[9]);  
+        modelo.addAttribute("contaEnergiaMes4", contaEnergiaMes[8]);  
+        modelo.addAttribute("contaEnergiaMes5", contaEnergiaMes[7]);  
+        modelo.addAttribute("contaEnergiaMes6", contaEnergiaMes[6]);  
+        modelo.addAttribute("contaEnergiaMes7", contaEnergiaMes[5]);  
+        modelo.addAttribute("contaEnergiaMes8", contaEnergiaMes[4]);  
+        modelo.addAttribute("contaEnergiaMes9", contaEnergiaMes[3]);  
+        modelo.addAttribute("contaEnergiaMes10", contaEnergiaMes[2]);  
+        modelo.addAttribute("contaEnergiaMes11", contaEnergiaMes[1]);  
+        modelo.addAttribute("contaEnergiaMes12", contaEnergiaMes[0]); 
         
         Optional<Usuario> usuarioOpt = usuarioRepo.findById(Long.parseLong(user.getUsername()));
         modelo.addAttribute("usuarioInfo", usuarioOpt.get());
-       
+        
+        modelo.addAttribute("quantidadeConta", notificacoesRepo.contar("Conta", "ROLE_GESTOR"));
+        modelo.addAttribute("quantidadeConcessionaria", notificacoesRepo.contar("Concessionaria", "ROLE_GESTOR"));
+        modelo.addAttribute("quantidadeUnidade", notificacoesRepo.contar("Unidade", "ROLE_GESTOR"));
+        modelo.addAttribute("quantidadeContrato", notificacoesRepo.contar("Contrato", "ROLE_GESTOR"));
+        modelo.addAttribute("quantidadeContaRep", notificacoesRepo.contar("Conta", "ROLE_DIGITADOR"));
+        modelo.addAttribute("quantidadeConcessionariaRep", notificacoesRepo.contar("Concessionaria", "ROLE_DIGITADOR"));
+        modelo.addAttribute("quantidadeUnidadeRep", notificacoesRepo.contar("Unidade", "ROLE_DIGITADOR"));
+        modelo.addAttribute("quantidadeContratoRep", notificacoesRepo.contar("Contrato", "ROLE_DIGITADOR"));
+               
 		return "pages/dashboard";
 	}	
 }

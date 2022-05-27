@@ -8,6 +8,8 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +21,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.api.inodevs.entidades.Fatura;
+import com.api.inodevs.entidades.Usuario;
 import com.api.inodevs.repositorio.FaturaRepositorio;
 import com.api.inodevs.repositorio.NotificacoesRepositorio;
+import com.api.inodevs.repositorio.UsuarioRepositorio;
 
 //Classe de controle que permite a navegação e funcionalidades no sistema:
 @Controller
@@ -31,6 +35,8 @@ public class ControleFatura {
 	private FaturaRepositorio faturaRepo;
 	@Autowired
 	private NotificacoesRepositorio notificacoesRepo;
+	@Autowired
+	private UsuarioRepositorio usuarioRepo;
 	
 	// Download da fatura:
 	@GetMapping("/download/{id}")
@@ -44,7 +50,7 @@ public class ControleFatura {
 	
 	// Abrir página para alterar uma fatura ao clicar no botão Inserir Novo:
 	@GetMapping("/inserirFatura/{id}")
-	public String inserirFatura(@PathVariable long id, Model modelo) {
+	public String inserirFatura(@PathVariable long id, Model modelo, @AuthenticationPrincipal User user) {
         Optional<Fatura> faturaOpt = faturaRepo.findById(id);
         if (faturaOpt.isEmpty()) {
             throw new IllegalArgumentException("Fatura inválida");
@@ -58,6 +64,9 @@ public class ControleFatura {
         modelo.addAttribute("quantidadeConcessionariaRep", notificacoesRepo.contar("Concessionaria", "ROLE_DIGITADOR"));
         modelo.addAttribute("quantidadeUnidadeRep", notificacoesRepo.contar("Unidade", "ROLE_DIGITADOR"));
         modelo.addAttribute("quantidadeContratoRep", notificacoesRepo.contar("Contrato", "ROLE_DIGITADOR"));
+        
+        Optional<Usuario> usuarioOpt = usuarioRepo.findById(Long.parseLong(user.getUsername()));
+        modelo.addAttribute("usuarioInfo", usuarioOpt.get());
 		return "pages/forms/edit/faturaEdit";
 	}
 	
