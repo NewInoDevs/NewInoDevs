@@ -59,7 +59,7 @@ do contrato).<br>
 
 Acesse o link para visualizar:
 > * [No Figma.](https://www.figma.com/file/J7tcAZx38a8CymG7RXSG7J/Untitled?node-id=0%3A1)
-> * [Imagens na documentação.](https://www.figma.com/file/J7tcAZx38a8CymG7RXSG7J/Untitled?node-id=0%3A1)
+> * [Imagens na documentação.](https://github.com/NewInoDevs/NewInoDevs/blob/3ºSprint/Documentação/Inodevsdoc3sem.pdf)
   
   <br>
      
