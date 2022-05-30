@@ -58,7 +58,8 @@ do contrato).<br>
 ## :computer: Wireframe
 
 Acesse o link para visualizar:
-> * [site do Figma.](https://www.figma.com/file/J7tcAZx38a8CymG7RXSG7J/Untitled?node-id=0%3A1)
+> * [No Figma.](https://www.figma.com/file/J7tcAZx38a8CymG7RXSG7J/Untitled?node-id=0%3A1)
+> * [Imagens na documentação.](https://www.figma.com/file/J7tcAZx38a8CymG7RXSG7J/Untitled?node-id=0%3A1)
   
   <br>
      
