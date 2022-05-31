@@ -407,7 +407,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 	        		<option th:each="contrato : ${listaContrato}" th:value="${contrato.codigo}" 
 	        		th:text="${contrato.codigo} + ' // Unidade: ' + ${contrato.unidade.nome} + ' // Concessionária: ' + ${contrato.concessionaria.nome} + ' // Tipo: ' + ${contrato.concessionaria.tipo_conta}"></option>
 				</select>
-				<div id="contratoErro"></div>
+				<div id="contratoErro" class="text-danger"></div>
 				</div>
                  </div>
         		 
@@ -483,7 +483,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
             <div class="card-body p-3">
               <div class="row">
                 <div class="col-lg-12 col-sm-8 col-12 mt-lg-0 mt-2">
-                  <button class="btn bg-gradient-primary w-100 my-4 mb-2 subtitle" type="submit" value="Cadastrar" data-target="successToast">Cadastrar</button>
+                  <button class="btn bg-gradient-primary w-100 my-4 mb-2 subtitle" type="submit" value="Cadastrar" data-target="successToast" onclick="verificar()">Cadastrar</button>
                 </div>
               </div>
             </div>
