@@ -1,4 +1,4 @@
-### Aprendizado por projeto integrador-FATEC-SJC
+### <p align="center">Aprendizado por projeto integrador-FATEC-SJC</center>
 
 # <p align="center"> InoDevs </center> 
 <hr>
