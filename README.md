@@ -52,6 +52,18 @@ do contrato).<br>
 - [x] [Sprint 3](https://github.com/NewInoDevs/NewInoDevs/tree/3ºSprint) - 16/05 a 05/06 - Concluído :heavy_check_mark:
 - [x] Feira de Soluções - 15/06 
 
+## Backlog
+
+<h1 align="center"><img src = "https://github.com/NewInoDevs/NewInoDevs/blob/3ºSprint/Artefatos/Backlog_total.png" width="80%"></h1>
+
+<h5 align="center">Prioridade:<br>
+🔴- Alta,
+🟡- Média,
+🟢- Baixa,
+🔵- Seria bom ter.<br></h5>
+
+<h1 align="center"><img src = "https://github.com/NewInoDevs/NewInoDevs/blob/3ºSprint/Artefatos/Linha_do_tempo.png" width="80%"></h1>
+<br>
 
 <br>
 
