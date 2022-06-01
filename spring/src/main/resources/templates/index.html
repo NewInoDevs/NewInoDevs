@@ -184,8 +184,8 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
               </a>
             </li>
             <li class="nav-item px-3 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body p-0">
-                <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
+              <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+      			<i class="material-icons py-3 fixed-plugin-button-nav cursor-pointer">help</i>
               </a>
             </li>
             <li class="nav-item dropdown pe-2 d-flex align-items-center">
@@ -697,29 +697,33 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
     
   </main>
     <div class="fixed-plugin">
-    <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
-      <i class="material-icons py-2">help</i>
-    </a>
     <div class="card shadow-lg">
       <div class="card-header pb-0 pt-3">
-        <div class="float-start">
-          <h5 class="mt-3 mb-0">Ajuda</h5>
-          <p>Entre em contato com suporte.</p>
-        </div>
-        <div class="float-end mt-4">
+         <div class="float-end mt-4">
           <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
             <i class="material-icons">clear</i>
-          </button>
+          </button> 
+        </div>
+        <div class="float-start">
+          <h4 class="mt-3 mb-0">Tabelas</h4><br>
+          
         </div>
         <!-- End Toggle Button -->
       </div>
         <hr class="horizontal dark my-3">
-        <div class="mt-2 d-flex">
-          <h6 class="mb-0">Light / Dark</h6>
-          <div class="form-check form-switch ps-0 ms-auto my-auto">
-            <input class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version" onclick="darkMode(this)">
-          </div>
+        <div class="mt-2">
+        <h5 class="mt-1 mb-0">Nivel de Acesso: Todos</h5><br>
+          <ul>
+          	<li><p>Esta página contém todos os tipos de cadastro já feitos pelo digitador, cada qual com seu devido status: pendente, em análise para aprovação; aprovado; e reprovado.</p></li>
+          	<li><p>Cada tabela está separada por tipo de cadastro (Contas, Concessionárias, Unidades e Contratos), onde pode-se encontrar informações básicas de tais.</p></li>
+          	<li><p>Ao clicar no nome ou no ícone de um cadastro, o usuário é redirecionado para uma página de edição. Esta página pode mudar de acordo com o nível de acesso.</p></li>
+          	<li><p>O usuário pode pesquisar o nome do cadastro usando a barra de pesquisa no canto superior direito.</p></li>
+          	<li><p>No canto superior direito, ao clicar no icone de pessoa abre uma pequena aba com breves informações do usuário.</p></li>
+			<li><p>Ao lado do icone de ajuda, ainda no canto superior direito, existe um icone com a funcionalidade de notificar caso qualquer cadastro seja novo, aprovado ou reprovado.</p></li> 
+          </ul>
         </div>
+       </div>
+      </div>
   <!--   Core JS Files   -->
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>
