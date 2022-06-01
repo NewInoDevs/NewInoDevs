@@ -1,12 +1,12 @@
-### Aprendizado por projeto integrador-FATEC-SJC
+### <p align="center">Aprendizado por projeto integrador-FATEC-SJC </center>
 
 # <p align="center"> NewInoDevs </center> 
 <hr>
 
 <p align="center">
+  <a href ="#calendar-plano-de-ação-clique-na-sprint-desejada-para-verificar-o-seu-andamento"> Plano de Ação </a>  • 
   <a href ="#dart-prosposta">  Proposta </a>  • 
   <a href ="#pushpin-requisitos"> Requisitos </a>  • 
-  <a href ="#calendar-plano-de-ação"> Plano de Ação </a>  • 
   <a href ="#computer-wireframe"> Wireframe</a>  • 
   <a href ="#rocket-tecnologias-utilizadas">  Tecnologias Utilizadas </a>  • 
   <a href ="#mortar_board-dev-team"> Dev Team </a> • 
@@ -14,6 +14,14 @@
 </p>
 <hr>
 <br>
+
+## :calendar: Plano de Ação (Clique na Sprint desejada para verificar o seu andamento) 
+
+- [x] Kick-off - 14/03 a 18/03 - Concluído :heavy_check_mark:
+- [x] [Sprint 1](https://github.com/NewInoDevs/NewInoDevs/blob/1º-Sprint/README.md) - 25/03 a 14/04 - Concluído :heavy_check_mark:
+- [x] [Sprint 2](https://github.com/NewInoDevs/NewInoDevs/blob/2ºSprint/README.md) - 25/04 a 15/05 - Concluído :heavy_check_mark:
+- [x] [Sprint 3](https://github.com/NewInoDevs/NewInoDevs/tree/3ºSprint) - 16/05 a 05/06 - Concluído :heavy_check_mark:
+- [x] Feira de Soluções - 15/06 
 
 ## :dart: Prosposta
 
@@ -44,13 +52,7 @@ do contrato).<br>
 3. &nbsp; Permitir navegação entre campos por TAB ou seta.
 <br>
  
-## :calendar: Plano de Ação
 
-- [x] Kick-off - 14/03 a 18/03 - Concluído :heavy_check_mark:
-- [x] [Sprint 1](https://github.com/NewInoDevs/NewInoDevs/blob/1º-Sprint/README.md) - 25/03 a 14/04 - Concluído :heavy_check_mark:
-- [x] [Sprint 2](https://github.com/NewInoDevs/NewInoDevs/blob/2ºSprint/README.md) - 25/04 a 15/05 - Concluído :heavy_check_mark:
-- [x] [Sprint 3](https://github.com/NewInoDevs/NewInoDevs/tree/3ºSprint) - 16/05 a 05/06 - Concluído :heavy_check_mark:
-- [x] Feira de Soluções - 15/06 
 
 ## Backlog
 
