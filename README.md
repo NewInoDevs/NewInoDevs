@@ -8,7 +8,6 @@
   <a href ="#sprint-backlog">  Sprint Backlog </a>  • 
   <a href ="#computer-Wireframe"> Wireframe</a>  • 
   <a href ="#chart_with_upwards_trend-burndown"> Burndown </a>  •
-  <a href ="#rocket-tecnologias-utilizadas">  Tecnologias Utilizadas </a>  • 
   <a href ="#gear-execução"> Execução(Gifs) </a> 
 </center>
 <hr>
@@ -45,13 +44,7 @@ Acesse o link para visualizar:
   
   <br>
      
-## :rocket: Tecnologias Utilizadas
 
-* **Reuniões e Apresentações:** Discord, WhatsApp e Microsoft Teams;;
-* **Back-end:** Java, MySQL e Spring;
-* **Front-end:** HTML5, CSS, JavaScript e bootstrap;
-* **Ferramentas:** GitHub, VS Code, Eclipse IDE, Canva, Excel,Figma e Jira.
-<br>
   
   ## :chart_with_upwards_trend: Burndown
 *O gráfico abaixo mostra o desempenho da equipe na realização das tarefas referentes a Sprint:*
