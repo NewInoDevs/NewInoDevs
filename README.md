@@ -9,7 +9,8 @@
   <a href ="#sprint-backlog">  Sprint Backlog </a>  • 
   <a href ="#computer-Wireframe"> Wireframe</a>  • 
   <a href ="#chart_with_upwards_trend-burndown"> Burndown </a>  •
-  <a href ="#gear-execução"> Execução(Gifs) </a> 
+  <a href ="#gear-execução"> Execução(Gifs) </a> •
+  <a href ="#manual-de-instalação">Manual de instalação</a> 
 </center>
 <hr>
 <br>
@@ -62,6 +63,8 @@ Acesse o link para visualizar:
 <h1 align="center"><img src = "" width="100%" height="580px"></h1>
 
 <br>
+## Manual de instalação
+[Manual pdf](Manual de instalação)
 
 <h1 align="center"></h1>
 
