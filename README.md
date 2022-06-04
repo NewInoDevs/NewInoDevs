@@ -44,7 +44,7 @@
 ## :computer: Wireframe
 
 Acesse o link para visualizar:
-> * versão estática disponivel na [Documentação](https://github.com/NewInoDevs/NewInoDevs/blob/2ºSprint/Documentação/Inodevs3sem.pdf)
+> * versão estática disponivel na [Documentação](https://github.com/NewInoDevs/NewInoDevs/blob/3ºSprint/Documentação/doc3.pdf)
 > * [Wireframe Figma.](https://www.figma.com/file/J7tcAZx38a8CymG7RXSG7J/Untitled?node-id=0%3A1)
   
   <br>
