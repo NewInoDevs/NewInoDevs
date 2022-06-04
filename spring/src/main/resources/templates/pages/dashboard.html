@@ -8,7 +8,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <title>
-    Tabelas
+    Dashboard
   </title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
@@ -392,7 +392,9 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
      <p th:text="'Unidade: ' + ${unidade.nome}"></p>
      <h4 th:if="${contratoAgua == null && contratoEnergia == null && contratoGas == null}">Não há contratos cadastrados nessa unidade.</h4>
 	</div>
-	<a th:href="@{/relatorioPdf/{cnpj}(cnpj=${unidade.cnpj})}">Download</a>
+	<div class="alinhadinho bg-gradient-secondary shadow-primary border-radius-lg pt-2 pb-2 col-2">
+         <a class="text-white text-capitalize"  th:href="@{/relatorioPdf/{cnpj}(cnpj=${unidade.cnpj})}">Download PDF</a>
+		</div>
       <div class="row mt-4">
         <div class="col-lg-4 col-md-6 mt-4 mb-4"  th:if="${contratoAgua != null}">
           <div class="card z-index-2 ">

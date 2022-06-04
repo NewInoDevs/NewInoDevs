@@ -74,13 +74,18 @@ public class Pdf {
         Font font = FontFactory.getFont(FontFactory.HELVETICA);
         font.setSize(12);
         
+        Font fontTabelaTitulo = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+        fontTabelaTitulo.setSize(12);
+        fontTabelaTitulo.setColor(Color.WHITE);
+        
         Font fontTabela = FontFactory.getFont(FontFactory.HELVETICA);
         fontTabela.setSize(9);
         fontTabela.setColor(Color.WHITE);
          
         Paragraph titulo = new Paragraph("Relatório de " + mes + " de " + ano, fontTitulo);
         titulo.setAlignment(Paragraph.ALIGN_CENTER);
-        
+	      document.add(titulo);
+	   
         Paragraph sub = new Paragraph("\nUnidade: " + unidade.getNome(), fontSub);
         sub.setAlignment(Paragraph.ALIGN_CENTER);
         
@@ -98,13 +103,106 @@ public class Pdf {
         table.setSpacingBefore(20);
          
         writeTableHeader(table, mesesGrafico, fontTabela, mes, ano);
-        writeTableData(table, contratoAgua, contaAguaMes);
-        
-	    document.add(titulo);
-	    document.add(sub);
-	    document.add(texto);
+        if(contratoAgua != null) {
+        	writeTableData(table, contratoAgua, contaAguaMes, fontTabelaDado, "m³"); 
+        } 
+        if(contratoEnergia != null) {
+        	writeTableData(table, contratoEnergia, contaEnergiaMes, fontTabelaDado,"kWh");
+        } 
+        if(contratoGas != null) {
+        	writeTableData(table, contratoGas, contaGasMes, fontTabelaDado, "m³");
+        } 
         document.add(table);
         
+        PdfPTable tableV = new PdfPTable(13);
+        tableV.setWidthPercentage(100f);
+        tableV.setWidths(new float[] {1f, 0.75f, 0.75f, 0.75f, 0.75f, 0.75f, 0.75f, 0.75f, 0.75f, 0.75f, 0.75f, 0.75f, 0.75f});
+        tableV.setSpacingBefore(20);  
+        PdfPCell cellV = new PdfPCell();
+        cellV.setBackgroundColor(Color.decode("#800080"));
+        cellV.setPadding(5);
+	    cellV.setPhrase(new Phrase("Tabela de Valor Gasto Mensal (R$)", fontTabelaTitulo));
+	    cellV.setColspan(13);
+	    cellV.setHorizontalAlignment(1);
+	    tableV.addCell(cellV);  
+        writeTableHeader(tableV, mesesGrafico, fontTabela, mes, ano);
+        if(contratoAgua != null) {
+        	writeTableData(tableV, contratoAgua, gastoAguaMes, fontTabelaDado, null); 
+        } 
+        if(contratoEnergia != null) {
+        	writeTableData(tableV, contratoEnergia, gastoEnergiaMes, fontTabelaDado, null);
+        } 
+        if(contratoGas != null) {
+        	writeTableData(tableV, contratoGas, gastoGasMes, fontTabelaDado, null);
+        } 
+        document.add(tableV);
+        
+        Paragraph sub2 = new Paragraph("\nDados deste mês:", fontSub);
+        sub2.setAlignment(Paragraph.ALIGN_CENTER);
+        document.add(sub2);
+        
+        //CONTRATO ÁGUA
+        
+        if(contratoAgua != null) {
+        	fontSub.setColor(Color.BLUE);
+        	Paragraph textoA = new Paragraph("\nConcessionária: " + contratoAgua.getConcessionaria().getNome(), fontSub);
+        	document.add(textoA);
+        	if (contaAguaAtual != null) {
+            	Paragraph texto2A = new Paragraph("Consumo: " + contaAguaAtual.getConsumo()
+                		+ "\nValor: " + contaAguaAtual.getValor_total()
+                		+ "\nMédia do Consumo Anual: " + mediaA
+                		+ "\nMédia Ideal de Consumo: " + contaAguaAtual.getMedia_consumo()
+                		+ "\n"
+                		, font);
+                		document.add(texto2A);
+        	}
+	        else {
+	        	Paragraph tituloNA = new Paragraph("Ainda não há uma conta de Água desse mês.");
+	        	document.add(tituloNA);
+	        } 	    
+        }
+        
+        //CONTRATO ENERGIA
+        
+        if(contratoEnergia != null) {
+        	fontSub.setColor(Color.RED);
+        	Paragraph textoE = new Paragraph("\nConcessionaria: " + contratoEnergia.getConcessionaria().getNome(), fontSub);
+        	document.add(textoE);
+        	if (contaEnergiaAtual != null) {
+            	Paragraph texto2E = new Paragraph("Consumo: " + contaEnergiaAtual.getConsumo()
+	        		+ "\nValor: " + contaEnergiaAtual.getValor_total()
+	        		+ "\nMédia do Consumo Anual: " + mediaE
+	        		+ "\nMédia Ideal de Consumo: " + contaEnergiaAtual.getMedia_consumo()
+	        		+ "\n"
+	        		, font);
+                	document.add(texto2E);
+        	}
+	        else {
+	        	Paragraph tituloNE = new Paragraph("Ainda não há uma conta de Energia desse mês.");
+	        	document.add(tituloNE);
+	        }
+        }
+
+        //CONTRATO GAS
+        
+        if(contratoGas != null) {
+        	fontSub.setColor(Color.decode("#005000"));
+        	Paragraph textoG = new Paragraph("\nConcessionaria: " + contratoGas.getConcessionaria().getNome(), fontSub);
+        	document.add(textoG);
+        	if (contaGasAtual != null) {
+            	Paragraph texto2G = new Paragraph("Consumo: " + contaGasAtual.getConsumo()
+            		+ "\nValor: " + contaGasAtual.getValor_total()
+            		+ "\nMédia do Consumo Anual: " + mediaG
+            		+ "\nMédia Ideal de Consumo: " + contaGasAtual.getMedia_consumo()
+            		+ "\n"
+            		, font);
+                	document.add(texto2G);
+        	}
+	        else {
+	        	Paragraph tituloNG = new Paragraph("Ainda não há uma conta de Gás desse mês.");
+	        	document.add(tituloNG);
+	        }                         
+        }
         document.close();
          
     }

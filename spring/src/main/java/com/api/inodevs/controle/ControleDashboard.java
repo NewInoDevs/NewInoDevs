@@ -64,9 +64,7 @@ public class ControleDashboard {
 			modelo.addAttribute("listaUnidade", unidadeRepo.pesquisarRelatorio(palavraChave));
 		} else {
 	        modelo.addAttribute("listaUnidade", unidadeRepo.findAll());    
-		}
-		modelo.addAttribute("listaContrato", contratoRepo.findAll());
-		
+		}		
         modelo.addAttribute("usuarioInfo", usuario);
         
         modelo.addAttribute("quantidadeConta", notificacoesRepo.contar("Conta", "ROLE_GESTOR"));
@@ -186,7 +184,7 @@ public class ControleDashboard {
         	String dataSplit[] = new String[3];
         	dataSplit = mesConta.split("-");
         	
-        	if (Integer.parseInt(dataSplit[1]) == mes && Integer.parseInt(dataSplit[0]) == ano) {
+        	if (Integer.parseInt(dataSplit[1]) == mes && Integer.parseInt(dataSplit[0]) == ano && conta.getStatus().equals("Aprovado")) {
         		contaAguaAtual = conta;
         	}
         	
@@ -198,7 +196,7 @@ public class ControleDashboard {
         			mesVar += 12;
         			anoVar -= 1;
         		}
-            	if (Integer.parseInt(dataSplit[1]) == mesVar && Integer.parseInt(dataSplit[0]) == anoVar) {
+            	if (Integer.parseInt(dataSplit[1]) == mesVar && Integer.parseInt(dataSplit[0]) == anoVar && conta.getStatus().equals("Aprovado")) {
             		gastoAguaMes[i] = conta.getValor_total();
             		contaAguaMes[i] = conta.getConsumo();
             		somaA += conta.getConsumo();
@@ -218,7 +216,7 @@ public class ControleDashboard {
         	String dataSplit[] = new String[3];
         	dataSplit = mesConta.split("-");
         	
-        	if (Integer.parseInt(dataSplit[1]) == mes && Integer.parseInt(dataSplit[0]) == ano) {
+        	if (Integer.parseInt(dataSplit[1]) == mes && Integer.parseInt(dataSplit[0]) == ano && conta.getStatus().equals("Aprovado")) {
         		contaGasAtual = conta;
         	}
         	
@@ -230,7 +228,7 @@ public class ControleDashboard {
         			mesVar += 12;
         			anoVar -= 1;
         		}
-            	if (Integer.parseInt(dataSplit[1]) == mesVar && Integer.parseInt(dataSplit[0]) == anoVar) {
+            	if (Integer.parseInt(dataSplit[1]) == mesVar && Integer.parseInt(dataSplit[0]) == anoVar && conta.getStatus().equals("Aprovado")) {
             		gastoGasMes[i] = conta.getValor_total();
             		contaGasMes[i] = conta.getConsumo();
             		somaG += conta.getConsumo();
@@ -250,7 +248,7 @@ public class ControleDashboard {
         	String dataSplit[] = new String[3];
         	dataSplit = mesConta.split("-");
         	
-        	if (Integer.parseInt(dataSplit[1]) == mes && Integer.parseInt(dataSplit[0]) == ano) {
+        	if (Integer.parseInt(dataSplit[1]) == mes && Integer.parseInt(dataSplit[0]) == ano && conta.getStatus().equals("Aprovado")) {
         		contaEnergiaAtual = conta;
         	}
         	
@@ -262,7 +260,7 @@ public class ControleDashboard {
         			mesVar += 12;
         			anoVar -= 1;
         		}
-            	if (Integer.parseInt(dataSplit[1]) == mesVar && Integer.parseInt(dataSplit[0]) == anoVar) {
+            	if (Integer.parseInt(dataSplit[1]) == mesVar && Integer.parseInt(dataSplit[0]) == anoVar && conta.getStatus().equals("Aprovado")) {
             		gastoEnergiaMes[i] = conta.getValor_total();
             		contaEnergiaMes[i] = conta.getConsumo();
             		somaE += conta.getConsumo();
@@ -297,10 +295,33 @@ public class ControleDashboard {
         
         modelo.addAttribute("unidade", unidadeOpt.get());
         
-        modelo.addAttribute("contratoAgua", contratoRepo.contratoAgua(cnpj));  
-        modelo.addAttribute("contratoEnergia", contratoRepo.contratoEnergia(cnpj)); 
-        modelo.addAttribute("contratoGas", contratoRepo.contratoGas(cnpj)); 
-       
+        Contrato contratoAgua = contratoRepo.contratoAgua(cnpj);
+        if (contratoAgua != null) {
+	        if (contratoAgua.getStatus().equals("Aprovado")) {
+	            modelo.addAttribute("contratoAgua", contratoAgua); 
+	        } else {
+	        	modelo.addAttribute("contratoAgua", null); 
+	        }
+        }
+        
+        Contrato contratoEnergia = contratoRepo.contratoEnergia(cnpj);
+        if (contratoEnergia != null) {
+	        if (contratoEnergia.getStatus().equals("Aprovado")) {
+	        	modelo.addAttribute("contratoEnergia", contratoEnergia);
+	        } else {
+	        	modelo.addAttribute("contratoEnergia", null);
+	        }
+        }
+        
+        Contrato contratoGas = contratoRepo.contratoGas(cnpj);
+        if (contratoGas != null) {
+	        if (contratoGas.getStatus().equals("Aprovado")) {
+	        	modelo.addAttribute("contratoGas", contratoGas); 
+	        } else {
+	        	modelo.addAttribute("contratoGas", null);
+	        }
+        }
+        
         modelo.addAttribute("contaAguaAtual", contaAguaAtual);  
         modelo.addAttribute("contaGasAtual", contaGasAtual); 
         modelo.addAttribute("contaEnergiaAtual", contaEnergiaAtual); 
@@ -408,7 +429,7 @@ public class ControleDashboard {
         	String dataSplit[] = new String[3];
         	dataSplit = mesConta.split("-");
         	
-        	if (Integer.parseInt(dataSplit[1]) == mes && Integer.parseInt(dataSplit[0]) == ano) {
+        	if (Integer.parseInt(dataSplit[1]) == mes && Integer.parseInt(dataSplit[0]) == ano && conta.getStatus().equals("Aprovado")) {
         		contaAguaAtual = conta;
         	}
         	
@@ -420,7 +441,7 @@ public class ControleDashboard {
         			mesVar += 12;
         			anoVar -= 1;
         		}
-            	if (Integer.parseInt(dataSplit[1]) == mesVar && Integer.parseInt(dataSplit[0]) == anoVar) {
+            	if (Integer.parseInt(dataSplit[1]) == mesVar && Integer.parseInt(dataSplit[0]) == anoVar && conta.getStatus().equals("Aprovado")) {
             		gastoAguaMes[i] = conta.getValor_total();
             		contaAguaMes[i] = conta.getConsumo();
             		somaA += conta.getConsumo();
@@ -441,7 +462,7 @@ public class ControleDashboard {
         	String dataSplit[] = new String[3];
         	dataSplit = mesConta.split("-");
         	
-        	if (Integer.parseInt(dataSplit[1]) == mes && Integer.parseInt(dataSplit[0]) == ano) {
+        	if (Integer.parseInt(dataSplit[1]) == mes && Integer.parseInt(dataSplit[0]) == ano && conta.getStatus().equals("Aprovado")) {
         		contaGasAtual = conta;
         	}
         	
@@ -453,7 +474,7 @@ public class ControleDashboard {
         			mesVar += 12;
         			anoVar -= 1;
         		}
-            	if (Integer.parseInt(dataSplit[1]) == mesVar && Integer.parseInt(dataSplit[0]) == anoVar) {
+            	if (Integer.parseInt(dataSplit[1]) == mesVar && Integer.parseInt(dataSplit[0]) == anoVar && conta.getStatus().equals("Aprovado")) {
             		gastoGasMes[i] = conta.getValor_total();
             		contaGasMes[i] = conta.getConsumo();
             		somaG += conta.getConsumo();
@@ -473,7 +494,7 @@ public class ControleDashboard {
         	String dataSplit[] = new String[3];
         	dataSplit = mesConta.split("-");
         	
-        	if (Integer.parseInt(dataSplit[1]) == mes && Integer.parseInt(dataSplit[0]) == ano) {
+        	if (Integer.parseInt(dataSplit[1]) == mes && Integer.parseInt(dataSplit[0]) == ano && conta.getStatus().equals("Aprovado")) {
         		contaEnergiaAtual = conta;
         	}
         	
@@ -485,7 +506,7 @@ public class ControleDashboard {
         			mesVar += 12;
         			anoVar -= 1;
         		}
-            	if (Integer.parseInt(dataSplit[1]) == mesVar && Integer.parseInt(dataSplit[0]) == anoVar) {
+            	if (Integer.parseInt(dataSplit[1]) == mesVar && Integer.parseInt(dataSplit[0]) == anoVar && conta.getStatus().equals("Aprovado")) {
             		gastoEnergiaMes[i] = conta.getValor_total();
             		contaEnergiaMes[i] = conta.getConsumo();
             		somaE += conta.getConsumo();
@@ -506,9 +527,31 @@ public class ControleDashboard {
 		}
         
         Contrato contratoAgua = contratoRepo.contratoAgua(cnpj);
-        Contrato contratoEnergia = contratoRepo.contratoEnergia(cnpj);  
-        Contrato contratoGas = contratoRepo.contratoGas(cnpj);  
+        if (contratoAgua != null) {
+	        if (contratoAgua.getStatus().equals("Aprovado")) {
+	        	contratoAgua = contratoRepo.contratoAgua(cnpj);
+	        } else {
+	        	contratoAgua = null;
+	        }
+        }
         
+        Contrato contratoEnergia = contratoRepo.contratoEnergia(cnpj);
+        if (contratoEnergia != null) {
+	        if (contratoEnergia.getStatus().equals("Aprovado")) {
+	        	contratoEnergia = contratoRepo.contratoEnergia(cnpj);
+	        } else {
+	        	contratoEnergia = null;
+	        }
+        }
+        
+        Contrato contratoGas = contratoRepo.contratoGas(cnpj);
+        if (contratoGas != null) {
+	        if (contratoGas.getStatus().equals("Aprovado")) {
+	        	contratoGas = contratoRepo.contratoGas(cnpj);
+	        } else {
+	        	contratoGas = null;
+	        }
+        }
         float mediaA = somaA/contA;
         float mediaE = somaE/contE;
 		float mediaG = somaG/contG;
