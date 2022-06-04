@@ -90,6 +90,7 @@ public class ControleUsuario {
 		usuario.setSenha(senhaCriptografada); // Inserindo a senha criptografada
 		usuarioRepo.save(usuario);
         Registros registros = new Registros();
+        
         registros.setAtividade("cadastrou um usuário");
         registros.setData_atividade(LocalDateTime.now ());
 		Optional <Usuario> usuarioOpt = usuarioRepo.findById(Long.parseLong(username_login, 10));
@@ -126,6 +127,15 @@ public class ControleUsuario {
 	// Salvar o usuário editado no banco de dados ao clicar em editar:
 	@PostMapping("/salvarUsuarioEdit")
 	public String salvarUsuarioEdit(@ModelAttribute("usuario") Usuario usuario, RedirectAttributes redirect) {
+		usuarioRepo.save(usuario);
+		redirect.addFlashAttribute("sucesso", "Usuário salvo com sucesso!");
+		return "redirect:/controleUsuario";
+	}
+	
+	@PostMapping("/salvarSenha")
+	public String salvarSenha(@ModelAttribute("usuario") Usuario usuario, RedirectAttributes redirect) {
+		String senhaCriptografada = new BCryptPasswordEncoder().encode(usuario.getSenha()); // Criptografando senha
+		usuario.setSenha(senhaCriptografada); // Inserindo a senha criptografada
 		usuarioRepo.save(usuario);
 		redirect.addFlashAttribute("sucesso", "Usuário salvo com sucesso!");
 		return "redirect:/controleUsuario";

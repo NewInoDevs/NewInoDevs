@@ -5,11 +5,12 @@
 
 <p align="center">
   <a href ="#calendar-plano-de-ação"> Plano de Ação </a>  • 
+  <a href ="#documentação"> Documentação </a>  • 
   <a href ="#sprint-backlog">  Sprint Backlog </a>  • 
   <a href ="#computer-Wireframe"> Wireframe</a>  • 
   <a href ="#chart_with_upwards_trend-burndown"> Burndown </a>  •
-  <a href ="#rocket-tecnologias-utilizadas">  Tecnologias Utilizadas </a>  • 
-  <a href ="#gear-execução"> Execução(Gifs) </a> 
+  <a href ="#gear-execução"> Execução(Gifs) </a> •
+  <a href ="#manual-de-instalação"> Manual de instalação</a> 
 </center>
 <hr>
 <br>
@@ -23,12 +24,16 @@
 - [x] [Sprint 3](https://github.com/NewInoDevs/NewInoDevs/tree/3ºSprint) - 16/05 a 05/06 - Concluído :heavy_check_mark:
 - [x] Feira de Soluções - 15/06 
 
+## Documentação
+[Documentação](https://github.com/NewInoDevs/NewInoDevs/blob/3ºSprint/Documentação/doc3.pdf)
+<br>
+
 
 <br>
 
 ## Sprint Backlog
 
-<h1 align="center"><img src = "https://github.com/NewInoDevs/NewInoDevs/blob/3ºSprint/Artefatos/sprintbacklog3.png" width="45%"></h1>
+<h1 align="center"><img src = "https://github.com/NewInoDevs/NewInoDevs/blob/3ºSprint/Artefatos/Sprint3.png" width="45%"></h1>
 
 <h5 align="center">Prioridade:<br>
 🔴- Alta,
@@ -40,22 +45,16 @@
 ## :computer: Wireframe
 
 Acesse o link para visualizar:
-> * versão estática disponivel na [Documentação](https://github.com/NewInoDevs/NewInoDevs/blob/2ºSprint/Documentação/Inodevs3sem.pdf)
+> * versão estática disponivel na [Documentação](https://github.com/NewInoDevs/NewInoDevs/blob/3ºSprint/Documentação/doc3.pdf)
 > * [Wireframe Figma.](https://www.figma.com/file/J7tcAZx38a8CymG7RXSG7J/Untitled?node-id=0%3A1)
   
   <br>
      
-## :rocket: Tecnologias Utilizadas
 
-* **Reuniões e Apresentações:** Discord, WhatsApp e Microsoft Teams;;
-* **Back-end:** Java, MySQL e Spring;
-* **Front-end:** HTML5, CSS, JavaScript e bootstrap;
-* **Ferramentas:** GitHub, VS Code, Eclipse IDE, Canva, Excel,Figma e Jira.
-<br>
   
   ## :chart_with_upwards_trend: Burndown
 *O gráfico abaixo mostra o desempenho da equipe na realização das tarefas referentes a Sprint:*
-<h1 align="center"><img src = "" width="80%"></h1>
+<h1 align="center"><img src = "https://github.com/NewInoDevs/NewInoDevs/blob/3ºSprint/Artefatos/Burndown.png" width="80%"></h1>
 <br> 
 
 # :gear: Execução:
@@ -65,6 +64,10 @@ Acesse o link para visualizar:
 
 <br>
 
+ ## Manual de instalação
+
+[Manual pdf](https://github.com/NewInoDevs/NewInoDevs/blob/3ºSprint/Manual-Instalacao.pdf)
+
 <h1 align="center"></h1>
 
-##### <p align="center"><img src="https://cdn.discordapp.com/attachments/826526043917647912/883363052425195560/faTec.png" width="20" height="20" /> Projeto Integrador 2021 - Fatec São José dos Campos </center>
+##### <p align="center"><img src="https://cdn.discordapp.com/attachments/826526043917647912/883363052425195560/faTec.png" width="20" height="20" /> Projeto Integrador 2022 - Fatec São José dos Campos </center>

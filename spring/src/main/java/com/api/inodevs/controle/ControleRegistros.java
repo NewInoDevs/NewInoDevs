@@ -32,7 +32,7 @@ public class ControleRegistros {
     	if (palavraChave != null) {
     		modelo.addAttribute("listaRegistros", registrosRepo.pesquisarRegistro(palavraChave));
     	} else {
-    		modelo.addAttribute("listaRegistros", registrosRepo.findAll());
+    		modelo.addAttribute("listaRegistros", registrosRepo.todosRegistros());
     	}
     	modelo.addAttribute("palavraChave", palavraChave);
     	
