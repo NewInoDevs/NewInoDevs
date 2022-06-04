@@ -56,7 +56,7 @@ do contrato).<br>
 
 ## Backlog
 
-<h1 align="center"><img src = "https://github.com/NewInoDevs/NewInoDevs/blob/3ºSprint/Artefatos/Backlog_total.png" width="80%"></h1>
+<h1 align="center"><img src = "https://github.com/NewInoDevs/NewInoDevs/blob/3ºSprint/Artefatos/Backlog_total3.png" width="80%"></h1>
 
 <h5 align="center">Prioridade:<br>
 🔴- Alta,
