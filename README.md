@@ -10,7 +10,7 @@
   <a href ="#computer-Wireframe"> Wireframe</a>  • 
   <a href ="#chart_with_upwards_trend-burndown"> Burndown </a>  •
   <a href ="#gear-execução"> Execução(Gifs) </a> •
-  <a href ="#manual-de-instalação">Manual de instalação</a> 
+  <a href ="#manual-de-instalação"> Manual de instalação</a> 
 </center>
 <hr>
 <br>
