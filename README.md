@@ -66,7 +66,7 @@ Acesse o link para visualizar:
 
  ## Manual de instalação
 
-[Manual pdf](Manual de instalação)
+[Manual pdf](https://github.com/NewInoDevs/NewInoDevs/blob/3ºSprint/Manual-Instalacao.pdf)
 
 <h1 align="center"></h1>
 
