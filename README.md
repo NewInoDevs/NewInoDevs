@@ -63,7 +63,9 @@ Acesse o link para visualizar:
 <h1 align="center"><img src = "" width="100%" height="580px"></h1>
 
 <br>
-## Manual de instalação
+
+ ## Manual de instalação
+
 [Manual pdf](Manual de instalação)
 
 <h1 align="center"></h1>
