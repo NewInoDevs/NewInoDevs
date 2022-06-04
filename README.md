@@ -31,7 +31,7 @@ salvamento em banco de dados para eventuais consultas e análises técnicas/fina
 trazer ao cliente oportunidades de redução de custos e alteração de contratos. 
 
 
-> [Documentação](https://github.com/NewInoDevs/NewInoDevs/blob/1%C2%BA-Sprint/Documenta%C3%A7%C3%A3o/Inodevs3sem.pdf)
+> [Documentação](https://github.com/NewInoDevs/NewInoDevs/blob/3ºSprint/Documentação/doc3.pdf)
 <br>
 
 ## :pushpin: Requisitos
@@ -73,7 +73,7 @@ do contrato).<br>
 
 Acesse o link para visualizar:
 > * [No Figma.](https://www.figma.com/file/J7tcAZx38a8CymG7RXSG7J/Untitled?node-id=0%3A1)
-> * [Imagens na documentação.](https://github.com/NewInoDevs/NewInoDevs/blob/3ºSprint/Documentação/Inodevsdoc3sem.pdf)
+> * [Imagens na documentação.](https://github.com/NewInoDevs/NewInoDevs/blob/3ºSprint/Documentação/doc3.pdf)
   
   <br>
      
