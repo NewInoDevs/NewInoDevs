@@ -90,7 +90,11 @@ public class Pdf {
         fontSub.setSize(12);
         
         Font font = FontFactory.getFont(FontFactory.HELVETICA);
-        font.setSize(12);
+        font.setSize(11);
+        
+        Font alerta = FontFactory.getFont(FontFactory.HELVETICA);
+        alerta.setSize(11);
+        alerta.setColor(Color.RED);
         
         Font fontTabelaTitulo = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
         fontTabelaTitulo.setSize(12);
@@ -107,7 +111,8 @@ public class Pdf {
         titulo.setAlignment(Paragraph.ALIGN_CENTER);
 	    document.add(titulo);
 	    
-        Paragraph sub = new Paragraph("\nUnidade: " + unidade.getNome(), fontSub);
+        Paragraph sub = new Paragraph("Unidade: " + unidade.getNome(), fontSub);
+        sub.setSpacingBefore(5);
         sub.setAlignment(Paragraph.ALIGN_CENTER);
         document.add(sub);
         
@@ -157,7 +162,8 @@ public class Pdf {
         } 
         document.add(tableV);
         
-        Paragraph sub2 = new Paragraph("\nDados deste mês:", fontSub);
+        Paragraph sub2 = new Paragraph("Dados deste mês:", fontSub);
+        sub2.setSpacingBefore(10);
         sub2.setAlignment(Paragraph.ALIGN_CENTER);
         document.add(sub2);
         
@@ -172,14 +178,17 @@ public class Pdf {
                 		+ "\nValor: " + contaAguaAtual.getValor_total()
                 		+ "\nMédia do Consumo Anual: " + mediaA
                 		+ "\nMédia Ideal de Consumo: " + contaAguaAtual.getMedia_consumo()
-                		+ "\n"
                 		, font);
                 		document.add(texto2A);
+                if (contaAguaAtual.getMedia_consumo() < mediaA) {
+                	Paragraph alertaA = new Paragraph("Consumo de Água acima da média ideal!", alerta);
+                	document.add(alertaA);
+                }
         	}
 	        else {
 	        	Paragraph tituloNA = new Paragraph("Ainda não há uma conta de Água desse mês.");
 	        	document.add(tituloNA);
-	        } 	    
+	        } 
         }
         
         //CONTRATO ENERGIA
@@ -196,6 +205,10 @@ public class Pdf {
 	        		+ "\n"
 	        		, font);
                 	document.add(texto2E);
+               if (contaEnergiaAtual.getMedia_consumo() < mediaE) {
+                   Paragraph alertaE = new Paragraph("Consumo de Energia acima da média ideal!", alerta);
+                   document.add(alertaE);
+               }
         	}
 	        else {
 	        	Paragraph tituloNE = new Paragraph("Ainda não há uma conta de Energia desse mês.");
@@ -214,9 +227,12 @@ public class Pdf {
             		+ "\nValor: " + contaGasAtual.getValor_total()
             		+ "\nMédia do Consumo Anual: " + mediaG
             		+ "\nMédia Ideal de Consumo: " + contaGasAtual.getMedia_consumo()
-            		+ "\n"
             		, font);
                 	document.add(texto2G);
+                if (contaGasAtual.getMedia_consumo() < mediaG) {
+                    Paragraph alertaG = new Paragraph("Consumo de Gás acima da média ideal!", alerta);
+                    document.add(alertaG);
+                }
         	}
 	        else {
 	        	Paragraph tituloNG = new Paragraph("Ainda não há uma conta de Gás desse mês.");
