@@ -64,7 +64,7 @@ do contrato).<br>
 🟢- Baixa,
 🔵- Seria bom ter.<br></h5>
 
-<h1 align="center"><img src = "https://github.com/NewInoDevs/NewInoDevs/blob/3ºSprint/Artefatos/Linha_do_tempo.png" width="80%"></h1>
+<h1 align="center"><img src = "https://github.com/NewInoDevs/NewInoDevs/blob/3ºSprint/Artefatos/timeline.png" width="80%"></h1>
 <br>
 
 <br>
@@ -105,4 +105,4 @@ Acesse o link para visualizar:
 
 <h1 align="center"></h1>
 
-##### <p align="center"><img src="https://cdn.discordapp.com/attachments/826526043917647912/883363052425195560/faTec.png" width="20" height="20" /> Projeto Integrador 2021 - Fatec São José dos Campos </center>
+##### <p align="center"><img src="https://cdn.discordapp.com/attachments/826526043917647912/883363052425195560/faTec.png" width="20" height="20" /> Projeto Integrador 2022 - Fatec São José dos Campos </center>
