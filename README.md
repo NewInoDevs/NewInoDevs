@@ -9,7 +9,8 @@
   <a href ="#pushpin-requisitos"> Requisitos </a>  • 
   <a href ="#computer-wireframe"> Wireframe</a>  • 
   <a href ="#rocket-tecnologias-utilizadas">  Tecnologias Utilizadas </a>  • 
-  <a href ="#mortar_board-dev-team"> Dev Team </a> • 
+   <a href ="#manual-de-instalação"> Manual de instalação</a> • 
+  <a href ="#mortar_board-dev-team"> Dev Team </a> 
 
 </p>
 <hr>
@@ -88,6 +89,10 @@ Acesse o link para visualizar:
 <!--## :gear: Execução 
 <h1 align="center"><img src = " " width="100%" height="580px"></h1>
 <br>-->
+
+ ## Manual de instalação
+
+[Manual pdf](https://github.com/NewInoDevs/NewInoDevs/blob/3ºSprint/Manual-Instalacao.pdf)
 
 ## :mortar_board: Dev Team
 
