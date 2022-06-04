@@ -5,6 +5,7 @@
 
 <p align="center">
   <a href ="#calendar-plano-de-ação"> Plano de Ação </a>  • 
+  <a href ="#documentação"> Documentação </a>  • 
   <a href ="#sprint-backlog">  Sprint Backlog </a>  • 
   <a href ="#computer-Wireframe"> Wireframe</a>  • 
   <a href ="#chart_with_upwards_trend-burndown"> Burndown </a>  •
@@ -21,6 +22,10 @@
 - [x] [Sprint 2](https://github.com/NewInoDevs/NewInoDevs/blob/2ºSprint/README.md) - 25/04 a 15/05 - Concluído :heavy_check_mark:
 - [x] [Sprint 3](https://github.com/NewInoDevs/NewInoDevs/tree/3ºSprint) - 16/05 a 05/06 - Concluído :heavy_check_mark:
 - [x] Feira de Soluções - 15/06 
+
+## Documentação
+[Documentação](https://github.com/NewInoDevs/NewInoDevs/blob/1%C2%BA-Sprint/Documenta%C3%A7%C3%A3o/Inodevs3sem.pdf)
+<br>
 
 
 <br>
