@@ -24,7 +24,7 @@
 - [x] Feira de Soluções - 15/06 
 
 ## Documentação
-[Documentação](https://github.com/NewInoDevs/NewInoDevs/blob/1%C2%BA-Sprint/Documenta%C3%A7%C3%A3o/Inodevs3sem.pdf)
+[Documentação](https://github.com/NewInoDevs/NewInoDevs/blob/3ºSprint/Documentação/doc3.pdf)
 <br>
 
 
