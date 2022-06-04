@@ -93,6 +93,8 @@ Acesse o link para visualizar:
  ## Manual de instalação
 
 [Manual pdf](https://github.com/NewInoDevs/NewInoDevs/blob/3ºSprint/Manual-Instalacao.pdf)
+<br>
+
 
 ## :mortar_board: Dev Team
 
