@@ -63,6 +63,8 @@ Acesse o link para visualizar:
 <h1 align="center"><img src = "https://github.com/NewInoDevs/NewInoDevs/blob/3ºSprint/Artefatos/perfil%2C%20ajuda%20e%20log.gif" width="100%" height="580px"></h1>
 Após logar nos perfis é possível no canto superior direito verificar os dados do perfil (nome, user e nível de acesso). Foi adicionado uma aba ajuda, contendo especificações sobre as páginas, para facilitar o uso. As ações são registradas no histórico de atividades, disponível para o perfil de administrador.
 <br>
+<br>
+<br>
 
 
 <h1 align="center"><img src = "https://github.com/NewInoDevs/NewInoDevs/blob/3ºSprint/Artefatos/relatorios.gif" width="100%" height="580px"></h1>
